@@ -1,5 +1,6 @@
 // General utilities.
-window.addEventListener("load", function(evt) {
+/*eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }]*/
+window.addEventListener("load", function(_evt) {
     window.utilGetJsonRecords = utilGetJsonRecords;
     window.utilUpdateRecords = utilUpdateRecords;
     window.utilUpdateMetaTime = utilUpdateMetaTime;
@@ -8,8 +9,35 @@ window.addEventListener("load", function(evt) {
     window.utilSelectTextById = utilSelectTextById;
     window.utilSortCaseInsensitiveCompare = utilSortCaseInsensitiveCompare;
     window.utilGetEncryptedPrefix = utilGetEncryptedPrefix;
+    window.utilSetCryptText = utilSetCryptText;
+    window.utilGetCryptText = utilGetCryptText;
+    window.utilSetCryptTextSize = utilSetCryptTextSize;
 });
 
+// Set the crypt text.
+// This is a single entry point that allows session
+// storage to be used.
+function utilSetCryptText(text) {
+    var obj = document.getElementById('cryptText');
+    obj.value = text;
+    sessionStorage.setItem('cryptText', text);
+    utilSetCryptTextSize();
+}
+
+function utilSetCryptTextSize() {
+    var text = window.utilGetCryptText()
+    var sobj = document.getElementById("cryptTextSizeValue");
+    if (!text) {
+        sobj.innerHTML = "(0)";
+    } else {
+        sobj.innerHTML = "(" + text.length + ")";
+    }
+}
+
+// Get the crypt text.
+function utilGetCryptText() {
+    return document.getElementById('cryptText').value;
+}
 
 // Get the encrypted prefix.
 function utilGetEncryptedPrefix() {
@@ -18,13 +46,11 @@ function utilGetEncryptedPrefix() {
 
 // Get the JSON records.
 function utilGetJsonRecords() {
-    var obj = document.getElementById('cryptText');
-    var text = obj.value.trim();
+    var text = window.utilGetCryptText().trim();
     if (text.startsWith(window.utilGetEncryptedPrefix())) {
         // Decrypt and then re-encrypt.
         window.doDecrypt();
-        obj = document.getElementById('cryptText');
-        text = obj.value;
+        text = window.utilGetCryptText();
         if (text.startsWith(window.utilGetEncryptedPrefix())) {
             // decrypt failed
             return {};  // most likely an invalid password
@@ -44,8 +70,7 @@ function utilGetJsonRecords() {
 // Update the textarea data based on the internal
 // record data.
 function utilUpdateRecords(rec, indent, modified, updateTimes) {
-    var obj1 = document.getElementById('cryptText');
-    var text = obj1.value.trim();
+    var text = window.utilGetCryptText().trim();
     if (updateTimes) {
         utilUpdateMetaTime(rec, "ctime", false);
         utilUpdateMetaTime(rec, "atime", true);
@@ -54,11 +79,11 @@ function utilUpdateRecords(rec, indent, modified, updateTimes) {
     if (text.startsWith(window.utilGetEncryptedPrefix())) {
         // Decrypt and then re-encrypt.
         window.doDecrypt();
-        obj1 = document.getElementById('cryptText');
-        obj1.value = JSON.stringify(rec, null, indent);
+        text = JSON.stringify(rec, null, indent);
+        window.utilSetCryptText(text);
         window.doEncrypt();
     } else {
-        obj1.value = JSON.stringify(rec, null, indent);
+        window.utilSetCryptText(text);
     }
 }
 
@@ -86,7 +111,7 @@ function utcnow() {
 
 // Zero pad a number.
 function utilZeroPad(n, len) {
-    s = n.toString();
+    var s = n.toString();
     if (s.length < len) {
         s = ('000000000000' + s).slice(-len);
     }

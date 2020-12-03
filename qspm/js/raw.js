@@ -1,5 +1,6 @@
 // Raw tab services.
-window.addEventListener("load", function(evt) {
+/*eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }]*/
+window.addEventListener("load", function(_evt) {
     document.getElementById('ulUpload').addEventListener('click', upload);
     document.getElementById('ulDownload').addEventListener('click', download);
     document.getElementById('ulDownloadFile').addEventListener('click', downloadFile);
@@ -12,8 +13,7 @@ window.addEventListener("load", function(evt) {
     document.getElementById('cryptCompress').addEventListener('click', compressText);
     document.getElementById('cryptClear').addEventListener('click', clearText);
     document.getElementById('cryptExample').addEventListener('click', exampleText);
-    document.getElementById('cryptTextSize').addEventListener('click', doTextSize);
-    doTextSize();
+    document.getElementById('cryptTextSize').addEventListener('click', window.utilSetCryptTextSize);
     document.getElementById("defaultTab").click();
     window.doDecrypt = doDecrypt;
     window.doEncrypt = doEncrypt;
@@ -23,11 +23,25 @@ window.addEventListener("load", function(evt) {
 
 // Initialize. Basically just add in the password fieldset.
 function initRaw() {
-    var div = document.getElementById('rawPasswordFieldset');
-    div.innerHTML = "";  // clear the DOM.
+    var pfs = document.getElementById('rawPasswordId');
+    if (!pfs) {
+        // Don't re-create it if it is already there.
+        var div = document.getElementById('rawPasswordFieldset');
+        var fieldset = window.passwordCreateFieldset('rawPassword',
+                                                     'Master Password',
+                                                     false,
+                                                     'rawPasswordValue');
+        div.innerHTML = "";  // clear the DOM.
+        div.appendChild(fieldset)
+    }
 
-    var fieldset1 = window.passwordCreateFieldset('rawPassword', 'Master Password', false);
-    div.appendChild(fieldset1)
+    // Initialize the text properly after a refresh.
+    let text = sessionStorage.getItem('cryptText');
+    if (text) {
+        window.utilSetCryptText(text);
+    } else {
+        window.utilSetCryptTextSize();
+    }
 }
 
 // Upload/download options.
@@ -103,7 +117,6 @@ function download() {
 // Download a file.
 function downloadFile() {
     var div = document.getElementById("ulFileListDiv");
-    var fname = document.getElementById('ulFile').value.trim();
     var input = document.createElement("INPUT");
     div.innerHTML = "";
     input.setAttribute("id", "download-text-file-selector");
@@ -118,8 +131,7 @@ function downloadFile() {
             const reader = new FileReader();
             reader.addEventListener('load', (event) => {
                 const result = event.target.result;
-                var obj = document.getElementById("cryptText");
-                obj.value = result;
+                window.utilSetCryptText(result);
             });
             reader.readAsText(file);
         }
@@ -130,9 +142,7 @@ function downloadFile() {
 
 // Download data from a URL.
 function downloadUrl() {
-    var div = document.getElementById("ulUrlListDiv");
     var url = document.getElementById('ulUrl').value.trim();
-    var input = document.createElement("INPUT");
     if (!url) {
         alert("WARNING! URL was not specified");
         return;
@@ -146,9 +156,8 @@ function downloadUrl() {
             }
         })
         .then(text => {
-            var obj = document.getElementById("cryptText");
             if (text) {
-                obj.value = text;
+                window.utilSetCryptText(text);
             } else {
                 alert("WARNING! no data found");
             }
@@ -161,9 +170,8 @@ function downloadUrl() {
 // Encrypt.
 function doEncrypt() {
     var obj1 = document.getElementById("rawPasswordId");
-    var obj2 = document.getElementById("cryptText");
     var pass = obj1.value.trim();
-    var text = obj2.value.trim();
+    var text = window.utilGetCryptText().trim();
     if (!pass) {
         alert("WARNING! no password specified");
         return;
@@ -178,16 +186,14 @@ function doEncrypt() {
         alert("WARNING! encrypt: (" + result.length + ") '" + result.substring(0, len) + "'..." );
         return;
     }
-    obj2.value = result;
-    doTextSize();
+    window.utilSetCryptText(result);
 }
 
 // Decrypt.
 function doDecrypt() {
     var obj1 = document.getElementById("rawPasswordId");
-    var obj2 = document.getElementById("cryptText");
     var pass = obj1.value.trim();
-    var text = obj2.value.trim();
+    var text = window.utilGetCryptText().trim();
     if (!pass) {
         alert("WARNING! no password specified");
         return;
@@ -202,46 +208,38 @@ function doDecrypt() {
         alert("WARNING! decrypt: (" + result.length + ") '" + result.substring(0, len) + "'...");
         return;
     }
-    obj2.value = result;
-    doTextSize();
+    window.utilSetCryptText(result);
 }
 
 // Clear the text.
 function clearText() {
-    var obj = document.getElementById("cryptText");
-    obj.value = "";
-    doTextSize();
+    window.utilSetCryptText("");
 }
 
 // Format the text if it is decrypted.
 function formatText() {
-    var obj = document.getElementById("cryptText");
-    var text = obj.value.trim();
+    var text = window.utilGetCryptText().trim();
     if (text.startsWith("-----")) {
         alert("WARNING! cannot format encrypted data");
     }
     var rec = JSON.parse(text);
     text = JSON.stringify(rec, null, 4);
-    obj.value = text;
-    doTextSize();
+    window.utilSetCryptText(text);
 }
 
 // Compress the text if it is decrypted.
 function compressText() {
-    var obj = document.getElementById("cryptText");
-    var text = obj.value.trim();
+    var text = window.utilGetCryptText().trim();
     if (text.startsWith("-----")) {
         alert("WARNING! cannot compress encrypted data");
     }
     var rec = JSON.parse(text);
     text = JSON.stringify(rec);
-    obj.value = text;
-    doTextSize();
+    window.utilSetCryptText(text);
 }
 
 // Set the example text.
 function exampleText() {
-    var obj = document.getElementById("cryptText");
     var rec = {
         "meta": {
             "atime": "",
@@ -325,16 +323,6 @@ function exampleText() {
             }
         }
     };
-    obj.value = JSON.stringify(rec, null, 4);
-    doTextSize();
-}
-
-function doTextSize() {
-    var obj1 = document.getElementById("cryptText");
-    var obj2 = document.getElementById("cryptTextSizeValue");
-    if (!!obj1.value) {
-        obj2.innerHTML = "(" + obj1.value.length + ")";
-    } else {
-        obj2.innerHTML = "(?)";
-    }
+    var text = JSON.stringify(rec, null, 4);
+    window.utilSetCryptText(text);
 }

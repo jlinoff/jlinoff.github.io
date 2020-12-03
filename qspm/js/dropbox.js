@@ -1,5 +1,6 @@
 // Dropbox utilities.
-window.addEventListener("load", function(evt) {
+/*eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }]*/
+window.addEventListener("load", function(_evt) {
     window.dropboxUpload = dropboxUpload;
     window.dropboxDownload = dropboxDownload;
     window.dropboxListFiles = dropboxListFiles;
@@ -14,9 +15,8 @@ function dropboxUpload() {
     
     var obj1 = document.getElementById('ulToken');
     var obj2 = document.getElementById('ulFile');
-    var obj3 = document.getElementById("cryptText");
 
-    var text = obj3.value.trim();
+    var text = window.utilGetCryptText().trim();
     if (!text.startsWith(window.utilGetEncryptedPrefix())) {
         alert("WARNING! can only upload encrypted strings");
         return;
@@ -51,7 +51,7 @@ function dropboxUpload() {
         }
     ).then(
         data => {
-            alert("SUCCESS! upload worked: " + fname);
+            alert("SUCCESS! upload worked: " + fname + " (" + data.length + ")");
         }
     ).catch((error) => {
         alert("WARNING! upload failed with code " + error);
@@ -64,7 +64,6 @@ function dropboxDownload() {
 
     var obj1 = document.getElementById('ulToken');
     var obj2 = document.getElementById('ulFile');
-    var obj3 = document.getElementById("cryptText");
 
     var url = "https://content.dropboxapi.com/2/files/download";
     var bearer = "Bearer " + obj1.value.trim();
@@ -87,7 +86,7 @@ function dropboxDownload() {
         }
     ).then(
         data => {
-            obj3.value = data.trim();
+            window.utilSetCryptText(data.trim());
             setTimeout(function() {
                 alert("SUCCESS! download worked: " + fname);
             }, 0.30);
