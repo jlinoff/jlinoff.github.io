@@ -17,6 +17,8 @@
 <blockquote>
 <p>It is often the case that other services manage the data for the user which is perfectly fine but it is sometimes difficult to determine how well that service is protecting the data.</p>
 </blockquote>
+<h2 id="using">Using</h2>
+<p>This webapp is available directly from <a href="https://jlinoff.github.io/qspm/">https://jlinoff.github.io/qspm/</a>.</p>
 <h2 id="installing">Installing</h2>
 <p>This single page web app can be installed without building anything. Simply download the <code>qspm.zip</code> file from the release page and extract to the location where it will be served.</p>
 <h2 id="building">Building</h2>
@@ -37,11 +39,11 @@
 <li>navigate to http://localhost:8005 to start using the system</li>
 </ol>
 <p>Here is an example:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>$ <span class="fu">git</span> clone git@git.eng.esentire.com:jlinoff/hackweek-20201116-qspm.git</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>$ <span class="fu">git</span> clone https://github.com/eSentire/qspm.git</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="ex">.</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="ex">.</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>$ <span class="bu">cd</span> hackweek-20201116-qspm</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>$ <span class="bu">cd</span> qspm</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>$ <span class="fu">make</span> serve</span></code></pre></div>
 <p>In about 10 minutes you will be able to navigate to the app at http://localhost:8005 where you will see something that looks like this.</p>
 <figure>
