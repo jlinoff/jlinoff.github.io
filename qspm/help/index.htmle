@@ -18,7 +18,7 @@
 <p>It is often the case that other services manage the data for the user which is perfectly fine but it is sometimes difficult to determine how well that service is protecting the data.</p>
 </blockquote>
 <h2 id="using">Using</h2>
-<p>This webapp is available directly from <a href="https://jlinoff.github.io/qspm/">https://jlinoff.github.io/qspm/</a>.</p>
+<p>This webapp is available directly from <a href="https://jlinoff.github.io/qspm">https://jlinoff.github.io/qspm</a>.</p>
 <h2 id="installing">Installing</h2>
 <p>This single page web app can be installed without building anything. Simply download the <code>qspm.zip</code> file from the release page and extract to the location where it will be served.</p>
 <h2 id="building">Building</h2>
