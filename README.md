@@ -24,7 +24,7 @@ to install any Grafana or database specific software.
 * The project is available [here](https://github.com/eSentire/grape).
 
 ## Grok
-Grep-like tool written uin go that searches for files that match regular expressions
+Grep-like tool written in Go that searches for files that match regular expressions
 using concurrency to improve performance.
 
 * The project is available [here](https://github.com/eSentire/grok).
