@@ -1,5 +1,9 @@
+## Table of Contents
+
 1. [Overview](#overview)
 1. [Grafana Prototyping Enviromment (grape)](#grafana-prototyping-environment)
+1. [Grok](#grok)
+1. [Lock Files](#lock-files)
 1. [Quantum Safe Password Manager (qspm)](#quantum-safe-password-manager)
 1. [RSA Demo](#rsa-demo)
 1. [z-tables](#z-tables)
@@ -18,6 +22,19 @@ a PostgreSQL database on your laptop that can be saved and used in other environ
 to install any Grafana or database specific software.
 
 * The project is available [here](https://github.com/eSentire/grape).
+
+## Grok
+Grep-like tool written uin go that searches for files that match regular expressions
+using concurrency to improve performance.
+
+* The project is available [here](https://github.com/eSentire/grok).
+
+## Lock Files
+A python command line tool name `lock_files` to lock (encrypt) or unlock (decrypt)
+multiple files using the Advanced Encryption Standard (AES) algorithm and a common password. 
+This version works in python2 and python3 and can be compatible with openssl.
+
+* The project is available [here](https://github.com/eSentire/lock_files).
 
 ## Quantum Safe Password Manager
 The quantum safe password manager (`qspm`) is a single page application (SPA) demonstration
@@ -49,7 +66,7 @@ Another is that it uses the same key structure as production tools (PKCS#1 and s
 
 * The project is available [here](https://github.com/jlinoff/rsa_demo).
 
-## Z-Tables
+## z-Tables
 Ever wonder how Standard Normal and Student-t Distribution z-tables are generated?
 
 This program shows how to generate z-tables for Standard Normal Distributions and Student-t Distributions. 
