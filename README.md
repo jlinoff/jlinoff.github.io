@@ -41,7 +41,7 @@ This version works in python2 and python3 and can be compatible with openssl.
 
 ## myVault
 myVault is a user friendly secure records manager it is much easier to use
-that `qspm` and it works better on mobile devices.
+than `qspm`, has more features, is customizable and works better on mobile devices.
 
 The webapp can be found [here](https://jlinoff.github.io/myvault/index.html).
 THe documentation can be found [here](https://jlinoff.github.io/myvault/help/index.html).
