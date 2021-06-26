@@ -1,16 +1,16 @@
-import { common } from '/js/common.js'
-import { hideAll } from '/js/utils.js'
-import { hideMenu  } from '/js/header.js'
-import { makePasswordEntryWithId } from '/js/password.js'
+import { common } from '/myvault/js/common.js'
+import { hideAll } from '/myvault/js/utils.js'
+import { hideMenu  } from '/myvault/js/header.js'
+import { makePasswordEntryWithId } from '/myvault/js/password.js'
 import { xmake,
          makeInputXWrapper,
          makeTextButton,
          makeIconButton,
          getFieldType,
          isURL
-       } from '/js/utils.js'
+       } from '/myvault/js/utils.js'
 // do we really need both?
-import { showDataPage, showDataPageInternal } from '/js/data.js' // TODO: hate this circular dependency
+import { showDataPage, showDataPageInternal } from '/myvault/js/data.js' // TODO: hate this circular dependency
 
 var gridLabelStyle = {}
 var gridValueStyle = {}

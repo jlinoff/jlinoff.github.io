@@ -1,9 +1,9 @@
 // Support for accordions.
 // Accordions are scoped under a top element which allows them to be localized to a page.
 
-import { common } from '/js/common.js'
-import { xmake }  from '/js/utils.js'
-import { makeIcon, changeIcon } from '/js/icons.js'
+import { common } from '/myvault/js/common.js'
+import { xmake }  from '/myvault/js/utils.js'
+import { makeIcon, changeIcon } from '/myvault/js/icons.js'
 
 export var accordionPanelClass = 'x-accordion-panel'
 export var accordionPanelImgClass = 'x-accordion-panel-img'

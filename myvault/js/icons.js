@@ -15,8 +15,8 @@
 // Color class
 // code taken from https://stackoverflow.com/questions/7033639/split-large-string-in-n-size-chunks-in-javascript
 // it was written by someone who understands filters far better than me.
-import { common } from '/js/common.js'
-import { xmake }  from '/js/utils.js'
+import { common } from '/myvault/js/common.js'
+import { xmake }  from '/myvault/js/utils.js'
 
 class Color {
     constructor(r, g, b) {

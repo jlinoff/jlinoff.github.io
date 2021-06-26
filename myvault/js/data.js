@@ -1,7 +1,7 @@
 // The data page
-import { common } from '/js/common.js'
-import { makeIcon, changeIcon } from '/js/icons.js'
-import { hideMenu  } from '/js/header.js'
+import { common } from '/myvault/js/common.js'
+import { makeIcon, changeIcon } from '/myvault/js/icons.js'
+import { hideMenu  } from '/myvault/js/header.js'
 import { hideAll,
          xmake,
          makeInputXWrapper,
@@ -10,7 +10,7 @@ import { hideAll,
          getFieldType,
          isURL,
          statusMsg,
-       } from '/js/utils.js'
+       } from '/myvault/js/utils.js'
 import { expandAccordion,
          collapseAccordion,
          accordionPanelClass,
@@ -18,9 +18,9 @@ import { expandAccordion,
          accordionPanelButtonClass,
          makeAccordionEntry,
          clickedAccordionButton,
-         getAccordionPanelStyle } from '/js/accordion.js'
-import { addRecord } from '/js/add.js'
-import { editRecord } from '/js/edit.js'
+         getAccordionPanelStyle } from '/myvault/js/accordion.js'
+import { addRecord } from '/myvault/js/add.js'
+import { editRecord } from '/myvault/js/edit.js'
 
 var gridLabelStyle = {}
 var gridValueStyle = {}

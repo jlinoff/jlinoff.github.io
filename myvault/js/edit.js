@@ -1,4 +1,4 @@
-import { common } from '/js/common.js'
+import { common } from '/myvault/js/common.js'
 import { xmake,
          makeTextButton,
          makeIconButton,
@@ -6,10 +6,10 @@ import { xmake,
          isURL,
          deepCopyObject,
          makeInputXWrapper,
-       } from '/js/utils.js'
-import { makePasswordEntryWithId } from '/js/password.js'
-import { showDataPage } from '/js/data.js'  // TODO: hate this circular dependency
-import { fieldNameHandler } from '/js/add.js'  // TODO: hate this circular dependency
+       } from '/myvault/js/utils.js'
+import { makePasswordEntryWithId } from '/myvault/js/password.js'
+import { showDataPage } from '/myvault/js/data.js'  // TODO: hate this circular dependency
+import { fieldNameHandler } from '/myvault/js/add.js'  // TODO: hate this circular dependency
 
 var gridLabelStyle = {}
 var gridValueStyle = {}

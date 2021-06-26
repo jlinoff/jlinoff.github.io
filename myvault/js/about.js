@@ -1,8 +1,8 @@
 // display the about page
-import { VERSION, BUILD, GIT_COMMIT_ID, GIT_BRANCH } from '/js/version.js'
-import { xmake, hideAll, makeTextButton } from '/js/utils.js'
-import { hideMenu  } from '/js/header.js'
-import { common } from '/js/common.js'
+import { VERSION, BUILD, GIT_COMMIT_ID, GIT_BRANCH } from '/myvault/js/version.js'
+import { xmake, hideAll, makeTextButton } from '/myvault/js/utils.js'
+import { hideMenu  } from '/myvault/js/header.js'
+import { common } from '/myvault/js/common.js'
 
 export function showAboutPage(event) {
     hideAll()
@@ -53,7 +53,7 @@ export function showAboutPage(event) {
                     .xAppendChild(
                         xmake('p').xInnerHTML(`
 The program help (markdown) is converted to HTML by pandoc during the build and released with the webapp,
-click <span onclick="window.open('/help/index.html', '_blank')" style='cursor: pointer'><i>here</i></span> to view it.
+click <span onclick="window.open('/myvault/help/index.html', '_blank')" style='cursor: pointer'><i>here</i></span> to view it.
 `),
                     ),
             )

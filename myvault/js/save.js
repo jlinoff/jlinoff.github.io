@@ -1,12 +1,12 @@
 // The save page
-import { VERSION, BUILD, GIT_COMMIT_ID, GIT_BRANCH } from '/js/version.js'
-import { common } from '/js/common.js'
-import { makeIcon, changeIcon } from '/js/icons.js'
-import { hideMenu  } from '/js/header.js'
+import { VERSION, BUILD, GIT_COMMIT_ID, GIT_BRANCH } from '/myvault/js/version.js'
+import { common } from '/myvault/js/common.js'
+import { makeIcon, changeIcon } from '/myvault/js/icons.js'
+import { hideMenu  } from '/myvault/js/header.js'
 import { hideAll,
          xmake,
          makeTextButton
-       } from '/js/utils.js'
+       } from '/myvault/js/utils.js'
 import { expandAccordion,
          collapseAccordion,
          accordionPanelClass,
@@ -14,7 +14,7 @@ import { expandAccordion,
          accordionPanelButtonClass,
          makeAccordionEntry,
          clickedAccordionButton,
-         getAccordionPanelStyle } from '/js/accordion.js'
+         getAccordionPanelStyle } from '/myvault/js/accordion.js'
 
 export function showSavePage() {
     hideAll()

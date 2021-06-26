@@ -1,20 +1,20 @@
 // The load page
-import { common } from '/js/common.js'
-import { makeIcon, changeIcon } from '/js/icons.js'
+import { common } from '/myvault/js/common.js'
+import { makeIcon, changeIcon } from '/myvault/js/icons.js'
 import { xmake,
          hideAll,
          makeIconButton,
          makeTextButton,
-       } from '/js/utils.js'
-import { header, hideMenu  } from '/js/header.js'
-import { getExample  } from '/js/example.js'
+       } from '/myvault/js/utils.js'
+import { header, hideMenu  } from '/myvault/js/header.js'
+import { getExample  } from '/myvault/js/example.js'
 import { expandAccordion,
          collapseAccordion,
          accordionPanelClass,
          accordionPanelImgClass,
          accordionPanelButtonClass,
          makeAccordionEntry,
-         getAccordionPanelStyle } from '/js/accordion.js'
+         getAccordionPanelStyle } from '/myvault/js/accordion.js'
 
 export function showLoadPage() {
     hideAll()

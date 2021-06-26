@@ -1,14 +1,14 @@
 // The preferences page
-import { common, displayTheme, TITLE, restoreCommon, resetCommon } from '/js/common.js'
-import { themes } from '/js/themes.js'
-import { makeIcon, changeIcon } from '/js/icons.js'
+import { common, displayTheme, TITLE, restoreCommon, resetCommon } from '/myvault/js/common.js'
+import { themes } from '/myvault/js/themes.js'
+import { makeIcon, changeIcon } from '/myvault/js/icons.js'
 import { hideAll,
          makeIconButton,
          makeTextButton,
          xmake,
-         statusMsg } from '/js/utils.js'
-import { hideMenu, header  } from '/js/header.js'
-import { makePasswordEntry } from '/js/password.js'
+         statusMsg } from '/myvault/js/utils.js'
+import { hideMenu, header  } from '/myvault/js/header.js'
+import { makePasswordEntry } from '/myvault/js/password.js'
 import { expandAccordion,
          collapseAccordion,
          accordionPanelClass,
@@ -16,7 +16,7 @@ import { expandAccordion,
          accordionPanelButtonClass,
          makeAccordionEntry,
          clickedAccordionButton,
-         getAccordionPanelStyle } from '/js/accordion.js'
+         getAccordionPanelStyle } from '/myvault/js/accordion.js'
 
 var gridLabelStyle = {}
 var gridValueStyle = {}

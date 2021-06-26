@@ -1,7 +1,7 @@
-import { xmake, makeInputXWrapper } from '/js/utils.js'
-import { makeIcon, changeIcon } from '/js/icons.js'
-import { words } from '/js/en_words.js'
-import { common } from '/js/common.js'
+import { xmake, makeInputXWrapper } from '/myvault/js/utils.js'
+import { makeIcon, changeIcon } from '/myvault/js/icons.js'
+import { words } from '/myvault/js/en_words.js'
+import { common } from '/myvault/js/common.js'
 
 // Password stuff
 // Generate a cryptic password composed of letters, digits and special characters.

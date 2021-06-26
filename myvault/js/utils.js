@@ -1,7 +1,7 @@
 // Utilities
-import { common } from '/js/common.js'
-import { getColorFilter } from '/js/icons.js'
-import { makeIcon, makeIconWithImg }  from '/js/icons.js'
+import { common } from '/myvault/js/common.js'
+import { getColorFilter } from '/myvault/js/icons.js'
+import { makeIcon, makeIconWithImg }  from '/myvault/js/icons.js'
 
 // Allow chaining for common calls to group element creation suff.
 // Here is an example:

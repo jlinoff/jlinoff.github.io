@@ -1,8 +1,8 @@
 // main entry point
 // Enable element functio chaining.
-import { xmake, enableFunctionChaining, statusMsg } from '/js/utils.js'
-import { header  } from '/js/header.js'
-import { common, displayTheme, saveCommon, restoreCommon } from '/js/common.js'
+import { xmake, enableFunctionChaining, statusMsg } from '/myvault/js/utils.js'
+import { header  } from '/myvault/js/header.js'
+import { common, displayTheme, saveCommon, restoreCommon } from '/myvault/js/common.js'
 
 
 import init, {
@@ -13,7 +13,7 @@ decrypt,
     get_num_algorithms,
     header_prefix,
     header_suffix,
-} from '/js/crypt.js';
+} from '/myvault/js/crypt.js';
 
 async function loadCrypt() {
     await init()

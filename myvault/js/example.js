@@ -1,4 +1,4 @@
-import { VERSION, BUILD, GIT_COMMIT_ID } from '/js/version.js'
+import { VERSION, BUILD, GIT_COMMIT_ID } from '/myvault/js/version.js'
 
 // ================================================================
 // Built in example

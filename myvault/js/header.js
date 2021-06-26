@@ -1,12 +1,12 @@
 // The header
-import { xmake, hideAll } from '/js/utils.js'
-import { makeIcon, changeIcon } from '/js/icons.js'
-import { common } from '/js/common.js'
-import { showPrefsPage } from '/js/prefs.js'
-import { showLoadPage } from '/js/load.js'
-import { showDataPage } from '/js/data.js'
-import { showSavePage } from '/js/save.js'
-import { showAboutPage } from '/js/about.js'
+import { xmake, hideAll } from '/myvault/js/utils.js'
+import { makeIcon, changeIcon } from '/myvault/js/icons.js'
+import { common } from '/myvault/js/common.js'
+import { showPrefsPage } from '/myvault/js/prefs.js'
+import { showLoadPage } from '/myvault/js/load.js'
+import { showDataPage } from '/myvault/js/data.js'
+import { showSavePage } from '/myvault/js/save.js'
+import { showAboutPage } from '/myvault/js/about.js'
 
 export function header() {
     let e = document.getElementById('x-topmenu-div')
