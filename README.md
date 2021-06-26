@@ -40,7 +40,7 @@ This version works in python2 and python3 and can be compatible with openssl.
 * The project is available [here](https://github.com/eSentire/lock_files).
 
 ## myVault
-myVault is a user friendly secure records manager it is much easier to use
+myVault is a user friendly secure records manager that is much easier to use
 than `qspm`, has more features, is customizable and works better on mobile devices.
 
 The webapp can be found [here](https://jlinoff.github.io/myvault/index.html).
