@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- report window informarion -->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>winfo</title>
+    <meta name="author" content="Joe Linoff">
+    <style>
+      * {
+          font-family: Arial, Helvetica, Tahoma, Calibri, Verdana, sans-serif;
+          color: #f2f4f4;
+          background-color: #1a355b;
+          font-size: 16px;
+      }
+      .grid-container {
+          display: grid;
+          grid-template-columns: auto auto;
+          grid-column-gap: 5px;
+          grid-row-gap: 5px;
+          overflow: scroll;
+      }
+      .grid-col1 {
+          grid-column: 1 / auto;
+          text-align: right;
+      }
+      .grid-col2 {
+          grid-column: 2 / auto;
+          text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <h3 id='title'></h3>
+    <div id='container' class='grid-container'>
+    </div>
+    <script>
+      function makeEntry(key,value) {
+          let div = document.getElementById('container')
+          let k = document.createElement('div')
+          k.classList.add('grid-col1')
+          k.innerHTML = key + ':'
+          let v = document.createElement('div')
+          v.classList.add('grid-col2')
+          v.innerHTML = value
+          div.appendChild(k)
+          div.appendChild(v)
+      }
+      window.onload = () => {
+          document.getElementById('title').innerHTML = document.title
+          makeEntry('window.innerWidth', window.innerWidth)
+          makeEntry('window.innerHeight', window.innerHeight)
+          makeEntry('document.baseURI', document.baseURI)
+          makeEntry('document.lastModified', document.lastModified)
+          makeEntry('navigator.userAgent', navigator.userAgent)
+          makeEntry('navigator.platform', navigator.platform)
+          makeEntry('navigator.vendor', navigator.vendor)
+          // doesn't work in safari
+          //makeEntry('screen.orientation.type', screen.orientation.type)
+          // read: https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent#mobile_device_detection
+      }
+    </script>
+  </body>
+</html>
