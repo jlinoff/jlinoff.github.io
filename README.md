@@ -46,8 +46,6 @@ than `qspm`, has more features, is customizable and works better on mobile devic
 The webapp can be found [here](https://jlinoff.github.io/myvault/index.html).
 THe documentation can be found [here](https://jlinoff.github.io/myvault/help/index.html).
 
-test link to md [README](README.md)
-
 ## Quantum Safe Password Manager
 The quantum safe password manager (`qspm`) is a single page application (SPA) demonstration
 webapp that shows how to build a simple password management system using symmetric key encryption
