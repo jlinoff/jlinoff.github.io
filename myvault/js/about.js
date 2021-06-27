@@ -13,6 +13,7 @@ export function showAboutPage(event) {
     top.xRemoveChildren()
     let project = 'https://github.com/jlinoff/myvault'
     let webapp = 'https://jlinoff.github.io/myvault'
+    let help = '/myvault/help/index.html'
 
     let col1 = common.themes._activeProp().about.grid.col1
     let col2 = common.themes._activeProp().about.grid.col2
@@ -22,39 +23,34 @@ export function showAboutPage(event) {
             .xAppendChild(
                 xmake('div').xStyle({height: '5px'}),
                 xmake('div').xStyle(common.themes._activeProp().about.grid)
-                    .xStyle(common.themes._activeProp().general.text)
                     .xAddClass('x-theme-element')
                     .xAppendChild(
                         xmake('div').xStyle(col1).xInnerHTML('Author:'),
                         xmake('div').xStyle(col2).xInnerHTML('Joe Linoff'),
+                        xmake('div').xStyle(col1).xInnerHTML('Copyright:'),
+                        xmake('div').xStyle(col2).xInnerHTML('2021'),
+                        xmake('div').xStyle(col1).xInnerHTML('License:'),
+                        xmake('div').xStyle(col2).xInnerHTML('MIT Open Source'),
                         xmake('div').xStyle(col1).xInnerHTML('Version:'),
                         xmake('div').xStyle(col2).xInnerHTML(VERSION),
                         xmake('div').xStyle(col1).xInnerHTML('Build:'),
                         xmake('div').xStyle(col2).xInnerHTML(BUILD),
-                        xmake('div').xStyle(col1).xInnerHTML('GitCommitID:'),
+                        xmake('div').xStyle(col1).xInnerHTML('GitCommitId:'),
                         xmake('div').xStyle(col2).xInnerHTML(GIT_COMMIT_ID),
                         xmake('div').xStyle(col1).xInnerHTML('GitBranch:'),
                         xmake('div').xStyle(col2).xInnerHTML(GIT_BRANCH),
-                        xmake('div').xStyle(col1).xInnerHTML('Copyright:'),
-                        xmake('div').xStyle(col2).xInnerHTML('2021'),
                         xmake('div').xStyle(col1).xInnerHTML('Project:'),
-                        xmake('div').xStyle(col2).xInnerHTML(`<i>${project}</i>`)
+                        xmake('div').xStyle(col2).xInnerHTML(`${project}`)
                             .xStyle({cursor: 'pointer'})
                             .xAddEventListener('click', () => window.open(project, '_blank')),
                         xmake('div').xStyle(col1).xInnerHTML('Webapp:'),
-                        xmake('div').xStyle(col2).xInnerHTML(`<i>${webapp}</i>`)
+                        xmake('div').xStyle(col2).xInnerHTML(`${webapp}`)
                             .xStyle({cursor: 'pointer'})
                             .xAddEventListener('click', () => window.open(webapp, '_blank')),
-                        xmake('div').xStyle(col1).xInnerHTML('License:'),
-                        xmake('div').xStyle(col2).xInnerHTML('MIT Open Source'),
-                    ),
-                xmake('div')
-                    .xStyle(common.themes._activeProp().general.text)
-                    .xAppendChild(
-                        xmake('p').xInnerHTML(`
-The program help (markdown) is converted to HTML by pandoc during the build and released with the webapp,
-click <span onclick="window.open('/myvault/help/index.html', '_blank')" style='cursor: pointer'><i>here</i></span> to view it.
-`),
+                        xmake('div').xStyle(col1).xInnerHTML('HelpDoc:'),
+                        xmake('div').xId('x-about-help-link').xStyle(col2).xInnerHTML(`${help}`)
+                            .xStyle({cursor: 'pointer'})
+                            .xAddEventListener('click', () => window.open(help, '_blank')),
                     ),
             )
     )

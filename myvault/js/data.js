@@ -57,8 +57,8 @@ function makeViewPage(top) {
                             .xAttr('type', 'input')
                             .xStyle(common.themes._activeProp().general.search)
                             .xStyle({
-                                backgroundColor: common.themes._activeEntry().bgColor,
-                                color: common.themes._activeEntry().fgColor,
+                                backgroundColor: common.themes._activeColors().bgColor,
+                                color: common.themes._activeColors().fgColor,
                             })
                             .xAddClass('x-theme-element')
                             .xAttr('placeholder', 'search')
@@ -71,13 +71,13 @@ function makeViewPage(top) {
                 ),
             xmake('div').xStyle({height: '10px'}),
             xmake('button')
-                .xStyle({backgroundColor: common.themes._activeEntry().bgColor, color: common.themes._activeEntry().fgColor, marginBottom: '8px'})
+                .xStyle({backgroundColor: common.themes._activeColors().bgColor, color: common.themes._activeColors().fgColor, marginBottom: '8px'})
                 .xAddClass('x-theme-element')
                 .xAppendChild(makeIcon(common.icons.expand, 'expand'))
                 .xTooltip('expand accordion panels')
                 .xAddEventListener('click', () => expandAccordion(top)),
             xmake('button')
-                .xStyle({backgroundColor: common.themes._activeEntry().bgColor, color: common.themes._activeEntry().fgColor, marginBottom: '8px'})
+                .xStyle({backgroundColor: common.themes._activeColors().bgColor, color: common.themes._activeColors().fgColor, marginBottom: '8px'})
                 .xAddClass('x-theme-element')
                 .xAppendChild(makeIcon(common.icons.collapse, 'collapse'))
                 .xTooltip('collapse accordion panels')
@@ -87,8 +87,8 @@ function makeViewPage(top) {
             xmake('button')
                 .xStyle(
                     {
-                        backgroundColor: common.themes._activeEntry().bgColor,
-                        color: common.themes._activeEntry().fgColor,
+                        backgroundColor: common.themes._activeColors().bgColor,
+                        color: common.themes._activeColors().fgColor,
                         marginLeft: '5px'})
                 .xAddClass('x-theme-element')
                 .xTooltip('create and insert new record')
@@ -271,8 +271,8 @@ function makeRecordViewEntry(ridx, idx, div, key, value) {
                     .xStyle({
                         top: '0',
                         textAlign: 'right',
-                        backgroundColor: common.themes._activeEntry().bgColor,
-                        color: common.themes._activeEntry().fgColor,
+                        backgroundColor: common.themes._activeColors().bgColor,
+                        color: common.themes._activeColors().fgColor,
                     })
                     .xAddClass('x-theme-element')
                     .xInnerHTML(key))
@@ -281,8 +281,8 @@ function makeRecordViewEntry(ridx, idx, div, key, value) {
     let vstyle = {
         overflow: 'scroll',
         width: '100%',
-        backgroundColor: common.themes._activeEntry().bgColor,
-        color: common.themes._activeEntry().fgColor,
+        backgroundColor: common.themes._activeColors().bgColor,
+        color: common.themes._activeColors().fgColor,
     }
 
     switch(ftype) {
@@ -345,8 +345,8 @@ function makeRecordViewEntry(ridx, idx, div, key, value) {
         buttons.xAppendChild(
             xmake('button')
                 .xStyle({
-                    backgroundColor: common.themes._activeEntry().bgColor,
-                    color: common.themes._activeEntry().fgColor,
+                    backgroundColor: common.themes._activeColors().bgColor,
+                    color: common.themes._activeColors().fgColor,
                     marginLeft: '5px',
                 })
                 .xAddClass('x-theme-element')
@@ -370,8 +370,8 @@ function makeRecordViewEntry(ridx, idx, div, key, value) {
     buttons.xAppendChild(
         xmake('button')
             .xStyle({
-                backgroundColor: common.themes._activeEntry().bgColor,
-                color: common.themes._activeEntry().fgColor,
+                backgroundColor: common.themes._activeColors().bgColor,
+                color: common.themes._activeColors().fgColor,
                 marginLeft: '5px',
             })
             .xAddClass('x-theme-element')

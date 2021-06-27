@@ -142,8 +142,8 @@ function createField(numFields, xid, idx, fid, rec) {
             makeInputXWrapper(
                 xmake('input')
                     .xStyle({
-                        backgroundColor: common.themes._activeEntry().bgColor,
-                        color: common.themes._activeEntry().fgColor,
+                        backgroundColor: common.themes._activeColors().bgColor,
+                        color: common.themes._activeColors().fgColor,
                     })
                     .xId(kid)
                     .xAttr('placeholder', 'field '+ fid + ' name')
@@ -168,8 +168,8 @@ function createField(numFields, xid, idx, fid, rec) {
                 xmake('textarea')
                     .xStyle({
                         fontFamily: 'monospace',
-                        backgroundColor: common.themes._activeEntry().bgColor,
-                        color: common.themes._activeEntry().fgColor,
+                        backgroundColor: common.themes._activeColors().bgColor,
+                        color: common.themes._activeColors().fgColor,
                         width: '100%'})
                      .xAttr('placeholder', placeholder)
                     .xAttr('rows', numrows)
@@ -187,8 +187,8 @@ function createField(numFields, xid, idx, fid, rec) {
         let vstyle = {
             overflow: 'scroll',
             width: '90%',
-            backgroundColor: common.themes._activeEntry().bgColor,
-            color: common.themes._activeEntry().fgColor,
+            backgroundColor: common.themes._activeColors().bgColor,
+            color: common.themes._activeColors().fgColor,
         }
         valdiv.xAppendChild(
             (

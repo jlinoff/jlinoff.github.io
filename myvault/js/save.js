@@ -31,13 +31,13 @@ export function showSavePage() {
                 xmake(common.themes._activeProp().header.subtitle.element)
                     .xInnerHTML('Save Page'),
                 xmake('button')
-                    .xStyle({backgroundColor: common.themes._activeEntry().bgColor, color: common.themes._activeEntry().fgColor, marginBottom: '8px'})
+                    .xStyle({backgroundColor: common.themes._activeColors().bgColor, color: common.themes._activeColors().fgColor, marginBottom: '8px'})
                     .xAddClass('x-theme-element')
                     .xAppendChild(makeIcon(common.icons.expand, 'expand'))
                     .xTooltip('expand accordion panels')
                     .xAddEventListener('click', () => expandAccordion(top)),
                 xmake('button')
-                    .xStyle({backgroundColor: common.themes._activeEntry().bgColor, color: common.themes._activeEntry().fgColor, marginBottom: '8px'})
+                    .xStyle({backgroundColor: common.themes._activeColors().bgColor, color: common.themes._activeColors().fgColor, marginBottom: '8px'})
                     .xAddClass('x-theme-element')
                     .xAppendChild(makeIcon(common.icons.collapse, 'collapse'))
                     .xTooltip('collapse accordion panels')
@@ -92,8 +92,8 @@ Download the master password encrypted data to a local file.`),
                                               .xStyle({
                                                   width: '90%',
                                                   fontSize: common.themes._activeProp().general.text.fontSize,
-                                                  backgroundColor: common.themes._activeEntry().bgColor,
-                                                  color: common.themes._activeEntry().fgColor})
+                                                  backgroundColor: common.themes._activeColors().bgColor,
+                                                  color: common.themes._activeColors().fgColor})
                                               .xAttr('placeholder', 'file name')
                                               .xAttr('type', 'input')
                                               .xAttr('value', common.save.filename)
@@ -176,7 +176,7 @@ function encodeSaveData() {
         },
         themes: {
             active: common.themes.active,
-            entries: common.themes.entries,
+            colors: common.themes.colors,
             props: common.themes.props,
         },
         records: common.data.records,

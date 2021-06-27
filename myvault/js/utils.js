@@ -112,8 +112,8 @@ export function hideAll() {
 export function makeIconButton(tooltip, alt, icon, clicker) {
     return xmake('button')
         .xStyle({
-            backgroundColor: common.themes._activeEntry().bgColor,
-            color: common.themes._activeEntry().fgColor,
+            backgroundColor: common.themes._activeColors().bgColor,
+            color: common.themes._activeColors().fgColor,
             margin: '2px',
         })
         .xAddClass('x-theme-element')
@@ -129,9 +129,9 @@ export function makeTextButton(tooltip, text, clicker) {
     let pad = ((text.length % 2)) ? 4 : 5 // heuristic: makes the button text look better
     return xmake('button')
         .xStyle({
-            backgroundColor: common.themes._activeEntry().bgColor,
-            color: common.themes._activeEntry().fgColor,
-            borderColor: common.themes._activeEntry().fgColor,
+            backgroundColor: common.themes._activeColors().bgColor,
+            color: common.themes._activeColors().fgColor,
+            borderColor: common.themes._activeColors().fgColor,
             width: (text.length + pad) +  'ch',
         })
         .xStyle(common.themes._activeProp().general.textButton)
@@ -192,8 +192,8 @@ export function makeInputXWrapper(input) {
     let div = xmake('div')
         .xStyle(common.themes._activeProp().general.iconxdiv)
         .xStyle({
-            backgroundColor: common.themes._activeEntry().bgColor,
-            color: common.themes._activeEntry().fgColor,
+            backgroundColor: common.themes._activeColors().bgColor,
+            color: common.themes._activeColors().fgColor,
         })
         .xAddClass('x-theme-element')
         .xAppendChild(
@@ -217,8 +217,8 @@ export function makeInputXWrapper(input) {
                     .xAddClass('x-vertical-center')
                     .xStyle(common.themes._activeProp().general.iconx)
                     .xStyle({
-                        backgroundColor: common.themes._activeEntry().fgColor,
-                        color: common.themes._activeEntry().bgColor,
+                        backgroundColor: common.themes._activeColors().fgColor,
+                        color: common.themes._activeColors().bgColor,
                     })
             )
         )
@@ -231,8 +231,8 @@ export function statusMsg(msg) {
         .xStyle(common.themes._activeProp().general.status.css)
         .xStyle({
             border: '0',
-            backgroundColor: common.themes._activeEntry().bgColor,
-            color: common.themes._activeEntry().fgColor,
+            backgroundColor: common.themes._activeColors().bgColor,
+            color: common.themes._activeColors().fgColor,
         })
         .xInnerHTML(msg)
     document.body.appendChild(div)

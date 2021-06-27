@@ -24,6 +24,11 @@
 <header id="title-block-header">
 <h1 class="title">myVault</h1>
 </header>
+<details>
+<summary>
+About
+</summary>
+<p>The meta data in the table is populated during the build process.</p>
 <table>
 <thead>
 <tr class="header">
@@ -33,31 +38,44 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td>version</td>
-<td><code>0.1.24</code></td>
+<td>Author</td>
+<td>Joe Linoff</td>
 </tr>
 <tr class="even">
-<td>build</td>
-<td><code>2021-06-26T13:24:00-07:00</code></td>
+<td>Copyright (©)</td>
+<td>2021</td>
 </tr>
 <tr class="odd">
-<td>git commit id</td>
-<td><code>7ba3430</code></td>
+<td>License</td>
+<td>MIT Open Source</td>
 </tr>
 <tr class="even">
-<td>git branch</td>
+<td>Version</td>
+<td><code>0.1.26</code></td>
+</tr>
+<tr class="odd">
+<td>Build</td>
+<td><code>2021-06-27T15:42:53-07:00</code></td>
+</tr>
+<tr class="even">
+<td>GitCommitId</td>
+<td><code>eb75ac3</code></td>
+</tr>
+<tr class="odd">
+<td>GitBranch</td>
 <td><code>main</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>project</td>
 <td><a href="https://github.com/jlinoff/myvault">https://github.com/jlinoff/myvault</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>webapp</td>
 <td><a href="https://jlinoff.github.io/myvault">https://jlinoff.github.io/myvault</a></td>
 </tr>
 </tbody>
 </table>
+</details>
 <details>
 <summary>
 Table of Contents
@@ -84,10 +102,21 @@ Table of Contents
 <li><a href="#master-password">Master Password</a></li>
 <li><a href="#automatic-password-generation">Automatic Password Generation</a>
 <ul>
-<li><a href="#memorable">Memorable</a></li>
 <li><a href="#cryptic">Cryptic</a></li>
+<li><a href="#memorable">Memorable</a></li>
+<li><a href="#custom">Custom</a></li>
 </ul></li>
-<li><a href="#security">Security</a></li>
+<li><a href="#security">Security</a>
+<ul>
+<li><a href="#mitm">MITM</a></li>
+<li><a href="#third-party-web-site-security">Third Party Web Site Security</a></li>
+<li><a href="#over-the-shoulder-surfing-attack">Over the Shoulder Surfing Attack</a></li>
+<li><a href="#clipboard-attack">Clipboard Attack</a></li>
+<li><a href="#unattended-browser">Unattended Browser</a></li>
+<li><a href="#malware--key-logging-and-screen-recording">Malware: Key Logging and Screen Recording</a></li>
+<li><a href="#website-spoofing">Website Spoofing</a></li>
+<li><a href="#protecting-yourself">Protecting Yourself</a></li>
+</ul></li>
 <li><a href="#themes">Themes</a></li>
 <li><a href="#how-to-use-the-builtin-example">How to use the builtin example</a></li>
 <li><a href="#how-to-create-the-first-record">How to create the first record</a></li>
@@ -105,23 +134,18 @@ Table of Contents
 </details>
 <h2 id="overview">Overview</h2>
 <p><em>myVault</em> is single page web app that allows you to securely manage your personal data as searchable records in a secure, flexible manner. Each record contains arbitrary data that you care about, such as the password for a site or the last book you read with notes. You define the record format and contents. Each record can be different. Both the format and the content of each record can be changed at anytime.</p>
-<p>Each record is composed of fields. A field has a name and a value. One key feature of the program is that the field types changes based on the field name. Thus, if a field name contains the word <q>password</q> or <q>secret</q>, the value changes to a password input which hides the value. If the field name contains the word <q>notes</q>, the value field changes to a multi-line text box to allow you enter multiple lines of text.</p>
-<p>It is quite customizable. Customization is done on the preferences page. For example, if you have a set of fields that you use over you can create your own template in <q>Record Field Templates</q> preference. Or, if you want to define a new field name that maps to a password you can define that map in the <q>Record Field Name Value Type Map</q> preference. You can even change the title in the <q>Change Title</q> preference.</p>
-<p>myVault also provides built-in password generation for both cryptic and memorable passwords.</p>
-<p>Cryptic passwords are secure, hard to remember passwords that are a pseudo random collection of upper case letters, lower case letters, numbers and special characters. Here are two examples of cryptic passwords: <code>t0t5Q2eL!6E7!s6nWp6lv1</code> and <code>SiPeD_dLQa03NIG</code>.</p>
-<p>Memorable passwords are secure, easy to remember passwords that are composed of three pseudo random english words separated by a slash. Here are two examples of memorable passwords: <code>farming/naval/decision</code> and <code>viewed/frequencies/looking</code>.</p>
-<p>The look and feel of the program can be changed by dynamically creating or modifying themes and their properties.</p>
-<p>In addition the app provides built in example data to allow you to play with the capabilities without committing to anything.</p>
-<p>The record data is never shipped outside of the browser unless it is encrypted by you master password. It is never shipped to a server which means that if anyone steals the data file, they will not be able to read it it without your master password.</p>
-<p>The data is protected using symmetric key encryption based on AES which is considered to be safe against future quantum attacks.</p>
-<p>It also has a lot of customization options that can be changed in the preferences. This included options like changing the title.</p>
-<p>The myVault data can be exported to you clipboard or stored in a local file. The exported data is always encrypted.</p>
-<p>I use myVault to store my password information and keep track of books that i have read. The books don’t really need to be secure. I simply use it because it is convenient on my mobile devices.</p>
+<p><em>myVault</em> allows you to control where the data is stored. The web app is self contained so data is never shipped to external web site. I tend to save my data in a file in a common place (like Google Drive and iCloud) so that all my devices can access it. If you store your data on a local drive make sure that it is backed up regularly.</p>
+<p>The record data is protected by a master password. It is used to encrypt all data that is exported and decrypt all data that is imported. For more information see the <a href="#master-password">Master Password</a> section.</p>
+<p>Each record is composed of fields. A field has a name and a value. One key feature of the program is that the field types changes based on the field name. Thus, if a field name contains the word <code>"password"</code> or <code>"secret"</code>, the value changes to a password input which hides the value. If the field name contains the word <code>"notes"</code>, the value field changes to a multi-line text box to allow you enter multiple lines of text. All other fields like <code>"name"</code> or <code>"url"</code> are treated as simple strings. Although the webapp does to try to identify <em>URLs</em> and present them as links in view mode.</p>
+<p><em>myVault</em> is very customizable. You can change the page title, the encryption algorithm used, the page theme colors, the page theme properties like font size, templates that define the fields used in records, the mapping between field names and their types, and more. The customization is done on the preferences page. Each customization panel has some information about what it does.</p>
+<p><em>myVault</em> also provides built-in password generation for both cryptic and memorable passwords for all password fields, including the master password. See the <a href="#master-password">Master Password</a> for details on cryptic and memorable passwords.</p>
+<p>The app also provides built in example data to allow you to play with the capabilities without committing to anything. It is a great way to get familiar with the program and is also really useful during development.</p>
+<p>I use <em>myVault</em> to store my password information and keep track of books that i have read. The books don’t really need to be secure. I simply use it because it is convenient to use on my mobile devices.</p>
 <h2 id="layout">Layout</h2>
 <p>This section describes the layout of the app and talks about each section in detail.</p>
-<p>All sections use accordion panels to display options. Opening the panel provides more information about what it does. There are icons at the top of the accordion panels that allow you to expand or collapse all of the panls at once.</p>
+<p>All sections use accordion panels to display options. Opening the panel provides more information about what it does. There are icons at the top of the accordion panels that allow you to expand or collapse all of the panels at once.</p>
 <h3 id="menu">Menu</h3>
-<p>It all starts with the menu. Which is positioned in the upper right corner of the app window. There 5 menu options for selecting one of the five different pages. The pages are briefly described in the table below and more thoroughly described in subsequent sections.</p>
+<p>It all starts with the menu. Which is an icon positioned in the upper right corner of the app window. There 5 menu options for selecting one of the five different pages. The pages are briefly described in the table below and more thoroughly described in subsequent sections.</p>
 <table>
 <colgroup>
 <col style="width: 22%" />
@@ -136,11 +160,11 @@ Table of Contents
 <tbody>
 <tr class="odd">
 <td>About</td>
-<td>Present information about the app.</td>
+<td>Presents information about the version and provenance of the app. It also provides links to the project and this help.</td>
 </tr>
 <tr class="even">
 <td>Preferences</td>
-<td>Allows you to customize the app. Including defining the master password.</td>
+<td>Allows you to customize the app. Including defining the master password, choosing the theme colors and changing the title.</td>
 </tr>
 <tr class="odd">
 <td>Load</td>
@@ -156,10 +180,64 @@ Table of Contents
 </tr>
 </tbody>
 </table>
-<p>The upper left is reserved for brief ephemeral status messages and the middle is reserved for the title which is customizable.</p>
+<p>The upper left is reserved for brief ephemeral status messages and the middle is reserved for the titleand subtitles.</p>
 <h3 id="about-page">About Page</h3>
-<p>This page contain build information about the webapp. There are two subsections. The the table at the top contains the build and provenance information. The text at the bottom briefly describes the webapp and provides a link to this help.</p>
-<p>You should use the version, build and git branch information when describing a problem.</p>
+<p>This page contain build information about the webapp. It basically has the same information as the <q>About</q> section at the top of this page. The specific fields are:</p>
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 73%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Author</td>
+<td>The program author.</td>
+</tr>
+<tr class="even">
+<td>Copyright</td>
+<td>The copyright year.</td>
+</tr>
+<tr class="odd">
+<td>License</td>
+<td>The source code license always MIT for this project.</td>
+</tr>
+<tr class="even">
+<td>Version</td>
+<td>The program version (semantic versioning 2.0.0).</td>
+</tr>
+<tr class="odd">
+<td>Build</td>
+<td>The build date and time. It is populated at build time.</td>
+</tr>
+<tr class="even">
+<td>GitCommitId</td>
+<td>The git commit id of the released source code. It is populated at build time.</td>
+</tr>
+<tr class="odd">
+<td>GitBranch</td>
+<td>The git branch of the released source code. It is populated at build time.</td>
+</tr>
+<tr class="even">
+<td>Project</td>
+<td>The github project link</td>
+</tr>
+<tr class="odd">
+<td>Webapp</td>
+<td>The webapp URL link.</td>
+</tr>
+<tr class="even">
+<td>HelpDoc</td>
+<td>A link to this help documentation.</td>
+</tr>
+</tbody>
+</table>
+<p>You can use the build and git branch information when describing a problem.</p>
 <h3 id="preferences-page">Preferences Page</h3>
 <p>This page contains a collection of interesting preferences that you can change to customize the interface. They are briefly summarized in the table below.</p>
 <table>
@@ -180,15 +258,15 @@ Table of Contents
 </tr>
 <tr class="even">
 <td>Encryption Algorithm</td>
-<td>Choose one of the Rust algorithms that were compiled into the webapp.</td>
+<td>Choose one of the algorithms that were compiled into the webapp.</td>
 </tr>
 <tr class="odd">
-<td>Themes</td>
-<td>Choose which them you want to use or define our own</td>
+<td>ThemeColors</td>
+<td>Choose which the color scheme you want or define our own.</td>
 </tr>
 <tr class="even">
 <td>Theme Properties</td>
-<td>Choose the theme properties you want.</td>
+<td>Choose the theme properties you want. This is not very user friendly because it requires knowledge of the internal implementation.</td>
 </tr>
 <tr class="odd">
 <td>Record Field Templates</td>
@@ -229,7 +307,7 @@ Table of Contents
 <tbody>
 <tr class="odd">
 <td>Internal Example</td>
-<td>Built in example data that can be used to play around with the program.</td>
+<td>Built in example data consisting of 11 made up password records that can be used to play around with the program.</td>
 </tr>
 <tr class="even">
 <td>Paste from Clipboard</td>
@@ -249,8 +327,9 @@ Table of Contents
 <p>Work with the records. You can add, change or delete records. The top level records page shows all of the records in accordion panels. You can click on a record accordion panel to see the record details.</p>
 <h4 id="search">Search</h4>
 <p>There is search bar at the top that allows you search for records that match a pattern. The search searches all of the record titles in a case insensitive manner. The default is to search for <em>all</em> records. The search syntax is the Javascript RegEx syntax.</p>
+<p>The records list is updated as you type.</p>
 <h4 id="add-new-record">Add New Record</h4>
-<p>Underneath the search bar there are three buttons: a button to expand all of the accordion panels, a button to collapse the all of the accordion panels and a <q>+</q> button to add a new record. There is also a count of the number of records which match the search criterion.</p>
+<p>Underneath the search bar there are three buttons: a button to expand all of the accordion panels, a button to collapse the all of the accordion panels and a <q>+</q> button to add a new record. There is also a count of the number of records which match the search criteria.</p>
 <p>When you click on the add new record button a new sub-page appears.</p>
 <p>Enter the data for the fields that you want to add and click on the <q>Create</q> button to create the new record.</p>
 <p>Before entering any field information you can choose a record field template from the <q>Template</q> selection box if you want to use pre-defined fields. This is helpful if you want a common format for the records. Note that you can define your own templates in the <q>Preferences</q>.</p>
@@ -284,79 +363,123 @@ Table of Contents
 </tr>
 <tr class="even">
 <td>Download to File</td>
-<td>Download the master password encrypted data to a local file.</td>
+<td>Download the master password encrypted data to a local file. If you download the file to a shared resource like Google Drive or iCloud, the file can be shared by different devices.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="master-password">Master Password</h2>
-<p>The master password is used to encrypt the records when they are saved and to decrypt the records when they are loaded. It is not stored. That means that you must not forget it. If it is lost the records cannot be recovered so you may want to make it easy to remember or write is down and store it in a safe place. This is the only password that you need to remember.</p>
+<p>The record data is protected by a master password. It is used to encrypt all data that is exported and decrypt all data that is imported so the only data ever saved is secure which means that the encrypted data in the stored file looks something like this.</p>
+<pre><code>----------------------- crypt-aes-256-gcm prefix -----------------------
+5YTMBBuyj0It/9cF6V8SxYa3MXXjRDsXKpcVG98fPSLdPcT75sUCnR7W/iTKMjEpZzrV3n0S
+HVX/czCqSeaJwTKHjsXyv4RKylIVRKR6fEDNFkmb8eUZC8nvqZdENWk2zkM45F4Iib3J5HUa
+PysK4noxEqIAimLlieGSWwvPD14XaRTGytBUxy4N6FmlahokO1bnBk6gwDTpLjNpxDkzI2Fa
+mRqoOzUJsmnNG8SAQtSNz4wBkdPJ46nOens309FWQoA5KEMQigaDE1tqgFdsd6d50HUd6idE
+.
+.
+yBmfWfXNtDoD7KSOIEGjRck6rrLNNDI9D3up8818438kVyrg8Srvrt0qmoH54SSKaB9/jb4V
+CZh35BY51SpHrsKFs91Qj54QHn9SSWA2HBOPfODomEqpG3BX2HPmQ3BIMHCWyrS6X9gLbJCB
+LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
+6HscqWKZ9gXH7INKAko0MHW75ckR6AOVTxrS7J93j6pXQhHgOYGMoyzCQQL0cx2Ix6eIPw==
+----------------------- crypt-aes-256-gcm suffix -----------------------</code></pre>
+<p>As you can see, it is not of much use without the password.</p>
+<blockquote>
+<p>If your master password is lost, the data cannot be recovered because the program never stores it.</p>
+</blockquote>
+<p>The encryption algorithm is AES-256 which is considered quite secure and should be relatively safe from future quantum attacks. Furthermore, the encryption algorithm runs <em>inside</em> the browser so, as mentioned earlier, your data is never shipped to an external server.</p>
+<p>I recommend creating a memorable password (<a href="#memorable">Memorable</a> below) because this is the <em>only</em> password that you have to remember to access all of your password records. It may even make sense to write it down and store it in a secure place.</p>
 <h2 id="automatic-password-generation">Automatic Password Generation</h2>
-<p>Passwords (including the master password) have four extra button: an eye button to let you view the password as plaintext, a single gear button that generates a <em>cryptic</em> password, a multiple gear button that generates a <em>memorable</em> password and a copy button that copies the password to the clipboard that can be pasted externally.</p>
+<p>lll passwords (including the master password) have four extra buttona: an eye button to let you view the password as plaintext, a single gear button that generates a <em>cryptic</em> password, a multiple gear button that generates a <em>memorable</em> password and a copy button that copies the password to the clipboard that can be pasted externally.</p>
 <h3 id="cryptic">Cryptic</h3>
 <p>Cryptic passwords are secure, hard to remember passwords that are a pseudo random collection of upper case letters, lower case letters, numbers and special characters. Here are two examples of cryptic passwords: <q><code>t0t5Q2eL!6E7!s6nWp6lv1</code></q> and <q><code>SiPeD_dLQa03NIG</code></q>.</p>
 <h3 id="memorable">Memorable</h3>
 <p>Memorable passwords are secure, easy to remember passwords that are composed of three pseudo random english words separated by a slash. Here are two examples of memorable passwords: <q><code>farming/naval/decision</code></q> and <q><code>viewed/frequencies/looking</code></q>.</p>
-<p>I recommend using a memorable password for your master password.</p>
-<p>The cryptic and memorable buttons make it easy to generate passwords automatically but if you prefer another style you can always enter passwords manually.</p>
+<h3 id="custom">Custom</h3>
+<p>The cryptic and memorable buttons make it easy to generate passwords automatically but if you prefer another style you can always enter your passwords manually.</p>
 <h2 id="security">Security</h2>
 <p><em>myVault</em>, like all webapps or programs, has security challenges. By understanding them you can better protect your record data.</p>
-<p>Unlike many other webapps, it does <em>not</em> talk to a server which means that the data is never transported over the internet. This protects your data from man-in-the-middle (MITM) attacks. Furthermore, because it does not send the data to a server, it is not vulnerable to how security is managed on the server. Instead, the encryption and decryption is inside the browser by algorithms implemented in Rust and incoporated using WebAssembly. This means that the data is never exposed outside of the browser unless it is encypted.</p>
-<p>However, this does not mean that the data is secure. Internally the data is stored in decrypted form so you may be vulnerable to over the shoulder surfing attacks. This can be mitigated by being aware of your surroundings to make sure you are not being watched or filmed.</p>
-<p>You may also be vulnerable to clipboard attacks if/when data is copied to the clipboard for pasting into an application because the clipboard is a global resource that can be accessed by other, independent applications. This attack can be mitigated by making sure that your computer does not have malware installed or by not copying to the clipboard or by enhancing the web app to create POST requests. It is probably impractical to not use the clipboard at all so always reset it after using it to copy/paste a password to minimize any chances that it will be captured by malware. Another way to mitigate this vulnerability would be to modify the webapp to automatically login in for you using a POST operation but that is not currently available.</p>
+<h3 id="mitm">MITM</h3>
+<p>Unlike many other webapps, it does <em>not</em> talk to an internet based web server which means that the data is never transported from your computer over the internet. Because no data is ever transmitted, it is protected from monster-in-the-middle (MITM) attacks.</p>
+<h3 id="third-party-web-site-security">Third Party Web Site Security</h3>
+<p>Furthermore, because it does not send the data to a server, it is not vulnerable to how cybersecurity is managed on the server by a third party.</p>
+<blockquote>
+<p>You can verify that <em>myVault</em> is not sending data out by monitoring outbound traffic from your system. This web app never sends any data.</p>
+</blockquote>
+<p>Instead, encryption and decryption is run <em>inside</em> the browser using algorithms implemented in Rust and incorporated into the <em>myVault</em> using WebAssembly. This means that the data is never exposed outside of the browser unless it is encrypted. It also means that the algorithms run quite fast and are not exposed in javascript.</p>
+<p><em>However, running the algorithms internally and not exporting the data over the internet does not guarantee that your data is secure</em>.</p>
+<h3 id="over-the-shoulder-surfing-attack">Over the Shoulder Surfing Attack</h3>
+<p>Internally the data is stored in decrypted form, so you may be vulnerable to over the shoulder surfing attacks where someone or something (like a camera) watches or films you typing. You could be observed opening a record and then clicking to display the password in plaintext which could allow that information to be stolen. This can be mitigated by being aware of your surroundings to make sure you are not being watched or filmed.</p>
+<h3 id="clipboard-attack">Clipboard Attack</h3>
+<p>Yet another type of vulnerability is clipboard attacks if/when data is copied to the clipboard for cut and paste operations. This vulnerability exists because the clipboard is a global resource that can be accessed by other, independent applications.</p>
+<p>Clipboard attacks can be mitigated by making sure that your computer does not have malware installed or by not copying to the clipboard. Although it is probably impractical to not use the clipboard at all so, if you do use the clipboard, make sure that you always reset it after any copy/paste operation to minimize any chances that it will be captured by malware or observed by an attacker. You can reset it by simply selection a single letter or word and copying it.</p>
+<p>Another perhaps better way to mitigate the clipboard vulnerability would be to eliminate the need for the clipboard by modifying <em>myVault</em> to automatically login in for you based on record data using an HTTP POST operation but that is not currently available.</p>
+<h3 id="unattended-browser">Unattended Browser</h3>
 <p>If you leave the browser unattended after you have loaded your record data, someone can sit down and see the records because they are impersonating you. This can be mitigated by always closing the webapp tab or locking your screen when you leave the computer.</p>
+<h3 id="malware-key-logging-and-screen-recording">Malware: Key Logging and Screen Recording</h3>
 <p>If malware has been installed on your computer that does screen shots or key logging, you are in trouble. It means that an attacker can see what you are doing and capture what you are typing. The best way to mitigate these forms of attacks is to keep your system up to data by installing security patches and use some sort of security tool to protect your system.</p>
-<p>Finally, web site spoofing could be used to direct you to a website that could be used to steal your information using a look alike webapp. To mitigate that make sure that you accessing the webapp from a known, trusted site.</p>
-<p>In summary, the best way to protect your data is to follow commonly recommended security practices.</p>
+<h3 id="website-spoofing">Website Spoofing</h3>
+<p>Finally, web site spoofing could be used to direct you to a website that could be used to steal your information using a look alike webapp. To mitigate that make sure that you accessing the <em>myVault</em> from a known, trusted site.</p>
+<h3 id="protecting-yourself">Protecting Yourself</h3>
+<p>In summary, even security can never be guaranteed, the best way to protect your data is to follow commonly recommended security practices:</p>
+<ol type="1">
+<li>Keep all of your security patches up to date.</li>
+<li>Keep malware off of your systems.</li>
+<li>Make sure that you are not observered.</li>
+<li>Never share sensitive information (like passwords).</li>
+<li>Backup your data.</li>
+</ol>
 <h2 id="themes">Themes</h2>
+<p>A theme is composed of a set of colors (foreground and background) and a set of properties that define other syle information. Each theme also has a unique name. Theme colors and properties are can be selected and/or defined on the <q><code>Preferences</code></q> page.</p>
 <p>The idea behind themes is to make the CSS styling dynamic to allow users to change and save styles from the UI. The current implementation is poor because it is too complex and is not documented.</p>
-<p>A theme is composed of a set of colors (foreground and background) and a set of properties that define other syle information. Each theme also has a unique name.</p>
-<p>The current properties are <em>desktop</em> and <em>mobile</em>. They are a first appproximation of styles that make the web app usable for different screen sizes.</p>
+<p>The current properties are <em>standard</em> and <em>large</em>. They are a first appproximation of styles that make the webapp usable for different screen sizes. I use <em>standard</em> on my laptop and <em>large</em> in landscape mode on my mobiles devices.</p>
+<p>When a theme color or property is changed, the display is updated immediately.</p>
 <h2 id="how-to-use-the-builtin-example">How to use the builtin example</h2>
 <p>An example is provided that allows you to play with the webapp to get familiar with it.</p>
-<p>It contains 11 hard-coded records that can be used to play around with the tool to learn how it is used. Note that this operation changes the password to <q>example</q> and the title to <q>myExample</q>. The password and title values can be changed to anything you want in the <q>Preferences</q>.</p>
+<p>It contains 11 built-in, hard-coded records that can be used to play around with the tool to learn how it is used. Note that this operation changes the password to <q><code>example</code></q> and the title to <q><code>myExample</code></q>. The password and title values can be changed to anything you want in the <q><code>Preferences</code></q>.</p>
 <p>To load the example follow these steps.</p>
 <ol type="1">
-<li>Navigate to the <q>Load</q> page from the menu.</li>
-<li>Click on the <q>Internal Example</q> accordion entry.</li>
-<li>Click the <q>Load Example</q> button.</li>
+<li>Go to the app in your browser: <a href="https://jlinoff.github.io/myvault">https://jlinoff.github.io/myvault</a></li>
+<li>Navigate to the <q><code>Load</code></q> page from the menu.</li>
+<li>Click on the <q><code>Internal Example</code></q> accordion entry.</li>
+<li>Click the <q><code>Load Example</code></q> button.</li>
 </ol>
-<p>Once the example is loaded, you can change the records from the <q>Records</q> page, add new records, save them and load them.</p>
+<p>Once the example is loaded, you can change the records from the <q><code>Records</code></q> page, add new records, save them and load them.</p>
 <h2 id="how-to-create-the-first-record">How to create the first record</h2>
 <p>Creating the first record requires you to define a master password, input the record data and save it. Here are the steps.</p>
 <ol type="1">
-<li>Navigate to the <q>Preferences</q> page from the menu.</li>
-<li>Click on the <q>Master Password</q> accordion entry.</li>
+<li>Go to the app in your browser: <a href="https://jlinoff.github.io/myvault">https://jlinoff.github.io/myvault</a></li>
+<li>Navigate to the <q><code>Preferences</code></q> page from the menu.</li>
+<li>Click on the <q><code>Master Password</code></q> accordion entry.</li>
 <li>Enter a password. I used the memorable password generator.</li>
-<li>Navigate to the <q>Records</q> page from the menu.</li>
-<li>Click on the <q>+</q> (plus) button.</li>
+<li>Navigate to the <q><code>Records</code></q> page from the menu.</li>
+<li>Click on the <q><code>+</code></q> (plus) button.</li>
 <li>Choose the PASS4 template.</li>
 <li>Enter the data: URL, username, password and a note about it.</li>
-<li>Navigate to the <q>Save</q> page from the menu.</li>
-<li>Click on the <q>Download to File</q> accordion entry.</li>
-<li>Enter different file name if you want. The default is <q>vault.txt</q>.</li>
-<li>Click the <q>Download</q> button.</li>
+<li>Navigate to the <q><code>Save</code></q> page from the menu.</li>
+<li>Click on the <q><code>Download to File</code></q> accordion entry.</li>
+<li>Enter different file name if you want. The default is <q><code>vault.txt</code></q>.</li>
+<li>Click the <q><code>Download</code></q> button.</li>
 </ol>
 <h2 id="how-to-create-the-second-record">How to create the second record</h2>
 <p>Creating the first record requires you to enter the master password you created for the first record, load the record data from the file that you created, input the second record data and then save it. Here are the steps.</p>
 <p>These are the same steps used for all subsequent records.</p>
 <ol type="1">
-<li>Navigate to the <q>Preferences</q> page from the menu.</li>
-<li>Click on the <q>Master Password</q> accordion entry.</li>
+<li>Go to the app in your browser: <a href="https://jlinoff.github.io/myvault">https://jlinoff.github.io/myvault</a></li>
+<li>Navigate to the <q><code>Preferences</code></q> page from the menu.</li>
+<li>Click on the <q><code>Master Password</code></q> accordion entry.</li>
 <li>Enter the password you created for the first record.</li>
-<li>Navigate to the <q>Load</q> page from the menu.</li>
-<li>Click on the <q>Read Local File</q> accordion entry.</li>
-<li>Click on the <q>Select Fie</q> button and choose a file. It will load automatically if the master password is correct. Otherwise it will fail. If it fails. Carefully check and re-enter you master password (go back to step 1).</li>
-<li>Navigate to the <q>Records</q> page from the menu.</li>
-<li>Click on the <q>+</q> (plus) button.</li>
+<li>Navigate to the <q><code>Load</code></q> page from the menu.</li>
+<li>Click on the <q><code>Read Local File</code></q> accordion entry.</li>
+<li>Click on the <q><code>Select File</code></q> button and choose a file. It will load automatically if the master password is correct. Otherwise it will fail. If it fails. Carefully check and re-enter you master password (go back to step 1).</li>
+<li>Navigate to the <q><code>Records</code></q> page from the menu. 9d8. Click on the <q><code>+</code></q> (plus) button.</li>
 <li>Choose the PASS4 template.</li>
 <li>Enter the data: URL, username, password and a note about it.</li>
-<li>Navigate to the <q>Save</q> page from the menu.</li>
-<li>Click on the <q>Download to File</q> accordion entry.</li>
-<li>Enter different file name if you want. The default is <q>vault.txt</q>.</li>
-<li>Click the <q>Download</q> button.</li>
+<li>Navigate to the <q><code>Save</code></q> page from the menu.</li>
+<li>Click on the <q><code>Download to File</code></q> accordion entry.</li>
+<li>Enter different file name if you want. The default is <q><code>vault.txt</code></q>.</li>
+<li>Click the <q><code>Download</code></q> button.</li>
 </ol>
 <h2 id="how-to-view-a-record">How to view a record</h2>
-<p>To view a record, load the data as described in the <q>How to create a second record section</q>, navigate to the <q>Records</q> page and click on the record you want to view. It will expand to show the record data in a read-only form. Passwords are never shown to protect from over the shoulder surfing. You can make them visible by clicking on the eye icon. All fields can be copied to the clipboard by clickin on the copy icon.</p>
+<p>To view a record, load the data as described in the <a href="#how-to-create-a-second-record-section">How to create a second record section</a>, navigate to the <q><code>Records</code></q> page and click on the record you want to view. It will expand to show the record data in a read-only form. Passwords are never shown to protect from over the shoulder surfing. You can make them visible by clicking on the eye icon. All fields can be copied to the clipboard by clickin on the copy icon.</p>
 <h2 id="how-to-edit-a-record">How to edit a record</h2>
 <p>To edit a record, first view the record and then click on the pencil icon.</p>
 <p>The shows an edit view of the record inline. The up/down arrows allow you to move the fields rows up an down.</p>
@@ -382,7 +505,7 @@ Table of Contents
 <ol type="1">
 <li>Get the source code.
 <ol type="1">
-<li><code>git clonehttps://github.com/jlinoff/myvault</code></li>
+<li><code>git clone https://github.com/jlinoff/myvault</code></li>
 <li><code>cd myvault</code></li>
 </ol></li>
 <li>Build and test it locally.
@@ -397,8 +520,8 @@ Table of Contents
 </ol>
 <p>If you want a port other than 8000 (say 9000), run <code>make server PORT=9000</code>.</p>
 <h2 id="how-to-get-help">How to get help</h2>
-<p>To get help, click on the <q>About</q> menu option then click on <em>here</em> where the page says <q>click <em>here</em> to view it</q>.</p>
+<p>To get help, Navigate to <a href="https://jlinoff.github.io/myvault/">https://jlinoff.github.io/myvault/</a>, click on the <q><code>About</code></q> menu option then click on <q><code>HelpDoc</code></q> entry in the table.</p>
 <h2 id="how-to-access-the-app">How to access the app</h2>
-<p>Navigate to https://jlinoff.github.io/myvault/ in your browser.</p>
+<p>Navigate to <a href="https://jlinoff.github.io/myvault/">https://jlinoff.github.io/myvault/</a> in your browser.</p>
 </body>
 </html>

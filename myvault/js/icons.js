@@ -386,7 +386,7 @@ export function makeIconWithImg(size, img) {
         .xStyle({
             height: size,
             width: size,
-            filter: getColorFilter(common.themes._activeEntry().fgColor),
+            filter: getColorFilter(common.themes._activeColors().fgColor),
         })
         .xAttr('viewBox', '0 0 100 100')
         .xAddClass('x-show-hide-img')

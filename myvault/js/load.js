@@ -31,13 +31,13 @@ export function showLoadPage() {
                 xmake(common.themes._activeProp().header.subtitle.element)
                     .xInnerHTML('Load Page'),
                 xmake('button')
-                    .xStyle({backgroundColor: common.themes._activeEntry().bgColor, color: common.themes._activeEntry().fgColor, marginBottom: '8px'})
+                    .xStyle({backgroundColor: common.themes._activeColors().bgColor, color: common.themes._activeColors().fgColor, marginBottom: '8px'})
                     .xAddClass('x-theme-element')
                     .xAppendChild(makeIcon(common.icons.expand, 'expand'))
                     .xTooltip('expand accordion panels')
                     .xAddEventListener('click', () => expandAccordion(top)),
                 xmake('button')
-                    .xStyle({backgroundColor: common.themes._activeEntry().bgColor, color: common.themes._activeEntry().fgColor, marginBottom: '8px'})
+                    .xStyle({backgroundColor: common.themes._activeColors().bgColor, color: common.themes._activeColors().fgColor, marginBottom: '8px'})
                     .xAddClass('x-theme-element')
                     .xAppendChild(makeIcon(common.icons.collapse, 'collapse'))
                     .xTooltip('collapse accordion panels')
@@ -197,8 +197,8 @@ If there is no data, reload the data.
 `),
                 xmake('textarea')
                     .xStyle({
-                        backgroundColor: common.themes._activeEntry().bgColor,
-                        color: common.themes._activeEntry().fgColor,
+                        backgroundColor: common.themes._activeColors().bgColor,
+                        color: common.themes._activeColors().fgColor,
                         width: common.themes._activeProp().textareaColor,
                     })
                     .xStyle(common.themes._activeProp().general.textarea)
@@ -377,11 +377,11 @@ function setRawData(text) {
         if ('themes' in rec) {
             if ('active' in rec.themes) {
                 let a = rec.themes.active.entry
-                if (!common.themes.entries.hasOwnProperty(a)) {
+                if (!common.themes.colors.hasOwnProperty(a)) {
                     // handle the case where the file references a
                     // theme that no longer exists.
                     common.themes.active.entry = getObjectValue(rec, common.themes.active, 'themes', 'active', 'entry')
-                    common.themes.entries = getObjectValue(rec, common.themes.entries, 'themes', 'entries')
+                    common.themes.colors = getObjectValue(rec, common.themes.colors, 'themes', 'colors')
                 }
             }
             if ('activeProp' in rec.themes) {

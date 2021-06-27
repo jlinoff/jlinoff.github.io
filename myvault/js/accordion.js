@@ -34,9 +34,9 @@ export function collapseAccordion(top) {
 // Accordion button style
 export function getAccordionButtonStyle() {
     let style = common.themes._activeProp().accordion.button
-    style.borderColor = common.themes._activeEntry().fgColor
-    style.backgroundColor = common.themes._activeEntry().bgColor
-    style.color = common.themes._activeEntry().fgColor
+    style.borderColor = common.themes._activeColors().fgColor
+    style.backgroundColor = common.themes._activeColors().bgColor
+    style.color = common.themes._activeColors().fgColor
     return style
 }
 

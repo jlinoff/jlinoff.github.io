@@ -50,13 +50,13 @@ export function showPrefsPage() {
                 xmake(common.themes._activeProp().header.subtitle.element)
                     .xInnerHTML('Preferences Page'),
                 xmake('button')
-                    .xStyle({backgroundColor: common.themes._activeEntry().bgColor, color: common.themes._activeEntry().fgColor, marginBottom: '8px'})
+                    .xStyle({backgroundColor: common.themes._activeColors().bgColor, color: common.themes._activeColors().fgColor, marginBottom: '8px'})
                     .xAddClass('x-theme-element')
                     .xAppendChild(makeIcon(common.icons.expand, 'expand'))
                     .xTooltip('expand accordion panels')
                     .xAddEventListener('click', () => expandAccordion(top)),
                 xmake('button')
-                    .xStyle({backgroundColor: common.themes._activeEntry().bgColor, color: common.themes._activeEntry().fgColor, marginBottom: '8px'})
+                    .xStyle({backgroundColor: common.themes._activeColors().bgColor, color: common.themes._activeColors().fgColor, marginBottom: '8px'})
                     .xAddClass('x-theme-element')
                     .xAppendChild(makeIcon(common.icons.collapse, 'collapse'))
                     .xTooltip('collapse accordion panels')
@@ -113,30 +113,25 @@ function prefsAlgorithm() {
 
 // manage themes
 function prefsThemes() {
-    let text = JSON.stringify(common.themes.entries, null, 4)
+    let text = JSON.stringify(common.themes.colors, null, 4)
     let eid = 'x-prefs-themes-buffer'
     let eidlen = eid + '-length'
     let div =  makeAccordionEntry(
-        'Themes',
+        'Theme Colors',
         xmake('div')
             .xStyle(common.themes._activeProp().accordion.panel)
             .xAppendChild(
                 xmake('p').xStyle(common.themes._activeProp().general.text)
                     .xInnerHTML(`
-Set or customize the theme that you want to use.
-The theme defines the colors and font size that are displayed.
-A light theme assumes a light background. A dark them assumes a dark background.
-The color is the light color.
-Medium is, generally, useful for large displays like desktops and latops.
-Large is, generally, useful for mobile devices.
-The app allows you to choose which one works best for you.
+Set or customize the theme background and foreground colors that you want to use.
+The colors can be specified as name: "red" or a hex value "#0000ff".
 `),
                 makeThemeEntrySelectBox(),
                 xmake('br'),
                 xmake('textarea')
                     .xStyle({
-                        backgroundColor: common.themes._activeEntry().bgColor,
-                        color: common.themes._activeEntry().fgColor,
+                        backgroundColor: common.themes._activeColors().bgColor,
+                        color: common.themes._activeColors().fgColor,
                         marginTop: '5px',
                     })
                     .xStyle(common.themes._activeProp().general.textarea)
@@ -163,7 +158,7 @@ The app allows you to choose which one works best for you.
                                 alert(`cannot save, invalid JSON\nerror: ${ e }`)
                                 return
                             }
-                            common.themes.entries = rec
+                            common.themes.colors = rec
                             displayTheme()
                             header()
                             showPrefsPage()
@@ -190,15 +185,18 @@ function prefsThemeProps() {
             .xAppendChild(
                 xmake('p').xStyle(common.themes._activeProp().general.text)
                     .xInnerHTML(`
-Set or customize the theme property record that you want to use.
-The fields are not documented yet.
+Set or customize the theme properties.
+THe properties are font sizes, icon sizes, layout information and spacing.
+This information is used internally by the webapp for dynamic styling.
+Basically everything but the color scheme.
+It is not user friendly because it requires knowledge of the internal implementation.
 `),
                 makeThemePropsSelectBox(),
                 xmake('br'),
                 xmake('textarea')
                     .xStyle({
-                        backgroundColor: common.themes._activeEntry().bgColor,
-                        color: common.themes._activeEntry().fgColor,
+                        backgroundColor: common.themes._activeColors().bgColor,
+                        color: common.themes._activeColors().fgColor,
                         marginTop: '5px',
                     })
                     .xStyle(common.themes._activeProp().general.textarea)
@@ -248,8 +246,8 @@ function makeThemeEntrySelectBox() {
     let entries = xmake('select').xId(sid)
         .xStyle(
             {
-                backgroundColor: common.themes._activeEntry().bgColor,
-                color: common.themes._activeEntry().fgColor,
+                backgroundColor: common.themes._activeColors().bgColor,
+                color: common.themes._activeColors().fgColor,
                 marginLeft: '5px'})
         .xAddClass('x-theme-element')
         .xAddEventListener('change', (e) => {
@@ -259,7 +257,7 @@ function makeThemeEntrySelectBox() {
             showPrefsPage()
         })
 
-    for (const key of Object.keys(common.themes.entries)) {
+    for (const key of Object.keys(common.themes.colors)) {
         let opt = xmake('option').xAttr('value', key).xAttr('text', key).xInnerHTML(key)
         if (key === common.themes.active.entry) {
             opt.xAttr('selected', true)
@@ -271,8 +269,8 @@ function makeThemeEntrySelectBox() {
         xmake('label')
             .xStyle(
                 {
-                    backgroundColor: common.themes._activeEntry().bgColor,
-                    color: common.themes._activeEntry().fgColor,
+                    backgroundColor: common.themes._activeColors().bgColor,
+                    color: common.themes._activeColors().fgColor,
                     marginLeft: '5px'})
             .xAddClass('x-theme-element')
             .xAttr('htmlFor', 'sid')
@@ -290,8 +288,8 @@ function makeThemePropsSelectBox() {
     let entries = xmake('select').xId(sid)
         .xStyle(
             {
-                backgroundColor: common.themes._activeEntry().bgColor,
-                color: common.themes._activeEntry().fgColor,
+                backgroundColor: common.themes._activeColors().bgColor,
+                color: common.themes._activeColors().fgColor,
                 marginLeft: '5px'})
         .xAddClass('x-theme-element')
         .xAddEventListener('change', (e) => {
@@ -313,8 +311,8 @@ function makeThemePropsSelectBox() {
         xmake('label')
             .xStyle(
                 {
-                    backgroundColor: common.themes._activeEntry().bgColor,
-                    color: common.themes._activeEntry().fgColor,
+                    backgroundColor: common.themes._activeColors().bgColor,
+                    color: common.themes._activeColors().fgColor,
                     marginLeft: '5px'})
             .xAddClass('x-theme-element')
             .xAttr('htmlFor', 'sid')
@@ -341,8 +339,8 @@ Please use all caps and numbers for the template names to guarantee that interna
 `),
                 xmake('textarea')
                     .xStyle({
-                        backgroundColor: common.themes._activeEntry().bgColor,
-                        color: common.themes._activeEntry().fgColor,
+                        backgroundColor: common.themes._activeColors().bgColor,
+                        color: common.themes._activeColors().fgColor,
                         marginTop: '5px',
                     })
                     .xStyle(common.themes._activeProp().general.textarea)
@@ -401,8 +399,8 @@ expresssions.
                         {
                             display: 'grid',
                             gridTemplateColumns: 'max-content auto', // label value
-                            backgroundColor: common.themes._activeEntry().bgColor,
-                            color: common.themes._activeEntry().fgColor,
+                            backgroundColor: common.themes._activeColors().bgColor,
+                            color: common.themes._activeColors().fgColor,
                             marginTop: '5px',
                         })
                     .xStyle(common.themes._activeProp().general.textarea)
@@ -459,8 +457,8 @@ processessed colors.
                 xmake('br'),
                 xmake('textarea')
                     .xStyle({
-                        backgroundColor: common.themes._activeEntry().bgColor,
-                        color: common.themes._activeEntry().fgColor,
+                        backgroundColor: common.themes._activeColors().bgColor,
+                        color: common.themes._activeColors().fgColor,
                         marginTop: '5px',
                     })
                     .xStyle(common.themes._activeProp().general.textarea)
@@ -516,8 +514,8 @@ Change the application title.
                     .xAppendChild(
                         xmake('input')
                             .xStyle({
-                                backgroundColor: common.themes._activeEntry().bgColor,
-                                color: common.themes._activeEntry().fgColor,
+                                backgroundColor: common.themes._activeColors().bgColor,
+                                color: common.themes._activeColors().fgColor,
                                 minWidth: '64ch',
                             })
                             .xStyle(common.themes._activeProp().general.text)
@@ -607,8 +605,8 @@ the internals.
                         {
                             display: 'grid',
                             gridTemplateColumns: 'max-content auto', // label value
-                            backgroundColor: common.themes._activeEntry().bgColor,
-                            color: common.themes._activeEntry().fgColor,
+                            backgroundColor: common.themes._activeColors().bgColor,
+                            color: common.themes._activeColors().fgColor,
                             marginTop: '5px'})
                     .xStyle(common.themes._activeProp().general.textarea)
                     .xAddClass('x-theme-element')

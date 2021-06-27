@@ -45,8 +45,8 @@ export function addRecord(event, title) {
                                 .xStyle(gridValueStyle)
                                 .xStyle(common.themes._activeProp().general.input)
                                 .xStyle({
-                                    backgroundColor: common.themes._activeEntry().bgColor,
-                                    color: common.themes._activeEntry().fgColor,
+                                    backgroundColor: common.themes._activeColors().bgColor,
+                                    color: common.themes._activeColors().fgColor,
                                     overflow: 'scroll',
                                     width: '90%',
                                 })
@@ -131,8 +131,8 @@ function createField(fid) {
             makeInputXWrapper(
                 xmake('input')
                     .xStyle({
-                        backgroundColor: common.themes._activeEntry().bgColor,
-                        color: common.themes._activeEntry().fgColor,
+                        backgroundColor: common.themes._activeColors().bgColor,
+                        color: common.themes._activeColors().fgColor,
                     })
                     .xAttr('placeholder', 'field '+ fid + ' name')
                     .xId(kid)
@@ -145,8 +145,8 @@ function createField(fid) {
     let vstyle = {
         overflow: 'scroll',
         width: '90%',
-        backgroundColor: common.themes._activeEntry().bgColor,
-        color: common.themes._activeEntry().fgColor,
+        backgroundColor: common.themes._activeColors().bgColor,
+        color: common.themes._activeColors().fgColor,
     }
     let val =  xmake('div')
         .xStyle(gridValueStyle)
@@ -174,8 +174,8 @@ function createTemplateSelectBox() {
     let tmpls = xmake('select').xId('x-data-templates')
             .xStyle(
                 {
-                    backgroundColor: common.themes._activeEntry().bgColor,
-                    color: common.themes._activeEntry().fgColor,
+                    backgroundColor: common.themes._activeColors().bgColor,
+                    color: common.themes._activeColors().fgColor,
                     marginLeft: '5px'})
         .xAddClass('x-theme-element')
         .xAddEventListener('change', (e) => {
@@ -260,8 +260,8 @@ export function fieldNameHandler(fname, fid) {
             p.appendChild(
                 xmake('textarea')
                     .xStyle({
-                        backgroundColor: common.themes._activeEntry().bgColor,
-                        color: common.themes._activeEntry().fgColor,
+                        backgroundColor: common.themes._activeColors().bgColor,
+                        color: common.themes._activeColors().fgColor,
                     })
                     .xStyle(common.themes._activeProp().general.textarea)
                     .xAttr('placeholder', placeholder)
@@ -291,8 +291,8 @@ export function fieldNameHandler(fname, fid) {
                     xmake('input')
                         .xStyle(common.themes._activeProp().general.input)
                         .xStyle({
-                            backgroundColor: common.themes._activeEntry().bgColor,
-                            color: common.themes._activeEntry().fgColor,
+                            backgroundColor: common.themes._activeColors().bgColor,
+                            color: common.themes._activeColors().fgColor,
                         })
                         .xAttr('placeholder', placeholder)
                         .xAttr('type', 'input')

@@ -93,8 +93,8 @@ export function makePasswordEntry(placeholder, getter, setter) {
                     .xAttr('type', 'password')
                     .xStyle(common.themes._activeProp().password.css)
                     .xStyle({
-                        backgroundColor: common.themes._activeEntry().bgColor,
-                        color: common.themes._activeEntry().fgColor,
+                        backgroundColor: common.themes._activeColors().bgColor,
+                        color: common.themes._activeColors().fgColor,
                     })
                     .xAddClass('x-password-input')
                     .xAddClass('x-theme-element')
@@ -111,8 +111,8 @@ export function makePasswordEntry(placeholder, getter, setter) {
                 .xInnerHTML(value.length),
             xmake('button')
                 .xStyle({
-                    backgroundColor: common.themes._activeEntry().bgColor,
-                    color: common.themes._activeEntry().fgColor,
+                    backgroundColor: common.themes._activeColors().bgColor,
+                    color: common.themes._activeColors().fgColor,
                     marginLeft: '10px',
                 })
                 .xAddClass('x-theme-element')
@@ -121,8 +121,8 @@ export function makePasswordEntry(placeholder, getter, setter) {
                 .xAppendChild(makeIcon(common.icons.eyeBlocked, 'show').xAddClass('x-show-hide-img')),
             xmake('button')
                 .xStyle({
-                    backgroundColor: common.themes._activeEntry().bgColor,
-                    color: common.themes._activeEntry().fgColor,
+                    backgroundColor: common.themes._activeColors().bgColor,
+                    color: common.themes._activeColors().fgColor,
                     marginLeft: '10px',
                 })
                 .xAddClass('x-theme-element')
@@ -131,8 +131,8 @@ export function makePasswordEntry(placeholder, getter, setter) {
                 .xAppendChild(makeIcon(common.icons.cog, 'generate').xAddClass('x-show-hide-img')),
             xmake('button')
                 .xStyle({
-                    backgroundColor: common.themes._activeEntry().bgColor,
-                    color: common.themes._activeEntry().fgColor,
+                    backgroundColor: common.themes._activeColors().bgColor,
+                    color: common.themes._activeColors().fgColor,
                     marginLeft: '10px',
                 })
                 .xAddClass('x-theme-element')
@@ -141,8 +141,8 @@ export function makePasswordEntry(placeholder, getter, setter) {
                 .xAppendChild(makeIcon(common.icons.cogs, 'generate2').xAddClass('x-show-hide-img')),
             xmake('button')
                 .xStyle({
-                    backgroundColor: common.themes._activeEntry().bgColor,
-                    color: common.themes._activeEntry().fgColor,
+                    backgroundColor: common.themes._activeColors().bgColor,
+                    color: common.themes._activeColors().fgColor,
                     marginLeft: '10px',
                 })
                 .xAddClass('x-theme-element')
@@ -161,8 +161,8 @@ export function makePasswordEntryWithId(eid, cls, placeholder,  value) {
                     .xAttr('type', 'password')
                     .xStyle(common.themes._activeProp().password.css)
                     .xStyle({
-                        backgroundColor: common.themes._activeEntry().bgColor,
-                        color: common.themes._activeEntry().fgColor,
+                        backgroundColor: common.themes._activeColors().bgColor,
+                        color: common.themes._activeColors().fgColor,
                     })
                     .xAddClass(cls)
                     .xAddClass('x-password-input')
@@ -181,8 +181,8 @@ export function makePasswordEntryWithId(eid, cls, placeholder,  value) {
                 .xInnerHTML(value.length),
             xmake('button')
                 .xStyle({
-                    backgroundColor: common.themes._activeEntry().bgColor,
-                    color: common.themes._activeEntry().fgColor,
+                    backgroundColor: common.themes._activeColors().bgColor,
+                    color: common.themes._activeColors().fgColor,
                     marginLeft: '10px'})
                 .xAddClass('x-theme-element')
                 .xAddEventListener('click', e => showHidePassword(e))
@@ -190,8 +190,8 @@ export function makePasswordEntryWithId(eid, cls, placeholder,  value) {
                 .xAppendChild(makeIcon(common.icons.eyeBlocked, 'show').xAddClass('x-show-hide-img')),
             xmake('button')
                 .xStyle({
-                    backgroundColor: common.themes._activeEntry().bgColor,
-                    color: common.themes._activeEntry().fgColor,
+                    backgroundColor: common.themes._activeColors().bgColor,
+                    color: common.themes._activeColors().fgColor,
                     marginLeft: '10px'})
                 .xAddClass('x-theme-element')
                 .xAddEventListener('click', e => generateCrypticPassword(e))
@@ -199,8 +199,8 @@ export function makePasswordEntryWithId(eid, cls, placeholder,  value) {
                 .xAppendChild(makeIcon(common.icons.cog, 'generate').xAddClass('x-show-hide-img')),
             xmake('button')
                 .xStyle({
-                    backgroundColor: common.themes._activeEntry().bgColor,
-                    color: common.themes._activeEntry().fgColor,
+                    backgroundColor: common.themes._activeColors().bgColor,
+                    color: common.themes._activeColors().fgColor,
                     marginLeft: '10px'})
                 .xAddClass('x-theme-element')
                 .xAddEventListener('click', e => generateMemorablePassword(e))
@@ -208,8 +208,8 @@ export function makePasswordEntryWithId(eid, cls, placeholder,  value) {
                 .xAppendChild(makeIcon(common.icons.cogs, 'generate2').xAddClass('x-show-hide-img')),
             xmake('button')
                 .xStyle({
-                    backgroundColor: common.themes._activeEntry().bgColor,
-                    color: common.themes._activeEntry().fgColor,
+                    backgroundColor: common.themes._activeColors().bgColor,
+                    color: common.themes._activeColors().fgColor,
                     marginLeft: '10px'})
                 .xAddClass('x-theme-element')
                 .xAddEventListener('click', e => copyPassword(e))

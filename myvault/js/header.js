@@ -20,8 +20,8 @@ export function header() {
         .xAddClass('x-theme-element')
         .xStyle(common.themes._activeProp().header.bar)
             .xStyle({
-                backgroundColor: common.themes._activeEntry().bgColor,
-                color: common.themes._activeEntry().fgColor,
+                backgroundColor: common.themes._activeColors().bgColor,
+                color: common.themes._activeColors().fgColor,
             })
 
     // Create the pull down menu.
@@ -32,8 +32,8 @@ export function header() {
             .xAddClass('x-theme-element')
             .xStyle(common.themes._activeProp().header.menu.closed)
             .xStyle({
-                backgroundColor: common.themes._activeEntry().bgColor,
-                color: common.themes._activeEntry().fgColor,
+                backgroundColor: common.themes._activeColors().bgColor,
+                color: common.themes._activeColors().fgColor,
             })
             .xAppendChild(makeIcon(common.icons.menu, 'menu'))
             .xAddEventListener('click', e => clickedMenu(e, dtype)),
@@ -47,8 +47,8 @@ export function header() {
                         {
                             display: 'none',
                             flexDirection: 'column',
-                            backgroundColor: common.themes._activeEntry().bgColor,
-                            color: common.themes._activeEntry().fgColor,
+                            backgroundColor: common.themes._activeColors().bgColor,
+                            color: common.themes._activeColors().fgColor,
                             zIndex: '30',
                         })
                     .xAppendChild(
@@ -86,8 +86,8 @@ export function header() {
             .xStyle(common.themes._activeProp().header.title)
             .xStyle(
                 {
-                    backgroundColor: common.themes._activeEntry().bgColor,
-                    color: common.themes._activeEntry().fgColor,
+                    backgroundColor: common.themes._activeColors().bgColor,
+                    color: common.themes._activeColors().fgColor,
                 })
             .xInnerHTML(common.meta.title))
 
@@ -97,12 +97,12 @@ export function header() {
     // Use the event class property to propagate the colors at startup.
     setTimeout( () => {
         let es = document.getElementsByClassName('x-theme-element')
-        document.body.style.color = common.themes._activeEntry().fgColor
-        document.body.style.backgroundColor = common.themes._activeEntry().bgColor
+        document.body.style.color = common.themes._activeColors().fgColor
+        document.body.style.backgroundColor = common.themes._activeColors().bgColor
         for(let i=0;i<es.length; i++) {
             let e = es[i]
-            e.style.color = common.themes._activeEntry().fgColor
-            e.style.backgroundColor = common.themes._activeEntry().bgColor
+            e.style.color = common.themes._activeColors().fgColor
+            e.style.backgroundColor = common.themes._activeColors().bgColor
         }}, 10)
 }
 
@@ -112,8 +112,8 @@ function makeMenuEntry(tooltip, title, icon, handler) {
     return xmake('button')
         .xStyle(common.themes._activeProp().menu)
         .xStyle({
-            backgroundColor: common.themes._activeEntry().bgColor,
-            color: common.themes._activeEntry().fgColor,
+            backgroundColor: common.themes._activeColors().bgColor,
+            color: common.themes._activeColors().fgColor,
         })
         .xTooltip(tooltip)
         .xAddClass('x-hover')

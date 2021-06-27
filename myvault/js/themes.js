@@ -1,17 +1,23 @@
 // Theme data
-// It is divided into entries (color schemes) and properties (desktop/mobile).
+// It is divided into colors (color schemes) and properties (standard/large).
 
-// desktop properties
-export var desktop = {
+// standard properties
+export var standard = {
     body: {
         fontFamily: 'Arial, Helvetica, Tahoma, Calibri, Verdana, sans-serif',
     },
     about: {
         grid: {
             display: 'grid',
-            fontFamily: 'monospace',
+            alignItems:'center',
+            justifyContent: 'left',
             textAlign: 'left',
-            gridTemplateColumns: '150px 500px',
+            gridTemplateColumns: '14ch 34ch',
+            gridColumnGap: '2px',
+            gridRowGap: '5px',
+            width: '50ch',
+            padding: '5px',
+            fontSize: '20px',
         },
         col1: {
             display: 'gridColumn: 1',
@@ -204,17 +210,23 @@ export var desktop = {
     },
 }
 
-// mobild properties
-export var mobile = {
+// lare properties - bigger icons, larger fonts
+export var large = {
     body: {
         fontFamily: 'Arial, Helvetica, Tahoma, Calibri, Verdana, sans-serif',
     },
     about: {
         grid: {
             display: 'grid',
-            fontFamily: 'monospace',
+            alignItems:'center',
+            justifyContent: 'left',
             textAlign: 'left',
-            gridTemplateColumns: '150px 500px',
+            gridTemplateColumns: '14ch 34ch',
+            gridColumnGap: '2px',
+            gridRowGap: '5px',
+            width: '50ch',
+            padding: '5px',
+            fontSize: '24px',
         },
         col1: {
             display: 'gridColumn: 1',
@@ -410,10 +422,10 @@ export var mobile = {
 // The built-in predefined themes.
 export var themes = {
     props: {
-        desktop: desktop,
-        mobile: mobile,
+        standard: standard,
+        large: large,
     },
-    entries: {
+    colors: {
         'steelblue-dark': {
             fgColor: '#f2f4f4',
             bgColor: '#1a355b',
@@ -449,6 +461,6 @@ export function getThemeProps() {
     return themes.props
 }
 
-export function getThemeEntries() {
-    return themes.entries
+export function getThemeColors() {
+    return themes.colors
 }

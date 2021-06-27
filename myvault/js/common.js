@@ -1,11 +1,11 @@
 import { VERSION, BUILD, GIT_COMMIT_ID, GIT_BRANCH } from '/myvault/js/version.js'
-import { getThemeProps, getThemeEntries } from '/myvault/js/themes.js'
+import { getThemeProps, getThemeColors } from '/myvault/js/themes.js'
 import { header  } from '/myvault/js/header.js'
 
 export var TITLE = 'myVault - Secure Personal Data Manager'
 
 // Global variables
-// entries that start with '_' are ignored.
+// entries that start with '_' are meant to be ignored during load/save operations.
 export var common = {
     // This maps the field name to the type.
     // for example the field name "description" maps to a textarea (multi-line) element
@@ -57,30 +57,30 @@ export var common = {
     themes: {
         active: {
             entry: 'steelblue-dark',
-            prop: 'desktop',
+            prop: 'standard',
         },
         // Get the current active entry.
-        // Allow theme entries to change dynamically.
-        _activeEntry: () => {
+        // Allow theme colors to change dynamically.
+        _activeColors: () => {
             let a = common.themes.active.entry
-            if ( ! common.themes.entries.hasOwnProperty(a)) {
-                a = Object.keys(common.themes.entries)[0]
+            if ( ! common.themes.colors.hasOwnProperty(a)) {
+                a = Object.keys(common.themes.colors)[0]
                 common.themes.active.entry = a
             }
-            return common.themes.entries[a]
+            return common.themes.colors[a]
         },
         // Get the current active property set.
         // Allow theme properties to change dynamically.
         _activeProp: () => {
             let p = common.themes.active.prop
             if ( ! common.themes.props.hasOwnProperty(p)) {
-                p = Object.keys(common.themes.entries)[0]
+                p = Object.keys(common.themes.colors)[0]
                 common.themes.active.prop = p
             }
             return common.themes.props[p]
         },
         props: getThemeProps(),
-        entries: getThemeEntries(),
+        colors: getThemeColors(),
     },
     icons: { // Credit to ico moon free icons: https://icomoon.io/preview-free.html
         arrowDown: '/myvault/icons/arrow-down.svg',
@@ -150,12 +150,12 @@ export function refreshTheme() {
 
 // new
 export function displayTheme() {
-    document.body.style.color = common.themes._activeEntry().fgColor
-    document.body.style.backgroundColor = common.themes._activeEntry().bgColor
+    document.body.style.color = common.themes._activeColors().fgColor
+    document.body.style.backgroundColor = common.themes._activeColors().bgColor
     let es = document.getElementsByClassName('x-theme-element')
     for(let i=0;i<es.length; i++) {
-        es[i].style.color = common.themes._activeEntry().fgColor
-        es[i].style.backgroundColor = common.themes._activeEntry().bgColor
+        es[i].style.color = common.themes._activeColors().fgColor
+        es[i].style.backgroundColor = common.themes._activeColors().bgColor
     }
 }
 
@@ -178,7 +178,7 @@ export function saveCommon() {
         save: common.save,
         themes: {
             active: common.themes.active,
-            entries: common.themes.entries,
+            colors: common.themes.colors,
             props: common.themes.props,
         },
         icons: common.icons
@@ -204,11 +204,11 @@ export function restoreCommon() {
             common.data.maxFields = jdata.data.maxFields
             common.data.rfts = jdata.data.rfts
             common.save = jdata.save
-            if (jdata.themes.active.entry in common.themes.entries) {
+            if (jdata.themes.active.entry in common.themes.colors) {
                 // handle the case where the session store contains
                 // an theme thata no longer exists.
                 common.themes.active.entry = jdata.themes.active.entry
-                common.themes.entries = jdata.themes.entries
+                common.themes.colors = jdata.themes.colors
             }
             if (jdata.themes.active.prop in common.themes.props) {
                 // handle the case where the session store contains
@@ -240,6 +240,6 @@ export function restoreCommon() {
 // reset for common
 export function resetCommon() {
     common.themes.props = getThemeProps()
-    common.themes.entries = getThemeEntries()
+    common.themes.colors = getThemeColors()
     saveCommon()
 }
