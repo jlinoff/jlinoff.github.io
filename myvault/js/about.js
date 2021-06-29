@@ -41,15 +41,15 @@ export function showAboutPage(event) {
                         xmake('div').xStyle(col2).xInnerHTML(GIT_BRANCH),
                         xmake('div').xStyle(col1).xInnerHTML('Project:'),
                         xmake('div').xStyle(col2).xInnerHTML(`${project}`)
-                            .xStyle({cursor: 'pointer'})
+                            .xStyle({cursor: 'pointer'}).xAddClass('x-hover').xTooltip('link to the project page')
                             .xAddEventListener('click', () => window.open(project, '_blank')),
                         xmake('div').xStyle(col1).xInnerHTML('Webapp:'),
                         xmake('div').xStyle(col2).xInnerHTML(`${webapp}`)
-                            .xStyle({cursor: 'pointer'})
+                            .xStyle({cursor: 'pointer'}).xAddClass('x-hover').xTooltip('link to the web app')
                             .xAddEventListener('click', () => window.open(webapp, '_blank')),
                         xmake('div').xStyle(col1).xInnerHTML('HelpDoc:'),
                         xmake('div').xId('x-about-help-link').xStyle(col2).xInnerHTML(`${help}`)
-                            .xStyle({cursor: 'pointer'})
+                            .xStyle({cursor: 'pointer'}).xAddClass('x-hover').xTooltip('link to the help page')
                             .xAddEventListener('click', () => window.open(help, '_blank')),
                     ),
             )

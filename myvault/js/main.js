@@ -3,6 +3,7 @@
 import { xmake, enableFunctionChaining, statusMsg } from '/myvault/js/utils.js'
 import { header  } from '/myvault/js/header.js'
 import { common, displayTheme, saveCommon, restoreCommon } from '/myvault/js/common.js'
+import { showAboutPage } from '/myvault/js/about.js'
 
 
 import init, {
@@ -58,7 +59,7 @@ window.onload = () => {
                 .xAddClass('x-spa-page')
                 .xStyle({display: 'none'}))
     }
-
+    showAboutPage() // initial splashscreen
 }
 
 // Common styles - function allows dynamic variable values.
