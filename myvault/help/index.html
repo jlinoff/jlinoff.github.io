@@ -55,11 +55,11 @@ About
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2021-06-29T08:54:11-07:00</code></td>
+<td><code>2021-06-29T10:05:35-07:00</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>825c2c5</code></td>
+<td><code>12925e1</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -132,7 +132,7 @@ Table of Contents
 <!--te-->
 </details>
 <h2 id="overview">Overview</h2>
-<p><em>myVault</em> is single page web app that allows you to securely manage your personal data as searchable records in a secure, flexible manner. Each record contains arbitrary data that you care about, such as the password for a site or the last book you read with notes. You define the record format and contents. Each record can be different. Both the format and the content of each record can be changed at anytime.</p>
+<p><em>myVault</em> is single page web app, available at <a href="https://jlinoff.github.io/myvault">https://jlinoff.github.io/myvault</a>, that allows you to securely manage your personal data as searchable records in a secure, flexible manner. Each record contains arbitrary data that you care about, such as the password for a site or the last book you read with notes. You define the record format and contents. Each record can be different. Both the format and the content of each record can be changed at anytime.</p>
 <p><em>myVault</em> allows you to control where the data is stored. The web app is self contained so data is never shipped to external web site. I tend to save my data in a file in a common place (like Google Drive and iCloud) so that all my devices can access it. If you store your data on a local drive make sure that it is backed up regularly.</p>
 <p>The record data is protected by a master password. It is used to encrypt all data that is exported and decrypt all data that is imported. For more information see the <a href="#master-password">Master Password</a> section.</p>
 <p>Each record is composed of fields. A field has a name and a value. One key feature of the program is that the field types changes based on the field name. Thus, if a field name contains the word <code>"password"</code> or <code>"secret"</code>, the value changes to a password input which hides the value. If the field name contains the word <code>"notes"</code>, the value field changes to a multi-line text box to allow you enter multiple lines of text. All other fields like <code>"name"</code> or <code>"url"</code> are treated as simple strings. Although the webapp does to try to identify <em>URLs</em> and present them as links in view mode.</p>
