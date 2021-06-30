@@ -243,3 +243,20 @@ export function resetCommon() {
     common.themes.colors = getThemeColors()
     saveCommon()
 }
+
+export function updateRecordsMap() {
+    // re-order the records
+    common.data.records.sort((a,b) => {
+        let xa = a.__id__.toLowerCase()
+        let xb = b.__id__.toLowerCase()
+        return xa.localeCompare(xb)
+    })
+    common.data._map = {}
+    for(let i=0; i<common.data.records.length; i++) {
+        let rec = common.data.records[i]
+        if ('__id__' in rec) {
+            let k = rec.__id__
+            common.data._map[k] = rec
+        }
+    }
+}

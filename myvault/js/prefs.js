@@ -1,5 +1,5 @@
 // The preferences page
-import { common, displayTheme, TITLE, restoreCommon, resetCommon } from '/myvault/js/common.js'
+import { common, displayTheme, TITLE, restoreCommon, resetCommon, updateRecordsMap } from '/myvault/js/common.js'
 import { themes } from '/myvault/js/themes.js'
 import { makeIcon, changeIcon } from '/myvault/js/icons.js'
 import { hideAll,
@@ -631,13 +631,27 @@ the internals.
                                 if (key === 'crypt' ) {
                                     continue // user cannot change the crypt stuff
                                 }
+                                if (key === 'themes') {
+                                    // do not overwrite the internal fields.
+                                    let list = ['active', 'props', 'colors']
+                                    list.forEach( (k) => { // jshint ignore:line
+                                        if (k in rec[key]) {
+                                            common[key][k] = rec[key][k]
+                                        }
+                                    })
+                                    continue
+                                }
                                 common[key] = rec[key]
                             }
-                        }),
+                            updateRecordsMap()
+                            statusMsg('raw edit data saved')
+
+                        }).xId('x-prefs-raw-edit-save'),
                         makeIconButton('copy to clipboard', 'copy', common.icons.copy, () => {
                             let text = document.getElementById(eid).value
                             navigator.clipboard.writeText(text).then((text) => {}, () => {
                                 alert('internal error: paste to clipboard operation failed')})
+                            statusMsg(`copied ${text.length} bytes`)
                         }),
                         makeIconButton('format JSON', 'format', common.icons.expand, (e) => {
                             let text = document.getElementById(eid).value
