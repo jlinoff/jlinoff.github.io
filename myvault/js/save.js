@@ -66,7 +66,7 @@ Copy the encrypted data to the clipboard.`),
                                                                  let info = document.getElementById('x-save-paste-info')
                                                                  info.innerHTML = `Pasted ${ text.length } encrypted bytes to the clipboard.`
                                                                  navigator.clipboard.writeText(text).then((text) => {}, () => {
-                                                                     alert('internal error: paste to clipboard operation failed')})
+                                                                     alert('internal error: clipboard copy operation failed')})
                                                              }})
                                       ),
                                   xmake('p')

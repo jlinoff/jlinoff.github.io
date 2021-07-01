@@ -147,7 +147,7 @@ The colors can be specified as name: "red" or a hex value "#0000ff".
                         makeIconButton('copy to clipboard', 'copy', common.icons.copy, () => {
                             let text = document.getElementById(eid).value
                             navigator.clipboard.writeText(text).then((text) => {}, () => {
-                                alert('internal error: paste to clipboard operation failed')})
+                                alert('internal error: clipboard copy operation failed')})
                         }),
                         makeIconButton('save', 'save', common.icons.pencil, () => {
                             let text = document.getElementById(eid).value
@@ -212,7 +212,7 @@ It is not user friendly because it requires knowledge of the internal implementa
                         makeIconButton('copy to clipboard', 'copy', common.icons.copy, () => {
                             let text = document.getElementById(eid).value
                             navigator.clipboard.writeText(text).then((text) => {}, () => {
-                                alert('internal error: paste to clipboard operation failed')})
+                                alert('internal error: clipboard copy operation failed')})
                         }),
                         makeIconButton('save', 'save', common.icons.pencil, () => {
                             let text = document.getElementById(eid).value
@@ -356,7 +356,7 @@ Please use all caps and numbers for the template names to guarantee that interna
                         makeIconButton('copy to clipboard', 'copy', common.icons.copy, () => {
                             let text = document.getElementById(eid).value
                             navigator.clipboard.writeText(text).then((text) => {}, () => {
-                                alert('internal error: paste to clipboard operation failed')})
+                                alert('internal error: clipboard copy operation failed')})
                         }),
                         makeIconButton('save', 'save', common.icons.pencil, () => {
                             let text = document.getElementById(eid).value
@@ -416,7 +416,7 @@ expresssions.
                         makeIconButton('copy to clipboard', 'copy', common.icons.copy, () => {
                             let text = document.getElementById(eid).value
                             navigator.clipboard.writeText(text).then((text) => {}, () => {
-                                alert('internal error: paste to clipboard operation failed')})
+                                alert('internal error: clipboard copy operation failed')})
                         }),
                         makeIconButton('save', 'save', common.icons.pencil, () => {
                             let text = document.getElementById(eid).value
@@ -474,7 +474,7 @@ processessed colors.
                         makeIconButton('copy to clipboard', 'copy', common.icons.copy, () => {
                             let text = document.getElementById(eid).value
                             navigator.clipboard.writeText(text).then((text) => {}, () => {
-                                alert('internal error: paste to clipboard operation failed')})
+                                alert('internal error: clipboard copy operation failed')})
                         }),
                         makeIconButton('save', 'save', common.icons.pencil, () => {
                             let text = document.getElementById(eid).value
@@ -650,7 +650,7 @@ the internals.
                         makeIconButton('copy to clipboard', 'copy', common.icons.copy, () => {
                             let text = document.getElementById(eid).value
                             navigator.clipboard.writeText(text).then((text) => {}, () => {
-                                alert('internal error: paste to clipboard operation failed')})
+                                alert('internal error: clipboard copy operation failed')})
                             statusMsg(`copied ${text.length} bytes`)
                         }),
                         makeIconButton('format JSON', 'format', common.icons.expand, (e) => {

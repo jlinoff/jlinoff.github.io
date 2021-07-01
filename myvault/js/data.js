@@ -378,7 +378,7 @@ function makeRecordViewEntry(ridx, idx, div, key, value) {
             .xAddEventListener('click', e => {
                 statusMsg(`copied ${value.length} bytes to the clipboard`)
                 navigator.clipboard.writeText(value).then((value) => {}, () => {
-                    alert('internal error: paste to clipboard operation failed')})
+                    alert('internal error: clipboard copy operation failed')})
             })
             .xTooltip(`paste ${ key } to clipboard for pasting to external applications`)
             .xAppendChild(makeIcon(common.icons.copy, 'copy')))

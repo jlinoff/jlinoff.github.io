@@ -1,4 +1,4 @@
-import { xmake, makeInputXWrapper, statusMsg } from '/myvault/js/utils.js'
+import { xmake, makeInputXWrapper } from '/myvault/js/utils.js'
 import { makeIcon, changeIcon } from '/myvault/js/icons.js'
 import { words } from '/myvault/js/en_words.js'
 import { common } from '/myvault/js/common.js'
@@ -270,10 +270,7 @@ function copyPassword(event) {
     let text = input.value
     updatePasswordLength(event)
     navigator.clipboard.writeText(text).then((text) => {}, () => {
-        alert('internal error: paste to clipboard operation failed')})
-    if (text) {
-        statusMsg(` ${ text.length } bytes copied to clipboard`)
-    }
+        alert('internal error: clipboard copy operation failed')})
 }
 
 function updatePassword(event, setter) {
