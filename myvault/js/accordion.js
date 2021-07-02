@@ -75,9 +75,18 @@ export function makeAccordionEntry(title, panel, expandAction, collapseAction) {
 export function clickedAccordionButton(event, expandAction, collapseAction) {
     // toggle expand/collapse
     let e = event.srcElement
+    let i = 0
+    while ( e && e.nodeName !== 'BUTTON' ) {
+        e = e.parentNode
+        i += 1
+        if (i > 5) {
+            break
+        }
+    }
     if ( e.nodeName !== 'BUTTON' ) {
         // Use the button if the user clicked on the image or text directly.
-        e = e.parentNode
+        alert('internal error! please report this bug')
+        return
     }
     // Change the image.
     let icon = e.getElementsByClassName('x-icon-element')[0]
