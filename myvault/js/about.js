@@ -14,6 +14,7 @@ export function showAboutPage(event) {
     let project = 'https://github.com/jlinoff/myvault'
     let webapp = 'https://jlinoff.github.io/myvault'
     let help = '/myvault/help/index.html'
+    let cryptor = '/myvault/xtra/cryptor.html'
 
     let col1 = common.themes._activeProp().about.grid.col1
     let col2 = common.themes._activeProp().about.grid.col2
@@ -50,6 +51,10 @@ export function showAboutPage(event) {
                         xmake('div').xStyle(col1).xInnerHTML('HelpDoc:'),
                         xmake('div').xId('x-about-help-link').xStyle(col2).xInnerHTML(`${help}`)
                             .xStyle({cursor: 'pointer'}).xAddClass('x-hover').xTooltip('link to the help page')
+                            .xAddEventListener('click', () => window.open(help, '_blank')),
+                        xmake('div').xStyle(col1).xInnerHTML('Cryptor:'),
+                        xmake('div').xId('x-about-help-link').xStyle(col2).xInnerHTML(`${cryptor}`)
+                            .xStyle({cursor: 'pointer'}).xAddClass('x-hover').xTooltip('link to the cryptor utility')
                             .xAddEventListener('click', () => window.open(help, '_blank')),
                     ),
             )

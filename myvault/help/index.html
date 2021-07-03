@@ -118,11 +118,11 @@ About
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2021-07-01T08:26:53-07:00</code></td>
+<td><code>2021-07-03T07:32:45-07:00</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>d2985a3</code></td>
+<td><code>7d05716</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -139,6 +139,10 @@ About
 <tr class="even">
 <td>help</td>
 <td><a href="https://jlinoff.github.io/myvault/help/index.html">https://jlinoff.github.io/myvault/help/index.html</a></td>
+</tr>
+<tr class="odd">
+<td>cryptor</td>
+<td><a href="#https://jlinoff.github.io/myvault/myvault/xtra/cryptor.html">https://jlinoff.github.io/myvault/myvault/xtra/cryptor.html</a></td>
 </tr>
 </tbody>
 </table>
@@ -182,6 +186,7 @@ Table of Contents
 <li><a href="#malware--key-logging-and-screen-recording">Malware: Key Logging and Screen Recording</a></li>
 <li><a href="#website-spoofing">Website Spoofing</a></li>
 <li><a href="#protecting-yourself">Protecting Yourself</a></li>
+<li><a href="#mfa">MFA</a></li>
 </ul></li>
 <li><a href="#extras">Extras</a>
 <ul>
@@ -215,6 +220,7 @@ Table of Contents
 <p><em>myVault</em> also provides built-in password generation for both cryptic and memorable passwords for all password fields, including the master password. See the <a href="#master-password">Master Password</a> for details on cryptic and memorable passwords.</p>
 <p>The app also provides built in example data to allow you to play with the capabilities without committing to anything. It is a great way to get familiar with the program and is also really useful during development.</p>
 <p>I use <em>myVault</em> to store my password information and keep track of books that i have read. The books don’t really need to be secure. I simply use it because it is convenient to use on my mobile devices.</p>
+<p>There is a related utility call <em>cryptor</em> that allows you to conveniently encrypt and descrypt any text file with arbitrarty data from the browser. You can access it from the <q><code>About</code></q> page. I originally built it as a prototype during development but then found it so useful that i decided to keep it. It is not part of the official <em>myVault</em> webapp because the function, although similar, is more general because <em>cryptor</em> does not care about the format of file contents whereas <em>myVault</em> does care about the format.</p>
 <h2 id="layout">Layout</h2>
 <p>This section describes the layout of the app and talks about each section in detail.</p>
 <p>All sections use accordion panels to display options. Opening the panel provides more information about what it does. There are icons at the top of the accordion panels that allow you to expand or collapse all of the panels at once.</p>
@@ -308,6 +314,10 @@ Table of Contents
 <tr class="even">
 <td>HelpDoc</td>
 <td>A link to this help documentation.</td>
+</tr>
+<tr class="odd">
+<td>Cryptor</td>
+<td>A link to the <em>cryptor</em> utility.</td>
 </tr>
 </tbody>
 </table>
@@ -501,6 +511,15 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 <li>Never share sensitive information (like passwords).</li>
 <li>Backup your data.</li>
 </ol>
+<h3 id="mfa">MFA</h3>
+<p>Several folks asked why multi-factor authentication (MFA) was not included to provide and additional layer of security.</p>
+<p>I deliberately did not include MFA because it requires an authentication/authorization service and I want this application to <em>never</em> talk to the internet unless the user explicitly requests access to a known shared file service through the <q><code>Load</code></q> or <q><code>Save</code></q> pages. In other words, you should never see any internet traffic originating from this webapp that you cannot account for.</p>
+<h3 id="extras">Extras</h3>
+<p>There were a couple of single page web apps that i developed while building <em>myVault</em>. They turned out to be so useful that i left them in. They are not elegant or well designed or well tested.</p>
+<h3 id="color2rgb">Color2RGB</h3>
+<p>This is a utility page that allows you to type in any color name and have it normalized to its RGB and hex value. For example <code>red</code> –&gt; <code>#ff0000</code> and <code>rgb(255,0,0)</code>. To access it click here: <a href="/myvault/xtra/color2rgb.html">xtra/color2rgb.html</a>.</p>
+<h3 id="cryptor">Cryptor</h3>
+<p>This is a utility page that allows you to encrypt and decrypt arbitrary data with cryptic, memorable or custom passwords. It can load from and save to files and the clipboard. I have found it to be very useful for encrypting arbitrary files. To access it click here: <a href="/myvault/xtra/cryptor.html">xtra/cryptor.html</a>.</p>
 <h2 id="themes">Themes</h2>
 <p>A theme is composed of a set of colors (foreground and background) and a set of properties that define other syle information. Each theme also has a unique name. Theme colors and properties are can be selected and/or defined on the <q><code>Preferences</code></q> page.</p>
 <p>The idea behind themes is to make the CSS styling dynamic to allow users to change and save styles from the UI. The current implementation is poor because it is too complex and is not documented.</p>
@@ -601,12 +620,6 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 <li>Navigate to http://localhost:8000</li>
 </ol>
 <p>If you want a port other than 8000 (say 9000), run <code>make server PORT=9000</code>.</p>
-<h3 id="extras">Extras</h3>
-<p>There were a couple of single page web apps that i developed while building <em>myVault</em>. They turned out to be so useful that i left them in. They are not elegant or well designed or well tested.</p>
-<h3 id="color2rgb">Color2RGB</h3>
-<p>This is a utility page that allows you to type in any color name and have it normalized to its RGB and hex value. For example <code>red</code> –&gt; <code>#ff0000</code> and <code>rgb(255,0,0)</code>. To access it click here: <a href="/myvault/xtra/color2rgb.html">xtra/color2rgb.html</a>.</p>
-<h3 id="cryptor">Cryptor</h3>
-<p>This is a utility page that allows you to encrypt and decrypt arbitrary data with cryptic, memorable or custom passwords. It can load from and save to files and the clipboard. I have found it to be very useful for encrypting arbitrary files. To access it click here: <a href="/myvault/xtra/cryptor.html">xtra/cryptor.html</a>.</p>
 <h2 id="how-to-get-help">How to get help</h2>
 <p>To get help, navigate to <a href="https://jlinoff.github.io/myvault/">https://jlinoff.github.io/myvault/</a>, click on the <q><code>About</code></q> menu option then click on <q><code>HelpDoc</code></q> entry in the table.</p>
 <p>The help document is generated from the <code>README.md</code> during the build process so that it can be associated with each release.</p>
