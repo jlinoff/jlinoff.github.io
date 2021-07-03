@@ -55,7 +55,7 @@ export function showAboutPage(event) {
                         xmake('div').xStyle(col1).xInnerHTML('Cryptor:'),
                         xmake('div').xId('x-about-help-link').xStyle(col2).xInnerHTML(`${cryptor}`)
                             .xStyle({cursor: 'pointer'}).xAddClass('x-hover').xTooltip('link to the cryptor utility')
-                            .xAddEventListener('click', () => window.open(help, '_blank')),
+                            .xAddEventListener('click', () => window.open(cryptor, '_blank')),
                     ),
             )
     )
