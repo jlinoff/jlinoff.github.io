@@ -1,15 +1,34 @@
+/**
+* Common variables that customize the webapp.
+ * @module common
+ */
 import { VERSION, BUILD, GIT_COMMIT_ID, GIT_BRANCH } from '/myvault/js/version.js'
 import { getThemeProps, getThemeColors } from '/myvault/js/themes.js'
 import { header  } from '/myvault/js/header.js'
 
 export var TITLE = 'myVault - Secure Personal Data Manager'
 
-// Global variables
-// entries that start with '_' are meant to be ignored during load/save operations.
+/**
+ * The common global variables.
+ * <p>
+ * Entries that start with "<b><code>_</code></b>" are meant to be ignored during load/save operations.
+ * <p>
+ *
+ * | section | description |
+ * | ------- | ----------- |
+ * | meta    | Information about the common data like the modified time, the build and the version. |
+ * | ftype   | Maps field names to types. A typical example is the "password" maps to a password field. |
+ * | crypt   | The data and functions loaded from the WebAssembly implementation of the encryption algorithms. |
+ * | search  | The last used search term. |
+ * | data    | The records data. |
+ * | save    | The filename that was used for loading or saving. |
+ * | themes  | The currently defined themes. |
+ * | icons   | The icons used by the app. |
+*/
 export var common = {
     // This maps the field name to the type.
     // for example the field name "description" maps to a textarea (multi-line) element
-    // it is used by by getValueType()
+    // it is used by by getFieldValueType()
     // May allow this to be modified in preferences in the future.
     meta: {
         atime: '', // last access time
@@ -27,10 +46,10 @@ export var common = {
         {rex: 'passphrase', type: 'password'}, // passphrase, "my passphrase"
         {rex: 'secret', type: 'password'}, // secret, "secret value"
         {rex: 'note', type: 'textarea'},  // note, notes
-        {rex: 'descripton', type: 'textarea'},  // description
+        {rex: 'description', type: 'textarea'},  // description
     ],
     crypt: {
-        _wasm: null, // populated at load time from the generated crypt.js
+        _wasm: null, // populated at load time from the auto-generated crypt.js functions.
         algorithm: '',
         password: '' // master password
     },
@@ -127,28 +146,44 @@ export var common = {
     }
 };
 
-// Get the value type based on the field name.
-// returns 'password', 'textarea' or 'string'
-export function getValueType(fieldName) {
+/*
+ * Get the field type from the field name.
+ *<p>
+ * There are three field types: password, textarea and string.
+ * The string field is the simplest it is just a text input.
+ * The textarea field is a multiple textarea box.
+ * The password field is the most complex. It is composed
+ * of multiple elements: a password input element and buttons
+ * for showing/hiding the password and generating cryptic or
+ * memorable passwords.
+ * The mapping between field names and types is defined in
+ *  the common.ftype map.
+ * @example
+ * assert getFieldValueType('password') == 'password'
+ * assert getFieldValueType('My Password') == 'password'
+ * assert getFieldValueType('passphrase') == 'password'
+ * assert getFieldValueType('secret') == 'password'
+ * assert getFieldValueType('notes') == 'textarea'
+ * assert getFieldValueType('my notes') == 'textarea'
+ * assert getFieldValueType('url') == 'string'
+ * @param {string} name  The name of th field.
+ * @returns {string} The type of field as a string.
+ */
+export function getFieldValueType(name) {
     // (O(N) is okay because the list is very short.
-    common.ftype.forEach( (obj) => {
-        if ( obj.search(fieldName) ) {
+    for (const obj of common.ftype) {
+        let rex = new RegExp(obj.rex, 'i')
+        if ( name.search(rex) >= 0 ) {
             return obj.type
         }
-    })
+    }
     return 'string'
 }
 
-// Use this when colors change.
-export function refreshTheme() {
-    if (common.theme.mode === 'dark' ) {
-        setDarkModeTheme()
-    } else {
-        setLightModeTheme()
-    }
-}
-
-// new
+/**
+ * Display the currently active theme.
+ * Useful when for refresh operations.
+ */
 export function displayTheme() {
     document.body.style.color = common.themes._activeColors().fgColor
     document.body.style.backgroundColor = common.themes._activeColors().bgColor
@@ -159,7 +194,9 @@ export function displayTheme() {
     }
 }
 
-// save to session storage
+/**
+ * Save the global state data to session storage.
+ */
 export function saveCommon() {
     // NOTE: was unable to get deep copy working reliably
     let rec = {
@@ -187,7 +224,9 @@ export function saveCommon() {
     sessionStorage.setItem('common', text)
 }
 
-// restore from session storage
+/**
+ * Restore the global state data from session storage.
+ */
 export function restoreCommon() {
     let now = new Date().toISOString()
     let wasm = common.crypt._wasm
@@ -237,13 +276,19 @@ export function restoreCommon() {
     header()
 }
 
-// reset for common
+/**
+ * Reset common to default values.
+ * This is useful when reading files that are out of date.
+ */
 export function resetCommon() {
     common.themes.props = getThemeProps()
     common.themes.colors = getThemeColors()
     saveCommon()
 }
 
+/**
+ * Populate the records title map for fast access.
+ */
 export function updateRecordsMap() {
     // re-order the records
     common.data.records.sort((a,b) => {

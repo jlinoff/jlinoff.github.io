@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>myVault</title>
+  <title>Help: myVault</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -85,7 +85,7 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">myVault</h1>
+<h1 class="title">Help: myVault</h1>
 </header>
 <details>
 <summary>
@@ -118,15 +118,15 @@ About
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2021-07-03T07:32:45-07:00</code></td>
+<td><code>2021-07-04T14:05:15-07:00</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>7d05716</code></td>
+<td><code>778a9c4</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
-<td><code>main</code></td>
+<td><code>20210703-jsdoc</code></td>
 </tr>
 <tr class="even">
 <td>project</td>
@@ -194,7 +194,6 @@ Table of Contents
 <li><a href="#cryptor">Cryptor</a></li>
 </ul></li>
 <li><a href="#themes">Themes</a></li>
-<li><a href="#how-to-get-help">How to get help</a></li>
 <li><a href="#how-to-access-the-app">How to access the app</a></li>
 <li><a href="#how-to-use-the-builtin-example">How to use the builtin example</a></li>
 <li><a href="#how-to-create-the-first-record">How to create the first record</a></li>
@@ -203,7 +202,9 @@ Table of Contents
 <li><a href="#how-to-edit-a-record">How to edit a record</a></li>
 <li><a href="#how-to-delete-a-record">How to delete a record</a></li>
 <li><a href="#how-to-search-for-a-record">How to search for a record</a></li>
-<li><a href="#how-to-run-locally-without-internet-access">How to run locally without internet access</a></li>
+<li><a href="#how-to-get-help">How to get help</a></li>
+<li><a href="#how-to-build-and-run-locally-without-internet-access">How to build and run locally without internet access</a></li>
+<li><a href="#how-to-release-the-webapp">How to release the webapp</a></li>
 <li><a href="#how-to-share-a-records-file">How to share a records file</a></li>
 <li><a href="#how-to-change-the-master-password">How to change the master password</a></li>
 <li><a href="#how-to-import-records-from-json">How to import records from JSON</a></li>
@@ -589,7 +590,10 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 <p>To delete a record, first view the record and then click on the trashcan icon.</p>
 <h2 id="how-to-search-for-a-record">How to search for a record</h2>
 <p>On the records page the search bar allows you to search for a record. Simply type in any words that are in the title and it will find records that match as you type.</p>
-<h2 id="how-to-run-locally-without-internet-access">How to run locally without internet access</h2>
+<h2 id="how-to-get-help">How to get help</h2>
+<p>To get help, navigate to <a href="https://jlinoff.github.io/myvault/">https://jlinoff.github.io/myvault/</a>, click on the <q><code>About</code></q> menu option then click on <q><code>HelpDoc</code></q> entry in the table.</p>
+<p>The help document is generated from the <code>README.md</code> during the build process so that it can be associated with each release.</p>
+<h2 id="how-to-build-and-run-locally-without-internet-access">How to build and run locally without internet access</h2>
 <p>These are the steps to run the web app locally without internet access.</p>
 <blockquote>
 <p>Note that you will need internet access to set things up.</p>
@@ -620,9 +624,29 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 <li>Navigate to http://localhost:8000</li>
 </ol>
 <p>If you want a port other than 8000 (say 9000), run <code>make server PORT=9000</code>.</p>
-<h2 id="how-to-get-help">How to get help</h2>
-<p>To get help, navigate to <a href="https://jlinoff.github.io/myvault/">https://jlinoff.github.io/myvault/</a>, click on the <q><code>About</code></q> menu option then click on <q><code>HelpDoc</code></q> entry in the table.</p>
-<p>The help document is generated from the <code>README.md</code> during the build process so that it can be associated with each release.</p>
+<h2 id="how-to-release-the-webapp">How to release the webapp</h2>
+<p><em>myVault</em> is released by running <q><code>make webapp</code></q> after building and testing changed. That target creates the <q><code>webapp.tar</code></q> archive which can be extracted to create a <code>myvault</code> directory tree. Here at the steps.</p>
+<ol type="1">
+<li>Get the myVault source code.
+<ol type="1">
+<li><code>git clone https://github.com/jlinoff/myvault</code></li>
+<li><code>cd myvault</code></li>
+</ol></li>
+<li>Make changes.</li>
+<li>Build and test it locally.
+<ol type="1">
+<li><code>make</code> (try <code>make help</code> for info about all available targets).</li>
+</ol></li>
+<li>Create the releae archive.
+<ol type="1">
+<li><code>make webapp</code></li>
+</ol></li>
+<li>Copy to the website and extract. There are many different ways to do this depending on how your website is setup.
+<ol type="1">
+<li><code>scp webapp.tar your-website:/www/</code></li>
+<li><code>ssh your-website "cd /www/ &amp;&amp; tar xf webapp.tar &amp;&amp; rm -f webapp.tar"</code></li>
+</ol></li>
+</ol>
 <h2 id="how-to-change-the-master-password">How to change the master password</h2>
 <p>The master password must be changed after the records file has been loaded but before it is saved. Here are the steps for a records file named <q><code>mystuff.txt</code></q>.</p>
 <ol type="1">

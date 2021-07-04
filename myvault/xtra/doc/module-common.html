@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Module: common</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: common</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Common variables that customize the webapp.</p></div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="common.js.html">common.js</a>, <a href="common.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id=".common"><span class="type-signature">(static) </span>common<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    <p>The common global variables.</p>
+<p>
+Entries that start with "<b><code>_</code></b>" are meant to be ignored during load/save operations.
+<p>
+<table>
+<thead>
+<tr>
+<th>section</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>meta</td>
+<td>Information about the common data like the modified time, the build and the version.</td>
+</tr>
+<tr>
+<td>ftype</td>
+<td>Maps field names to types. A typical example is the &quot;password&quot; maps to a password field.</td>
+</tr>
+<tr>
+<td>crypt</td>
+<td>The data and functions loaded from the WebAssembly implementation of the encryption algorithms.</td>
+</tr>
+<tr>
+<td>search</td>
+<td>The last used search term.</td>
+</tr>
+<tr>
+<td>data</td>
+<td>The records data.</td>
+</tr>
+<tr>
+<td>save</td>
+<td>The filename that was used for loading or saving.</td>
+</tr>
+<tr>
+<td>themes</td>
+<td>The currently defined themes.</td>
+</tr>
+<tr>
+<td>icons</td>
+<td>The icons used by the app.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="common.js.html">common.js</a>, <a href="common.js.html#line28">line 28</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".displayTheme"><span class="type-signature">(static) </span>displayTheme<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Display the currently active theme.
+Useful when for refresh operations.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="common.js.html">common.js</a>, <a href="common.js.html#line187">line 187</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".resetCommon"><span class="type-signature">(static) </span>resetCommon<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Reset common to default values.
+This is useful when reading files that are out of date.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="common.js.html">common.js</a>, <a href="common.js.html#line283">line 283</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".restoreCommon"><span class="type-signature">(static) </span>restoreCommon<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Restore the global state data from session storage.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="common.js.html">common.js</a>, <a href="common.js.html#line230">line 230</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".saveCommon"><span class="type-signature">(static) </span>saveCommon<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Save the global state data to session storage.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="common.js.html">common.js</a>, <a href="common.js.html#line200">line 200</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".updateRecordsMap"><span class="type-signature">(static) </span>updateRecordsMap<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Populate the records title map for fast access.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="common.js.html">common.js</a>, <a href="common.js.html#line292">line 292</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-about.html">about</a></li><li><a href="module-accordion.html">accordion</a></li><li><a href="module-add.html">add</a></li><li><a href="module-common.html">common</a></li><li><a href="module-edit.html">edit</a></li><li><a href="module-en_words.html">en_words</a></li><li><a href="module-example.html">example</a></li><li><a href="module-header.html">header</a></li><li><a href="module-icons.html">icons</a></li><li><a href="module-load.html">load</a></li><li><a href="module-main.html">main</a></li><li><a href="module-password.html">password</a></li><li><a href="module-preferences.html">preferences</a></li><li><a href="module-records.html">records</a></li><li><a href="module-save.html">save</a></li><li><a href="module-themes.html">themes</a></li><li><a href="module-utils.html">utils</a></li><li><a href="module-version.html">version</a></li></ul><h3>Classes</h3><ul><li><a href="module-icons-Color.html">Color</a></li><li><a href="module-icons-Solver.html">Solver</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_xmake">_xmake</a></li><li><a href="global.html#decrypt">decrypt</a></li><li><a href="global.html#encrypt">encrypt</a></li><li><a href="global.html#get_algorithm">get_algorithm</a></li><li><a href="global.html#get_name">get_name</a></li><li><a href="global.html#get_num_algorithms">get_num_algorithms</a></li><li><a href="global.html#header_prefix">header_prefix</a></li><li><a href="global.html#header_suffix">header_suffix</a></li><li><a href="global.html#onload">onload</a></li><li><a href="global.html#xAddClass">xAddClass</a></li><li><a href="global.html#xAddEventListener">xAddEventListener</a></li><li><a href="global.html#xAppendChild">xAppendChild</a></li><li><a href="global.html#xAppendToParent">xAppendToParent</a></li><li><a href="global.html#xAttr">xAttr</a></li><li><a href="global.html#xAttrIfTrue">xAttrIfTrue</a></li><li><a href="global.html#xAttrNS">xAttrNS</a></li><li><a href="global.html#xId">xId</a></li><li><a href="global.html#xInnerHTML">xInnerHTML</a></li><li><a href="global.html#xmake">xmake</a></li><li><a href="global.html#xRemoveChildren">xRemoveChildren</a></li><li><a href="global.html#xRemoveClass">xRemoveClass</a></li><li><a href="global.html#xStyle">xStyle</a></li><li><a href="global.html#xTooltip">xTooltip</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Jul 04 2021 14:05:17 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

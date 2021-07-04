@@ -1,13 +1,27 @@
+/**
+ * Password support.
+ * @module password
+ */
 import { xmake, makeInputXWrapper } from '/myvault/js/utils.js'
 import { makeIcon, changeIcon } from '/myvault/js/icons.js'
 import { words } from '/myvault/js/en_words.js'
 import { common } from '/myvault/js/common.js'
 
-// Password stuff
-// Generate a cryptic password composed of letters, digits and special characters.
-// minlen = 15
-// maxlen = 31
-function pass1(opts) {
+/**
+ * Internal utility function to generate a cryptic password composed
+ * of letters, digits and special characters.
+ * @example
+ * password1 = _generateCrypticPassword()
+ * password2 = _generateCrypticPassword({minlen: 64, maxlen: 64})
+ * asssert password2.length == 62
+ * asssert password2.length > password1.length
+ * @param {object} opts The password options object.
+ * It defines the alphabet, the minimum length (minlen) and maximum length (maxlen) of
+ * the password that is to be generated. The default minimum length is 15
+ * and the maximum length is 31.
+ * @returns {string} The generated password.
+ */
+function _generateCrypticPassword(opts) {
     function getval(prop, defval) {
         if (!opts) {
             return defval
@@ -45,8 +59,17 @@ function pass1(opts) {
     return result;
 }
 
-// Generate a word.
- function randomWord(minlen, maxlen) {
+/**
+ * Get a random word of a specific length from the en_words word list.
+ * @example
+ * let word = getRandomWord(3, 7)
+ * assert word.length >= 3
+ * assert word.length <= 7
+ * @param {number} minlen The minimum word length.
+ * @param {number} maxlen The maximum word length.
+ * @returns {string} the word.
+ */
+function getRandomWord(minlen, maxlen) {
     var i = Math.floor(Math.random() * words.length);
     var word = words[i];
     while (word.length < minlen || word.length > maxlen) {
@@ -56,18 +79,31 @@ function pass1(opts) {
     return word;
 }
 
-// Generate a human readable (memorable) password.
-function pass2() {
-    const tminlen = 15;
-    const tmaxlen = 31;
-    const wminlen = 3;
-    const wmaxlen = 15;
-    const sep = '/';
+/**
+* Generate a human readable (memorable) password between 15 and 31
+* characters where each word is separated by a forward slash.
+* <p>
+* The decision to not parameterize the word size, password size and
+* separator was deliberate to keep things simple. In the future it
+* might make sense to make those parameters dynamic by adding them
+* to the common parameters.
+* @example
+* let password = _generateMemorablePassword()
+* assert password.count('/') == 2
+* assert password.length >= 15
+* @returns {string} The memorable password.
+*/
+function _generateMemorablePassword() {
+    const tminlen = 15; // minimum password length
+    const tmaxlen = 31; // maximum password length
+    const wminlen = 3; // minimum word length
+    const wmaxlen = 15; // maximum word length
+    const sep = '/'; // hard coded separator
     var result = '';
     while (result.length < tminlen || result.length > tmaxlen) {
         result = '';
         for(var i=0; i<3; i++) {
-            var word = randomWord(wminlen, wmaxlen);
+            var word = getRandomWord(wminlen, wmaxlen);
             if (i) {
                 result += sep;
             }
@@ -81,8 +117,20 @@ function pass2() {
 // DOM Setup
 //
 // ========================================================================
-// This is the password prompt with all of the bells an whistles.
-// TODO: add the getter and setter parameters.
+/**
+ * Create the password input DOM element with the buttons to show/hide
+ * button, generate cryptic password button generate the memorable
+ * password button, copy the password button and the password length
+ * display element.
+ * @example
+ * let element = makePasswordEntry('password',
+ *                                 () => { return common.crypt.password},  // Getter
+ *                                 (value) => {common.crypt.password = value})  // Setter
+ * @param {string} placeholder The placeholder text in the input element.
+ * @param {function} getter The function to call to get the value.
+ * @param {function} getter The function to call to set the value.
+ * @returns {element} The DOM element that contains the password input elements.
+ */
 export function makePasswordEntry(placeholder, getter, setter) {
     let value = getter() || ''
     return xmake('div')
@@ -152,6 +200,32 @@ export function makePasswordEntry(placeholder, getter, setter) {
 }
 
 // Make a password entry with an ID - not DRY!!! needs to be fixed
+/**
+ * Create the password input DOM element with the buttons to show/hide
+ * button, generate cryptic password button generate the memorable
+ * password button, copy the password button and the password length
+ * display element with a user specified input id and class to make it
+ * easier to directly access and manipulate the input elements.
+ * <p>
+ * This is used to make custom password inputs for each record which is
+ * why the getter an setter functions are not needed.
+ * <p>
+ * Note that this code need to be DRYed up in the future because it replicates
+ * code in makePasswordEntry().
+ * @example
+ * let cls = 'x-data-field-value-element'
+ * let p1 = makePasswordEntryWithId('x-pass-1', cls, 'secret1')
+ * let p2 = makePasswordEntryWithId('x-pass-2', cls, 'secret2')
+ * let p3 = makePasswordEntryWithId('x-pass-3', cls, 'secret3')
+ * // later after the user entered password data
+ * let p1 = document.getElementbyId('x-pass-1')
+ * assert document.getElementsByClassName(cls) == 3
+ * @param {string} eid The input element id.
+ * @param {string} cls The input element class.
+ * @param {string} placeholder The placeholder text in the input element.
+ * @param {string} value The initial password value. Can be overwritten interactively.
+ * @returns {element} The DOM element that contains the password input elements.
+ */
 export function makePasswordEntryWithId(eid, cls, placeholder,  value) {
     return xmake('div')
         .xStyle(common.themes._activeProp().password.topdiv)
@@ -217,6 +291,10 @@ export function makePasswordEntryWithId(eid, cls, placeholder,  value) {
                 .xAppendChild(makeIcon(common.icons.copy, 'copy').xAddClass('x-show-hide-img')))
 }
 
+/**
+ * Helper function that displays the password length based on password event.
+ * @param {event} event A DOM event.
+ */
 function updatePasswordLength(event) {
     let button = event.currentTarget
     let div = button.parentNode
@@ -225,6 +303,11 @@ function updatePasswordLength(event) {
     span.innerHTML = input.value.length
 }
 
+/**
+ * Helper function that shows or hides the password character based
+ * on a password show/hide button click event.
+ * @param {event} event A DOM event.
+ */
 function showHidePassword(event) {
     let button = event.currentTarget
     let div = button.parentNode
@@ -241,28 +324,43 @@ function showHidePassword(event) {
     updatePasswordLength(event)
 }
 
+/**
+ * Helper function that generates a cryptic password based
+ * on a password cryptic button click event.
+ * @param {event} event A DOM event.
+ */
 function generateCrypticPassword(event) {
     let button = event.currentTarget
     let div = button.parentNode
     let input = div.parentNode.getElementsByClassName('x-password-input')[0]
-    input.value = pass1()
+    input.value = _generateCrypticPassword()
     let size = div.parentNode.getElementsByClassName('x-password-length')[0]
     size.innerHTML = input.value.length
     updatePasswordLength(event)
     dispatchChangeEvent(input)
 }
 
+/**
+ * Helper function that generates a memorable password based
+ * on a password memorable button click event.
+ * @param {event} event A DOM event.
+ */
 function generateMemorablePassword(event) {
     let button = event.currentTarget
     let div = button.parentNode
     let input = div.parentNode.getElementsByClassName('x-password-input')[0]
-    input.value = pass2() // TODO
+    input.value = _generateMemorablePassword()
     let size = div.parentNode.getElementsByClassName('x-password-length')[0]
     size.innerHTML = input.value.length
     updatePasswordLength(event)
     dispatchChangeEvent(input)
 }
 
+/**
+ * Helper function that copies the password to the clipboard based 
+ * on a password copy button click event.
+ * @param {event} event A DOM event.
+ */
 function copyPassword(event) {
     let button = event.currentTarget
     let div = button.parentNode
@@ -273,12 +371,23 @@ function copyPassword(event) {
         alert('internal error: clipboard copy operation failed')})
 }
 
+/**
+ * Helper function that updates value and length elements when
+ * the password changes (including paste events).
+ * @param {event} event A DOM event.
+ * @param {function} setter Function that sets the password value in a function that the caller defined.
+ */
 function updatePassword(event, setter) {
     let input = event.currentTarget
     setter(input.value)
     updatePasswordLength(event)
 }
 
+/**
+ * Dispatch a change event to the parent of the password subtree so
+ * that they can deal with it in a customized way.
+ * @param {element} input The input element. It is the source of the new dispatched event.
+ */
 function dispatchChangeEvent(input) {
     const event = new Event('change')
     input.dispatchEvent(event)

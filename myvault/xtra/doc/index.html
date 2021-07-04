@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: myVault</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>myVault</h1>
+<p><a href="https://github.com/jlinoff/myvault/releases"><img src="https://img.shields.io/github/release/jlinoff/myvault?style" alt="Releases"></a></p>
+<details>
+<summary>About</summary>
+<p>The meta data in the table is populated during the build process when the on-line help is generated.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Joe Linoff</td>
+</tr>
+<tr>
+<td>Copyright (©)</td>
+<td>2021</td>
+</tr>
+<tr>
+<td>License</td>
+<td>MIT Open Source</td>
+</tr>
+<tr>
+<td>Version</td>
+<td><code>__VERSION__</code></td>
+</tr>
+<tr>
+<td>Build</td>
+<td><code>__BUILD__</code></td>
+</tr>
+<tr>
+<td>GitCommitId</td>
+<td><code>__GIT_COMMIT_ID__</code></td>
+</tr>
+<tr>
+<td>GitBranch</td>
+<td><code>__GIT_BRANCH__</code></td>
+</tr>
+<tr>
+<td>project</td>
+<td><a href="https://github.com/jlinoff/myvault">https://github.com/jlinoff/myvault</a></td>
+</tr>
+<tr>
+<td>webapp</td>
+<td><a href="https://jlinoff.github.io/myvault">https://jlinoff.github.io/myvault</a></td>
+</tr>
+<tr>
+<td>help</td>
+<td><a href="https://jlinoff.github.io/myvault/help/index.html">https://jlinoff.github.io/myvault/help/index.html</a></td>
+</tr>
+<tr>
+<td>cryptor</td>
+<td><a href="#https://jlinoff.github.io/myvault/xtra/cryptor.html">https://jlinoff.github.io/myvault/xtra/cryptor.html</a></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+<summary>Table of Contents</summary>
+<!--ts-->
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#layout">Layout</a>
+<ul>
+<li><a href="#menu">Menu</a></li>
+<li><a href="#about-page">About Page</a></li>
+<li><a href="#preferences-page">Preferences</a></li>
+<li><a href="#load-page">Load</a></li>
+<li><a href="#records-page">Records</a>
+<ul>
+<li><a href="#search">Search</a></li>
+<li><a href="#add-new-record">Add New Record</a></li>
+<li><a href="#view-record">View Record</a></li>
+<li><a href="#delete-record">Delete Record</a></li>
+<li><a href="#edit-record">Edit Record</a></li>
+</ul>
+</li>
+<li><a href="#save-page">Save</a></li>
+<li><a href="#master-password">Master Password</a></li>
+<li><a href="#automatic-password-generation">Automatic Password Generation</a>
+<ul>
+<li><a href="#cryptic">Cryptic</a></li>
+<li><a href="#memorable">Memorable</a></li>
+<li><a href="#custom">Custom</a></li>
+</ul>
+</li>
+<li><a href="#security">Security</a>
+<ul>
+<li><a href="#mitm">MITM</a></li>
+<li><a href="#third-party-web-site-security">Third Party Web Site Security</a></li>
+<li><a href="#over-the-shoulder-surfing-attack">Over the Shoulder Surfing Attack</a></li>
+<li><a href="#clipboard-attack">Clipboard Attack</a></li>
+<li><a href="#unattended-browser">Unattended Browser</a></li>
+<li><a href="#malware--key-logging-and-screen-recording">Malware: Key Logging and Screen Recording</a></li>
+<li><a href="#website-spoofing">Website Spoofing</a></li>
+<li><a href="#protecting-yourself">Protecting Yourself</a></li>
+<li><a href="#mfa">MFA</a></li>
+</ul>
+</li>
+<li><a href="#extras">Extras</a>
+<ul>
+<li><a href="#color2rgb">Color2RGB</a></li>
+<li><a href="#cryptor">Cryptor</a></li>
+</ul>
+</li>
+<li><a href="#themes">Themes</a></li>
+<li><a href="#how-to-access-the-app">How to access the app</a></li>
+<li><a href="#how-to-use-the-builtin-example">How to use the builtin example</a></li>
+<li><a href="#how-to-create-the-first-record">How to create the first record</a></li>
+<li><a href="#how-to-create-the-second-record">How to create the second record</a></li>
+<li><a href="#how-to-view-a-record">How to view a record</a></li>
+<li><a href="#how-to-edit-a-record">How to edit a record</a></li>
+<li><a href="#how-to-delete-a-record">How to delete a record</a></li>
+<li><a href="#how-to-search-for-a-record">How to search for a record</a></li>
+<li><a href="#how-to-get-help">How to get help</a></li>
+<li><a href="#how-to-build-and-run-locally-without-internet-access">How to build and run locally without internet access</a></li>
+<li><a href="#how-to-release-the-webapp">How to release the webapp</a></li>
+<li><a href="#how-to-share-a-records-file">How to share a records file</a></li>
+<li><a href="#how-to-change-the-master-password">How to change the master password</a></li>
+<li><a href="#how-to-import-records-from-json">How to import records from JSON</a></li>
+</ul>
+</li>
+</ul>
+<!--te-->
+</details>
+<h2>Overview</h2>
+<p><em>myVault</em> is single page web app, available
+at <a href="https://jlinoff.github.io/myvault">https://jlinoff.github.io/myvault</a>,
+that allows you to securely manage
+your personal data as searchable records in a secure, flexible
+manner. Each record contains arbitrary data that you care about, such
+as the password for a site or the last book you read with notes. You
+define the record format and contents. Each record can be
+different. Both the format and the content of each record can be
+changed at anytime.</p>
+<p><em>myVault</em> allows you to control where the data is stored. The web app
+is self contained so data is never shipped to external web site. I
+tend to save my data in a file in a common place (like Google Drive
+and iCloud) so that all my devices can access it. If you store your
+data on a local drive make sure that it is backed up regularly.</p>
+<p>The record data is protected by a master password. It is used to
+encrypt all data that is exported and decrypt all data that is
+imported. For more information see the <a href="#master-password">Master Password</a>
+section.</p>
+<p>Each record is composed of fields. A field has a name and a value. One
+key feature of the program is that the field types changes based on
+the field name. Thus, if a field name contains the word <code>&quot;password&quot;</code> or
+<code>&quot;secret&quot;</code>, the value changes to a password input which hides the
+value. If the field name contains the word <code>&quot;notes&quot;</code>, the value field
+changes to a multi-line text box to allow you enter multiple lines of
+text. All other fields like <code>&quot;name&quot;</code> or <code>&quot;url&quot;</code> are treated as simple
+strings. Although the webapp does to try to identify <em>URLs</em> and present
+them as links in view mode.</p>
+<p><em>myVault</em> is very customizable. You can change the page title, the encryption
+algorithm used, the page theme colors, the page theme properties like
+font size, templates that define the fields used in records, the
+mapping between field names and their types, and more. The
+customization is done on the preferences page. Each customization
+panel has some information about what it does.</p>
+<p><em>myVault</em> also provides built-in password generation for both cryptic
+and memorable passwords for all password fields, including the master
+password. See the <a href="#master-password">Master Password</a> for details on
+cryptic and memorable passwords.</p>
+<p>The app also provides built in example data to allow you to play with the
+capabilities without committing to anything.  It is a great way to get
+familiar with the program and is also really useful during
+development.</p>
+<p>I use <em>myVault</em> to store my password information and keep track of
+books that i have read. The books don't really need to be secure. I
+simply use it because it is convenient to use on my mobile devices.</p>
+<p>There is a related utility call <em>cryptor</em> that allows you to
+conveniently encrypt and descrypt any text file with arbitrarty data
+from the browser. You can access it from the &quot;<code>About</code>&quot; page. I
+originally built it as a prototype during development but then found
+it so useful that i decided to keep it. It is not part of the official
+<em>myVault</em> webapp because the function, although similar, is more
+general because <em>cryptor</em> does not care about the format of file
+contents whereas <em>myVault</em> does care about the format.</p>
+<h2>Layout</h2>
+<p>This section describes the layout of the app and talks about each section in
+detail.</p>
+<p>All sections use accordion panels to display options. Opening the
+panel provides more information about what it does. There are icons at
+the top of the accordion panels that allow you to expand or collapse
+all of the panels at once.</p>
+<h3>Menu</h3>
+<p>It all starts with the menu. Which is an icon positioned in the upper
+right corner of the app window. There 5 menu options for selecting one
+of the five different pages.  The pages are briefly described in the
+table below and more thoroughly described in subsequent sections.</p>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Brief Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>About</td>
+<td>Presents information about the version and provenance of the app. It also provides links to the project and this help.</td>
+</tr>
+<tr>
+<td>Preferences</td>
+<td>Allows you to customize the app. Including defining the master password, choosing the theme colors and changing the title.</td>
+</tr>
+<tr>
+<td>Load</td>
+<td>Specify the data to load from a file or the clipboard. It also provides example data for playing around.</td>
+</tr>
+<tr>
+<td>Records</td>
+<td>View the records, edit them, create news ones or delete them.</td>
+</tr>
+<tr>
+<td>Save</td>
+<td>Save changed to a file or the clipboard.</td>
+</tr>
+</tbody>
+</table>
+<p>The upper left is reserved for brief ephemeral status messages and the
+middle is reserved for the titleand subtitles.</p>
+<h3>About Page</h3>
+<p>This page contain build information about the webapp. It basically has the
+same information as the &quot;About&quot; section at the top of this page. The specific fields
+are:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>The program author.</td>
+</tr>
+<tr>
+<td>Copyright</td>
+<td>The copyright year.</td>
+</tr>
+<tr>
+<td>License</td>
+<td>The source code license always MIT for this project.</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>The program version (semantic versioning 2.0.0).</td>
+</tr>
+<tr>
+<td>Build</td>
+<td>The build date and time. It is populated at build time.</td>
+</tr>
+<tr>
+<td>GitCommitId</td>
+<td>The git commit id of the released source code. It is populated at build time.</td>
+</tr>
+<tr>
+<td>GitBranch</td>
+<td>The git branch of the released source code. It is populated at build time.</td>
+</tr>
+<tr>
+<td>Project</td>
+<td>The github project link</td>
+</tr>
+<tr>
+<td>Webapp</td>
+<td>The webapp URL link.</td>
+</tr>
+<tr>
+<td>HelpDoc</td>
+<td>A link to this help documentation.</td>
+</tr>
+<tr>
+<td>Cryptor</td>
+<td>A link to the <em>cryptor</em> utility.</td>
+</tr>
+</tbody>
+</table>
+<p>You can use the build and git branch information when describing a problem.</p>
+<h3>Preferences Page</h3>
+<p>This page contains a collection of interesting preferences that you can change to customize the interface.
+They are briefly summarized in the table below.</p>
+<table>
+<thead>
+<tr>
+<th>Panel</th>
+<th>Brief Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Master Password</td>
+<td>Set the master password. This is used to encrypt and decrypt all data so that it cannot be read by anyone else.</td>
+</tr>
+<tr>
+<td>Encryption Algorithm</td>
+<td>Choose one of the algorithms that were compiled into the webapp.</td>
+</tr>
+<tr>
+<td>ThemeColors</td>
+<td>Choose which the color scheme you want or define our own.</td>
+</tr>
+<tr>
+<td>Theme Properties</td>
+<td>Choose the theme properties you want. This is not very user friendly because it requires knowledge of the internal implementation.</td>
+</tr>
+<tr>
+<td>Record Field Templates</td>
+<td>Define templates that can be used to pre-populate the keys in a record. This is very useful when you want a common record format.</td>
+</tr>
+<tr>
+<td>Record Field Name Based Types</td>
+<td>Associate record field names with types like password, textarea and string so that when a user types in a field name like &quot;notes&quot;, the value becomes a textarea.</td>
+</tr>
+<tr>
+<td>Change Title</td>
+<td>Define a custom title for the webapp. This is useful for defining a logical name for a group of records.</td>
+</tr>
+<tr>
+<td>Reset</td>
+<td>Reset the internal state by clearing the internal session storage and reloading. This is useful during development when the common data changes.</td>
+</tr>
+<tr>
+<td>Raw Edit</td>
+<td>Allows you to bypass the UI and edit the JSON data directly. Not generally recommended.</td>
+</tr>
+</tbody>
+</table>
+<p>Most of the customizable preferences are in JSON format.</p>
+<h3>Load Page</h3>
+<p>This page contains the options available for loading data. They are briefly summarized in the table below.</p>
+<table>
+<thead>
+<tr>
+<th>Panel</th>
+<th>Brief Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Internal Example</td>
+<td>Built in example data consisting of 11 made up password records that can be used to play around with the program.</td>
+</tr>
+<tr>
+<td>Paste from Clipboard</td>
+<td>Load the content of the clipboard as data and decrypt using the master password if necessary. This option can be used to transfer data from a file that is open in an external editor.</td>
+</tr>
+<tr>
+<td>Read Local File</td>
+<td>Load the content of a local file as data and decrypt using the master password if necessary.</td>
+</tr>
+<tr>
+<td>View Raw Data</td>
+<td>View or change the raw data that was loaded by the previous options. This is useful for debugging or entering data manually. If there is no data, reload the data.</td>
+</tr>
+</tbody>
+</table>
+<h3>Records Page</h3>
+<p>Work with the records. You can add, change or delete records.  The top
+level records page shows all of the records in accordion panels. You
+can click on a record accordion panel to see the record details.</p>
+<h4>Search</h4>
+<p>There is search bar at the top that allows you search for records that
+match a pattern. The search searches all of the record titles in a
+case insensitive manner. The default is to search for <em>all</em>
+records. The search syntax is the Javascript RegEx syntax.</p>
+<p>The records list is updated as you type.</p>
+<h4>Add New Record</h4>
+<p>Underneath the search bar there are three buttons: a button to expand all of the
+accordion panels, a button to collapse the all of the accordion panels and a &quot;+&quot; button
+to add a new record. There is also a count of the number of records which match
+the search criteria.</p>
+<p>When you click on the add new record button a new sub-page
+appears.</p>
+<p>Enter the data for the fields that you want to add and click
+on the &quot;Create&quot; button to create the new record.</p>
+<p>Before entering any field information you can choose a record
+field template from the &quot;Template&quot; selection box if you want to use
+pre-defined fields. This is helpful if you want a common format for
+the records. Note that you can define your own templates in the
+&quot;Preferences&quot;.</p>
+<p>Click the &quot;Discard&quot; button to discard the changes and go back to the
+main records page.</p>
+<p>The &quot;Add Field&quot; button allows you to append a new field which is a new
+row at the end with name and a value.</p>
+<p>A field will not be included in a record if either the name or the
+value are empty.</p>
+<p>Certain field names will change the value type. For example a field
+named &quot;password&quot; will create a password input. There are three value
+types: string (basic input), textarea (multi-line input) and password
+(a password field). The field type will change <em>as you type the name</em>.
+Thus the name &quot;passwor&quot; (missing the final &quot;d&quot;) will be string field
+but when you type the final &quot;d&quot;, the value field will change to a
+password. You can define the mapping between field names and field
+values in the &quot;Preferences&quot; in the &quot;Record Field Name Based
+Types&quot; accordion entry.</p>
+<h4>View Record</h4>
+<p>When a record is expanded you will see a view of its contents. Urls
+will be seen as links (the program figure that out automatically),
+passwords will not be displayed (you can see them by clicking on the
+eye icon). All fields can be copied to the clipboard by clicking the
+copy icon on the far right.</p>
+<h4>Delete Record</h4>
+<p>A record can be deleted by clicking on the trashcan icon in view mode.
+See the &quot;how to&quot; entries in subsequent sections for details.</p>
+<h4>Edit Record</h4>
+<p>A record can be edited by clicking on the pencil icon.
+See the &quot;how to&quot; entries in subsequent sections for details.</p>
+<h3>Save Page</h3>
+<p>This page contains the options available for saving data. They are briefly summarized in the table below.</p>
+<table>
+<thead>
+<tr>
+<th>Panel</th>
+<th>Brief Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paste Data to Clipboard</td>
+<td>Copy the master password encrypted data to the clipboard.</td>
+</tr>
+<tr>
+<td>Download to File</td>
+<td>Download the master password encrypted data to a local file. If you download the file to a shared resource like Google Drive or iCloud, the file can be shared by different devices.</td>
+</tr>
+</tbody>
+</table>
+<h2>Master Password</h2>
+<p>The record data is protected by a master password. It is used to
+encrypt all data that is exported and decrypt all data that is
+imported so the only data ever saved is secure which means that the
+encrypted data in the stored file looks something like this.</p>
+<pre class="prettyprint source"><code>----------------------- crypt-aes-256-gcm prefix -----------------------
+5YTMBBuyj0It/9cF6V8SxYa3MXXjRDsXKpcVG98fPSLdPcT75sUCnR7W/iTKMjEpZzrV3n0S
+HVX/czCqSeaJwTKHjsXyv4RKylIVRKR6fEDNFkmb8eUZC8nvqZdENWk2zkM45F4Iib3J5HUa
+PysK4noxEqIAimLlieGSWwvPD14XaRTGytBUxy4N6FmlahokO1bnBk6gwDTpLjNpxDkzI2Fa
+mRqoOzUJsmnNG8SAQtSNz4wBkdPJ46nOens309FWQoA5KEMQigaDE1tqgFdsd6d50HUd6idE
+.
+.
+yBmfWfXNtDoD7KSOIEGjRck6rrLNNDI9D3up8818438kVyrg8Srvrt0qmoH54SSKaB9/jb4V
+CZh35BY51SpHrsKFs91Qj54QHn9SSWA2HBOPfODomEqpG3BX2HPmQ3BIMHCWyrS6X9gLbJCB
+LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
+6HscqWKZ9gXH7INKAko0MHW75ckR6AOVTxrS7J93j6pXQhHgOYGMoyzCQQL0cx2Ix6eIPw==
+----------------------- crypt-aes-256-gcm suffix -----------------------
+</code></pre>
+<p>As you can see, it is not of much use without the password.</p>
+<blockquote>
+<p>If your master password is lost, the data cannot be recovered
+because the program never stores it.</p>
+</blockquote>
+<p>The encryption algorithm is AES-256 which is considered quite secure
+and should be relatively safe from future quantum attacks. Furthermore,
+the encryption algorithm runs <em>inside</em> the browser so, as mentioned earlier,
+your data is never shipped to an external server.</p>
+<p>I recommend creating a memorable password (<a href="#memorable">Memorable</a> below)
+because this is the <em>only</em> password that you have to remember to
+access all of your password records. It may even make sense to write
+it down and store it in a secure place.</p>
+<h2>Automatic Password Generation</h2>
+<p>lll passwords (including the master password) have four extra buttona:
+an eye button to let you view the password as plaintext, a single gear
+button that generates a <em>cryptic</em> password, a multiple gear button
+that generates a <em>memorable</em> password and a copy button that copies
+the password to the clipboard that can be pasted externally.</p>
+<h3>Cryptic</h3>
+<p>Cryptic passwords are secure, hard to remember passwords that are a
+pseudo random collection of upper case letters, lower case letters,
+numbers and special characters. Here are two examples of cryptic
+passwords: &quot;<code>t0t5Q2eL!6E7!s6nWp6lv1</code>&quot; and &quot;<code>SiPeD_dLQa03NIG</code>&quot;.</p>
+<h3>Memorable</h3>
+<p>Memorable passwords are secure, easy to remember passwords that are
+composed of three pseudo randomly chosen english words separated by a
+slash. Here are two examples of memorable passwords:
+&quot;<code>farming/naval/decision</code>&quot; and &quot;<code>viewed/frequencies/looking</code>&quot;.</p>
+<h3>Custom</h3>
+<p>The cryptic and memorable buttons make it easy to generate passwords
+automatically but if you prefer another style you can always enter
+your passwords manually.</p>
+<h2>Security</h2>
+<p><em>myVault</em>, like all webapps or programs, has security challenges. By
+understanding them you can better protect your record data.</p>
+<h3>MITM</h3>
+<p>Unlike many other webapps, it does <em>not</em> talk to an internet based web
+server which means that the data is never transported from your
+computer over the internet. Because no data is ever transmitted, it is
+protected from monster-in-the-middle (MITM) attacks.</p>
+<h3>Third Party Web Site Security</h3>
+<p>Furthermore, because it does not send the data to a server, it is
+not vulnerable to how cybersecurity is managed on the server by a third
+party.</p>
+<blockquote>
+<p>You can verify that <em>myVault</em> is not sending data out by monitoring
+outbound traffic from your system. This web app never sends any data.</p>
+</blockquote>
+<p>Instead, encryption and decryption is run <em>inside</em> the browser using
+algorithms implemented in Rust and incorporated into the <em>myVault</em>
+using WebAssembly. This means that the data is never exposed outside
+of the browser unless it is encrypted. It also means that the
+algorithms run quite fast and are not exposed in javascript.</p>
+<p><em>However, running the algorithms internally and not exporting the data
+over the internet does not guarantee that your data is secure</em>.</p>
+<h3>Over the Shoulder Surfing Attack</h3>
+<p>Internally the data is stored in decrypted form, so you may be
+vulnerable to over the shoulder surfing attacks where someone or
+something (like a camera) watches or films you typing. You could be
+observed opening a record and then clicking to display the password in
+plaintext which could allow that information to be stolen. This can be
+mitigated by being aware of your surroundings to make sure you are not
+being watched or filmed.</p>
+<h3>Clipboard Attack</h3>
+<p>Yet another type of vulnerability is clipboard attacks if/when data is
+copied to the clipboard for cut and paste operations. This
+vulnerability exists because the clipboard is a global resource that
+can be accessed by other, independent applications.</p>
+<p>Clipboard attacks can be mitigated by making sure that your computer
+does not have malware installed or by not copying to the clipboard.
+Although it is probably impractical to not use the clipboard at all
+so, if you do use the clipboard, make sure that you always reset it
+after any copy/paste operation to minimize any chances that it will be
+captured by malware or observed by an attacker. You can reset it by
+simply selection a single letter or word and copying it.</p>
+<p>Another perhaps better way to mitigate the clipboard vulnerability
+would be to eliminate the need for the clipboard by modifying <em>myVault</em>
+to automatically login in for you based on record data using an
+HTTP POST operation but that is not currently available.</p>
+<h3>Unattended Browser</h3>
+<p>If you leave the browser unattended after you have loaded your record data,
+someone can sit down and see the records because they are
+impersonating you. This can be mitigated by always closing the webapp
+tab or locking your screen when you leave the computer.</p>
+<h3>Malware: Key Logging and Screen Recording</h3>
+<p>If malware has been installed on your computer that does screen shots or
+key logging, you are in trouble. It means that an attacker can see what
+you are doing and capture what you are typing. The best way to mitigate
+these forms of attacks is to keep your system up to data by installing
+security patches and use some sort of security tool to protect your
+system.</p>
+<h3>Website Spoofing</h3>
+<p>Finally, web site spoofing could be used to direct you to a website
+that could be used to steal your information using a look alike
+webapp. To mitigate that make sure that you accessing the <em>myVault</em> from
+a known, trusted site.</p>
+<h3>Protecting Yourself</h3>
+<p>In summary, even security can never be guaranteed, the best way to
+protect your data is to follow commonly recommended security
+practices:</p>
+<ol>
+<li>Keep all of your security patches up to date.</li>
+<li>Keep malware off of your systems.</li>
+<li>Make sure that you are not observered.</li>
+<li>Never share sensitive information (like passwords).</li>
+<li>Backup your data.</li>
+</ol>
+<h3>MFA</h3>
+<p>Several folks asked why multi-factor authentication (MFA) was not
+included to provide and additional layer of security.</p>
+<p>I deliberately did not include MFA because it requires an
+authentication/authorization service and I want this application to
+<em>never</em> talk to the internet unless the user explicitly requests
+access to a known shared file service through the &quot;<code>Load</code>&quot; or &quot;<code>Save</code>&quot;
+pages. In other words, you should never see any internet traffic
+originating from this webapp that you cannot account for.</p>
+<h3>Extras</h3>
+<p>There were a couple of single page web apps that i developed while building <em>myVault</em>.
+They turned out to be so useful that i left them in. They are not elegant or well
+designed or well tested.</p>
+<h3>Color2RGB</h3>
+<p>This is a utility page that allows you to type in any color name and have it normalized
+to its RGB and hex value. For example <code>red</code> --&gt; <code>#ff0000</code> and <code>rgb(255,0,0)</code>.
+To access it click here: <a href="/xtra/color2rgb.html">xtra/color2rgb.html</a>.</p>
+<h3>Cryptor</h3>
+<p>This is a utility page that allows you to encrypt and decrypt arbitrary data
+with cryptic, memorable or custom passwords.
+It can load from and save to files and the clipboard.
+I have found it to be very useful for encrypting arbitrary files.
+To access it click here: <a href="/xtra/cryptor.html">xtra/cryptor.html</a>.</p>
+<h2>Themes</h2>
+<p>A theme is composed of a set of colors (foreground and background) and
+a set of properties that define other syle information. Each theme also
+has a unique name. Theme colors and properties are can be selected and/or
+defined on the &quot;<code>Preferences</code>&quot; page.</p>
+<p>The idea behind themes is to make the CSS styling dynamic to allow users
+to change and save styles from the UI. The current implementation is poor
+because it is too complex and is not documented.</p>
+<p>The current properties are <em>standard</em> and <em>large</em>. They are a first
+appproximation of styles that make the webapp usable for different
+screen sizes. I use <em>standard</em> on my laptop and <em>large</em> in landscape
+mode on my mobiles devices.</p>
+<p>When a theme color or property is changed, the display is updated
+immediately.</p>
+<h2>How to access the app</h2>
+<p>Navigate to <a href="https://jlinoff.github.io/myvault/">https://jlinoff.github.io/myvault/</a>
+in your browser.</p>
+<h2>How to share a records file</h2>
+<p>The easiest way to share records is to save the records file to a
+shared volume from the &quot;<code>Save</code>&quot; page to a shareable resource like
+<em>Google Drive</em> or <em>iCloud</em>. Then provide the password to other folks
+entrused to access the data.</p>
+<blockquote>
+<p>Take care in transmitting the password to keep the data safe.</p>
+</blockquote>
+<h2>How to use the builtin example</h2>
+<p>An example is provided that allows you to play with the webapp to get
+familiar with it.</p>
+<p>It contains 11 built-in, hard-coded records that can be used to play
+around with the tool to learn how it is used. Note that this operation
+changes the password to &quot;<code>example</code>&quot; and the title to &quot;<code>myExample</code>&quot;. The
+password and title values can be changed to anything you want in the
+&quot;<code>Preferences</code>&quot;.</p>
+<p>To load the example follow these steps.</p>
+<ol>
+<li>Go to the app in your browser: <a href="https://jlinoff.github.io/myvault">https://jlinoff.github.io/myvault</a></li>
+<li>Navigate to the &quot;<code>Load</code>&quot; page from the menu.</li>
+<li>Click on the &quot;<code>Internal Example</code>&quot; accordion entry.</li>
+<li>Click the &quot;<code>Load Example</code>&quot; button.</li>
+<li>Navigate to the &quot;<code>Records</code>&quot; to view the records.</li>
+</ol>
+<p>Once the example is loaded, you can change the records from the &quot;<code>Records</code>&quot;
+page, add new records, save them and load them.</p>
+<h2>How to create the first record</h2>
+<p>Creating the first record requires you to define a master password,
+input the record data and save it. Here are the steps.</p>
+<ol>
+<li>Go to the app in your browser: <a href="https://jlinoff.github.io/myvault">https://jlinoff.github.io/myvault</a></li>
+<li>Navigate to the &quot;<code>Preferences</code>&quot; page from the menu.</li>
+<li>Click on the &quot;<code>Master Password</code>&quot; accordion entry.</li>
+<li>Enter a password. I used the memorable password generator.</li>
+<li>Navigate to the &quot;<code>Records</code>&quot; page from the menu.</li>
+<li>Click on the &quot;<code>+</code>&quot; (plus) button.</li>
+<li>Choose the PASS4 template.</li>
+<li>Enter the data: URL, username, password and a note about it.</li>
+<li>Navigate to the &quot;<code>Save</code>&quot; page from the menu.</li>
+<li>Click on the &quot;<code>Download to File</code>&quot; accordion entry.</li>
+<li>Enter different file name if you want. The default is &quot;<code>vault.txt</code>&quot;.</li>
+<li>Click the &quot;<code>Download</code>&quot; button.</li>
+</ol>
+<h2>How to create the second record</h2>
+<p>Creating the first record requires you to enter the master password
+you created for the first record, load the record data from the file
+that you created, input the second record data and then save it.
+Here are the steps.</p>
+<p>These are the same steps used for all subsequent records.</p>
+<ol>
+<li>Go to the app in your browser: <a href="https://jlinoff.github.io/myvault">https://jlinoff.github.io/myvault</a></li>
+<li>Navigate to the &quot;<code>Preferences</code>&quot; page from the menu.</li>
+<li>Click on the &quot;<code>Master Password</code>&quot; accordion entry.</li>
+<li>Enter the password you created for the first record.</li>
+<li>Navigate to the &quot;<code>Load</code>&quot; page from the menu.</li>
+<li>Click on the &quot;<code>Read Local File</code>&quot; accordion entry.</li>
+<li>Click on the &quot;<code>Select File</code>&quot; button and choose a file. It will load automatically if the master password is correct. Otherwise it will fail. If it fails. Carefully check and re-enter you master password (go back to step 1).</li>
+<li>Navigate to the &quot;<code>Records</code>&quot; page from the menu.
+9d8. Click on the &quot;<code>+</code>&quot; (plus) button.</li>
+<li>Choose the PASS4 template.</li>
+<li>Enter the data: URL, username, password and a note about it.</li>
+<li>Navigate to the &quot;<code>Save</code>&quot; page from the menu.</li>
+<li>Click on the &quot;<code>Download to File</code>&quot; accordion entry.</li>
+<li>Enter different file name if you want. The default is &quot;<code>vault.txt</code>&quot;.</li>
+<li>Click the &quot;<code>Download</code>&quot; button.</li>
+</ol>
+<h2>How to view a record</h2>
+<p>To view a record, load the data as described in the
+<a href="#how-to-create-a-second-record-section">How to create a second record section</a>,
+navigate to the &quot;<code>Records</code>&quot; page and click on the record you want to
+view. It will expand to show the record data in a read-only
+form. Passwords are never shown to protect from over the shoulder
+surfing.  You can make them visible by clicking on the eye icon. All
+fields can be copied to the clipboard by clickin on the copy icon.</p>
+<h2>How to edit a record</h2>
+<p>To edit a record, first view the record and then click on the pencil icon.</p>
+<p>The shows an edit view of the record inline. The up/down arrows allow
+you to move the fields rows up an down.</p>
+<p>The trashcan icon next to the field allows you to delete the field.</p>
+<h2>How to delete a record</h2>
+<p>To delete a record, first view the record and then click on the trashcan icon.</p>
+<h2>How to search for a record</h2>
+<p>On the records page the search bar allows you to search for a record. Simply type in
+any words that are in the title and it will find records that match as you type.</p>
+<h2>How to get help</h2>
+<p>To get help,
+navigate to <a href="https://jlinoff.github.io/myvault/">https://jlinoff.github.io/myvault/</a>,
+click on the &quot;<code>About</code>&quot; menu option then click on &quot;<code>HelpDoc</code>&quot; entry
+in the table.</p>
+<p>The help document is generated from the <code>README.md</code> during the build process so that
+it can be associated with each release.</p>
+<h2>How to build and run locally without internet access</h2>
+<p>These are the steps to run the web app locally without internet access.</p>
+<blockquote>
+<p>Note that you will need internet access to set things up.</p>
+</blockquote>
+<p>You must have a number of dev tools installed:</p>
+<ol>
+<li><code>gnu make</code></li>
+<li><code>rust</code></li>
+<li><code>python3</code></li>
+<li><code>pipenv</code></li>
+<li><code>jshint</code> (node)</li>
+</ol>
+<p>Once that is done here are the steps to set it up.</p>
+<ol>
+<li>Get the source code.
+<ol>
+<li><code>git clone https://github.com/jlinoff/myvault</code></li>
+<li><code>cd myvault</code></li>
+</ol>
+</li>
+<li>Build and test it locally.
+<ol>
+<li><code>make</code> (try <code>make help</code> for info about all available targets).</li>
+</ol>
+</li>
+<li>Run a server
+<ol>
+<li><code>make server</code></li>
+</ol>
+</li>
+<li>Navigate to http://localhost:8000</li>
+</ol>
+<p>If you want a port other than 8000 (say 9000), run <code>make server PORT=9000</code>.</p>
+<h2>How to release the webapp</h2>
+<p><em>myVault</em> is released by running &quot;<code>make webapp</code>&quot; after building and testing changed.
+That target creates the &quot;<code>webapp.tar</code>&quot; archive which can be extracted to create a
+<code>myvault</code> directory tree. Here at the steps.</p>
+<ol>
+<li>Get the myVault source code.
+<ol>
+<li><code>git clone https://github.com/jlinoff/myvault</code></li>
+<li><code>cd myvault</code></li>
+</ol>
+</li>
+<li>Make changes.</li>
+<li>Build and test it locally.
+<ol>
+<li><code>make</code> (try <code>make help</code> for info about all available targets).</li>
+</ol>
+</li>
+<li>Create the releae archive.
+<ol>
+<li><code>make webapp</code></li>
+</ol>
+</li>
+<li>Copy to the website and extract. There are many different ways to do this depending on how your website is setup.
+<ol>
+<li><code>scp webapp.tar your-website:/www/</code></li>
+<li><code>ssh your-website &quot;cd /www/ &amp;&amp; tar xf webapp.tar &amp;&amp; rm -f webapp.tar&quot;</code></li>
+</ol>
+</li>
+</ol>
+<h2>How to change the master password</h2>
+<p>The master password must be changed after the records file has been
+loaded but before it is saved. Here are the steps for a records
+file named &quot;<code>mystuff.txt</code>&quot;.</p>
+<ol>
+<li>Go to the app in your browser: <a href="https://jlinoff.github.io/myvault">https://jlinoff.github.io/myvault</a></li>
+<li>Navigate to the &quot;<code>Preferences</code>&quot; page from the menu.</li>
+<li>Click on the &quot;<code>Master Password</code>&quot; accordion entry.</li>
+<li>Enter the old password for &quot;<code>mystuff.txt</code>&quot;.</li>
+<li>Navigate to the &quot;<code>Load</code>&quot; page from the menu.</li>
+<li>Click on the &quot;<code>Read Local File</code>&quot; accordion entry.</li>
+<li>Click on the &quot;<code>Select File</code>&quot; button and choose &quot;<code>mystuff.txt</code>&quot;.</li>
+<li>Navigate to the &quot;<code>Preferences</code>&quot; page from the menu.</li>
+<li>Click on the &quot;<code>Master Password</code>&quot; accordion entry.</li>
+<li>Enter the new password for &quot;<code>mystuff.txt</code>&quot;.</li>
+<li>Navigate to the &quot;<code>Save</code>&quot; from the menu.</li>
+<li>Click on the &quot;<code>Download to File</code>&quot; accordion entry.</li>
+<li>Click the &quot;<code>Download</code>&quot; button. The <em>MyVault</em> remembers the file name &quot;`mystuff.txt'&quot; so you don't have to re-enter it.</li>
+</ol>
+<h2>How to import records from JSON</h2>
+<p>It is sometimes convenient to be able import many records at once. If, for example,
+you want to transfer records between records files. This can be done using the
+&quot;<code>Raw Edit</code>&quot; function on the &quot;<code>Preferences</code>&quot; page. This example shows how to create
+a simple password record named &quot;<code>Acme Utensils for Coyotes</code>&quot;. The JSON is shown below:</p>
+<pre class="prettyprint source lang-json"><code>{
+  &quot;__id__&quot; : &quot;Acme Utensils for Coyotes&quot;,
+  &quot;url&quot;: &quot;https://roadrunner.io&quot;,
+  &quot;username&quot;: &quot;wilec&quot;,
+  &quot;password&quot;: &quot;roadrunnersaredelicious&quot;
+}
+</code></pre>
+<p>This JSON defines a record that follows the built-in <em>PASS4</em> records template.</p>
+<p>Here are the steps required to add it the example:</p>
+<ol>
+<li>Go to the app in your browser: <a href="https://jlinoff.github.io/myvault">https://jlinoff.github.io/myvault</a></li>
+<li>Navigate to the &quot;<code>Load</code>&quot; page from the menu.</li>
+<li>Click on the &quot;<code>Internal Example</code>&quot; accordion entry.</li>
+<li>Click the &quot;<code>Load Example</code>&quot; button.</li>
+<li>Navigate to the &quot;<code>Preferences</code>&quot; to page.</li>
+<li>Select the &quot;<code>Raw Edit</code>&quot; button.</li>
+<li>Scroll down to the &quot;<code>Records</code>&quot; entry in the JSON textarea box.</li>
+</ol>
+<blockquote>
+<p>Note that you can transfer records one records file to another by
+using &quot;Raw Edit&quot; to copy the record file from one file and paste it to
+the other file.</p>
+</blockquote></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-about.html">about</a></li><li><a href="module-accordion.html">accordion</a></li><li><a href="module-add.html">add</a></li><li><a href="module-common.html">common</a></li><li><a href="module-edit.html">edit</a></li><li><a href="module-en_words.html">en_words</a></li><li><a href="module-example.html">example</a></li><li><a href="module-header.html">header</a></li><li><a href="module-icons.html">icons</a></li><li><a href="module-load.html">load</a></li><li><a href="module-main.html">main</a></li><li><a href="module-password.html">password</a></li><li><a href="module-preferences.html">preferences</a></li><li><a href="module-records.html">records</a></li><li><a href="module-save.html">save</a></li><li><a href="module-themes.html">themes</a></li><li><a href="module-utils.html">utils</a></li><li><a href="module-version.html">version</a></li></ul><h3>Classes</h3><ul><li><a href="module-icons-Color.html">Color</a></li><li><a href="module-icons-Solver.html">Solver</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_xmake">_xmake</a></li><li><a href="global.html#decrypt">decrypt</a></li><li><a href="global.html#encrypt">encrypt</a></li><li><a href="global.html#get_algorithm">get_algorithm</a></li><li><a href="global.html#get_name">get_name</a></li><li><a href="global.html#get_num_algorithms">get_num_algorithms</a></li><li><a href="global.html#header_prefix">header_prefix</a></li><li><a href="global.html#header_suffix">header_suffix</a></li><li><a href="global.html#onload">onload</a></li><li><a href="global.html#xAddClass">xAddClass</a></li><li><a href="global.html#xAddEventListener">xAddEventListener</a></li><li><a href="global.html#xAppendChild">xAppendChild</a></li><li><a href="global.html#xAppendToParent">xAppendToParent</a></li><li><a href="global.html#xAttr">xAttr</a></li><li><a href="global.html#xAttrIfTrue">xAttrIfTrue</a></li><li><a href="global.html#xAttrNS">xAttrNS</a></li><li><a href="global.html#xId">xId</a></li><li><a href="global.html#xInnerHTML">xInnerHTML</a></li><li><a href="global.html#xmake">xmake</a></li><li><a href="global.html#xRemoveChildren">xRemoveChildren</a></li><li><a href="global.html#xRemoveClass">xRemoveClass</a></li><li><a href="global.html#xStyle">xStyle</a></li><li><a href="global.html#xTooltip">xTooltip</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Jul 04 2021 14:05:17 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

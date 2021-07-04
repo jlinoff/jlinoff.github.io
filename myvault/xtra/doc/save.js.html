@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: save.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: save.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Show the save page.
+ * @module save
+ */
+import { VERSION, BUILD, GIT_COMMIT_ID, GIT_BRANCH } from '/js/version.js'
+import { common } from '/js/common.js'
+import { makeIcon, changeIcon } from '/js/icons.js'
+import { hideMenu  } from '/js/header.js'
+import { hideAll,
+         xmake,
+         makeTextButton
+       } from '/js/utils.js'
+import { expandAccordion,
+         collapseAccordion,
+         accordionPanelClass,
+         accordionPanelImgClass,
+         accordionPanelButtonClass,
+         makeAccordionEntry } from '/js/accordion.js'
+
+/**
+ * Show the load page.
+ */
+export function showSavePage() {
+    hideAll()
+    hideMenu()
+        let top = document.getElementById('page-save')
+    top.style.display = 'block'
+    top.xRemoveChildren()
+
+    // create this page
+    top.xAppendChild(
+        xmake('center')
+            .xId('x-save-content-id')
+            .xAppendChild(
+                xmake(common.themes._activeProp().header.subtitle.element)
+                    .xInnerHTML('Save Page'),
+                xmake('button')
+                    .xStyle({backgroundColor: common.themes._activeColors().bgColor, color: common.themes._activeColors().fgColor, marginBottom: '8px'})
+                    .xAddClass('x-theme-element')
+                    .xAppendChild(makeIcon(common.icons.expand, 'expand'))
+                    .xTooltip('expand accordion panels')
+                    .xAddEventListener('click', () => expandAccordion(top)),
+                xmake('button')
+                    .xStyle({backgroundColor: common.themes._activeColors().bgColor, color: common.themes._activeColors().fgColor, marginBottom: '8px'})
+                    .xAddClass('x-theme-element')
+                    .xAppendChild(makeIcon(common.icons.collapse, 'collapse'))
+                    .xTooltip('collapse accordion panels')
+                    .xAddEventListener('click', () => collapseAccordion(top))),
+        saveToClipboard(),
+        saveDownload()
+    )
+}
+
+/**
+ * Create the accordion enrty to save data to the clipboard.
+ */
+function saveToClipboard() {
+    return makeAccordionEntry('Paste Data to Clipboard',
+                              xmake('div')
+                              .xAppendChild(
+                                  xmake('p')
+                                      .xStyle(common.themes._activeProp().general.text)
+                                      .xInnerHTML(`
+Copy the encrypted data to the clipboard.`),
+                                  xmake('center')
+                                      .xAppendChild(
+                                          makeTextButton('Paste the master password encrypted data to the clipboard"',
+                                                         'Paste to Clipboard',
+                                                         (e) => {
+                                                             let text = encodeSaveData()
+                                                             if (text.length) {
+                                                                 let info = document.getElementById('x-save-paste-info')
+                                                                 info.innerHTML = `Pasted ${ text.length } encrypted bytes to the clipboard.`
+                                                                 navigator.clipboard.writeText(text).then((text) => {}, () => {
+                                                                     alert('internal error: clipboard copy operation failed')})
+                                                             }})
+                                      ),
+                                  xmake('p')
+                                      .xStyle(common.themes._activeProp().general.text)
+                                      .xStyle({textAlign: 'center'})
+                                      .xAddClass('x-theme-element')
+                                      .xId('x-save-paste-info')
+                                      .xInnerHTML('')
+                              ))
+}
+
+/**
+ * Create the accordion entry to save the download to a file.
+ * &lt;p>
+ * The term "download" is used because it uses the browser download functionality.
+ */
+function saveDownload() {
+    return makeAccordionEntry('Download to File',
+                              xmake('div')
+                              .xAppendChild(
+                                  xmake('p')
+                                      .xStyle(common.themes._activeProp().general.text)
+                                      .xInnerHTML(`
+Download the master password encrypted data to a local file.`),
+                                  xmake('center')
+                                      .xAppendChild(
+                                          xmake('input')
+                                              .xStyle({
+                                                  width: '90%',
+                                                  fontSize: common.themes._activeProp().general.text.fontSize,
+                                                  backgroundColor: common.themes._activeColors().bgColor,
+                                                  color: common.themes._activeColors().fgColor})
+                                              .xAttr('placeholder', 'file name')
+                                              .xAttr('type', 'input')
+                                              .xAttr('value', common.save.filename)
+                                              .xId('x-save-download-file')
+                                              .xAddClass('x-theme-element'),
+                                          xmake('div').xStyle({height: '5px'}),
+                                          makeTextButton('download to local file',
+                                                         'Download',
+                                                         (e) => {
+                                                             let text = encodeSaveData()
+                                                             let filename = document.getElementById('x-save-download-file').value
+                                                             common.save.filename = filename
+                                                             if (text.length) {
+                                                                 download(filename, text)
+                                                                 let info = document.getElementById('x-save-download-info')
+                                                                 info.innerHTML = `Pasted ${ text.length } encrypted bytes to the file: ${filename}.`
+                                                             }})
+                                      ),
+                                  xmake('p')
+                                      .xStyle(common.themes._activeProp().general.text)
+                                      .xStyle({textAlign: 'center'})
+                                      .xAddClass('x-theme-element')
+                                      .xId('x-save-download-info')
+                                      .xInnerHTML('')
+                              ))
+}
+
+/**
+ * Download text data to a file by creating a popup file dialogue.
+ * @example
+ * download('file.txt', 'data')
+ * @param {string} filename The file name to download to.
+ * @param {string} text The file data.
+ */
+// download
+// citation: https://ourcodeworld.com/articles/read/189/how-to-create-a-file-and-generate-a-download-with-javascript-in-the-browser-without-a-server
+function download(filename, text) {
+    if (filename.trim().length === 0) {
+        alert('need to specify a file name')
+        return
+    }
+    if (text.trim().length === 0) {
+        alert('no text to download')
+        return
+    }
+    let e  = xmake('a')
+        .xAttr('href','data:text/plain; charset=utf-8,' + encodeURIComponent(text.trim()))
+        .xAttr('download', filename)
+        .xStyle({display: 'none'})
+    document.body.appendChild(e)
+    e.click()
+    e.remove()
+}
+
+/**
+ * Encrypt the data that is going to be saved.
+ * &lt;p>
+ * This function defines the format of the file data.
+ */
+function encodeSaveData() {
+    if (!common.crypt.password) {
+        alert('cannot save without a password')
+        return ''
+    }
+
+    let now = new Date().toISOString()
+    let data = {
+        crypt: {
+            algorithm: common.crypt.algorithm,
+        },
+        ftype: common.ftype,
+        rfts: common.data.rfts,
+        meta: {
+            atime: now,
+            mtime: common.meta.mtime,
+            ctime: common.meta.ctime,
+            btime: BUILD,
+            version: VERSION,
+            gitCommitId: GIT_COMMIT_ID,
+            gitBranch: GIT_BRANCH,
+            title: common.meta.title,
+        },
+        themes: {
+            active: common.themes.active,
+            colors: common.themes.colors,
+            props: common.themes.props,
+        },
+        records: common.data.records,
+        maxFields: common.data.maxFields,
+        filename: common.save.filename
+    }
+    let string = JSON.stringify(data, null, 4)
+    let text = common.crypt._wasm.encrypt(common.crypt.algorithm, common.crypt.password, string)
+    return text
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-about.html">about</a></li><li><a href="module-accordion.html">accordion</a></li><li><a href="module-add.html">add</a></li><li><a href="module-common.html">common</a></li><li><a href="module-edit.html">edit</a></li><li><a href="module-en_words.html">en_words</a></li><li><a href="module-example.html">example</a></li><li><a href="module-header.html">header</a></li><li><a href="module-icons.html">icons</a></li><li><a href="module-load.html">load</a></li><li><a href="module-main.html">main</a></li><li><a href="module-password.html">password</a></li><li><a href="module-preferences.html">preferences</a></li><li><a href="module-records.html">records</a></li><li><a href="module-save.html">save</a></li><li><a href="module-themes.html">themes</a></li><li><a href="module-utils.html">utils</a></li><li><a href="module-version.html">version</a></li></ul><h3>Classes</h3><ul><li><a href="module-icons-Color.html">Color</a></li><li><a href="module-icons-Solver.html">Solver</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_xmake">_xmake</a></li><li><a href="global.html#decrypt">decrypt</a></li><li><a href="global.html#encrypt">encrypt</a></li><li><a href="global.html#get_algorithm">get_algorithm</a></li><li><a href="global.html#get_name">get_name</a></li><li><a href="global.html#get_num_algorithms">get_num_algorithms</a></li><li><a href="global.html#header_prefix">header_prefix</a></li><li><a href="global.html#header_suffix">header_suffix</a></li><li><a href="global.html#onload">onload</a></li><li><a href="global.html#xAddClass">xAddClass</a></li><li><a href="global.html#xAddEventListener">xAddEventListener</a></li><li><a href="global.html#xAppendChild">xAppendChild</a></li><li><a href="global.html#xAppendToParent">xAppendToParent</a></li><li><a href="global.html#xAttr">xAttr</a></li><li><a href="global.html#xAttrIfTrue">xAttrIfTrue</a></li><li><a href="global.html#xAttrNS">xAttrNS</a></li><li><a href="global.html#xId">xId</a></li><li><a href="global.html#xInnerHTML">xInnerHTML</a></li><li><a href="global.html#xmake">xmake</a></li><li><a href="global.html#xRemoveChildren">xRemoveChildren</a></li><li><a href="global.html#xRemoveClass">xRemoveClass</a></li><li><a href="global.html#xStyle">xStyle</a></li><li><a href="global.html#xTooltip">xTooltip</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Jul 04 2021 14:05:17 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

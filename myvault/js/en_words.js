@@ -1,6 +1,19 @@
-// A list of the common words for the human readable passwords
-// in order of popularity.
-// CITATION: https://github.com/first20hours/google-10000-english
+/**
+ * A list of about 10,000 common english words that are used to generate
+ * memorable passwords.
+ * <p>
+ * They were obtained from https://github.com/first20hours/google-10000-english.
+ * @module en_words
+ */
+
+/**
+ * The array of words.
+ *@example
+ * import { words } from '/myvault/js/en_words.js'
+ * for (const word of words) {
+ *   console.log(word)
+ * }
+ */
 export const words = [
     "the",
     "of",

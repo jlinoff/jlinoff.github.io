@@ -1,8 +1,12 @@
-import { common } from '/myvault/js/common.js'
+/**
+ * Create the edit records dialogue in the record view accordion panel when
+ * the user clicks the edit button.
+ * @module edit
+*/
+import { common, getFieldValueType } from '/myvault/js/common.js'
 import { xmake,
          makeTextButton,
          makeIconButton,
-         getFieldType,
          isURL,
          deepCopyObject,
          makeInputXWrapper,
@@ -11,14 +15,32 @@ import { makePasswordEntryWithId } from '/myvault/js/password.js'
 import { showDataPage } from '/myvault/js/data.js'  // TODO: hate this circular dependency
 import { fieldNameHandler } from '/myvault/js/add.js'  // TODO: hate this circular dependency
 
+/**
+ * The grid label style, populated by the theme.
+ */
 var gridLabelStyle = {}
+
+/**
+ * The grid value style, populated by the theme.
+ */
 var gridValueStyle = {}
+
+/**
+ * The grid button style, populated by the theme.
+ */
 var gridButtonStyle = {}
 
-// Create the edit entries
+/**
+ * Create the record edit dialogue in the record accordion panel.
+ *<p>
+ * It is called from the view page when the user clicks on the edit icon.
+ * @param {string} xid The record container element id, something like <code>x-record-view-container-42</code>.
+ * @param {number} idx The record index in common.data.records[].
+ * @param {object} inrec The record to edit.
+ */
 export function editRecord(xid, idx, inrec) {
-    let rec = deepCopyObject(inrec)
-    let mid = xid + '-edit'
+    let rec = deepCopyObject(inrec)  // make sure the record edit data is local until an explicit save.
+    let mid = xid + '-edit' // id of the div that contains the fields of the record being edited.
     let view = document.getElementById(xid)
     let eid = 'x-data-field-edit-container'
     view.xStyle({display: 'none'})
@@ -50,7 +72,7 @@ export function editRecord(xid, idx, inrec) {
                 makeTextButton('Save the changes',
                                'Save',
                                (e) => {
-                                   saveData(view, mid, idx)
+                                   saveData(mid, idx)
                                    cleanup(view, mid)
                                }),
                 makeTextButton('Revert the changes back to the original contents',
@@ -73,6 +95,11 @@ export function editRecord(xid, idx, inrec) {
     )
 }
 
+/**
+ * Make the record object using data collected from the DOM elements
+ * in the record edit dialogue.
+ * @returns {object} The constructed record object with the edited data.
+ */
 // make the record from the DOM fields
 function makeRecordFromDomFields() {
     let rec = {}
@@ -98,10 +125,15 @@ function makeRecordFromDomFields() {
     return rec
  }
 
-// save the data
-// handle the case where the title changes
-// by redisplaying the records.u
-function saveData(view, mid, idx) {
+/**
+ * Save the edited record data.
+ *<p>
+ * Correctly handle the case where the title changes by redisplaying
+ * the records to preserve ordering by title.
+ * @param {string} mid The id of the div that contains the fields of the record being edited.
+ * @param {number} idx The record index in common.data.records[].
+ */
+function saveData( mid, idx) {
     let rec = makeRecordFromDomFields()
     if (common.data.records[idx] !== rec.__id__) {
         // Sort becausee the __id__ changed.
@@ -114,19 +146,37 @@ function saveData(view, mid, idx) {
     common.data.records[idx] = rec
     common.data.mtime = new Date().toISOString()
     showDataPage()
-
 }
 
-// common cleanup - get rid of the temporary edit fields.
+/**
+ * Cleanup the edit dialogue by removing the child elements of the
+ * edit record dialogue.
+ * <p>
+ * When this operation completes the edit dialogue is gone and the view
+ * dialogue is displayed.
+ * @param {element} view The record view container element.
+ * @param {string} mid The id of the div that contains the fields of
+ * the record being edited.
+ */
 function cleanup(view, mid) {
-    view.xStyle({display: 'grid'})
+    view.xStyle({display: 'grid'}) //  show the view
     let m = document.getElementById(mid)
     if (m) {
-        m.remove()
+        m.remove()  // remove the edit
     }
 }
 
-// Create an edit field (key and value)
+/**
+ * Create an editable field from the record consisting of a label, a
+ * value and buttons in the record edit dialogue.
+ * @aparam {number} numFields The total number of fields in the record. This is used for adding new fields.
+ * @param {string} xid The record container element id, something like <code>x-record-view-container-42</code>.
+ * @param {number} idx The record index in common.data.records[].
+ * @param {number} fid The record field index for the field that is to be edited.
+ * itself. The maximum number of fields allowed is defined by
+ * common.data.maxFields.
+ * @param {object} rec The record data.
+ */
 function createField(numFields, xid, idx, fid, rec) {
     let kid = 'x-data-field-key-' + fid
     let vid = 'x-data-field-value-'+ fid
@@ -135,7 +185,7 @@ function createField(numFields, xid, idx, fid, rec) {
     let fkey = Object.keys(rec)[fid]
     let fname = fkey
     let fvalue = rec[fkey] || ''
-    let ftype = getFieldType(fkey)
+    let ftype = getFieldValueType(fkey)
     let key = xmake('div')
         .xStyle(gridLabelStyle)
         .xAppendChild(
@@ -157,7 +207,7 @@ function createField(numFields, xid, idx, fid, rec) {
             ).xAddClass('x-vertical-center')
         )
 
-    // TODO: change based on field type
+    // Changes based on field type
     let valdiv =  xmake('div').xStyle(gridValueStyle)
     let placeholder = `${fkey} value`
     let val = null
@@ -206,6 +256,7 @@ function createField(numFields, xid, idx, fid, rec) {
         break
     }
 
+    // There are differnt buttons for different field types.
     let buttons = xmake('div').xStyle(gridButtonStyle)
 
     if (fid > 1) { // can't go up at the top
@@ -255,7 +306,15 @@ function createField(numFields, xid, idx, fid, rec) {
         .xAppendChild(key, valdiv, buttons)
 }
 
-// swap order of object fields.
+/**
+ * Swap the order of two record fields.
+ * <p>
+ * The logic guarantees that i never equals j.
+ * @param {number} i The first field to swap.
+ * @param {number} j The second field to swap.
+ * @param {object} rec The record.
+ * @returns {object} A new record with the swapped fields.
+ */
 function swapFields(i, j, rec) {
     let keys = Object.keys(rec)
     let tmp = keys[j]

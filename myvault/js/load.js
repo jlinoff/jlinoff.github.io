@@ -1,4 +1,7 @@
-// The load page
+/**
+ * Show the load page.
+ * @module load
+ */
 import { common } from '/myvault/js/common.js'
 import { makeIcon, changeIcon } from '/myvault/js/icons.js'
 import { xmake,
@@ -13,9 +16,11 @@ import { expandAccordion,
          accordionPanelClass,
          accordionPanelImgClass,
          accordionPanelButtonClass,
-         makeAccordionEntry,
-         getAccordionPanelStyle } from '/myvault/js/accordion.js'
+         makeAccordionEntry } from '/myvault/js/accordion.js'
 
+/**
+ * Show the load page.
+ */
 export function showLoadPage() {
     hideAll()
     hideMenu()
@@ -49,7 +54,9 @@ export function showLoadPage() {
     )
 }
 
-// Example
+/**
+ * Create the accordion enrty to load the internal example.
+ */
 function loadExample() {
     return makeAccordionEntry(
         'Internal Example',
@@ -83,7 +90,9 @@ values can be changed in the preferences.
                     )))
 }
 
-// Clipboard
+/**
+ * Create the accordion entry to paste from the clipboard.
+ */
 function loadClipboard() {
     return makeAccordionEntry(
         'Paste from Clipboard',
@@ -115,7 +124,10 @@ This option can be used to transfer data from a file that is open in an external
             ))
 }
 
-// load local file
+/**
+ * Create the accordion entry to load a local file.
+ * @param {element} top the element load page element (used for the file dialogue).
+ */
 function loadFile(top) {
     return makeAccordionEntry(
         'Read Local File',
@@ -178,8 +190,10 @@ Load the content of a local file as data and decrypt using the master password i
             ))
 }
 
-// view the raw data
-// TODO: add pretty print option for JSON
+
+/**
+ * Create the accordion entry to view the raw data.
+ */
 function viewRawData() {
     let eid = 'x-load-raw-data-buffer'
     let eidlen = 'x-load-raw-data-buffer-length'
@@ -297,6 +311,16 @@ If there is no data, reload the data.
             ))
 }
 
+/**
+ * Get a value from an object path.
+ * @example
+ * let obj = {k1: 'v1', k2: 'v2', k3: {k3a: 1, k3b: 2}}
+ * let x = getObjectValue(obj, '30', 'k3', 'k3b') // x == 2
+ * let x = getObjectValue(obj, '30', 'k3', 'k3c') // x == 30
+ * @param {object} obj The object to do the path search on.
+ * @param {any} defaultValue The default value if the path is not found.
+ * @param {...path} path Object path.
+ */
 // Get a value from the object if it exists.
 function getObjectValue(obj, defaultValue, ...path) {
     let rec = obj
@@ -310,9 +334,12 @@ function getObjectValue(obj, defaultValue, ...path) {
     return rec
 }
 
-// Wrapper for more functionality later
-// The text is the data to load it has the same format as the example.
-// It could be encrypted, if so it is immediately descrypted.
+/**
+ * Set the common data from JSON text.
+ * <p>
+ * If it the data is be encrypted, it is immediately decrypted using the master password.
+ * @param {string} text The data.
+ */
 function setRawData(text) {
     text = text.trim()
     if (text.toLowerCase().startsWith('error:')) {

@@ -1,3 +1,8 @@
+/**
+ * Display the header section for all pages with the menu in the upper
+ * right and the title in the center.
+ * @module header
+ */
 // The header
 import { xmake, hideAll } from '/myvault/js/utils.js'
 import { makeIcon, changeIcon } from '/myvault/js/icons.js'
@@ -8,6 +13,10 @@ import { showDataPage } from '/myvault/js/data.js'
 import { showSavePage } from '/myvault/js/save.js'
 import { showAboutPage } from '/myvault/js/about.js'
 
+/**
+ * Create the header and append it to the document body.
+ * The CSS styles for the header are defined by the theme.
+ */
 export function header() {
     let e = document.getElementById('x-topmenu-div')
     if (e) {
@@ -106,7 +115,36 @@ export function header() {
         }}, 10)
 }
 
-// make a menu entry
+/**
+ * Make a menu entry.
+ * @example
+ xmake('div').xAppendChild(
+   makeMenuEntry('information about the tool',
+     'About',
+     common.icons.info,
+     showAboutPage),
+   makeMenuEntry('modify preferences',
+     'Preferences',
+     common.icons.cog,
+     showPrefsPage),
+   makeMenuEntry('load the password database records',
+     'Load',
+     common.icons.list,
+     showLoadPage),
+   makeMenuEntry('view or modify the password data records',
+    'Records',
+    common.icons.db,
+    showDataPage),
+   makeMenuEntry('save the records to the vault',
+    'Save',
+    common.icons.save,
+    showSavePage),
+  )
+  * @param {string} tooltip The tooltip for the menu item.
+  * @param {string} title The menu item text.
+  * @param {string} icon The menu item icon.
+  * @param {function} handler The function called when the menu item is selected.
+*/
 function makeMenuEntry(tooltip, title, icon, handler) {
     //let fs = common.themes._activeProp().menuItemFontSize
     return xmake('button')
@@ -124,11 +162,19 @@ function makeMenuEntry(tooltip, title, icon, handler) {
             xmake('span').xInnerHTML('&nbsp;' + title))
 }
 
+/**
+ * Hide the menu.
+ */
 export function hideMenu() {
     let x = document.getElementById('x-menu-content')
     x.style.display = 'none'
 }
 
+/**
+ * Toggle showing/hiding the menu items.
+ * @param {event} e The click event.
+ * @param {string} dtype The display style type. Typically "display" or "flex".
+ */
 function clickedMenu(e, dtype) {
     let x = document.getElementById('x-menu-content')
     if (x.style.display === 'none') {
@@ -137,5 +183,4 @@ function clickedMenu(e, dtype) {
     else {
         x.style.display = 'none'
     }
-  //alert('clicked in topmenu!');
 }
