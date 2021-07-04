@@ -118,11 +118,11 @@ About
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2021-07-04T14:05:15-07:00</code></td>
+<td><code>2021-07-04T14:58:48-07:00</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>778a9c4</code></td>
+<td><code>162c2b0</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -221,7 +221,7 @@ Table of Contents
 <p><em>myVault</em> also provides built-in password generation for both cryptic and memorable passwords for all password fields, including the master password. See the <a href="#master-password">Master Password</a> for details on cryptic and memorable passwords.</p>
 <p>The app also provides built in example data to allow you to play with the capabilities without committing to anything. It is a great way to get familiar with the program and is also really useful during development.</p>
 <p>I use <em>myVault</em> to store my password information and keep track of books that i have read. The books don’t really need to be secure. I simply use it because it is convenient to use on my mobile devices.</p>
-<p>There is a related utility call <em>cryptor</em> that allows you to conveniently encrypt and descrypt any text file with arbitrarty data from the browser. You can access it from the <q><code>About</code></q> page. I originally built it as a prototype during development but then found it so useful that i decided to keep it. It is not part of the official <em>myVault</em> webapp because the function, although similar, is more general because <em>cryptor</em> does not care about the format of file contents whereas <em>myVault</em> does care about the format.</p>
+<p>There is a related utility call <em>cryptor</em> that allows you to conveniently encrypt and decrypt any text file with arbitrary data from the browser. You can access it from the <q><code>About</code></q> page. I originally built it as a prototype during development but then found it so useful that i decided to keep it. It is not part of the official <em>myVault</em> webapp because the function, although similar, is more general because <em>cryptor</em> does not care about the format of file contents whereas <em>myVault</em> does care about the format.</p>
 <h2 id="layout">Layout</h2>
 <p>This section describes the layout of the app and talks about each section in detail.</p>
 <p>All sections use accordion panels to display options. Opening the panel provides more information about what it does. There are icons at the top of the accordion panels that allow you to expand or collapse all of the panels at once.</p>
@@ -261,7 +261,7 @@ Table of Contents
 </tr>
 </tbody>
 </table>
-<p>The upper left is reserved for brief ephemeral status messages and the middle is reserved for the titleand subtitles.</p>
+<p>The upper left is reserved for brief ephemeral status messages and the middle is reserved for the title and subtitles.</p>
 <h3 id="about-page">About Page</h3>
 <p>This page contain build information about the webapp. It basically has the same information as the <q>About</q> section at the top of this page. The specific fields are:</p>
 <table>
@@ -355,7 +355,7 @@ Table of Contents
 </tr>
 <tr class="odd">
 <td>Record Field Templates</td>
-<td>Define templates that can be used to pre-populate the keys in a record. This is very useful when you want a common record format.</td>
+<td>Define templates that can be used to prepopulate the keys in a record. This is very useful when you want a common record format.</td>
 </tr>
 <tr class="even">
 <td>Record Field Name Based Types</td>
@@ -473,11 +473,11 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 <p>The encryption algorithm is AES-256 which is considered quite secure and should be relatively safe from future quantum attacks. Furthermore, the encryption algorithm runs <em>inside</em> the browser so, as mentioned earlier, your data is never shipped to an external server.</p>
 <p>I recommend creating a memorable password (<a href="#memorable">Memorable</a> below) because this is the <em>only</em> password that you have to remember to access all of your password records. It may even make sense to write it down and store it in a secure place.</p>
 <h2 id="automatic-password-generation">Automatic Password Generation</h2>
-<p>lll passwords (including the master password) have four extra buttona: an eye button to let you view the password as plaintext, a single gear button that generates a <em>cryptic</em> password, a multiple gear button that generates a <em>memorable</em> password and a copy button that copies the password to the clipboard that can be pasted externally.</p>
+<p>all passwords (including the master password) have four extra buttons: an eye button to let you view the password as plaintext, a single gear button that generates a <em>cryptic</em> password, a multiple gear button that generates a <em>memorable</em> password and a copy button that copies the password to the clipboard that can be pasted externally.</p>
 <h3 id="cryptic">Cryptic</h3>
-<p>Cryptic passwords are secure, hard to remember passwords that are a pseudo random collection of upper case letters, lower case letters, numbers and special characters. Here are two examples of cryptic passwords: <q><code>t0t5Q2eL!6E7!s6nWp6lv1</code></q> and <q><code>SiPeD_dLQa03NIG</code></q>.</p>
+<p>Cryptic passwords are secure, hard to remember passwords that are a pseudo random collection of upper case letters, lower case letters,, numbers and special characters. Here are two examples of cryptic passwords: <q><code>t0t5Q2eL!6E7!s6nWp6lv1</code></q> and <q><code>SiPeD_dLQa03NIG</code></q>.</p>
 <h3 id="memorable">Memorable</h3>
-<p>Memorable passwords are secure, easy to remember passwords that are composed of three pseudo randomly chosen english words separated by a slash. Here are two examples of memorable passwords: <q><code>farming/naval/decision</code></q> and <q><code>viewed/frequencies/looking</code></q>.</p>
+<p>Memorable passwords are secure, easy to remember passwords that are composed of three pseudo randomly chosen English words separated by a slash. Here are two examples of memorable passwords: <q><code>farming/naval/decision</code></q> and <q><code>viewed/frequencies/looking</code></q>.</p>
 <h3 id="custom">Custom</h3>
 <p>The cryptic and memorable buttons make it easy to generate passwords automatically but if you prefer another style you can always enter your passwords manually.</p>
 <h2 id="security">Security</h2>
@@ -508,7 +508,7 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 <ol type="1">
 <li>Keep all of your security patches up to date.</li>
 <li>Keep malware off of your systems.</li>
-<li>Make sure that you are not observered.</li>
+<li>Make sure that you are not observed.</li>
 <li>Never share sensitive information (like passwords).</li>
 <li>Backup your data.</li>
 </ol>
@@ -522,14 +522,14 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 <h3 id="cryptor">Cryptor</h3>
 <p>This is a utility page that allows you to encrypt and decrypt arbitrary data with cryptic, memorable or custom passwords. It can load from and save to files and the clipboard. I have found it to be very useful for encrypting arbitrary files. To access it click here: <a href="/myvault/xtra/cryptor.html">xtra/cryptor.html</a>.</p>
 <h2 id="themes">Themes</h2>
-<p>A theme is composed of a set of colors (foreground and background) and a set of properties that define other syle information. Each theme also has a unique name. Theme colors and properties are can be selected and/or defined on the <q><code>Preferences</code></q> page.</p>
+<p>A theme is composed of a set of colors (foreground and background) and a set of properties that define other style information. Each theme also has a unique name. Theme colors and properties are can be selected and/or defined on the <q><code>Preferences</code></q> page.</p>
 <p>The idea behind themes is to make the CSS styling dynamic to allow users to change and save styles from the UI. The current implementation is poor because it is too complex and is not documented.</p>
-<p>The current properties are <em>standard</em> and <em>large</em>. They are a first appproximation of styles that make the webapp usable for different screen sizes. I use <em>standard</em> on my laptop and <em>large</em> in landscape mode on my mobiles devices.</p>
+<p>The current properties are <em>standard</em> and <em>large</em>. They are a first approximation of styles that make the webapp usable for different screen sizes. I use <em>standard</em> on my laptop and <em>large</em> in landscape mode on my mobiles devices.</p>
 <p>When a theme color or property is changed, the display is updated immediately.</p>
 <h2 id="how-to-access-the-app">How to access the app</h2>
 <p>Navigate to <a href="https://jlinoff.github.io/myvault/">https://jlinoff.github.io/myvault/</a> in your browser.</p>
 <h2 id="how-to-share-a-records-file">How to share a records file</h2>
-<p>The easiest way to share records is to save the records file to a shared volume from the <q><code>Save</code></q> page to a shareable resource like <em>Google Drive</em> or <em>iCloud</em>. Then provide the password to other folks entrused to access the data.</p>
+<p>The easiest way to share records is to save the records file to a shared volume from the <q><code>Save</code></q> page to a shareable resource like <em>Google Drive</em> or <em>iCloud</em>. Then provide the password to other folks entrusted to access the data.</p>
 <blockquote>
 <p>Take care in transmitting the password to keep the data safe.</p>
 </blockquote>
@@ -581,7 +581,7 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 <li>Click the <q><code>Download</code></q> button.</li>
 </ol>
 <h2 id="how-to-view-a-record">How to view a record</h2>
-<p>To view a record, load the data as described in the <a href="#how-to-create-a-second-record-section">How to create a second record section</a>, navigate to the <q><code>Records</code></q> page and click on the record you want to view. It will expand to show the record data in a read-only form. Passwords are never shown to protect from over the shoulder surfing. You can make them visible by clicking on the eye icon. All fields can be copied to the clipboard by clickin on the copy icon.</p>
+<p>To view a record, load the data as described in the <a href="#how-to-create-a-second-record-section">How to create a second record section</a>, navigate to the <q><code>Records</code></q> page and click on the record you want to view. It will expand to show the record data in a read-only form. Passwords are never shown to protect from over the shoulder surfing. You can make them visible by clicking on the eye icon. All fields can be copied to the clipboard by clicking on the copy icon.</p>
 <h2 id="how-to-edit-a-record">How to edit a record</h2>
 <p>To edit a record, first view the record and then click on the pencil icon.</p>
 <p>The shows an edit view of the record inline. The up/down arrows allow you to move the fields rows up an down.</p>
@@ -637,7 +637,7 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 <ol type="1">
 <li><code>make</code> (try <code>make help</code> for info about all available targets).</li>
 </ol></li>
-<li>Create the releae archive.
+<li>Create the release archive.
 <ol type="1">
 <li><code>make webapp</code></li>
 </ol></li>
