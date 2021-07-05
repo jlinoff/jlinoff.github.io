@@ -395,7 +395,7 @@ export function deepCopyObject(inObject) {
  *   )
  * )
  * @param {element} input The input element to wrap.
- * @returns {object} The wrapper object.
+ * @returns {element} The wrapper element.
  */
 export function makeInputXWrapper(input) {
     let div = xmake('div')
