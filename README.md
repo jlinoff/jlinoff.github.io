@@ -44,7 +44,8 @@ myVault is a user friendly secure records manager that is much easier to use
 than `qspm`, has more features, is customizable and works better on mobile devices.
 
 The webapp can be found [here](https://jlinoff.github.io/myvault/index.html).
-THe documentation can be found [here](https://jlinoff.github.io/myvault/help/index.html).
+
+The documentation can be found [here](https://jlinoff.github.io/myvault/help/index.html).
 
 ## Quantum Safe Password Manager
 The quantum safe password manager (`qspm`) is a single page application (SPA) demonstration
