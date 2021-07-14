@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: accordion.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: accordion.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Support for accordions.
+ * Accordions are composed of two parts: an accordion toggle button and an accordion panel.
+ * When the button is clicked it toggles the display the panel which contains the contents.
+ * Accordions are the primary idiom used to display information on the app pages.
+ * @module accordion
+ */
+
+import { common } from '/js/common.js'
+import { xmake }  from '/js/utils.js'
+import { makeIcon, changeIcon } from '/js/icons.js'
+
+export var accordionPanelClass = 'x-accordion-panel'
+export var accordionPanelImgClass = 'x-accordion-panel-img'
+export var accordionPanelButtonClass = 'x-accordion-panel-button'
+
+/**
+ * Expand all accordion entries on a page.
+ * It recognizes accordion enries by the membership in the &lt;code>'x-accordion-panel&lt;/code> class.
+ * @example
+ xmake('button')
+   .xStyle({backgroundColor: common.themes._activeColors().bgColor,
+            color: common.themes._activeColors().fgColor,
+            marginBottom: '8px'})
+   .xAddClass('x-theme-element')
+   .xAppendChild(makeIcon(common.icons.expand, 'expand'))
+   .xTooltip('expand accordion panels')
+   .xAddEventListener('click', () => expandAccordion(top)),
+ * @param {element} top A container element (like a div) that contains all of the accordion entries.
+ *
+ */
+export function expandAccordion(top) {
+    let panels = top.getElementsByClassName(accordionPanelClass)
+    for(let i=0; i&lt; panels.length; i++) {
+        panels[i].style.display = 'block'
+    }
+    let images = top.getElementsByClassName(accordionPanelImgClass)
+    for(let i=0; i&lt; images.length; i++) {
+        changeIcon(images[i], common.icons.arrowDown)
+    }
+}
+
+/**
+ * Collapses all accordion entries on a page.
+ * It recognizes accordion enries by the membership in the &lt;code>'x-accordion-panel&lt;/code> class.
+ * @example
+ xmake('button')
+   .xStyle({backgroundColor: common.themes._activeColors().bgColor,
+            color: common.themes._activeColors().fgColor,
+            marginBottom: '8px'})
+   .xAddClass('x-theme-element')
+   .xAppendChild(makeIcon(common.icons.collapse, 'collapse'))
+   .xTooltip('collapse accordion panels')
+   .xAddEventListener('click', () => collapseAccordion(top))),
+ * @param {element} top A container element (like a div) that contains all of the accordion entries.
+ *
+ */
+export function collapseAccordion(top) {
+    let panels = top.getElementsByClassName(accordionPanelClass)
+    for(let i=0; i&lt; panels.length; i++) {
+        panels[i].style.display = 'none'
+    }
+    let images = top.getElementsByClassName(accordionPanelImgClass)
+    for(let i=0; i&lt; images.length; i++) {
+        changeIcon(images[i], common.icons.arrowRight)
+    }
+}
+
+// Accordion button style
+/**
+ * Define the accordion button style for a theme.
+ * @returns {object} the style.
+ */
+export function getAccordionButtonStyle() {
+    let style = common.themes._activeProp().accordion.button
+    style.borderColor = common.themes._activeColors().fgColor
+    style.backgroundColor = common.themes._activeColors().bgColor
+    style.color = common.themes._activeColors().fgColor
+    return style
+}
+
+/**
+ * Make an accordion entry.
+ *&lt;p>
+ * An accordion entry is composed of a button and a panel.
+ * The button and panel elements have class designations to
+ * make them easier to find.
+ * &lt;p>
+ * The button has an icon the far left that changes to show
+ * whether the accordion entry is expanded or collapsed.
+ * @example
+    let accordionEntry = makeAccordionEntry(
+        'Encryption Algorithm',
+        xmake('div')
+            .xStyle(common.themes._activeProp().accordion.panel)
+            .xId('x-prefs-algorithm-div')
+            .xAppendChild(
+                xmake('p')
+                    .xStyle(common.themes._activeProp().general.text)
+                    .xInnerHTML('Choose the algorithm to use for encryption and decryption.'),
+            ))
+ * @param {string} title The accordion entry title displayed in the button.
+ * @param {element} panel The panel DOM element.
+ * @Param {function} expandAction The action to take when the entry is expanded.
+ * @Param {function} collapseAction The action to take when the entry is collapsed.
+*/
+export function makeAccordionEntry(title, panel, expandAction, collapseAction) {
+    return xmake('div')
+        .xAppendChild(
+            xmake('button') // button
+                .xStyle(getAccordionButtonStyle())
+                .xAddClass('x-theme-element')
+                .xAddClass('x-hover')
+                .xAppendChild(
+                    makeIcon(common.icons.circleRight,'closed').xAddClass(accordionPanelImgClass),
+                    xmake('span')
+                        .xStyle(common.themes._activeProp().accordion.title)
+                        .xInnerHTML('&amp;nbsp;&amp;nbsp;' + title))
+                .xAddEventListener('click', e => clickedAccordionButton(e, expandAction, collapseAction)),
+            xmake('div') //panel
+                .xStyle({display: 'none'})
+                .xAddClass('x-theme-element')
+                .xAddClass(accordionPanelClass)
+                .xAppendChild(panel))
+}
+
+/**
+ * Toggle an accordion panel display.
+ * @param {event} event The event that triggered the toggle.
+ * @param {function} expandAction The action to take when the accordion is expanded.
+ * @param {function} collapseAction The action to take when the accordion is collapsed.
+ */
+export function clickedAccordionButton(event, expandAction, collapseAction) {
+    // toggle expand/collapse
+    let e = event.srcElement
+    let i = 0
+    while ( e &amp;&amp; e.nodeName !== 'BUTTON' ) {
+        e = e.parentNode
+        i += 1
+        if (i > 5) {
+            break
+        }
+    }
+    if ( e.nodeName !== 'BUTTON' ) {
+        // Use the button if the user clicked on the image or text directly.
+        alert('internal error! please report this bug')
+        return
+    }
+    // Change the image.
+    let icon = e.getElementsByClassName('x-icon-element')[0]
+
+    // Toggle the panel display.
+    e.classList.toggle("active");
+    var panel = e.nextElementSibling;
+    if (panel.style.display === "block") {
+        panel.style.display = "none";
+        changeIcon(icon, common.icons.circleRight).xAttr('alt', 'closed')
+        if (collapseAction){
+            collapseAction()
+        }
+    } else {
+        panel.style.display = "block";
+        changeIcon(icon, common.icons.circleDown).xAttr('alt', 'open')
+        if (expandAction) {
+            expandAction()
+        }
+    }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-about.html">about</a></li><li><a href="module-accordion.html">accordion</a></li><li><a href="module-add.html">add</a></li><li><a href="module-common.html">common</a></li><li><a href="module-edit.html">edit</a></li><li><a href="module-en_words.html">en_words</a></li><li><a href="module-example.html">example</a></li><li><a href="module-header.html">header</a></li><li><a href="module-icons.html">icons</a></li><li><a href="module-load.html">load</a></li><li><a href="module-main.html">main</a></li><li><a href="module-password.html">password</a></li><li><a href="module-preferences.html">preferences</a></li><li><a href="module-records.html">records</a></li><li><a href="module-save.html">save</a></li><li><a href="module-themes.html">themes</a></li><li><a href="module-utils.html">utils</a></li><li><a href="module-version.html">version</a></li></ul><h3>Classes</h3><ul><li><a href="module-icons-Color.html">Color</a></li><li><a href="module-icons-Solver.html">Solver</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_xmake">_xmake</a></li><li><a href="global.html#decrypt">decrypt</a></li><li><a href="global.html#encrypt">encrypt</a></li><li><a href="global.html#get_algorithm">get_algorithm</a></li><li><a href="global.html#get_name">get_name</a></li><li><a href="global.html#get_num_algorithms">get_num_algorithms</a></li><li><a href="global.html#header_prefix">header_prefix</a></li><li><a href="global.html#header_suffix">header_suffix</a></li><li><a href="global.html#onload">onload</a></li><li><a href="global.html#xAddClass">xAddClass</a></li><li><a href="global.html#xAddEventListener">xAddEventListener</a></li><li><a href="global.html#xAppendChild">xAppendChild</a></li><li><a href="global.html#xAppendToParent">xAppendToParent</a></li><li><a href="global.html#xAttr">xAttr</a></li><li><a href="global.html#xAttrIfTrue">xAttrIfTrue</a></li><li><a href="global.html#xAttrNS">xAttrNS</a></li><li><a href="global.html#xId">xId</a></li><li><a href="global.html#xInnerHTML">xInnerHTML</a></li><li><a href="global.html#xmake">xmake</a></li><li><a href="global.html#xRemoveChildren">xRemoveChildren</a></li><li><a href="global.html#xRemoveClass">xRemoveClass</a></li><li><a href="global.html#xStyle">xStyle</a></li><li><a href="global.html#xTooltip">xTooltip</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Jul 13 2021 17:18:43 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

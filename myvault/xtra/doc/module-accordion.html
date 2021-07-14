@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Module: accordion</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: accordion</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Support for accordions.
+Accordions are composed of two parts: an accordion toggle button and an accordion panel.
+When the button is clicked it toggles the display the panel which contains the contents.
+Accordions are the primary idiom used to display information on the app pages.</p></div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="accordion.js.html">accordion.js</a>, <a href="accordion.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".clickedAccordionButton"><span class="type-signature">(static) </span>clickedAccordionButton<span class="signature">(event, expandAction, collapseAction)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Toggle an accordion panel display.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>event</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">event</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The event that triggered the toggle.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>expandAction</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The action to take when the accordion is expanded.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>collapseAction</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The action to take when the accordion is collapsed.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="accordion.js.html">accordion.js</a>, <a href="accordion.js.html#line133">line 133</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".collapseAccordion"><span class="type-signature">(static) </span>collapseAccordion<span class="signature">(top)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Collapses all accordion entries on a page.
+It recognizes accordion enries by the membership in the <code>'x-accordion-panel</code> class.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>top</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">element</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A container element (like a div) that contains all of the accordion entries.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="accordion.js.html">accordion.js</a>, <a href="accordion.js.html#line58">line 58</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>xmake('button')
+   .xStyle({backgroundColor: common.themes._activeColors().bgColor,
+            color: common.themes._activeColors().fgColor,
+            marginBottom: '8px'})
+   .xAddClass('x-theme-element')
+   .xAppendChild(makeIcon(common.icons.collapse, 'collapse'))
+   .xTooltip('collapse accordion panels')
+   .xAddEventListener('click', () => collapseAccordion(top))),</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".expandAccordion"><span class="type-signature">(static) </span>expandAccordion<span class="signature">(top)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Expand all accordion entries on a page.
+It recognizes accordion enries by the membership in the <code>'x-accordion-panel</code> class.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>top</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">element</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A container element (like a div) that contains all of the accordion entries.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="accordion.js.html">accordion.js</a>, <a href="accordion.js.html#line32">line 32</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>xmake('button')
+   .xStyle({backgroundColor: common.themes._activeColors().bgColor,
+            color: common.themes._activeColors().fgColor,
+            marginBottom: '8px'})
+   .xAddClass('x-theme-element')
+   .xAppendChild(makeIcon(common.icons.expand, 'expand'))
+   .xTooltip('expand accordion panels')
+   .xAddEventListener('click', () => expandAccordion(top)),</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getAccordionButtonStyle"><span class="type-signature">(static) </span>getAccordionButtonStyle<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Define the accordion button style for a theme.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="accordion.js.html">accordion.js</a>, <a href="accordion.js.html#line74">line 74</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>the style.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".makeAccordionEntry"><span class="type-signature">(static) </span>makeAccordionEntry<span class="signature">(title, panel, expandAction, collapseAction)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Make an accordion entry.</p>
+<p>
+An accordion entry is composed of a button and a panel.
+The button and panel elements have class designations to
+make them easier to find.
+<p>
+The button has an icon the far left that changes to show
+whether the accordion entry is expanded or collapsed.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The accordion entry title displayed in the button.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>panel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">element</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The panel DOM element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>expandAction</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The action to take when the entry is expanded.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>collapseAction</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The action to take when the entry is collapsed.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="accordion.js.html">accordion.js</a>, <a href="accordion.js.html#line107">line 107</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>let accordionEntry = makeAccordionEntry(
+        'Encryption Algorithm',
+        xmake('div')
+            .xStyle(common.themes._activeProp().accordion.panel)
+            .xId('x-prefs-algorithm-div')
+            .xAppendChild(
+                xmake('p')
+                    .xStyle(common.themes._activeProp().general.text)
+                    .xInnerHTML('Choose the algorithm to use for encryption and decryption.'),
+            ))</code></pre>
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-about.html">about</a></li><li><a href="module-accordion.html">accordion</a></li><li><a href="module-add.html">add</a></li><li><a href="module-common.html">common</a></li><li><a href="module-edit.html">edit</a></li><li><a href="module-en_words.html">en_words</a></li><li><a href="module-example.html">example</a></li><li><a href="module-header.html">header</a></li><li><a href="module-icons.html">icons</a></li><li><a href="module-load.html">load</a></li><li><a href="module-main.html">main</a></li><li><a href="module-password.html">password</a></li><li><a href="module-preferences.html">preferences</a></li><li><a href="module-records.html">records</a></li><li><a href="module-save.html">save</a></li><li><a href="module-themes.html">themes</a></li><li><a href="module-utils.html">utils</a></li><li><a href="module-version.html">version</a></li></ul><h3>Classes</h3><ul><li><a href="module-icons-Color.html">Color</a></li><li><a href="module-icons-Solver.html">Solver</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_xmake">_xmake</a></li><li><a href="global.html#decrypt">decrypt</a></li><li><a href="global.html#encrypt">encrypt</a></li><li><a href="global.html#get_algorithm">get_algorithm</a></li><li><a href="global.html#get_name">get_name</a></li><li><a href="global.html#get_num_algorithms">get_num_algorithms</a></li><li><a href="global.html#header_prefix">header_prefix</a></li><li><a href="global.html#header_suffix">header_suffix</a></li><li><a href="global.html#onload">onload</a></li><li><a href="global.html#xAddClass">xAddClass</a></li><li><a href="global.html#xAddEventListener">xAddEventListener</a></li><li><a href="global.html#xAppendChild">xAppendChild</a></li><li><a href="global.html#xAppendToParent">xAppendToParent</a></li><li><a href="global.html#xAttr">xAttr</a></li><li><a href="global.html#xAttrIfTrue">xAttrIfTrue</a></li><li><a href="global.html#xAttrNS">xAttrNS</a></li><li><a href="global.html#xId">xId</a></li><li><a href="global.html#xInnerHTML">xInnerHTML</a></li><li><a href="global.html#xmake">xmake</a></li><li><a href="global.html#xRemoveChildren">xRemoveChildren</a></li><li><a href="global.html#xRemoveClass">xRemoveClass</a></li><li><a href="global.html#xStyle">xStyle</a></li><li><a href="global.html#xTooltip">xTooltip</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Jul 13 2021 17:18:43 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

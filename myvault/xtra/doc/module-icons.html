@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Module: icons</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: icons</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Icon creation and management functions plus functions to color SVG
+icons by using only CSS color filter specifications.</p>
+<p>
+The functions here convert a color string like 'white' or '#ff7878' to
+filter specifications: invert, sepia, saturate, hue-rotate, brightness, contrast.
+All credit for the logic goes to this very clever implementation:
+citation.
+<p>
+It assumes a black (#00000) fill color for the SVG.
+<p>
+This code was originally written to allow colors to change
+dynamically but it isn't used now that themes are explicitly
+specified. I left it in because it is very clever and might be
+useful for future work.</div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="icons.js.html">icons.js</a>, <a href="icons.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// color to filter mapping
+getColorFilter('#445566') -> invert(32%) sepia(6%) saturate(1995%) hue-rotate(169deg) brightness(92%) contrast(89%)
+getColorFilter('blue')    -> invert(10%) sepia(62%) saturate(7478%) hue-rotate(244deg) brightness(115%) contrast(154%)
+getColorFilter('#345678') -> invert(30%) sepia(69%) saturate(351%) hue-rotate(168deg) brightness(90%) contrast(93%)
+getColorFilter('red')     -> invert(14%) sepia(86%) saturate(7080%) hue-rotate(6deg) brightness(109%) contrast(120%)</code></pre>
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="module-icons-Color.html">Color</a></dt>
+            <dd></dd>
+        
+            <dt><a href="module-icons-Solver.html">Solver</a></dt>
+            <dd></dd>
+        </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".changeIcon"><span class="type-signature">(static) </span>changeIcon<span class="signature">(element, href)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Change the icon file source reference.
+This is used to change the password show/hide icon as created by icons~makeIcon.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>element</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">element</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The element object.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>href</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The icon href.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="icons.js.html">icons.js</a>, <a href="icons.js.html#line401">line 401</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".convertColorStringtoHex"><span class="type-signature">(static) </span>convertColorStringtoHex<span class="signature">(color)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Convert color string to hex.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The color string.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="icons.js.html">icons.js</a>, <a href="icons.js.html#line369">line 369</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The hex color with the '#' prefix.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>convertColorStringtoHex('red') -> '#ff0000'</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".convertColorStringToRGBSpec"><span class="type-signature">(static) </span>convertColorStringToRGBSpec<span class="signature">(color)</span><span class="type-signature"> &rarr; {tuple}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Convert a color string to an RGB tuple.
+This code was derived from <a href="https://stackoverflow.com/questions/1573053/javascript-function-to-convert-color-names-to-hex-codes/24390910">citation</a></p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The color to convert.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="icons.js.html">icons.js</a>, <a href="icons.js.html#line353">line 353</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The 3-tuple of colors.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">tuple</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>convertColorStringToRGBSpec('red') -> [255, 0,0]</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getColorFilter"><span class="type-signature">(static) </span>getColorFilter<span class="signature">(inColor)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Get the icon fill color filter that matches closely.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>inColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the color to match.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="icons.js.html">icons.js</a>, <a href="icons.js.html#line325">line 325</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The CSS filter settings.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".makeIcon"><span class="type-signature">(static) </span>makeIcon<span class="signature">(icon, alt)</span><span class="type-signature"> &rarr; {element}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Make a square icon image based on the icon size specified by a theme.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>icon</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The icon image.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>alt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The icon image, alt text.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="icons.js.html">icons.js</a>, <a href="icons.js.html#line419">line 419</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The created SVG image element.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">element</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>let element = makeIcon(common.icons.cog, 'generate').xAddClass('x-show-hide-img')</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".makeIconWithImg"><span class="type-signature">(static) </span>makeIconWithImg<span class="signature">(size, img)</span><span class="type-signature"> &rarr; {element}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Make a square icon image.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>size</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The size of the square icon.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>img</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The icon image.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="icons.js.html">icons.js</a>, <a href="icons.js.html#line463">line 463</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The created SVG image element.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">element</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>let element = makeIconWithImg(
+      common.themes._activeProp().general.iconx.width,
+      xmake('img')
+          .xAddClass('x-theme-element')
+          .xAttr('src', common.icons.clear)
+          .xAttr('alt', 'x')
+          .xAttr('width', common.themes._activeProp().general.iconx.width)
+          .xAttr('height', common.themes._activeProp().general.iconx.height)
+          .xAddEventListener('click', (event) => {
+              let div = event.target.parentNode.parentNode // img --> svg --> div
+              let input = div.getElementsByTagName('input')[0]
+              input.value = ''
+              // clone and propagate the event as if it came from the input
+              let clonedEvent = new event.constructor(event.type, event)
+              input.dispatchEvent(clonedEvent)
+          })
+          .xAddClass('x-vertical-center')
+          .xStyle(common.themes._activeProp().general.iconx)
+          .xStyle({
+              backgroundColor: common.themes._activeColors().fgColor,
+              color: common.themes._activeColors().bgColor,
+          })
+  )</code></pre>
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-about.html">about</a></li><li><a href="module-accordion.html">accordion</a></li><li><a href="module-add.html">add</a></li><li><a href="module-common.html">common</a></li><li><a href="module-edit.html">edit</a></li><li><a href="module-en_words.html">en_words</a></li><li><a href="module-example.html">example</a></li><li><a href="module-header.html">header</a></li><li><a href="module-icons.html">icons</a></li><li><a href="module-load.html">load</a></li><li><a href="module-main.html">main</a></li><li><a href="module-password.html">password</a></li><li><a href="module-preferences.html">preferences</a></li><li><a href="module-records.html">records</a></li><li><a href="module-save.html">save</a></li><li><a href="module-themes.html">themes</a></li><li><a href="module-utils.html">utils</a></li><li><a href="module-version.html">version</a></li></ul><h3>Classes</h3><ul><li><a href="module-icons-Color.html">Color</a></li><li><a href="module-icons-Solver.html">Solver</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_xmake">_xmake</a></li><li><a href="global.html#decrypt">decrypt</a></li><li><a href="global.html#encrypt">encrypt</a></li><li><a href="global.html#get_algorithm">get_algorithm</a></li><li><a href="global.html#get_name">get_name</a></li><li><a href="global.html#get_num_algorithms">get_num_algorithms</a></li><li><a href="global.html#header_prefix">header_prefix</a></li><li><a href="global.html#header_suffix">header_suffix</a></li><li><a href="global.html#onload">onload</a></li><li><a href="global.html#xAddClass">xAddClass</a></li><li><a href="global.html#xAddEventListener">xAddEventListener</a></li><li><a href="global.html#xAppendChild">xAppendChild</a></li><li><a href="global.html#xAppendToParent">xAppendToParent</a></li><li><a href="global.html#xAttr">xAttr</a></li><li><a href="global.html#xAttrIfTrue">xAttrIfTrue</a></li><li><a href="global.html#xAttrNS">xAttrNS</a></li><li><a href="global.html#xId">xId</a></li><li><a href="global.html#xInnerHTML">xInnerHTML</a></li><li><a href="global.html#xmake">xmake</a></li><li><a href="global.html#xRemoveChildren">xRemoveChildren</a></li><li><a href="global.html#xRemoveClass">xRemoveClass</a></li><li><a href="global.html#xStyle">xStyle</a></li><li><a href="global.html#xTooltip">xTooltip</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Jul 13 2021 17:18:43 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
