@@ -1,5 +1,8 @@
-// The data page
-import { common } from '/myvault/js/common.js'
+/**
+ * Show the data records.
+ * @module records
+ */
+import { common, getFieldValueType } from '/myvault/js/common.js'
 import { makeIcon, changeIcon } from '/myvault/js/icons.js'
 import { hideMenu  } from '/myvault/js/header.js'
 import { hideAll,
@@ -7,7 +10,6 @@ import { hideAll,
          makeInputXWrapper,
          makeTextButton,
          makeIconButton,
-         getFieldType,
          isURL,
          statusMsg,
        } from '/myvault/js/utils.js'
@@ -16,16 +18,28 @@ import { expandAccordion,
          accordionPanelClass,
          accordionPanelImgClass,
          accordionPanelButtonClass,
-         makeAccordionEntry,
-         clickedAccordionButton,
-         getAccordionPanelStyle } from '/myvault/js/accordion.js'
+         makeAccordionEntry } from '/myvault/js/accordion.js'
 import { addRecord } from '/myvault/js/add.js'
 import { editRecord } from '/myvault/js/edit.js'
 
+/**
+ * The grid label style, populated by the theme.
+ */
 var gridLabelStyle = {}
+
+/**
+ * The grid value style, populated by the theme.
+ */
 var gridValueStyle = {}
+
+/**
+ * The grid button style, populated by the theme.
+ */
 var gridButtonStyle = {}
 
+/**
+ * Show the data page.
+ */
 export function showDataPage() {
     gridLabelStyle = common.themes._activeProp().records.gridLabelStyle
     gridValueStyle = common.themes._activeProp().records.gridValueStyle
@@ -33,16 +47,24 @@ export function showDataPage() {
     showDataPageInternal('block')
 }
 
-export function showDataPageInternal(v) {
+/**
+ * Internal funtion to show the data page that allows the caller to
+ * control the display.
+ * @param {display} display The page display setting. Typically "none" or "block".
+ */
+export function showDataPageInternal(display) {
     hideAll()
     hideMenu()
     let top = document.getElementById('page-data')
-    top.style.display = v
+    top.style.display = display
     top.xRemoveChildren()
     makeViewPage(top)
 }
 
-// make the record view page
+/**
+ * Make the record view page with the accordion entries.
+ * @param {element} top The parent element.
+ */
 function makeViewPage(top) {
     let accordion = xmake('center')
         .xId('x-data-content-id')
@@ -64,10 +86,10 @@ function makeViewPage(top) {
                             .xAttr('placeholder', 'search')
                             .xAttr('value', common.search.cache)
                             .xTooltip('enter regular expression to search for matching records')
-                            .xAddEventListener('click', e => updateSearch(e))
-                            .xAddEventListener('input', e => updateSearch(e))
-                            .xAddEventListener('paste', e => updateSearch(e))
-                            .xAddEventListener('change', e => updateSearch(e)))
+                            .xAddEventListener('click', () => updateSearch())
+                            .xAddEventListener('input', () => updateSearch())
+                            .xAddEventListener('paste', () => updateSearch())
+                            .xAddEventListener('change', () => updateSearch()))
                 ),
             xmake('div').xStyle({height: '10px'}),
             xmake('button')
@@ -89,7 +111,8 @@ function makeViewPage(top) {
                     {
                         backgroundColor: common.themes._activeColors().bgColor,
                         color: common.themes._activeColors().fgColor,
-                        marginLeft: '5px'})
+                        marginLeft: '5px'
+                    })
                 .xAddClass('x-theme-element')
                 .xTooltip('create and insert new record')
                 .xId('x-data-create-button')
@@ -106,7 +129,12 @@ function makeViewPage(top) {
     makeRecordEntries(accordion)
 }
 
-// make the record entries
+/**
+ * Make the accordion entries for each record.
+ * <p>
+ * Each entry has a set of read-only fields that can be copied to the clipboard.
+ * @param {element} accordion The accordion entries container.
+ */
 function makeRecordEntries(accordion) {
     let did = 'x-data-records-div'
     let accordionDiv = document.getElementById(did)
@@ -219,7 +247,10 @@ Please load records or create the records manually by clicking the "plus" button
     document.getElementById('x-records-length').innerHTML = getNumVisibleRecs()
 }
 
-// get the regex for the search constraints
+/**
+ * Get the regex for the search constraints from the search input element.
+ * @returns {RegExp} The search regular expression.
+ */
 function getSearchRegexp() {
     let e = document.getElementById('x-data-search')
     let filterString = ''
@@ -239,7 +270,10 @@ function getSearchRegexp() {
     return regexp
 }
 
-// Get the number of visible records
+/**
+ * Get the number of visible records based on the search criterion.
+ * @returns {number} The number of visible records.
+ */
 function getNumVisibleRecs() {
     let regexp = getSearchRegexp()
     let numrecs = 0
@@ -253,11 +287,23 @@ function getNumVisibleRecs() {
     return numrecs
 }
 
+/**
+ * Make a record view field entry.
+ * <p>
+ * Each view entry has a label and value.
+ * The value can be copied to the clipboard.
+ * For passwords you have the option show/hide the data.
+ * It also tries to recognize URLs values and display them as a link.
+ * @param {number} ridx The record index in common.data.records[].
+ * @param {number} idx The record field index.
+ * @param {element} div The parent element of the this entry.
+ * @param {string} key The field label value.
+ * @param {string} value The field value.
+ */
 // make record entry
 function makeRecordViewEntry(ridx, idx, div, key, value) {
-    // TODO: add copy to clipboard function add password capability
     let pid = 'x-data-record-password-key-' + ridx + '-' + idx
-    let ftype = getFieldType(key)
+    let ftype = getFieldValueType(key)
     if (ftype === 'string') {
         // check for the special case where the value is a URL
         if (isURL(value)) {
@@ -378,7 +424,7 @@ function makeRecordViewEntry(ridx, idx, div, key, value) {
             .xAddEventListener('click', e => {
                 statusMsg(`copied ${value.length} bytes to the clipboard`)
                 navigator.clipboard.writeText(value).then((value) => {}, () => {
-                    alert('internal error: paste to clipboard operation failed')})
+                    alert('internal error: clipboard copy operation failed')})
             })
             .xTooltip(`paste ${ key } to clipboard for pasting to external applications`)
             .xAppendChild(makeIcon(common.icons.copy, 'copy')))
@@ -387,8 +433,11 @@ function makeRecordViewEntry(ridx, idx, div, key, value) {
     div.xAppendChild(label, vobj, buttons)
 }
 
-
-function updateSearch(event) {
+/**
+ * Update the records display by an event listener when the search
+ * input changes.
+ */
+function updateSearch() {
     let accordion = document.getElementById('x-data-content-id')
     makeRecordEntries(accordion)
 }

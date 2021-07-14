@@ -1,5 +1,10 @@
-// Support for accordions.
-// Accordions are scoped under a top element which allows them to be localized to a page.
+/**
+ * Support for accordions.
+ * Accordions are composed of two parts: an accordion toggle button and an accordion panel.
+ * When the button is clicked it toggles the display the panel which contains the contents.
+ * Accordions are the primary idiom used to display information on the app pages.
+ * @module accordion
+ */
 
 import { common } from '/myvault/js/common.js'
 import { xmake }  from '/myvault/js/utils.js'
@@ -9,6 +14,21 @@ export var accordionPanelClass = 'x-accordion-panel'
 export var accordionPanelImgClass = 'x-accordion-panel-img'
 export var accordionPanelButtonClass = 'x-accordion-panel-button'
 
+/**
+ * Expand all accordion entries on a page.
+ * It recognizes accordion enries by the membership in the <code>'x-accordion-panel</code> class.
+ * @example
+ xmake('button')
+   .xStyle({backgroundColor: common.themes._activeColors().bgColor,
+            color: common.themes._activeColors().fgColor,
+            marginBottom: '8px'})
+   .xAddClass('x-theme-element')
+   .xAppendChild(makeIcon(common.icons.expand, 'expand'))
+   .xTooltip('expand accordion panels')
+   .xAddEventListener('click', () => expandAccordion(top)),
+ * @param {element} top A container element (like a div) that contains all of the accordion entries.
+ *
+ */
 export function expandAccordion(top) {
     let panels = top.getElementsByClassName(accordionPanelClass)
     for(let i=0; i< panels.length; i++) {
@@ -20,6 +40,21 @@ export function expandAccordion(top) {
     }
 }
 
+/**
+ * Collapses all accordion entries on a page.
+ * It recognizes accordion enries by the membership in the <code>'x-accordion-panel</code> class.
+ * @example
+ xmake('button')
+   .xStyle({backgroundColor: common.themes._activeColors().bgColor,
+            color: common.themes._activeColors().fgColor,
+            marginBottom: '8px'})
+   .xAddClass('x-theme-element')
+   .xAppendChild(makeIcon(common.icons.collapse, 'collapse'))
+   .xTooltip('collapse accordion panels')
+   .xAddEventListener('click', () => collapseAccordion(top))),
+ * @param {element} top A container element (like a div) that contains all of the accordion entries.
+ *
+ */
 export function collapseAccordion(top) {
     let panels = top.getElementsByClassName(accordionPanelClass)
     for(let i=0; i< panels.length; i++) {
@@ -32,6 +67,10 @@ export function collapseAccordion(top) {
 }
 
 // Accordion button style
+/**
+ * Define the accordion button style for a theme.
+ * @returns {object} the style.
+ */
 export function getAccordionButtonStyle() {
     let style = common.themes._activeProp().accordion.button
     style.borderColor = common.themes._activeColors().fgColor
@@ -40,17 +79,31 @@ export function getAccordionButtonStyle() {
     return style
 }
 
-// accordion panel style
-export function getAccordionPanelStyle() {
-    return {
-        display: 'none',
-    }
-}
-
-// An accordion entry is a button and a panel.
-// The sub elements have class designations.
-// Create an accordion entry
-// Allow optional actiond when it expands or collapses
+/**
+ * Make an accordion entry.
+ *<p>
+ * An accordion entry is composed of a button and a panel.
+ * The button and panel elements have class designations to
+ * make them easier to find.
+ * <p>
+ * The button has an icon the far left that changes to show
+ * whether the accordion entry is expanded or collapsed.
+ * @example
+    let accordionEntry = makeAccordionEntry(
+        'Encryption Algorithm',
+        xmake('div')
+            .xStyle(common.themes._activeProp().accordion.panel)
+            .xId('x-prefs-algorithm-div')
+            .xAppendChild(
+                xmake('p')
+                    .xStyle(common.themes._activeProp().general.text)
+                    .xInnerHTML('Choose the algorithm to use for encryption and decryption.'),
+            ))
+ * @param {string} title The accordion entry title displayed in the button.
+ * @param {element} panel The panel DOM element.
+ * @Param {function} expandAction The action to take when the entry is expanded.
+ * @Param {function} collapseAction The action to take when the entry is collapsed.
+*/
 export function makeAccordionEntry(title, panel, expandAction, collapseAction) {
     return xmake('div')
         .xAppendChild(
@@ -65,19 +118,33 @@ export function makeAccordionEntry(title, panel, expandAction, collapseAction) {
                         .xInnerHTML('&nbsp;&nbsp;' + title))
                 .xAddEventListener('click', e => clickedAccordionButton(e, expandAction, collapseAction)),
             xmake('div') //panel
-                .xStyle(getAccordionPanelStyle())
+                .xStyle({display: 'none'})
                 .xAddClass('x-theme-element')
                 .xAddClass(accordionPanelClass)
                 .xAppendChild(panel))
 }
 
-// Toggle accordion panel
+/**
+ * Toggle an accordion panel display.
+ * @param {event} event The event that triggered the toggle.
+ * @param {function} expandAction The action to take when the accordion is expanded.
+ * @param {function} collapseAction The action to take when the accordion is collapsed.
+ */
 export function clickedAccordionButton(event, expandAction, collapseAction) {
     // toggle expand/collapse
     let e = event.srcElement
+    let i = 0
+    while ( e && e.nodeName !== 'BUTTON' ) {
+        e = e.parentNode
+        i += 1
+        if (i > 5) {
+            break
+        }
+    }
     if ( e.nodeName !== 'BUTTON' ) {
         // Use the button if the user clicked on the image or text directly.
-        e = e.parentNode
+        alert('internal error! please report this bug')
+        return
     }
     // Change the image.
     let icon = e.getElementsByClassName('x-icon-element')[0]

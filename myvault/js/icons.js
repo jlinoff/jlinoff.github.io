@@ -1,23 +1,38 @@
-// All this to color the SVG icons.
-// The functions here convert a color string like 'white' or '#ff7878' to
-// filter specifications: invert, sepia, saturate, hue-rotaet, brightness, contrast.
-// All credit for the logic goes to
-// citation: https://stackoverflow.com/questions/7033639/split-large-string-in-n-size-chunks-in-javascript
-//
-// it assumes a black (#00000) fill color for the svg.
-// Examples:
-// '#445566' -> filter: invert(32%) sepia(6%) saturate(1995%) hue-rotate(169deg) brightness(92%) contrast(89%)
-// 'blue'    -> filter: invert(10%) sepia(62%) saturate(7478%) hue-rotate(244deg) brightness(115%) contrast(154%)
-// '#345678' -> filter: invert(30%) sepia(69%) saturate(351%) hue-rotate(168deg) brightness(90%) contrast(93%)
-// 'red'     -> filter: invert(14%) sepia(86%) saturate(7080%) hue-rotate(6deg) brightness(109%) contrast(120%)
-//
-
-// Color class
-// code taken from https://stackoverflow.com/questions/7033639/split-large-string-in-n-size-chunks-in-javascript
-// it was written by someone who understands filters far better than me.
+/**
+ * Icon creation and management functions plus functions to color SVG
+ * icons by using only CSS color filter specifications.
+ * <p>
+ * The functions here convert a color string like 'white' or '#ff7878' to
+ * filter specifications: invert, sepia, saturate, hue-rotate, brightness, contrast.
+ * All credit for the logic goes to this very clever implementation:
+ * [citation]{@Link https://stackoverflow.com/questions/7033639/split-large-string-in-n-size-chunks-in-javascript}.
+ *<p>
+ * It assumes a black (#00000) fill color for the SVG.
+ *<p>
+ * This code was originally written to allow colors to change
+ * dynamically but it isn't used now that themes are explicitly
+ * specified. I left it in because it is very clever and might be
+ * useful for future work.
+ * @example
+ * // color to filter mapping
+ * getColorFilter('#445566') -> invert(32%) sepia(6%) saturate(1995%) hue-rotate(169deg) brightness(92%) contrast(89%)
+ * getColorFilter('blue')    -> invert(10%) sepia(62%) saturate(7478%) hue-rotate(244deg) brightness(115%) contrast(154%)
+ * getColorFilter('#345678') -> invert(30%) sepia(69%) saturate(351%) hue-rotate(168deg) brightness(90%) contrast(93%)
+ * getColorFilter('red')     -> invert(14%) sepia(86%) saturate(7080%) hue-rotate(6deg) brightness(109%) contrast(120%)
+ *
+ * @module icons
+ */
 import { common } from '/myvault/js/common.js'
 import { xmake }  from '/myvault/js/utils.js'
 
+
+/**
+ * Color class
+ * <p>
+ * This  code taken from
+ *  [citation]{@link https://stackoverflow.com/questions/7033639/split-large-string-in-n-size-chunks-in-javascript}
+ * it was written by someone who understands filters far better than me.
+*/
 class Color {
     constructor(r, g, b) {
         this.set(r, g, b);
@@ -168,9 +183,13 @@ class Color {
   }
 }
 
-// Solver class
-// code taken from https://stackoverflow.com/questions/7033639/split-large-string-in-n-size-chunks-in-javascript
-// it was written by someone who understands filter conversions far better than me.
+/**
+ * solver class
+ * <p>
+ * This  code taken from
+ *  [citation]{@link https://stackoverflow.com/questions/7033639/split-large-string-in-n-size-chunks-in-javascript}
+ * it was written by someone who understands filter conversions far better than me.
+*/
 class Solver {
     constructor(target, baseColor) {
         this.target = target;
@@ -298,7 +317,11 @@ class Solver {
     }
 }
 
-// Get the icon fill color filter
+/**
+ * Get the icon fill color filter that matches closely.
+ * @param {string} inColor the color to match.
+ * @returns {object} The CSS filter settings.
+ */
 export function getColorFilter(inColor) {
     if (inColor in common.iconFillColorFilter.cache) {
         return common.iconFillColorFilter.cache[inColor]
@@ -319,7 +342,14 @@ export function getColorFilter(inColor) {
     return last.filter
 }
 
-// citation: https://stackoverflow.com/questions/1573053/javascript-function-to-convert-color-names-to-hex-codes/24390910
+/**
+ * Convert a color string to an RGB tuple.
+ * This code was derived from [citation]{@link https://stackoverflow.com/questions/1573053/javascript-function-to-convert-color-names-to-hex-codes/24390910}
+ * @example
+ * convertColorStringToRGBSpec('red') -> [255, 0,0]
+ * @param {string} color The color to convert.
+ * @returns {tuple} The 3-tuple of colors.
+ */
 export function convertColorStringToRGBSpec(color) {
     const html = document.querySelector('html')
     const originalColor = html.style.color
@@ -329,20 +359,25 @@ export function convertColorStringToRGBSpec(color) {
     return rgb
 }
 
-// convert color string to hex
-// ex. 'red' -> '#ff0000'
+/**
+ * Convert color string to hex.
+ * @example
+ * convertColorStringtoHex('red') -> '#ff0000'
+ * @param {string} color The color string.
+ * @returns {string} The hex color with the '#' prefix.
+ */
 export function convertColorStringtoHex(color) {
     const rgb = convertColorStringToRGBSpec(color)
     const regex = /(\d+)/g
     const result = rgb.match(regex)
     let hexColor = '#'
-    result.forEach( (v) => {
+    for (const v of result) {
         let h = Number(v).toString(16)
         if (h.length === 1) {
             h = '0' + h
         }
         hexColor += h
-    })
+    }
     return hexColor
 }
 
@@ -356,6 +391,12 @@ function convertColorToRGB(color) {
     return out
 }
 
+/**
+ * Change the icon file source reference.
+ * This is used to change the password show/hide icon as created by {@link module: icons~makeIcon}.
+ * @param {element} element The element object.
+ * @param {string} href The icon href.
+ */
 // change icon file
 export function changeIcon(element, href) {
     // IMG is inside of the SVG
@@ -367,6 +408,14 @@ export function changeIcon(element, href) {
 }
 
 // make image element
+/**
+ * Make a square icon image based on the icon size specified by a theme.
+ * @example
+   let element = makeIcon(common.icons.cog, 'generate').xAddClass('x-show-hide-img')
+ * @param {string} icon The icon image.
+ * @param {string} alt The icon image, alt text.
+ * @returns {element} The created SVG image element.
+ */
 export function makeIcon(icon, alt) {
     return makeIconWithImg(
         common.themes._activeProp().general.icons.width,
@@ -381,6 +430,36 @@ export function makeIcon(icon, alt) {
     )
 }
 
+/**
+ * Make a square icon image.
+ * @example
+   let element = makeIconWithImg(
+      common.themes._activeProp().general.iconx.width,
+      xmake('img')
+          .xAddClass('x-theme-element')
+          .xAttr('src', common.icons.clear)
+          .xAttr('alt', 'x')
+          .xAttr('width', common.themes._activeProp().general.iconx.width)
+          .xAttr('height', common.themes._activeProp().general.iconx.height)
+          .xAddEventListener('click', (event) => {
+              let div = event.target.parentNode.parentNode // img --> svg --> div
+              let input = div.getElementsByTagName('input')[0]
+              input.value = ''
+              // clone and propagate the event as if it came from the input
+              let clonedEvent = new event.constructor(event.type, event)
+              input.dispatchEvent(clonedEvent)
+          })
+          .xAddClass('x-vertical-center')
+          .xStyle(common.themes._activeProp().general.iconx)
+          .xStyle({
+              backgroundColor: common.themes._activeColors().fgColor,
+              color: common.themes._activeColors().bgColor,
+          })
+  )
+ * @param {number} size The size of the square icon.
+ * @param {string} img The icon image.
+ * @returns {element} The created SVG image element.
+ */
 export function makeIconWithImg(size, img) {
     return xmake('svg')
         .xStyle({

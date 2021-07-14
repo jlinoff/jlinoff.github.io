@@ -1,8 +1,19 @@
+/**
+ * Built-in, hard-coded example data for the internal example action on the load page.
+ * <p>
+ * The example consists of 11 records. It turned out to be surprising
+ * useful for debugging and testing the system so I left it in for the
+ * webapp.
+ * @module example
+ */
 import { VERSION, BUILD, GIT_COMMIT_ID } from '/myvault/js/version.js'
 
-// ================================================================
-// Built in example
-// ================================================================
+/**
+ * The example object.
+ * @example
+ * import { example } from '/myvault/js/example.js'
+ * assert 'meta' in example
+ */
 var example = {
    "meta": {
        "atime": "",
@@ -90,6 +101,12 @@ var example = {
     ]
 }
 
+/**
+ * Convenience function for getting the example object.
+ * @example
+ * example = getExample()
+ * @returns {object} The example object.
+ */
 export function getExample() {
     return JSON.stringify(example, null, 4)
 }

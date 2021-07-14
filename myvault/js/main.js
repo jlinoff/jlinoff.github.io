@@ -1,5 +1,8 @@
-// main entry point
-// Enable element functio chaining.
+
+/**
+ * The main entry point for the application.
+ * @module main
+*/
 import { xmake, enableFunctionChaining, statusMsg } from '/myvault/js/utils.js'
 import { header  } from '/myvault/js/header.js'
 import { common, displayTheme, saveCommon, restoreCommon } from '/myvault/js/common.js'
@@ -16,6 +19,16 @@ decrypt,
     header_suffix,
 } from '/myvault/js/crypt.js';
 
+/**
+ * Enable function chaining for all elements to allow elements to be
+ * grouped in an interesting way.
+ */
+enableFunctionChaining()
+
+/**
+ * Load the Rust encryption/decryption algorithms from WebAssembly.
+ * It updates the common.crypt fields.
+ */
 async function loadCrypt() {
     await init()
     let fcts = {
@@ -28,25 +41,46 @@ async function loadCrypt() {
         header_suffix: header_suffix, // header_suffix(algorithm: string) -> string
     }
     common.crypt._wasm = fcts
-    enableFunctionChaining()
     restoreCommon()
 }
 loadCrypt()
 
-// Handle refresh and reload.
+/**
+ * When the window is closed make sure that the state is saved.
+ * This was implemented befor i chose to use session storage rather
+ * than local storage and can probably be removed.
+ * @global
+ */
 window.addEventListener('beforeunload', () => {
     console.log('beforeunload')
     saveCommon()
 })
 
-// Initialize the window.
-window.onload = () => {
-    enableFunctionChaining()
+/**
+ * Actions to take when the window is loaded.
+ * @global
+ */
+window.onload = () => { main() }
+
+/**
+ * Main entry point for the application.
+ * <p>
+ * It sets up a bunch of stuff which takes a bit of time so it assumes
+ * that
+ * [loadCrypt()]{@link module:main~loadCrypt}.
+ * is complete which obviates the need for a
+ * document.readyState check.
+ * <p>
+ * If race problem is ever observed, the logic
+ * should be modified so that main() is called by
+ * but since this works there is no reason to change it.
+ */
+function main() {
     header()
     displayTheme()
 
     let style = document.createElement('style');
-    style.innerHTML = css()
+    style.innerHTML = loadMainCSS()
     document.head.append(style)
 
     // Setup the basic main pages.
@@ -62,8 +96,12 @@ window.onload = () => {
     showAboutPage() // initial splashscreen
 }
 
-// Common styles - function allows dynamic variable values.
-function css() {
+/**
+ * Define a few application wide style elements.
+ * Some of the css logic could be replaced with <code>@media</code> declarations.
+* @returns {string} css text
+ */
+function loadMainCSS() {
     let width = '1000px'  // default
     let mlr = 'auto'
     if (window.innerWidth < 1000) {

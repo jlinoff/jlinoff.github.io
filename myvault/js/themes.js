@@ -1,7 +1,14 @@
-// Theme data
-// It is divided into colors (color schemes) and properties (standard/large).
+/**
+* Theme data.
+*<p>
+* Each theme is organized by colors (color schemes) and properties (standard/large).
+* @module themes
+*/
 
-// standard properties
+/**
+ * The standard properties.
+ * These were the properties that were originally used during development.
+ */
 export var standard = {
     body: {
         fontFamily: 'Arial, Helvetica, Tahoma, Calibri, Verdana, sans-serif',
@@ -210,7 +217,11 @@ export var standard = {
     },
 }
 
-// lare properties - bigger icons, larger fonts
+/**
+ * The large properties.
+ * These were the properties with slightly larger fonts and icons that
+ * were used for a landscape display on my tablet.
+ */
 export var large = {
     body: {
         fontFamily: 'Arial, Helvetica, Tahoma, Calibri, Verdana, sans-serif',
@@ -419,7 +430,10 @@ export var large = {
     },
 }
 
-// The built-in predefined themes.
+/**
+ * The built-in predefined themes that are stored in common.themes.
+ * They can be customized and saved for each user on the preferences page.
+ */
 export var themes = {
     props: {
         standard: standard,

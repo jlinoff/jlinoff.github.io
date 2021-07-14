@@ -1,4 +1,7 @@
-// The save page
+/**
+ * Show the save page.
+ * @module save
+ */
 import { VERSION, BUILD, GIT_COMMIT_ID, GIT_BRANCH } from '/myvault/js/version.js'
 import { common } from '/myvault/js/common.js'
 import { makeIcon, changeIcon } from '/myvault/js/icons.js'
@@ -12,10 +15,11 @@ import { expandAccordion,
          accordionPanelClass,
          accordionPanelImgClass,
          accordionPanelButtonClass,
-         makeAccordionEntry,
-         clickedAccordionButton,
-         getAccordionPanelStyle } from '/myvault/js/accordion.js'
+         makeAccordionEntry } from '/myvault/js/accordion.js'
 
+/**
+ * Show the load page.
+ */
 export function showSavePage() {
     hideAll()
     hideMenu()
@@ -42,13 +46,15 @@ export function showSavePage() {
                     .xAppendChild(makeIcon(common.icons.collapse, 'collapse'))
                     .xTooltip('collapse accordion panels')
                     .xAddEventListener('click', () => collapseAccordion(top))),
-        savetoClipboard(),
+        saveToClipboard(),
         saveDownload()
     )
 }
 
-// save to clipboard
-function savetoClipboard() {
+/**
+ * Create the accordion enrty to save data to the clipboard.
+ */
+function saveToClipboard() {
     return makeAccordionEntry('Paste Data to Clipboard',
                               xmake('div')
                               .xAppendChild(
@@ -66,7 +72,7 @@ Copy the encrypted data to the clipboard.`),
                                                                  let info = document.getElementById('x-save-paste-info')
                                                                  info.innerHTML = `Pasted ${ text.length } encrypted bytes to the clipboard.`
                                                                  navigator.clipboard.writeText(text).then((text) => {}, () => {
-                                                                     alert('internal error: paste to clipboard operation failed')})
+                                                                     alert('internal error: clipboard copy operation failed')})
                                                              }})
                                       ),
                                   xmake('p')
@@ -78,6 +84,11 @@ Copy the encrypted data to the clipboard.`),
                               ))
 }
 
+/**
+ * Create the accordion entry to save the download to a file.
+ * <p>
+ * The term "download" is used because it uses the browser download functionality.
+ */
 function saveDownload() {
     return makeAccordionEntry('Download to File',
                               xmake('div')
@@ -121,6 +132,13 @@ Download the master password encrypted data to a local file.`),
                               ))
 }
 
+/**
+ * Download text data to a file by creating a popup file dialogue.
+ * @example
+ * download('file.txt', 'data')
+ * @param {string} filename The file name to download to.
+ * @param {string} text The file data.
+ */
 // download
 // citation: https://ourcodeworld.com/articles/read/189/how-to-create-a-file-and-generate-a-download-with-javascript-in-the-browser-without-a-server
 function download(filename, text) {
@@ -141,17 +159,12 @@ function download(filename, text) {
     e.remove()
 }
 
-// save to AWS
-function saveToAWS() {
-    return makeAccordionEntry('AWS S3 Object',
-                              xmake('div')
-                              .xInnerHTML('panel contents'))
-}
-
-// encode the data that is going to be saved
-// it is used by load.js::setRawData
+/**
+ * Encrypt the data that is going to be saved.
+ * <p>
+ * This function defines the format of the file data.
+ */
 function encodeSaveData() {
-    // TODO: create the "real" data JSON with atime, mtime, ctime, etc.
     if (!common.crypt.password) {
         alert('cannot save without a password')
         return ''

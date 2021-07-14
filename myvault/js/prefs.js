@@ -1,3 +1,7 @@
+/**
+ * Show the preferences page.
+ * @module preferences
+ */
 // The preferences page
 import { common, displayTheme, TITLE, restoreCommon, resetCommon, updateRecordsMap } from '/myvault/js/common.js'
 import { themes } from '/myvault/js/themes.js'
@@ -14,13 +18,21 @@ import { expandAccordion,
          accordionPanelClass,
          accordionPanelImgClass,
          accordionPanelButtonClass,
-         makeAccordionEntry,
-         clickedAccordionButton,
-         getAccordionPanelStyle } from '/myvault/js/accordion.js'
+         makeAccordionEntry } from '/myvault/js/accordion.js'
 
+/**
+ * The grid label style, populated by the theme.
+ */
 var gridLabelStyle = {}
+
+/**
+ * The grid value style, populated by the theme.
+ */
 var gridValueStyle = {}
 
+/**
+ * Center the accordion panel text.
+ */
 var prefsCenterDiv = {
     display: 'flex',
     alignItems: 'center',
@@ -28,6 +40,9 @@ var prefsCenterDiv = {
     flexDirection: 'column',
 }
 
+/**
+ * Show the preferences page.
+ */
 export function showPrefsPage() {
     hideAll()
     hideMenu()
@@ -76,7 +91,9 @@ export function showPrefsPage() {
 
     }
 
-// algorithm
+/**
+ * Show the accordion entry to choose the encryption algorithm.
+ */
 function prefsAlgorithm() {
     let num = common.crypt._wasm.get_num_algorithms()
     if (num === 0) {
@@ -111,7 +128,9 @@ function prefsAlgorithm() {
     return ap
 }
 
-// manage themes
+/**
+ * Show the accordion entry to choose or manage the theme colors.
+ */
 function prefsThemes() {
     let text = JSON.stringify(common.themes.colors, null, 4)
     let eid = 'x-prefs-themes-buffer'
@@ -126,7 +145,7 @@ function prefsThemes() {
 Set or customize the theme background and foreground colors that you want to use.
 The colors can be specified as name: "red" or a hex value "#0000ff".
 `),
-                makeThemeEntrySelectBox(),
+                makeThemeColorsSelectBox(),
                 xmake('br'),
                 xmake('textarea')
                     .xStyle({
@@ -147,7 +166,7 @@ The colors can be specified as name: "red" or a hex value "#0000ff".
                         makeIconButton('copy to clipboard', 'copy', common.icons.copy, () => {
                             let text = document.getElementById(eid).value
                             navigator.clipboard.writeText(text).then((text) => {}, () => {
-                                alert('internal error: paste to clipboard operation failed')})
+                                alert('internal error: clipboard copy operation failed')})
                         }),
                         makeIconButton('save', 'save', common.icons.pencil, () => {
                             let text = document.getElementById(eid).value
@@ -173,7 +192,9 @@ The colors can be specified as name: "red" or a hex value "#0000ff".
     return div
 }
 
-// manage themes
+/**
+ * Show the accordion entry to choose or manage the theme properties.
+ */
 function prefsThemeProps() {
     let text = JSON.stringify(common.themes.props, null, 4)
     let eid = 'x-prefs-themes-props-buffer'
@@ -186,7 +207,7 @@ function prefsThemeProps() {
                 xmake('p').xStyle(common.themes._activeProp().general.text)
                     .xInnerHTML(`
 Set or customize the theme properties.
-THe properties are font sizes, icon sizes, layout information and spacing.
+The properties are font sizes, icon sizes, layout information and spacing.
 This information is used internally by the webapp for dynamic styling.
 Basically everything but the color scheme.
 It is not user friendly because it requires knowledge of the internal implementation.
@@ -212,7 +233,7 @@ It is not user friendly because it requires knowledge of the internal implementa
                         makeIconButton('copy to clipboard', 'copy', common.icons.copy, () => {
                             let text = document.getElementById(eid).value
                             navigator.clipboard.writeText(text).then((text) => {}, () => {
-                                alert('internal error: paste to clipboard operation failed')})
+                                alert('internal error: clipboard copy operation failed')})
                         }),
                         makeIconButton('save', 'save', common.icons.pencil, () => {
                             let text = document.getElementById(eid).value
@@ -238,8 +259,10 @@ It is not user friendly because it requires knowledge of the internal implementa
     return div
 }
 
-// create the selection box.
-function makeThemeEntrySelectBox() {
+/**
+ * Create the theme colors selection box.
+ */
+function makeThemeColorsSelectBox() {
     let sid = 'x-prefs-themes-select'
     let eid = sid + '-entry'
     let select = xmake('span')
@@ -280,7 +303,9 @@ function makeThemeEntrySelectBox() {
     return select
 }
 
-// create theme props  selection box.
+/**
+ * Create the theme properties selection box.
+ */
 function makeThemePropsSelectBox() {
     let sid = 'x-prefs-theme-propss-select'
     let eid = sid + '-entry'
@@ -322,7 +347,9 @@ function makeThemePropsSelectBox() {
     return select
 }
 
-// record field templates
+/**
+ * Create the accordion entry to define custom field record templates.
+ */
 function prefsRecordFieldTemplates() {
     let text = JSON.stringify(common.data.rfts, null, 4)
     let eid = 'x-prefs-rtfs-buffer'
@@ -356,7 +383,7 @@ Please use all caps and numbers for the template names to guarantee that interna
                         makeIconButton('copy to clipboard', 'copy', common.icons.copy, () => {
                             let text = document.getElementById(eid).value
                             navigator.clipboard.writeText(text).then((text) => {}, () => {
-                                alert('internal error: paste to clipboard operation failed')})
+                                alert('internal error: clipboard copy operation failed')})
                         }),
                         makeIconButton('save', 'save', common.icons.pencil, () => {
                             let text = document.getElementById(eid).value
@@ -376,6 +403,10 @@ Please use all caps and numbers for the template names to guarantee that interna
     return  makeAccordionEntry(title, kvpairs)
 }
 
+/**
+ * Create the accordion entry to define custom maps between field
+ * names and field value types.
+ */
 function prefsFieldType() {
     let text = JSON.stringify(common.ftype, null, 4) || '[]'
     let eid = 'x-prefs-ftype-buffer'
@@ -387,11 +418,11 @@ function prefsFieldType() {
             .xAppendChild(
                 xmake('p').xStyle(common.themes._activeProp().general.text)
                     .xInnerHTML(`
-Define custom record field name value type map. These change the value types
-based on the field named.  For example a field named "passphrase" will
-create a password field. The valid types are string, password and
-textarea. The rex values are interpreted as case insensitive regular
-expresssions.
+Define the custom record field name value type map. These change the
+value types based on the field name.  For example a field named
+"passphrase" will create a password field. The valid types are string,
+password and textarea. The rex values are interpreted as case
+insensitive regular expresssions.
 `),
                 xmake('br'),
                 xmake('textarea')
@@ -416,7 +447,7 @@ expresssions.
                         makeIconButton('copy to clipboard', 'copy', common.icons.copy, () => {
                             let text = document.getElementById(eid).value
                             navigator.clipboard.writeText(text).then((text) => {}, () => {
-                                alert('internal error: paste to clipboard operation failed')})
+                                alert('internal error: clipboard copy operation failed')})
                         }),
                         makeIconButton('save', 'save', common.icons.pencil, () => {
                             let text = document.getElementById(eid).value
@@ -436,7 +467,11 @@ expresssions.
     return  makeAccordionEntry(title, kvpairs)
 }
 
-// manage icon color filer discovery
+/**
+ * Create the accordion entry to manage the icon color filer discovery.
+ *<p>
+ * It is not used at this time.
+ */
 function prefsIconColorFilter() {
     let text = JSON.stringify(common.iconFillColorFilter, null, 4)
     let eid = 'x-prefs-icon-color-filter-buffer'
@@ -452,7 +487,7 @@ Set the parameters for discovering the color filter for the SVG icon fill valus.
 Note that this assumes that the fill color is #000000 (black).
 maxTries is the maximum number of iterations to try before giving up.
 maxLoss is the maximum acceptable loss and cache is the cache of already
-processessed colors.
+processessed colors. <i>It is not used at this time</i>.
 `),
                 xmake('br'),
                 xmake('textarea')
@@ -474,7 +509,7 @@ processessed colors.
                         makeIconButton('copy to clipboard', 'copy', common.icons.copy, () => {
                             let text = document.getElementById(eid).value
                             navigator.clipboard.writeText(text).then((text) => {}, () => {
-                                alert('internal error: paste to clipboard operation failed')})
+                                alert('internal error: clipboard copy operation failed')})
                         }),
                         makeIconButton('save', 'save', common.icons.pencil, () => {
                             let text = document.getElementById(eid).value
@@ -498,7 +533,9 @@ processessed colors.
     return div
 }
 
-// app title
+/**
+ * Create the accordion entry to change the title.
+ */
 function prefsTitle() {
     return makeAccordionEntry(
         'Change Title',
@@ -546,6 +583,12 @@ Change the application title.
     )
 }
 
+/**
+ * Change the accordion entry to clear the session storage.
+ * <p>
+ * This is useful during development when there are format changes to
+ * the common data structure.
+ */
 // reset - clear the session storage
 function prefsReset() {
     return makeAccordionEntry(
@@ -555,8 +598,9 @@ function prefsReset() {
             .xAppendChild(
                 xmake('p').xStyle(common.themes._activeProp().general.text)
                     .xInnerHTML(`
-Reset the internal state by clearing the internal session storage and reloading.
-This is useful during development when the common data changes.
+Reset the internal state by clearing the internal session storage and
+reloading. This is useful during development when there are format
+changes to the common data structure.
 `),
                 xmake('div')
                     .xStyle(prefsCenterDiv)
@@ -583,6 +627,13 @@ This is useful during development when the common data changes.
     )
 }
 
+/**
+ * Create the accordion entry that allows the raw internal common data
+ * to be edited.
+ *<p>
+ * This is not for the faint of heart. It can break the program
+ * because it allows full access to the internals.
+ */
 // raw edit of the common data
 function prefsRawEdit() {
     let text = JSON.stringify(common, null, 4)
@@ -595,9 +646,8 @@ function prefsRawEdit() {
             .xAppendChild(
                 xmake('p').xStyle(common.themes._activeProp().general.text)
                     .xInnerHTML(`
-Edit the raw preferences data. This is not for the faint of heart
-because it can break the program but it allows full access to
-the internals.
+Edit the raw preferences data. This is not for the faint of heart.  It
+can break the program because it allows full access to the internals.
 `),
                 xmake('br'),
                 xmake('textarea')
@@ -633,12 +683,11 @@ the internals.
                                 }
                                 if (key === 'themes') {
                                     // do not overwrite the internal fields.
-                                    let list = ['active', 'props', 'colors']
-                                    list.forEach( (k) => { // jshint ignore:line
+                                    for(const k in ['active', 'props', 'colors']) {
                                         if (k in rec[key]) {
                                             common[key][k] = rec[key][k]
                                         }
-                                    })
+                                    }
                                     continue
                                 }
                                 common[key] = rec[key]
@@ -650,7 +699,7 @@ the internals.
                         makeIconButton('copy to clipboard', 'copy', common.icons.copy, () => {
                             let text = document.getElementById(eid).value
                             navigator.clipboard.writeText(text).then((text) => {}, () => {
-                                alert('internal error: paste to clipboard operation failed')})
+                                alert('internal error: clipboard copy operation failed')})
                             statusMsg(`copied ${text.length} bytes`)
                         }),
                         makeIconButton('format JSON', 'format', common.icons.expand, (e) => {
@@ -686,6 +735,12 @@ the internals.
     return  makeAccordionEntry(title, kvpairs)
 }
 
+/**
+ * Create the accordion entry to set the master password.
+ *<p>
+ * This is the pasword that is used encrypt and decrypt data duing
+ * load and save operations.
+ */
 // master password
 function prefsMasterPassword() {
     return makeAccordionEntry(

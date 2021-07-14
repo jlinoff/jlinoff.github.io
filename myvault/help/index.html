@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>myVault</title>
+  <title>Help: myVault</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -85,7 +85,7 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">myVault</h1>
+<h1 class="title">Help: myVault</h1>
 </header>
 <details>
 <summary>
@@ -114,15 +114,15 @@ About
 </tr>
 <tr class="even">
 <td>Version</td>
-<td><code>0.1.26</code></td>
+<td><code>0.1.28</code></td>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2021-06-30T08:58:06-07:00</code></td>
+<td><code>2021-07-13T17:18:41-07:00</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>c7e008b</code></td>
+<td><code>633653c</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -139,6 +139,10 @@ About
 <tr class="even">
 <td>help</td>
 <td><a href="https://jlinoff.github.io/myvault/help/index.html">https://jlinoff.github.io/myvault/help/index.html</a></td>
+</tr>
+<tr class="odd">
+<td>cryptor</td>
+<td><a href="#https://jlinoff.github.io/myvault/myvault/xtra/cryptor.html">https://jlinoff.github.io/myvault/myvault/xtra/cryptor.html</a></td>
 </tr>
 </tbody>
 </table>
@@ -182,9 +186,14 @@ Table of Contents
 <li><a href="#malware--key-logging-and-screen-recording">Malware: Key Logging and Screen Recording</a></li>
 <li><a href="#website-spoofing">Website Spoofing</a></li>
 <li><a href="#protecting-yourself">Protecting Yourself</a></li>
+<li><a href="#mfa">MFA</a></li>
+</ul></li>
+<li><a href="#extras">Extras</a>
+<ul>
+<li><a href="#color2rgb">Color2RGB</a></li>
+<li><a href="#cryptor">Cryptor</a></li>
 </ul></li>
 <li><a href="#themes">Themes</a></li>
-<li><a href="#how-to-get-help">How to get help</a></li>
 <li><a href="#how-to-access-the-app">How to access the app</a></li>
 <li><a href="#how-to-use-the-builtin-example">How to use the builtin example</a></li>
 <li><a href="#how-to-create-the-first-record">How to create the first record</a></li>
@@ -193,7 +202,9 @@ Table of Contents
 <li><a href="#how-to-edit-a-record">How to edit a record</a></li>
 <li><a href="#how-to-delete-a-record">How to delete a record</a></li>
 <li><a href="#how-to-search-for-a-record">How to search for a record</a></li>
-<li><a href="#how-to-run-locally-without-internet-access">How to run locally without internet access</a></li>
+<li><a href="#how-to-get-help">How to get help</a></li>
+<li><a href="#how-to-install-and-run-locally-without-internet-access">How to install and run locally without internet access</a></li>
+<li><a href="#how-to-release-the-webapp">How to release the webapp</a></li>
 <li><a href="#how-to-share-a-records-file">How to share a records file</a></li>
 <li><a href="#how-to-change-the-master-password">How to change the master password</a></li>
 <li><a href="#how-to-import-records-from-json">How to import records from JSON</a></li>
@@ -210,6 +221,7 @@ Table of Contents
 <p><em>myVault</em> also provides built-in password generation for both cryptic and memorable passwords for all password fields, including the master password. See the <a href="#master-password">Master Password</a> for details on cryptic and memorable passwords.</p>
 <p>The app also provides built in example data to allow you to play with the capabilities without committing to anything. It is a great way to get familiar with the program and is also really useful during development.</p>
 <p>I use <em>myVault</em> to store my password information and keep track of books that i have read. The books don’t really need to be secure. I simply use it because it is convenient to use on my mobile devices.</p>
+<p>There is a related utility called <em>cryptor</em> ( <a href="https://jlinoff.github.io/myvault/myvault/xtra/cryptor.html">https://jlinoff.github.io/myvault/myvault/xtra/cryptor.html</a>) that allows you to conveniently encrypt and decrypt any text file with arbitrary data from the browser. You can access it from the <q><code>About</code></q> page. I originally built it as a prototype during development but then found it so useful that i decided to keep it. It is not part of the official <em>myVault</em> webapp because the function, although similar, is more general because <em>cryptor</em> does not care about the format of file contents whereas <em>myVault</em> does care about the format.</p>
 <h2 id="layout">Layout</h2>
 <p>This section describes the layout of the app and talks about each section in detail.</p>
 <p>All sections use accordion panels to display options. Opening the panel provides more information about what it does. There are icons at the top of the accordion panels that allow you to expand or collapse all of the panels at once.</p>
@@ -249,7 +261,7 @@ Table of Contents
 </tr>
 </tbody>
 </table>
-<p>The upper left is reserved for brief ephemeral status messages and the middle is reserved for the titleand subtitles.</p>
+<p>The upper left is reserved for brief ephemeral status messages and the middle is reserved for the title and subtitles.</p>
 <h3 id="about-page">About Page</h3>
 <p>This page contain build information about the webapp. It basically has the same information as the <q>About</q> section at the top of this page. The specific fields are:</p>
 <table>
@@ -304,6 +316,10 @@ Table of Contents
 <td>HelpDoc</td>
 <td>A link to this help documentation.</td>
 </tr>
+<tr class="odd">
+<td>Cryptor</td>
+<td>A link to the <em>cryptor</em> utility.</td>
+</tr>
 </tbody>
 </table>
 <p>You can use the build and git branch information when describing a problem.</p>
@@ -339,7 +355,7 @@ Table of Contents
 </tr>
 <tr class="odd">
 <td>Record Field Templates</td>
-<td>Define templates that can be used to pre-populate the keys in a record. This is very useful when you want a common record format.</td>
+<td>Define templates that can be used to prepopulate the keys in a record. This is very useful when you want a common record format.</td>
 </tr>
 <tr class="even">
 <td>Record Field Name Based Types</td>
@@ -395,19 +411,19 @@ Table of Contents
 <h3 id="records-page">Records Page</h3>
 <p>Work with the records. You can add, change or delete records. The top level records page shows all of the records in accordion panels. You can click on a record accordion panel to see the record details.</p>
 <h4 id="search">Search</h4>
-<p>There is search bar at the top that allows you search for records that match a pattern. The search searches all of the record titles in a case insensitive manner. The default is to search for <em>all</em> records. The search syntax is the Javascript RegEx syntax.</p>
+<p>There is search bar at the top that allows you search for records that match a pattern. The search searches all of the record titles in a case insensitive manner. The default is to search for <em>all</em> records. The search syntax is the Javascript RegExp syntax.</p>
 <p>The records list is updated as you type.</p>
 <h4 id="add-new-record">Add New Record</h4>
 <p>Underneath the search bar there are three buttons: a button to expand all of the accordion panels, a button to collapse the all of the accordion panels and a <q>+</q> button to add a new record. There is also a count of the number of records which match the search criteria.</p>
 <p>When you click on the add new record button a new sub-page appears.</p>
 <p>Enter the data for the fields that you want to add and click on the <q>Create</q> button to create the new record.</p>
-<p>Before entering any field information you can choose a record field template from the <q>Template</q> selection box if you want to use pre-defined fields. This is helpful if you want a common format for the records. Note that you can define your own templates in the <q>Preferences</q>.</p>
+<p>Before entering any field information you can choose a record field template from the <q>Template</q> selection box if you want to use predefined fields. This is helpful if you want a common format for the records. Note that you can define your own templates in the <q>Preferences</q>.</p>
 <p>Click the <q>Discard</q> button to discard the changes and go back to the main records page.</p>
 <p>The <q>Add Field</q> button allows you to append a new field which is a new row at the end with name and a value.</p>
 <p>A field will not be included in a record if either the name or the value are empty.</p>
 <p>Certain field names will change the value type. For example a field named <q>password</q> will create a password input. There are three value types: string (basic input), textarea (multi-line input) and password (a password field). The field type will change <em>as you type the name</em>. Thus the name <q>passwor</q> (missing the final <q>d</q>) will be string field but when you type the final <q>d</q>, the value field will change to a password. You can define the mapping between field names and field values in the <q>Preferences</q> in the <q>Record Field Name Based Types</q> accordion entry.</p>
 <h4 id="view-record">View Record</h4>
-<p>When a record is expanded you will see a view of its contents. Urls will be seen as links (the program figure that out automatically), passwords will not be displayed (you can see them by clicking on the eye icon). All fields can be copied to the clipboard by clicking the copy icon on the far right.</p>
+<p>When a record is expanded you will see a view of its contents. URLs will be seen as links (the program figure that out automatically), passwords will not be displayed (you can see them by clicking on the eye icon). All fields can be copied to the clipboard by clicking the copy icon on the far right.</p>
 <h4 id="delete-record">Delete Record</h4>
 <p>A record can be deleted by clicking on the trashcan icon in view mode. See the <q>how to</q> entries in subsequent sections for details.</p>
 <h4 id="edit-record">Edit Record</h4>
@@ -457,11 +473,11 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 <p>The encryption algorithm is AES-256 which is considered quite secure and should be relatively safe from future quantum attacks. Furthermore, the encryption algorithm runs <em>inside</em> the browser so, as mentioned earlier, your data is never shipped to an external server.</p>
 <p>I recommend creating a memorable password (<a href="#memorable">Memorable</a> below) because this is the <em>only</em> password that you have to remember to access all of your password records. It may even make sense to write it down and store it in a secure place.</p>
 <h2 id="automatic-password-generation">Automatic Password Generation</h2>
-<p>lll passwords (including the master password) have four extra buttona: an eye button to let you view the password as plaintext, a single gear button that generates a <em>cryptic</em> password, a multiple gear button that generates a <em>memorable</em> password and a copy button that copies the password to the clipboard that can be pasted externally.</p>
+<p>all passwords (including the master password) have four extra buttons: an eye button to let you view the password as plaintext, a single gear button that generates a <em>cryptic</em> password, a multiple gear button that generates a <em>memorable</em> password and a copy button that copies the password to the clipboard that can be pasted externally.</p>
 <h3 id="cryptic">Cryptic</h3>
-<p>Cryptic passwords are secure, hard to remember passwords that are a pseudo random collection of upper case letters, lower case letters, numbers and special characters. Here are two examples of cryptic passwords: <q><code>t0t5Q2eL!6E7!s6nWp6lv1</code></q> and <q><code>SiPeD_dLQa03NIG</code></q>.</p>
+<p>Cryptic passwords are secure, hard to remember passwords that are a pseudo random collection of upper case letters, lower case letters,, numbers and special characters. Here are two examples of cryptic passwords: <q><code>t0t5Q2eL!6E7!s6nWp6lv1</code></q> and <q><code>SiPeD_dLQa03NIG</code></q>.</p>
 <h3 id="memorable">Memorable</h3>
-<p>Memorable passwords are secure, easy to remember passwords that are composed of three pseudo randomly chosen english words separated by a slash. Here are two examples of memorable passwords: <q><code>farming/naval/decision</code></q> and <q><code>viewed/frequencies/looking</code></q>.</p>
+<p>Memorable passwords are secure, easy to remember passwords that are composed of three pseudo randomly chosen English words separated by a slash. Here are two examples of memorable passwords: <q><code>farming/naval/decision</code></q> and <q><code>viewed/frequencies/looking</code></q>.</p>
 <h3 id="custom">Custom</h3>
 <p>The cryptic and memorable buttons make it easy to generate passwords automatically but if you prefer another style you can always enter your passwords manually.</p>
 <h2 id="security">Security</h2>
@@ -492,19 +508,28 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 <ol type="1">
 <li>Keep all of your security patches up to date.</li>
 <li>Keep malware off of your systems.</li>
-<li>Make sure that you are not observered.</li>
+<li>Make sure that you are not observed.</li>
 <li>Never share sensitive information (like passwords).</li>
 <li>Backup your data.</li>
 </ol>
+<h3 id="mfa">MFA</h3>
+<p>Several folks asked why multi-factor authentication (MFA) was not included to provide and additional layer of security.</p>
+<p>I deliberately did not include MFA because it requires an authentication/authorization service and I want this application to <em>never</em> talk to the internet unless the user explicitly requests access to a known shared file service through the <q><code>Load</code></q> or <q><code>Save</code></q> pages. In other words, you should never see any internet traffic originating from this webapp that you cannot account for.</p>
+<h3 id="extras">Extras</h3>
+<p>There were a couple of single page web apps that i developed while building <em>myVault</em>. They turned out to be so useful that i left them in. They are not elegant or well designed or well tested.</p>
+<h3 id="color2rgb">Color2RGB</h3>
+<p>This is a utility page that allows you to type in any color name and have it normalized to its RGB and hex value. For example <code>red</code> –&gt; <code>#ff0000</code> and <code>rgb(255,0,0)</code>. To access it click here: <a href="/myvault/xtra/color2rgb.html">xtra/color2rgb.html</a>.</p>
+<h3 id="cryptor">Cryptor</h3>
+<p>This is a utility page that allows you to encrypt and decrypt arbitrary data with cryptic, memorable or custom passwords. It can load from and save to files and the clipboard. I have found it to be very useful for encrypting arbitrary files. To access it click here: <a href="/myvault/xtra/cryptor.html">xtra/cryptor.html</a>.</p>
 <h2 id="themes">Themes</h2>
-<p>A theme is composed of a set of colors (foreground and background) and a set of properties that define other syle information. Each theme also has a unique name. Theme colors and properties are can be selected and/or defined on the <q><code>Preferences</code></q> page.</p>
+<p>A theme is composed of a set of colors (foreground and background) and a set of properties that define other style information. Each theme also has a unique name. Theme colors and properties are can be selected and/or defined on the <q><code>Preferences</code></q> page.</p>
 <p>The idea behind themes is to make the CSS styling dynamic to allow users to change and save styles from the UI. The current implementation is poor because it is too complex and is not documented.</p>
-<p>The current properties are <em>standard</em> and <em>large</em>. They are a first appproximation of styles that make the webapp usable for different screen sizes. I use <em>standard</em> on my laptop and <em>large</em> in landscape mode on my mobiles devices.</p>
+<p>The current properties are <em>standard</em> and <em>large</em>. They are a first approximation of styles that make the webapp usable for different screen sizes. I use <em>standard</em> on my laptop and <em>large</em> in landscape mode on my mobiles devices.</p>
 <p>When a theme color or property is changed, the display is updated immediately.</p>
 <h2 id="how-to-access-the-app">How to access the app</h2>
 <p>Navigate to <a href="https://jlinoff.github.io/myvault/">https://jlinoff.github.io/myvault/</a> in your browser.</p>
 <h2 id="how-to-share-a-records-file">How to share a records file</h2>
-<p>The easiest way to share records is to save the records file to a shared volume from the <q><code>Save</code></q> page to a shareable resource like <em>Google Drive</em> or <em>iCloud</em>. Then provide the password to other folks entrused to access the data.</p>
+<p>The easiest way to share records is to save the records file to a shared volume from the <q><code>Save</code></q> page to a shareable resource like <em>Google Drive</em> or <em>iCloud</em>. Then provide the password to other folks entrusted to access the data.</p>
 <blockquote>
 <p>Take care in transmitting the password to keep the data safe.</p>
 </blockquote>
@@ -556,7 +581,7 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 <li>Click the <q><code>Download</code></q> button.</li>
 </ol>
 <h2 id="how-to-view-a-record">How to view a record</h2>
-<p>To view a record, load the data as described in the <a href="#how-to-create-a-second-record-section">How to create a second record section</a>, navigate to the <q><code>Records</code></q> page and click on the record you want to view. It will expand to show the record data in a read-only form. Passwords are never shown to protect from over the shoulder surfing. You can make them visible by clicking on the eye icon. All fields can be copied to the clipboard by clickin on the copy icon.</p>
+<p>To view a record, load the data as described in the <a href="#how-to-create-a-second-record-section">How to create a second record section</a>, navigate to the <q><code>Records</code></q> page and click on the record you want to view. It will expand to show the record data in a read-only form. Passwords are never shown to protect from over the shoulder surfing. You can make them visible by clicking on the eye icon. All fields can be copied to the clipboard by clicking on the copy icon.</p>
 <h2 id="how-to-edit-a-record">How to edit a record</h2>
 <p>To edit a record, first view the record and then click on the pencil icon.</p>
 <p>The shows an edit view of the record inline. The up/down arrows allow you to move the fields rows up an down.</p>
@@ -565,27 +590,93 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 <p>To delete a record, first view the record and then click on the trashcan icon.</p>
 <h2 id="how-to-search-for-a-record">How to search for a record</h2>
 <p>On the records page the search bar allows you to search for a record. Simply type in any words that are in the title and it will find records that match as you type.</p>
-<h2 id="how-to-run-locally-without-internet-access">How to run locally without internet access</h2>
+<h2 id="how-to-get-help">How to get help</h2>
+<p>To get help, navigate to <a href="https://jlinoff.github.io/myvault/">https://jlinoff.github.io/myvault/</a>, click on the <q><code>About</code></q> menu option then click on <q><code>HelpDoc</code></q> entry in the table.</p>
+<p>The help document is generated from the <code>README.md</code> during the build process so that it can be associated with each release.</p>
+<h2 id="how-to-install-and-run-locally-without-internet-access">How to install and run locally without internet access</h2>
 <p>These are the steps to run the web app locally without internet access.</p>
 <blockquote>
 <p>Note that you will need internet access to set things up.</p>
 </blockquote>
-<p>You must have a number of dev tools installed:</p>
-<ol type="1">
-<li><code>gnu make</code></li>
-<li><code>rust</code></li>
-<li><code>python3</code></li>
-<li><code>pipenv</code></li>
-<li><code>jshint</code> (node)</li>
-</ol>
+<p>You must have a number of dev tools installed. They are shown in the table below.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Tool</th>
+<th>Aliases</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>apsell</td>
+<td><em>none</em></td>
+<td>ASCII spell checker</td>
+</tr>
+<tr class="even">
+<td>column</td>
+<td><em>none</em></td>
+<td>columnizer tool</td>
+</tr>
+<tr class="odd">
+<td>grep</td>
+<td><em>none</em></td>
+<td>must support <em>-E</em></td>
+</tr>
+<tr class="even">
+<td>jsdoc</td>
+<td><em>none</em></td>
+<td>javascript source code documentation generator</td>
+</tr>
+<tr class="odd">
+<td>jshint</td>
+<td><em>none</em></td>
+<td>relativtly unopinionated javascript linter</td>
+</tr>
+<tr class="even">
+<td>make</td>
+<td>gmake</td>
+<td>GNU make</td>
+</tr>
+<tr class="odd">
+<td>pipenv</td>
+<td><em>none</em></td>
+<td>python environment wrapper</td>
+</tr>
+<tr class="even">
+<td>pytho3n</td>
+<td><em>none</em></td>
+<td>python 3.9</td>
+</tr>
+<tr class="odd">
+<td>rust</td>
+<td><em>none</em></td>
+<td>The rust compiler</td>
+</tr>
+<tr class="even">
+<td>sed</td>
+<td>gsed</td>
+<td>GNU sed</td>
+</tr>
+<tr class="odd">
+<td>sort</td>
+<td>gsort</td>
+<td>GNU sort</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>The build system recognize both the tool and alternate names.</p>
+</blockquote>
+<p>The aliases are for systems like Mac OS that use ancient versions of standard tools. It allows <em>make</em> to recognize the more modern versions that were installed with tools like <em>macports</em>.</p>
 <p>Once that is done here are the steps to set it up.</p>
 <ol type="1">
-<li>Get the source code.
+<li>Get the project.
 <ol type="1">
 <li><code>git clone https://github.com/jlinoff/myvault</code></li>
 <li><code>cd myvault</code></li>
 </ol></li>
-<li>Build and test it locally.
+<li>Build and test it locally. This is required to build the Rust components, the version data and to generate the documentation.
 <ol type="1">
 <li><code>make</code> (try <code>make help</code> for info about all available targets).</li>
 </ol></li>
@@ -593,12 +684,32 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 <ol type="1">
 <li><code>make server</code></li>
 </ol></li>
-<li>Navigate to http://localhost:8000</li>
+<li>Navigate to http://localhost:8000 in your favorite browser.</li>
 </ol>
 <p>If you want a port other than 8000 (say 9000), run <code>make server PORT=9000</code>.</p>
-<h2 id="how-to-get-help">How to get help</h2>
-<p>To get help, navigate to <a href="https://jlinoff.github.io/myvault/">https://jlinoff.github.io/myvault/</a>, click on the <q><code>About</code></q> menu option then click on <q><code>HelpDoc</code></q> entry in the table.</p>
-<p>The help document is generated from the <code>README.md</code> during the build process so that it can be associated with each release.</p>
+<h2 id="how-to-release-the-webapp">How to release the webapp</h2>
+<p><em>myVault</em> is released by running <q><code>make webapp</code></q> after building and testing changed. That target creates the <q><code>webapp.tar</code></q> archive which can be extracted to create a <code>myvault</code> directory tree. Here at the steps.</p>
+<ol type="1">
+<li>Get the project.
+<ol type="1">
+<li><code>git clone https://github.com/jlinoff/myvault</code></li>
+<li><code>cd myvault</code></li>
+</ol></li>
+<li>Make changes.</li>
+<li>Build and test it locally. This is required to build the Rust components, the version data and to generate the documentation.
+<ol type="1">
+<li><code>make</code> (try <code>make help</code> for info about all available targets).</li>
+</ol></li>
+<li>Create the release archive.
+<ol type="1">
+<li><code>make webapp</code></li>
+</ol></li>
+<li>Copy to the website and extract. There are many different ways to do this depending on how your website is setup.
+<ol type="1">
+<li><code>scp webapp.tar your-website:/www/</code></li>
+<li><code>ssh your-website "cd /www/ &amp;&amp; tar xf webapp.tar &amp;&amp; rm -f webapp.tar"</code></li>
+</ol></li>
+</ol>
 <h2 id="how-to-change-the-master-password">How to change the master password</h2>
 <p>The master password must be changed after the records file has been loaded but before it is saved. Here are the steps for a records file named <q><code>mystuff.txt</code></q>.</p>
 <ol type="1">

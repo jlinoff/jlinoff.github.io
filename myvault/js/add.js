@@ -1,4 +1,8 @@
-import { common } from '/myvault/js/common.js'
+/**
+ * Show the add records page.
+ * @module add
+*/
+import { common, getFieldValueType } from '/myvault/js/common.js'
 import { hideAll } from '/myvault/js/utils.js'
 import { hideMenu  } from '/myvault/js/header.js'
 import { makePasswordEntryWithId } from '/myvault/js/password.js'
@@ -6,16 +10,26 @@ import { xmake,
          makeInputXWrapper,
          makeTextButton,
          makeIconButton,
-         getFieldType,
          isURL
        } from '/myvault/js/utils.js'
 // do we really need both?
 import { showDataPage, showDataPageInternal } from '/myvault/js/data.js' // TODO: hate this circular dependency
 
+/**
+ * The grid label style, populated by the theme.
+ */
 var gridLabelStyle = {}
+
+/**
+ * The grid value style, populated by the theme.
+ */
 var gridValueStyle = {}
 
-// Define and create a new record.
+/** 
+ * Define and create a new record.
+ * @param {event} event The click event that triggered the add.
+ * @param {string} title The page title.
+ */
 export function addRecord(event, title) {
     hideAll()
     hideMenu()
@@ -119,7 +133,11 @@ A field is ignored if the name or the value is empty.
     }
 }
 
-// Create a field (key and value)
+/**
+ * Create a field (key and value).
+ * It creates label and value element that align in the grid.
+ * @param {number} fid The unique field id.
+ */
 function createField(fid) {
     let kid = 'x-data-field-key-' + fid
     let vid = 'x-data-field-value-'+ fid
@@ -162,13 +180,13 @@ function createField(fid) {
 
     return xmake('div')
         .xStyle(common.themes._activeProp().records.gridContainer)
-        /*.xStyle({
-            display: 'grid',
-            gridTemplateColumns: 'max-content auto', // label value
-            paddingTop: '10px'})*/
         .xAppendChild(key, val)
 }
 
+/**
+ * Create the selection box the field templates.
+ * This allows fields to pre-populated for convenience.
+ */
 function createTemplateSelectBox() {
     let select = xmake('span')
     let tmpls = xmake('select').xId('x-data-templates')
@@ -206,14 +224,21 @@ function createTemplateSelectBox() {
     return select
 }
 
-// This function changes the type of the fname input element based on type defined by the field name.
-// For example a field named "password" would change the fname input element type to a password input element.
-// A field named "text" would change the fname input element type to a textarea element.
+/**
+ * Changes the field value element types based on the field label (fname) from the label input element.
+* <p>
+ * For example a field named "password" would change the value element type to a password input element subtree.
+ * A field named "text" would change the value element type to a textarea element.
+ * A field named "foo" would keep the value element type as a text input.
+ * The mapping between field names and value types is defined in common.ftypes.
+ * @param {fname} fname The field name.
+ * @param {number} fid The unique field number.
+ */
 export function fieldNameHandler(fname, fid) {
     let vcls = 'x-data-field-value-element'
     let vid = 'x-data-field-value-' + fid
     let vpid = vid + '-parent'
-    let ftype = getFieldType(fname)
+    let ftype = getFieldValueType(fname)
     let e = document.getElementById(vid)
     let oldval = e.value
     let placeholder = `field ${ fid } value`
@@ -305,8 +330,13 @@ export function fieldNameHandler(fname, fid) {
     }
 }
 
-function clearFields(id) {
-    for (const obj of document.getElementsByClassName(id)) {
+/**
+ * Clear all of the fields.
+ * It finds the fields by searching for all elements in a pre-defined class.
+ * @param {string} class The class of all of thethe add record fields.
+ */
+function clearFields(cls) {
+    for (const obj of document.getElementsByClassName(cls)) {
         if (obj.tagName === 'TEXTAREA') {
             obj.innerHTML = ''
         } else if (obj.tagName === 'INPUT') {
@@ -315,7 +345,12 @@ function clearFields(id) {
     }
 }
 
-// get the last field number defined
+/**
+ * Get the last field number defined by searching all of the fields that were created.
+ *<p>
+ * It finds the fields by searching for all elements in a pre-defined class.
+ * @returns {number} The number of the last field defined.
+*/
 function getLastFieldNumber() {
     let m = 0
     let kcls = 'x-data-field-key-element'
@@ -327,7 +362,11 @@ function getLastFieldNumber() {
     return m
 }
 
-// Create a new record.
+/**
+ * Create a new record based on all of the fields defined.
+ *<p>
+ * It finds the fields by searching for all elements in a pre-defined class.
+*/
 function createRecord() {
     let kcls = 'x-data-field-key-element'
     let vcls = 'x-data-field-value-element'
