@@ -1,7 +1,7 @@
-import { enableFunctionChaining, xmake } from '/js/utils.js'
-import { VERSION, BUILD, GIT_COMMIT_ID, GIT_BRANCH } from '/js/version.js'
-import { generateCrypticPassword, generateMemorablePassword } from '/js/password.js'
-import { words } from '/js/en_words.js'
+import { enableFunctionChaining, xmake } from '/myvault/js/utils.js'
+import { VERSION, BUILD, GIT_COMMIT_ID, GIT_BRANCH } from '/myvault/js/version.js'
+import { generateCrypticPassword, generateMemorablePassword } from '/myvault/js/password.js'
+import { words } from '/myvault/js/en_words.js'
 import init, {
     decrypt,
     encrypt,
@@ -10,7 +10,7 @@ import init, {
     get_num_algorithms,
     header_prefix,
     header_suffix,
-} from '/js/crypt.js';
+} from '/myvault/js/crypt.js';
 
 enableFunctionChaining()
 
