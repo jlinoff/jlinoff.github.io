@@ -3,6 +3,6 @@
  * @module version
  */
 export var VERSION = '0.1.30'
-export var BUILD = '2021-07-15T18:19:25-07:00'
-export var GIT_COMMIT_ID = 'b3645c2'
+export var BUILD = '2021-07-15T18:41:28-07:00'
+export var GIT_COMMIT_ID = '3c7a093'
 export var GIT_BRANCH = 'main'
