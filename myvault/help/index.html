@@ -5,92 +5,84 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Help: myVault</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
-    q { quotes: "“" "”" "‘" "’"; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      {   }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-    code span.at { color: #7d9029; } /* Attribute */
-    code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #4070a0; } /* Char */
-    code span.cn { color: #880000; } /* Constant */
-    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-    code span.dt { color: #902000; } /* DataType */
-    code span.dv { color: #40a070; } /* DecVal */
-    code span.er { color: #ff0000; font-weight: bold; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #40a070; } /* Float */
-    code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
-    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-    code span.op { color: #666666; } /* Operator */
-    code span.ot { color: #007020; } /* Other */
-    code span.pp { color: #bc7a00; } /* Preprocessor */
-    code span.sc { color: #4070a0; } /* SpecialChar */
-    code span.ss { color: #bb6688; } /* SpecialString */
-    code span.st { color: #4070a0; } /* String */
-    code span.va { color: #19177c; } /* Variable */
-    code span.vs { color: #4070a0; } /* VerbatimString */
-    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      q { quotes: "“" "”" "‘" "’"; }
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="index.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
 <body>
 <header id="title-block-header">
 <h1 class="title">Help: myVault</h1>
 </header>
 <details>
-<summary>
-About
-</summary>
+<p><summary>About</summary></p>
 <p>The meta data in the table is populated during the build process when the on-line help is generated.</p>
 <table>
 <thead>
@@ -114,19 +106,11 @@ About
 </tr>
 <tr class="even">
 <td>Version</td>
-<td><code>0.1.32</code></td>
+<td><code>0.1.33</code></td>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2021-07-16T14:53:15-07:00</code></td>
-</tr>
-<tr class="even">
-<td>GitCommitId</td>
-<td><code>5c2e364</code></td>
-</tr>
-<tr class="odd">
-<td>GitBranch</td>
-<td><code>main</code></td>
+<td>`<code>| | GitCommitId |</code>122d0a6<code>| | GitBranch |</code>docker`</td>
 </tr>
 <tr class="even">
 <td>project</td>
@@ -148,9 +132,7 @@ About
 </table>
 </details>
 <details>
-<summary>
-Table of Contents
-</summary>
+<p><summary>Table of Contents</summary></p>
 <!--ts-->
 <ul>
 <li><a href="#overview">Overview</a></li>
@@ -204,6 +186,9 @@ Table of Contents
 <li><a href="#how-to-search-for-a-record">How to search for a record</a></li>
 <li><a href="#how-to-get-help">How to get help</a></li>
 <li><a href="#how-to-install-and-run-locally-without-internet-access">How to install and run locally without internet access</a></li>
+<li><a href="#How-to-develop-using-the-myvault-dev-docker-container">How to develop using the myvault-dev docker container</a></li>
+<li><a href="#how-to-test-github-actions-locally">How to test github actions locally</a></li>
+<li><a href="#how-to-download-the-github-workflow-artifact">How to download the github workflow artifact</a></li>
 <li><a href="#how-to-release-the-webapp">How to release the webapp</a></li>
 <li><a href="#how-to-share-a-records-file">How to share a records file</a></li>
 <li><a href="#how-to-change-the-master-password">How to change the master password</a></li>
@@ -629,51 +614,56 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 <td>rust lint tool</td>
 </tr>
 <tr class="odd">
+<td>git</td>
+<td><em>none</em></td>
+<td>source code version control system</td>
+</tr>
+<tr class="even">
 <td>grep</td>
 <td><em>none</em></td>
 <td>must support <em>-E</em></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>jsdoc</td>
 <td><em>none</em></td>
 <td>javascript source code documentation generator</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>jshint</td>
 <td><em>none</em></td>
 <td>relatively unopinionated javascript linter</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>make</td>
 <td>gmake</td>
 <td>GNU make</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>pipenv</td>
 <td><em>none</em></td>
 <td>python environment wrapper</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>python3</td>
 <td><em>none</em></td>
 <td>python 3.9</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>rustc</td>
 <td><em>none</em></td>
 <td>rust compiler</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>sed</td>
 <td>gsed</td>
 <td>GNU sed</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>sort</td>
 <td>gsort</td>
 <td>GNU sort</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>wasm-pack</td>
 <td><em>none</em></td>
 <td>rust webassembly build tool</td>
@@ -682,6 +672,9 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 </table>
 <blockquote>
 <p>The build system recognize both the tool and alternate names.</p>
+</blockquote>
+<blockquote>
+<p>Note that only make and docker are needed if you use the docker container described in the next section.</p>
 </blockquote>
 <p>The aliases are for systems like Mac OS that use ancient versions of standard tools. It allows <em>make</em> to recognize the more modern versions that were installed with tools like <em>macports</em>.</p>
 <p>Once that is done here are the steps to set it up.</p>
@@ -702,17 +695,98 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 <li>Navigate to http://localhost:8000 in your favorite browser.</li>
 </ol>
 <p>If you want a port other than 8000 (say 9000), run <code>make server PORT=9000</code>.</p>
-<h2 id="how-to-release-the-webapp">How to release the webapp</h2>
-<p><em>myVault</em> is released by running <q><code>make webapp</code></q> after building and testing changed. That target creates the <q><code>webapp.tar</code></q> archive which can be extracted to create a <code>myvault</code> directory tree. Here at the steps.</p>
+<h2 id="how-to-develop-using-the-myvault-dev-docker-container">How to develop using the myvault-dev docker container</h2>
+<p><em>myVault</em> can define a docker container that you can use for local development. It allows you to build, test and serve the system without installing any software other than docker and gnu make.</p>
+<p>You must have a small number of dev tools installed for this approach. They are shown in the table below.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Tool</th>
+<th>Aliases</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>docker</td>
+<td><em>none</em></td>
+<td>system for managing containerized apps</td>
+</tr>
+<tr class="even">
+<td>git</td>
+<td><em>none</em></td>
+<td>source code version control system</td>
+</tr>
+<tr class="odd">
+<td>make</td>
+<td>gmake</td>
+<td>GNU make</td>
+</tr>
+</tbody>
+</table>
+<p>The steps for setting up and using the container are:</p>
 <ol type="1">
 <li>Get the project.
 <ol type="1">
 <li><code>git clone https://github.com/jlinoff/myvault</code></li>
 <li><code>cd myvault</code></li>
 </ol></li>
-<li>Make changes.</li>
-<li>Build and test it locally. This is required to build the Rust components, the version data and to generate the documentation.
+<li>Create the container, build the project and log in.
 <ol type="1">
+<li><code>make dev</code></li>
+</ol></li>
+<li>Once logged into the container you can run any of the <code>make</code> or <code>git</code> commands as well as tools like <code>aspell</code>. A typical command sequence might look something like this.
+<ol type="1">
+<li><code>git checkout -b new-branch</code></li>
+<li><code>make</code></li>
+<li><code>git status</code></li>
+<li><code>make server</code></li>
+</ol></li>
+</ol>
+<blockquote>
+<p>Note if you want to re-install the pipenv environment in the container (perhaps after a <code>make clean</code>) you must run <code>pipenv install -d --python=python3.9</code> to ensure that the correct version of python is found.</p>
+</blockquote>
+<p>On the host you can watch the build status by:</p>
+<ol type="1">
+<li>Running <code>docker ps</code> to get the container id.</li>
+<li>Then running something like: <code>docker exec it 789173edc736 htop</code>. Where <code>789173edc736</code> is the container id.</li>
+</ol>
+<p>To run the web server from the container run <code>make server</code> in the container and then browse to http://localhost:8007 on the host.</p>
+<h2 id="how-to-test-github-actions-locally">How to test github actions locally</h2>
+<p>I used https://github.com/nektos/act to test <code>.github/workflows/build.yaml</code> locally. It is a great tool and strongly recommend it.</p>
+<blockquote>
+<p>Note that you must have <code>golang</code> installed.</p>
+</blockquote>
+<p>Here is how you install it.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="va">GOBIN=</span><span class="st">&quot;/home/jlinoff/bin&quot;</span> <span class="ex">go</span> install github.com/nektos/act@master</a></code></pre></div>
+<p>Once it is installed, simply run the <code>act</code> command in the <em>myVault</em> project directory.</p>
+<blockquote>
+<p>Note that I had to comment out the <code>uppload webapp</code> step in <code>build.yaml</code> because upload is not yet supported.</p>
+</blockquote>
+<h2 id="how-to-download-the-github-workflow-artifact">How to download the github workflow artifact</h2>
+<p>When the github actions are run a webapp workflow artifact is created. Here is how to download it.</p>
+<ol type="1">
+<li>List all artifacts.
+<ol type="1">
+<li><code>curl -H 'Accept: application/vnd.github.v3+json' https://api.github.com/repos/jlinoff/myvault/actions/artifacts</code></li>
+</ol></li>
+<li>Choose the one that you want (for this example <code>75537995</code>).</li>
+<li>Download it (required valid access credentials).
+<ol type="1">
+<li><code>curl -u jlinoff -L https://api.github.com/repos/jlinoff/myvault/actions/artifacts/75537995/zip -o artifact.zip</code></li>
+</ol></li>
+</ol>
+<h2 id="how-to-release-the-webapp">How to release the webapp</h2>
+<p><em>myVault</em> is released by running <q><code>make webapp</code></q> after building and testing changed. That target creates the <q><code>webapp.tar</code></q> archive which can be extracted to create a <code>myvault</code> directory tree that can be installed on a web server. This is how the project is bundled for release to http:jlinoff.github.io/myvault. Here are the steps.</p>
+<ol type="1">
+<li>Get the project.
+<ol type="1">
+<li><code>git clone https://github.com/jlinoff/myvault</code></li>
+<li><code>cd myvault</code></li>
+</ol></li>
+<li>Make changes.
+<ol start="3" type="1">
+<li>Build and test it locally. This is required to build the Rust components, the version data and to generate the documentation.</li>
 <li><code>make</code> (try <code>make help</code> for info about all available targets).</li>
 </ol></li>
 <li>Create the release archive.
@@ -744,12 +818,12 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 </ol>
 <h2 id="how-to-import-records-from-json">How to import records from JSON</h2>
 <p>It is sometimes convenient to be able import many records at once. If, for example, you want to transfer records between records files. This can be done using the <q><code>Raw Edit</code></q> function on the <q><code>Preferences</code></q> page. This example shows how to create a simple password record named <q><code>Acme Utensils for Coyotes</code></q>. The JSON is shown below:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;__id__&quot;</span> <span class="fu">:</span> <span class="st">&quot;Acme Utensils for Coyotes&quot;</span><span class="fu">,</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://roadrunner.io&quot;</span><span class="fu">,</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;username&quot;</span><span class="fu">:</span> <span class="st">&quot;wilec&quot;</span><span class="fu">,</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;password&quot;</span><span class="fu">:</span> <span class="st">&quot;roadrunnersaredelicious&quot;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">&quot;__id__&quot;</span> <span class="fu">:</span> <span class="st">&quot;Acme Utensils for Coyotes&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://roadrunner.io&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="dt">&quot;username&quot;</span><span class="fu">:</span> <span class="st">&quot;wilec&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="dt">&quot;password&quot;</span><span class="fu">:</span> <span class="st">&quot;roadrunnersaredelicious&quot;</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="fu">}</span></a></code></pre></div>
 <p>This JSON defines a record that follows the built-in <em>PASS4</em> records template.</p>
 <p>Here are the steps required to add it the example:</p>
 <ol type="1">

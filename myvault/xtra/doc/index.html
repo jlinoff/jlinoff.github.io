@@ -162,6 +162,9 @@
 <li><a href="#how-to-search-for-a-record">How to search for a record</a></li>
 <li><a href="#how-to-get-help">How to get help</a></li>
 <li><a href="#how-to-install-and-run-locally-without-internet-access">How to install and run locally without internet access</a></li>
+<li><a href="#How-to-develop-using-the-myvault-dev-docker-container">How to develop using the myvault-dev docker container</a></li>
+<li><a href="#how-to-test-github-actions-locally">How to test github actions locally</a></li>
+<li><a href="#how-to-download-the-github-workflow-artifact">How to download the github workflow artifact</a></li>
 <li><a href="#how-to-release-the-webapp">How to release the webapp</a></li>
 <li><a href="#how-to-share-a-records-file">How to share a records file</a></li>
 <li><a href="#how-to-change-the-master-password">How to change the master password</a></li>
@@ -772,6 +775,11 @@ it can be associated with each release.</p>
 <td>rust lint tool</td>
 </tr>
 <tr>
+<td>git</td>
+<td><em>none</em></td>
+<td>source code version control system</td>
+</tr>
+<tr>
 <td>grep</td>
 <td><em>none</em></td>
 <td>must support <em>-E</em></td>
@@ -826,6 +834,9 @@ it can be associated with each release.</p>
 <blockquote>
 <p>The build system recognize both the tool and alternate names.</p>
 </blockquote>
+<blockquote>
+<p>Note that only make and docker are needed if you use the docker container described in the next section.</p>
+</blockquote>
 <p>The aliases are for systems like Mac OS that use ancient versions of
 standard tools. It allows <em>make</em> to recognize the more modern versions
 that were installed with tools like <em>macports</em>.</p>
@@ -850,10 +861,39 @@ that were installed with tools like <em>macports</em>.</p>
 <li>Navigate to http://localhost:8000 in your favorite browser.</li>
 </ol>
 <p>If you want a port other than 8000 (say 9000), run <code>make server PORT=9000</code>.</p>
-<h2>How to release the webapp</h2>
-<p><em>myVault</em> is released by running &quot;<code>make webapp</code>&quot; after building and testing changed.
-That target creates the &quot;<code>webapp.tar</code>&quot; archive which can be extracted to create a
-<code>myvault</code> directory tree. Here at the steps.</p>
+<h2>How to develop using the myvault-dev docker container</h2>
+<p><em>myVault</em> can define a docker container that you can use for local
+development. It allows you to build, test and serve the system without
+installing any software other than docker and gnu make.</p>
+<p>You must have a small number of dev tools installed for this
+approach. They are shown in the table below.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Aliases</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>docker</td>
+<td><em>none</em></td>
+<td>system for managing containerized apps</td>
+</tr>
+<tr>
+<td>git</td>
+<td><em>none</em></td>
+<td>source code version control system</td>
+</tr>
+<tr>
+<td>make</td>
+<td>gmake</td>
+<td>GNU make</td>
+</tr>
+</tbody>
+</table>
+<p>The steps for setting up and using the container are:</p>
 <ol>
 <li>Get the project.
 <ol>
@@ -861,8 +901,76 @@ That target creates the &quot;<code>webapp.tar</code>&quot; archive which can be
 <li><code>cd myvault</code></li>
 </ol>
 </li>
-<li>Make changes.</li>
-<li>Build and test it locally. This is required to build the Rust components, the version data and to generate the documentation.
+<li>Create the container, build the project and log in.
+<ol>
+<li><code>make dev</code></li>
+</ol>
+</li>
+<li>Once logged into the container  you can run any of the <code>make</code> or <code>git</code> commands as well as tools like <code>aspell</code>. A typical command sequence might look something like this.
+<ol>
+<li><code>git checkout -b new-branch</code></li>
+<li><code>make</code></li>
+<li><code>git status</code></li>
+<li><code>make server</code></li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>Note if you want to re-install the pipenv environment in the
+container (perhaps after a <code>make clean</code>) you must run
+<code>pipenv install -d --python=python3.9</code> to ensure that the
+correct version of python is found.</p>
+</blockquote>
+<p>On the host you can watch the build status by:</p>
+<ol>
+<li>Running <code>docker ps</code> to get the container id.</li>
+<li>Then running something like: <code>docker exec it 789173edc736 htop</code>. Where <code>789173edc736</code> is the container id.</li>
+</ol>
+<p>To run the web server from the container run <code>make server</code> in the container
+and then browse to http://localhost:8007 on the host.</p>
+<h2>How to test github actions locally</h2>
+<p>I used https://github.com/nektos/act to test <code>.github/workflows/build.yaml</code> locally. It is a great
+tool and strongly recommend it.</p>
+<blockquote>
+<p>Note that you must have <code>golang</code> installed.</p>
+</blockquote>
+<p>Here is how you install it.</p>
+<pre class="prettyprint source lang-bash"><code>GOBIN=&quot;/home/jlinoff/bin&quot; go install github.com/nektos/act@master
+</code></pre>
+<p>Once it is installed, simply run the <code>act</code> command in the <em>myVault</em> project directory.</p>
+<blockquote>
+<p>Note that I had to comment out the <code>uppload webapp</code> step in <code>build.yaml</code> because
+upload is not yet supported.</p>
+</blockquote>
+<h2>How to download the github workflow artifact</h2>
+<p>When the github actions are run a webapp workflow artifact is created. Here is how to download it.</p>
+<ol>
+<li>List all artifacts.
+<ol>
+<li><code>curl -H 'Accept: application/vnd.github.v3+json' https://api.github.com/repos/jlinoff/myvault/actions/artifacts</code></li>
+</ol>
+</li>
+<li>Choose the one that you want (for this example <code>75537995</code>).</li>
+<li>Download it (required valid access credentials).
+<ol>
+<li><code>curl -u jlinoff -L https://api.github.com/repos/jlinoff/myvault/actions/artifacts/75537995/zip -o artifact.zip</code></li>
+</ol>
+</li>
+</ol>
+<h2>How to release the webapp</h2>
+<p><em>myVault</em> is released by running &quot;<code>make webapp</code>&quot; after building and testing changed.
+That target creates the &quot;<code>webapp.tar</code>&quot; archive which can be extracted to create a
+<code>myvault</code> directory tree that can be installed on a web server. This is how the
+project is bundled for release to http:jlinoff.github.io/myvault. Here are the steps.</p>
+<ol>
+<li>Get the project.
+<ol>
+<li><code>git clone https://github.com/jlinoff/myvault</code></li>
+<li><code>cd myvault</code></li>
+</ol>
+</li>
+<li>Make changes.
+3. Build and test it locally. This is required to build the Rust components, the version data and to generate the documentation.
 <ol>
 <li><code>make</code> (try <code>make help</code> for info about all available targets).</li>
 </ol>
@@ -942,7 +1050,7 @@ the other file.</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Jul 16 2021 14:53:17 GMT-0700 (Pacific Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Jul 20 2021 08:49:28 GMT-0700 (Pacific Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>
