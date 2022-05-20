@@ -106,11 +106,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 <tr class="even">
 <td>Version</td>
-<td><code>0.1.33</code></td>
+<td><code>0.1.37</code></td>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td>`<code>| | GitCommitId |</code>122d0a6<code>| | GitBranch |</code>docker`</td>
+<td><code>2021-07-23T09:19:18-07:00</code></td>
+</tr>
+<tr class="even">
+<td>GitCommitId</td>
+<td><code>f4bfe67</code></td>
+</tr>
+<tr class="odd">
+<td>GitBranch</td>
+<td><code>main</code></td>
 </tr>
 <tr class="even">
 <td>project</td>
@@ -162,6 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="#mitm">MITM</a></li>
 <li><a href="#third-party-web-site-security">Third Party Web Site Security</a></li>
+<li><a href="#third-party-web-site-reliability">Third Party Web Site Reliability</a></li>
 <li><a href="#over-the-shoulder-surfing-attack">Over the Shoulder Surfing Attack</a></li>
 <li><a href="#clipboard-attack">Clipboard Attack</a></li>
 <li><a href="#unattended-browser">Unattended Browser</a></li>
@@ -476,6 +485,9 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 </blockquote>
 <p>Instead, encryption and decryption is run <em>inside</em> the browser using algorithms implemented in Rust and incorporated into the <em>myVault</em> using WebAssembly. This means that the data is never exposed outside of the browser unless it is encrypted. It also means that the algorithms run quite fast and are not exposed in javascript.</p>
 <p><em>However, running the algorithms internally and not exporting the data over the internet does not guarantee that your data is secure</em>.</p>
+<h3 id="third-party-web-site-reliability">Third Party Web Site Reliability</h3>
+<p>As mentioned in the previous point, <em>myVault</em> is not subject to third party server reliability issues. If you are using a tool that relies on an external server and it goes down, the service will not be available. That cannot happen with <em>myVault</em> because it runs in your browser on your local host.</p>
+<p>If your database is stored on an external server and that server is down you are still subject to reliability issues <em>on that server</em>, but you can mitigate that vulnerability by storing the data locally and uploading it periodicallly.</p>
 <h3 id="over-the-shoulder-surfing-attack">Over the Shoulder Surfing Attack</h3>
 <p>Internally the data is stored in decrypted form, so you may be vulnerable to over the shoulder surfing attacks where someone or something (like a camera) watches or films you typing. You could be observed opening a record and then clicking to display the password in plaintext which could allow that information to be stolen. This can be mitigated by being aware of your surroundings to make sure you are not being watched or filmed.</p>
 <h3 id="clipboard-attack">Clipboard Attack</h3>
@@ -487,7 +499,7 @@ LqbbTaqa7kjlOdTuDEPnZ9Acl0smFdIt0/qa2CWHXGuTsoHL7JjwwtIMOPMV3kFAZEDOpC9l
 <h3 id="malware-key-logging-and-screen-recording">Malware: Key Logging and Screen Recording</h3>
 <p>If malware has been installed on your computer that does screen shots or key logging, you are in trouble. It means that an attacker can see what you are doing and capture what you are typing. The best way to mitigate these forms of attacks is to keep your system up to data by installing security patches and use some sort of security tool to protect your system.</p>
 <h3 id="website-spoofing">Website Spoofing</h3>
-<p>Finally, web site spoofing could be used to direct you to a website that could be used to steal your information using a look alike webapp. To mitigate that make sure that you accessing the <em>myVault</em> from a known, trusted site.</p>
+<p>Finally, Web site spoofing could be used to direct you to a website that could be used to steal your information using a look alike webapp. To mitigate that make sure that you accessing the <em>myVault</em> from a known, trusted site.</p>
 <h3 id="protecting-yourself">Protecting Yourself</h3>
 <p>In summary, even security can never be guaranteed, the best way to protect your data is to follow commonly recommended security practices:</p>
 <ol type="1">
