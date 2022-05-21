@@ -63,11 +63,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-21T07:56:28-07:00</code></td>
+<td><code>2022-05-21T08:59:28-07:00</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>513c581</code></td>
+<td><code>a8e4988</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -98,58 +98,41 @@ Table of Contents
 <!--ts-->
 <ul>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#brief-overview">Brief Overview</a></li>
+<li><a href="#brief-overview">Brief Overview</a>
+<ul>
+<li><a href="#menu">Menu</a></li>
+<li><a href="#load-records">Load Records</a></li>
+<li><a href="#expand-record">Expand Record</a></li>
+</ul></li>
 <li><a href="#preferences">Preferences</a></li>
-<li><a href="#developer-notes">Developer Notes</a></li>
+<li><a href="#security-considerations">Security Considerations</a></li>
+<li><a href="#developer-notes">Developer Notes</a>
+<ul>
+<li><a href="#release-pam">Release PAM</a></li>
+</ul></li>
 </ul>
 <!--t3-->
 </details>
 <h4 id="introduction">Introduction</h4>
-<p><em>PAM</em> or Personal Account Manager is single page web app that
-runs in your browser in a secure context that enables you to securely
-manage your confidential personal account data as searchable records in
-a secure, flexible, and persistent manner <em>without ever having to
-visit a server</em> because it stores the data in a file that you
-control. The file is encrypted so even if it were stolen the data would
-be safe <em>if the password you used to encrypt it was strong</em>. It
-is available here: <a
-href="https://jlinoff.github.io/pam">https://jlinoff.github.io/pam</a>.</p>
+<p><em>PAM</em> or Personal Account Manager is a free and open source
+single page web app that runs in your browser in a secure context that
+enables you to securely manage your confidential personal account data
+as searchable records in a secure, flexible, and persistent manner
+<em>without ever having to visit a server</em> because it stores the
+data in a file that you control. The file is encrypted so even if it
+were stolen the data would be safe <em>if the password you used to
+encrypt it was strong</em>.</p>
+<p>You can run the application locally, from your own server or from the
+public github.io servers here: <a
+href="https://jlinoff.github.io/pam/www/index.html">https://jlinoff.github.io/pam/www/index.html</a>.</p>
 <h4 id="brief-overview">Brief Overview</h4>
 <p>Probably the easiest way to understand how the app works is to look
-at a simple example that shows how to read records because reading
-records is the most common usage once they have been created.</p>
-<p>This example shows a file with seven records that contain
-confidential account information for <q>Amazon</q>, <q>Email</q>,
-<q>Facebook</q>, <q>Github</q>, <q>Google</q>, <q>Netflix</q> and
-<q>Stack Exchange</q> accounts.</p>
-<p>The records were created by clicking on the <q>New Record</q> option
-from the menu in some cases or by clicking the <q>Clone</q> option on an
-existing record for the other cases. The <q>Clone</q> operation is
-particularly convenient for creating records with similar formats.</p>
-<blockquote>
-<p>The information is all made up and has no relation to any real
-accounts AFAIK.</p>
-</blockquote>
-<details>
-<summary>
-Click here to see an example that shows the example records.
-</summary>
-<p><img src="./image01.png" alt="Example records"></p>
-</details>
-<p>As you can see there are seven records in an accordion format in the
-middle of the screen. You can click on each one to expand it to make the
-record data visible.</p>
-<p>At the top of the screen is the search bar and, at the far right, the
-menu. The menu is where much of the action is. The rest of the action is
-in the individual records.</p>
-<p>At the bottom of the screen is a status bar that shows status
-messages.</p>
-<details>
-<summary>
-Click here to see what the menu looks like.
-</summary>
-<img src="./image03.png" alt="menu">
-</details>
+at some simple examples that reflect common ways to use the app.</p>
+<h5 id="menu">Menu</h5>
+<p>The menu is the control center for the app. It provides the basic
+operations for creating records, loading records, saving them and it
+provide information about the app including this help.</p>
+<p><img src="./image03.png" alt="menu"></p>
 <p>As you can see, there are seven menu options: <q>About</q>,
 <q>Preferences</q>, <q>New Record</q>, <q>Clear Records</q>, <q>Load
 File</q>, <q>Save File</q>, and <q>Help</q>.</p>
@@ -186,30 +169,59 @@ password is lost.</p>
 <p>Click or tap on the
 <q><img src='./question-circle.svg' height='32' width='32' /> Help</q>
 entry to see this help message.</p>
+<p>At the top of the screen is the search bar and, at the far right, the
+menu.</p>
+<p>At the bottom of the screen is a status bar that shows status
+messages.</p>
+<h5 id="load-records">Load Records</h5>
+<p>This example shows what the records look like. It shows seven records
+that contain confidential information for <q>Amazon</q>, <q>Email</q>,
+<q>Facebook</q>, <q>Github</q>, <q>Google</q>, <q>Netflix</q> and
+<q>Stack Exchange</q> fictional accounts.</p>
+<p>The records were created by clicking on the <q>New Record</q> option
+from the menu and then adding the individual fields in some cases or by
+clicking the <q>Clone</q> option on an existing record and updating the
+field values for the other cases. The <q>Clone</q> operation is
+particularly convenient for creating records with similar formats.</p>
+<blockquote>
+<p>The information is all made up and has no relation to any real
+accounts AFAIK.</p>
+</blockquote>
+<p><img src="./image01.png" alt="Example records"></p>
+<p>As you can see there are seven records in an accordion format in the
+middle of the screen. You can click on each one to expand it to make the
+record data visible.</p>
 <p>To get the information for an account you click or tap the
 button.</p>
-<details>
-<summary>
-Click here to see an example that shows the expanded <q>Facebook</q>
-record.
-</summary>
-<img src="./image02.png" alt="Expanded Facebook record">
-</details>
+<p>At the top of the screen is the search bar and, at the far right, the
+menu.</p>
+<p>At the bottom of the screen is a status bar that shows status
+messages.</p>
+<h5 id="expand-record">Expand Record</h5>
+<p>The most common operation is expanding a record to see the
+information. This example shows the fictional <q>Facebook</q> account
+data.</p>
+<p><img src="./image02.png" alt="Expanded Facebook record"></p>
 <p>You can see that there are three fields in the record: <q>url</q>,
 <q>login</q> and <q>password</q>, next to each field there is a icon
 that looks like a clipboard
-<img src="./clipboard.svg" height="32" width="32" alt="clipboard"/> . If
+<img src="./clipboard.svg" height="32" width="32" alt="clipboard"/>. If
 you click or tap it the field contents will be copied to the clipboard
 so that you can paste them into a login dialogue.</p>
+<blockquote>
+<p>Note that the fields are completely customizable. You can have as
+many as you want. Fields are added, modified and deleted by the
+<q>Edit</q> option.</p>
+</blockquote>
 <p>In addition to the cliboard icon there is another icon that looks
 like an eye
-<img src="./eye.svg" height="32" width="32" alt="clipboard"/> . that
+<img src="./eye.svg" height="32" width="32" alt="clipboard"/>. that
 shows up for password field. If you click or tap it, the password will
 be shown in plaintext and the icon will change to an eye with a slash
 through it
-<img src="./eye-slash.svg" height="32" width="32" alt="clipboard"/> . .
-By default all passwords are hidden so that they are not visible to
-casual observers.</p>
+<img src="./eye-slash.svg" height="32" width="32" alt="clipboard"/>. By
+default all passwords are hidden so that they are not visible to casual
+observers. Click it again to re-hide the password.</p>
 <p>In addition there are three buttons at the bottom
 <q><img src='./trash.svg' height='32' width='32' /> Delete</q> to delete
 the record,
@@ -218,6 +230,11 @@ the record and
 <q><img src='./pencil-square.svg' height='32' width='32' /> Edit</q> to
 edit the record fields.</p>
 <h4 id="preferences">Preferences</h4>
+<p>Preferences allow you to customized the behavior of the app. The
+defaults are set so that most people will never have to change
+anything.</p>
+<p>TBD</p>
+<h4 id="security-considerations">Security Considerations</h4>
 <p>TBD</p>
 <h4 id="developer-notes">Developer Notes</h4>
 <p>These are things that developers might be interested in.</p>
