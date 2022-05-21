@@ -62,11 +62,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-20T17:53:25-07:00</code></td>
+<td><code>2022-05-20T18:14:34-07:00</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>f31c1d6</code></td>
+<td><code>5e9b9bd</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -90,9 +90,9 @@ href="https://jlinoff.github.io/pam/help/index.html">https://jlinoff.github.io/p
 </tbody>
 </table>
 </details>
-<h2 id="warning-this-document-is-not-complete.">WARNING! This document
-is not complete.</h2>
-<h2 id="overview">Overview</h2>
+<h3 id="warning-this-document-is-not-complete.">WARNING! This document
+is not complete.</h3>
+<h3 id="introduction">Introduction</h3>
 <p><em>PAM</em> or Personal Account Manager is single page web app that
 runs in your browser in a secure context that enables you to securely
 manage your confidential personal account data as searchable records in
@@ -102,6 +102,7 @@ control. The file is encrypted so even if it were stolen the data would
 be safe <em>if the password you used to encrypt it was strong</em>. It
 is available here: <a
 href="https://jlinoff.github.io/pam">https://jlinoff.github.io/pam</a>.</p>
+<h3 id="brief-overview">Brief Overview</h3>
 <p>Probably the best way to understand how it works is to look at a
 simple example. This example shows a file with seven records that
 contain confidential account information for <q>Amazon</q>,
@@ -135,29 +136,29 @@ Click here to see what the menu looks like.
 <q>Preferences</q>, <q>New Record</q>, <q>Clear Records</q>, <q>Load
 File</q>, <q>Save File</q>, and <q>Help</q>.</p>
 <p>Click or tap on the
-<q><img src='./info-circle.svg' height='32' width='32' /> About</q>
+<q><img src='./info-circle.svg' height='32' width='32' /> About</q>
 entry to see information about the app.</p>
 <p>Click or tap on the
-<q><img src='./gear.svg' height='32' width='32' /> Preferences</q> entry
+<q><img src='./gear.svg' height='32' width='32' /> Preferences</q> entry
 to see the preferences dialogue which allows you to customize some of
 the app behavior. There is a lot of stuff so you might want to read the
 preferences section before trying it.</p>
 <p>Click or tap on the
-<q><img src='./plus-circle-fill.svg' height='32' width='32' /> New
+<q><img src='./plus-circle-fill.svg' height='32' width='32' /> New
 Record</q> entry to create a new record.</p>
 <p>Click or tap on the
-<q><img src='./trash3-fill.svg' height='32' width='32' /> Clear
+<q><img src='./trash3-fill.svg' height='32' width='32' /> Clear
 Records</q> entry to delete all of the records. This is useful for times
 when you want to create a new collection of records that is saved in a
 separate file. For example, if you wanted to create a collection
 personal accounts in one file and a collection shared accounts for a
 group of folks (like a development team sharing AWS accounts).</p>
 <p>Click or tap on the
-<q><img src='./file-arrow-up-fill.svg' height='32' width='32' /> Load
+<q><img src='./file-arrow-up-fill.svg' height='32' width='32' /> Load
 File</q> entry to load a records file. You will typically have to enter
 a password to decrypt the file so that the records can be displayed.</p>
 <p>Click or tap on the
-<q><img src='./file-arrow-down-fill.svg' height='32' width='32' /> Save
+<q><img src='./file-arrow-down-fill.svg' height='32' width='32' /> Save
 File</q> entry to save all of the records to a file. You will want to
 enter a password to make sure that the records in the file are
 encrypted. Encryption is done using the AWS-CBC-256 encryption algorithm
@@ -165,7 +166,7 @@ which is known to be secure (even to quantum attacks) but it means that
 you must remember it because the file records cannot be retrieved if the
 password is lost.</p>
 <p>Click or tap on the
-<q><img src='./question-circle.svg' height='32' width='32' /> Help</q>
+<q><img src='./question-circle.svg' height='32' width='32' /> Help</q>
 entry to see this help message.</p>
 <p>To get the information for an account you click or tap the
 button.</p>
@@ -179,25 +180,26 @@ record.
 <p>You can see that there are three fields in the record: <q>url</q>,
 <q>login</q> and <q>password</q>, next to each field there is a icon
 that looks like a clipboard
-<img src="./clipboard.svg" height="32" width="32" alt="clipboard"/>. If
+<img src="./clipboard.svg" height="32" width="32" alt="clipboard"/> . If
 you click or tap it the field contents will be copied to the clipboard
 so that you can paste them into a login dialogue.</p>
 <p>In addition to the cliboard icon there is another icon that looks
 like an eye
-<img src="./eye.svg" height="32" width="32" alt="clipboard"/>. that
+<img src="./eye.svg" height="32" width="32" alt="clipboard"/> . that
 shows up for password field. If you click or tap it, the password will
 be shown in plaintext and the icon will change to an eye with a slash
 through it
-<img src="./eye-slash.svg" height="32" width="32" alt="clipboard"/>. .
+<img src="./eye-slash.svg" height="32" width="32" alt="clipboard"/> . .
 By default all passwords are hidden so that they are not visible to
 casual observers.</p>
 <p>In addition there are three buttons at the bottom
-<q><img src='./trash.svg' height='32' width='32' /> Delete</q> to delete
-the record, <q><img src='./files.svg' height='32' width='32' />
-Clone</q> to clone the record and
-<q><img src='./pencil-square.svg' height='32' width='32' /> Edit</q> to
+<q><img src='./trash.svg' height='32' width='32' /> Delete</q> to delete
+the record,
+<q><img src='./files.svg' height='32' width='32' /> Clone</q> to clone
+the record and
+<q><img src='./pencil-square.svg' height='32' width='32' /> Edit</q> to
 edit the record fields.</p>
-<h2 id="preferences">Preferences</h2>
+<h3 id="preferences">Preferences</h3>
 <p>TBD</p>
 </body>
 </html>
