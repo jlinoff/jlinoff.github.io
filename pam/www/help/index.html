@@ -12,6 +12,7 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    q { quotes: "“" "”" "‘" "’"; }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
   <link rel="stylesheet" href="index.css" />
@@ -61,11 +62,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-20T14:12:22-07:00</code></td>
+<td><code>2022-05-20T17:53:25-07:00</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>7bf56bb</code></td>
+<td><code>f31c1d6</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -89,15 +90,114 @@ href="https://jlinoff.github.io/pam/help/index.html">https://jlinoff.github.io/p
 </tbody>
 </table>
 </details>
+<h2 id="warning-this-document-is-not-complete.">WARNING! This document
+is not complete.</h2>
 <h2 id="overview">Overview</h2>
-<p><em>PAM</em> is single page web app that runs in your browser in a
-secure context that enables you to securely manage your personal account
-data as searchable records in a secure, flexible, and persistent manner
-<em>without ever having to visit a server</em> because it stores the
-data in a file that you control. The file is encrypted so even if it
-were stolen the data would be safe <em>if the password you used to
-encrypt it was strong</em>. It is available here: <a
+<p><em>PAM</em> or Personal Account Manager is single page web app that
+runs in your browser in a secure context that enables you to securely
+manage your confidential personal account data as searchable records in
+a secure, flexible, and persistent manner <em>without ever having to
+visit a server</em> because it stores the data in a file that you
+control. The file is encrypted so even if it were stolen the data would
+be safe <em>if the password you used to encrypt it was strong</em>. It
+is available here: <a
 href="https://jlinoff.github.io/pam">https://jlinoff.github.io/pam</a>.</p>
-<p>WARNING! This document is not complete.</p>
+<p>Probably the best way to understand how it works is to look at a
+simple example. This example shows a file with seven records that
+contain confidential account information for <q>Amazon</q>,
+<q>Email</q>, <q>Facebook</q>, <q>Github</q>, <q>Google</q>,
+<q>Netflix</q> and <q>Stack Exchange</q>.</p>
+<blockquote>
+<p>The information is all made up and has no relation to any real
+accounts AFAIK.</p>
+</blockquote>
+<details>
+<summary>
+Click here to see an example that shows the example records.
+</summary>
+<p><img src="./image01.png" alt="Example records"></p>
+</details>
+<p>As you can see there are seven records in an accordion format in the
+middle of the screen. You can click on each one to expand it to make the
+record data visible.</p>
+<p>At the top of the screen is the search bar and, at the far right, the
+menu. The menu is where much of the action is. The rest of the action is
+in the individual records.</p>
+<p>At the bottom of the screen is a status bar that shows status
+messages.</p>
+<details>
+<summary>
+Click here to see what the menu looks like.
+</summary>
+<img src="./image03.png" alt="menu">
+</details>
+<p>As you can see, there are seven menu options: <q>About</q>,
+<q>Preferences</q>, <q>New Record</q>, <q>Clear Records</q>, <q>Load
+File</q>, <q>Save File</q>, and <q>Help</q>.</p>
+<p>Click or tap on the
+<q><img src='./info-circle.svg' height='32' width='32' /> About</q>
+entry to see information about the app.</p>
+<p>Click or tap on the
+<q><img src='./gear.svg' height='32' width='32' /> Preferences</q> entry
+to see the preferences dialogue which allows you to customize some of
+the app behavior. There is a lot of stuff so you might want to read the
+preferences section before trying it.</p>
+<p>Click or tap on the
+<q><img src='./plus-circle-fill.svg' height='32' width='32' /> New
+Record</q> entry to create a new record.</p>
+<p>Click or tap on the
+<q><img src='./trash3-fill.svg' height='32' width='32' /> Clear
+Records</q> entry to delete all of the records. This is useful for times
+when you want to create a new collection of records that is saved in a
+separate file. For example, if you wanted to create a collection
+personal accounts in one file and a collection shared accounts for a
+group of folks (like a development team sharing AWS accounts).</p>
+<p>Click or tap on the
+<q><img src='./file-arrow-up-fill.svg' height='32' width='32' /> Load
+File</q> entry to load a records file. You will typically have to enter
+a password to decrypt the file so that the records can be displayed.</p>
+<p>Click or tap on the
+<q><img src='./file-arrow-down-fill.svg' height='32' width='32' /> Save
+File</q> entry to save all of the records to a file. You will want to
+enter a password to make sure that the records in the file are
+encrypted. Encryption is done using the AWS-CBC-256 encryption algorithm
+which is known to be secure (even to quantum attacks) but it means that
+you must remember it because the file records cannot be retrieved if the
+password is lost.</p>
+<p>Click or tap on the
+<q><img src='./question-circle.svg' height='32' width='32' /> Help</q>
+entry to see this help message.</p>
+<p>To get the information for an account you click or tap the
+button.</p>
+<details>
+<summary>
+Click here to see an example that shows the expanded <q>Facebook</q>
+record.
+</summary>
+<img src="./image02.png" alt="Expanded Facebook record">
+</details>
+<p>You can see that there are three fields in the record: <q>url</q>,
+<q>login</q> and <q>password</q>, next to each field there is a icon
+that looks like a clipboard
+<img src="./clipboard.svg" height="32" width="32" alt="clipboard"/>. If
+you click or tap it the field contents will be copied to the clipboard
+so that you can paste them into a login dialogue.</p>
+<p>In addition to the cliboard icon there is another icon that looks
+like an eye
+<img src="./eye.svg" height="32" width="32" alt="clipboard"/>. that
+shows up for password field. If you click or tap it, the password will
+be shown in plaintext and the icon will change to an eye with a slash
+through it
+<img src="./eye-slash.svg" height="32" width="32" alt="clipboard"/>. .
+By default all passwords are hidden so that they are not visible to
+casual observers.</p>
+<p>In addition there are three buttons at the bottom
+<q><img src='./trash.svg' height='32' width='32' /> Delete</q> to delete
+the record, <q><img src='./files.svg' height='32' width='32' />
+Clone</q> to clone the record and
+<q><img src='./pencil-square.svg' height='32' width='32' /> Edit</q> to
+edit the record fields.</p>
+<h2 id="preferences">Preferences</h2>
+<p>TBD</p>
 </body>
 </html>

@@ -15,7 +15,7 @@ body {
     color: #444;
     backgroundColor: #fefefe;
     font-family: Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
-    font-size: 12px;
+    font-size: 22px;
     line-height: 1.7;
     padding: 1em;
     margin: auto;
@@ -254,12 +254,12 @@ table td {
 
 @media only screen and (min-width: 480px) {
     body {
-        font-size: 14px;
+        font-size: 24px;
     }
 }
 @media only screen and (min-width: 768px) {
     body {
-        font-size: 16px;
+        font-size: 26px;
     }
 }
 @media print {
