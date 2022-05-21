@@ -63,11 +63,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-20T18:25:33-07:00</code></td>
+<td><code>2022-05-21T07:56:28-07:00</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>4d28f80</code></td>
+<td><code>513c581</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -100,6 +100,7 @@ Table of Contents
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#brief-overview">Brief Overview</a></li>
 <li><a href="#preferences">Preferences</a></li>
+<li><a href="#developer-notes">Developer Notes</a></li>
 </ul>
 <!--t3-->
 </details>
@@ -114,11 +115,17 @@ be safe <em>if the password you used to encrypt it was strong</em>. It
 is available here: <a
 href="https://jlinoff.github.io/pam">https://jlinoff.github.io/pam</a>.</p>
 <h4 id="brief-overview">Brief Overview</h4>
-<p>Probably the best way to understand how it works is to look at a
-simple example. This example shows a file with seven records that
-contain confidential account information for <q>Amazon</q>,
-<q>Email</q>, <q>Facebook</q>, <q>Github</q>, <q>Google</q>,
-<q>Netflix</q> and <q>Stack Exchange</q>.</p>
+<p>Probably the easiest way to understand how the app works is to look
+at a simple example that shows how to read records because reading
+records is the most common usage once they have been created.</p>
+<p>This example shows a file with seven records that contain
+confidential account information for <q>Amazon</q>, <q>Email</q>,
+<q>Facebook</q>, <q>Github</q>, <q>Google</q>, <q>Netflix</q> and
+<q>Stack Exchange</q> accounts.</p>
+<p>The records were created by clicking on the <q>New Record</q> option
+from the menu in some cases or by clicking the <q>Clone</q> option on an
+existing record for the other cases. The <q>Clone</q> operation is
+particularly convenient for creating records with similar formats.</p>
 <blockquote>
 <p>The information is all made up and has no relation to any real
 accounts AFAIK.</p>
@@ -212,5 +219,18 @@ the record and
 edit the record fields.</p>
 <h4 id="preferences">Preferences</h4>
 <p>TBD</p>
+<h4 id="developer-notes">Developer Notes</h4>
+<p>These are things that developers might be interested in.</p>
+<h5 id="release-pam">Release PAM</h5>
+<ol type="1">
+<li>Update the <code>VERSION</code> file using semantic versioning.</li>
+<li>Run <code>make</code> to propagate the new version.</li>
+<li>Run <code>make app-help</code> to propagate any changes to
+<code>HELP.md</code>.</li>
+<li>Run <code>make web</code> to create <code>pam-www.tar</code> which
+contains the app in <code>pam/www</code>. It can be used to release to a
+secure (HTTPS) server. The app cannot be used on a non-secure (HTTP)
+server because it requires a secure context.</li>
+</ol>
 </body>
 </html>

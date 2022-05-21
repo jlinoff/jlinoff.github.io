@@ -22,7 +22,7 @@ var delete_occurred = false
 
 export function initPrefs() {
     window.prefs = {
-        fileName: 'example.txt',
+        fileName: 'example.pam',
         filePass: '',
         passwordRangeLengthDefault: 20,
         passwordRangeMinLength: 12,
