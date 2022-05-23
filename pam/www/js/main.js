@@ -110,6 +110,7 @@ function topLayout() {
 
 // Create the search input and the menu at the top.
 function createSearchAndMenu() {
+    let popup = 'clear the search field'
     let e = xmk('div')
         .xClass('row',
                 'd-flex',
@@ -123,18 +124,19 @@ function createSearchAndMenu() {
                 .xClass('col-auto', 'text-start')
                 .xAppendChild(
                     xmk('button')
-                        .xClass('btn', 'btn-lg', 'px-0', 'ms-2', 'text-light')
+                        .xClass('btn', 'btn-lg', 'px-0', 'ms-0', 'text-light')
                         .xAttrs({
                             'type': 'button',
-                            'title': 'clear the search field',
+                            'title': popup,
                         })
                         .xAddEventListener('click', (event) => {
                             document.body.xGet('#search').value = ''
                             filterRecords('')
                         })
                         .xAppend(
-                            icon('bi-x-circle', 'clear the search field'),
+                            icon('bi-x-circle', popup),
                         ),
+                    xmk('span').xClass('ms-3').xId('x-num-records').xInnerHTML('0')
                 ),
             xmk('div')
                 .xClass('col-auto', 'text-end' )
@@ -147,10 +149,7 @@ function createSearchAndMenu() {
 function searchInput() {
     let e = xmk('input')
         .xId('search')
-        .xClass(
-            'm-2',
-            'w-100',
-        )
+        .xClass('m-1', 'w-100')
         .xAttrs({
             'type': 'search',
             'title': 'search as you type',
@@ -179,6 +178,7 @@ function filterRecords(value) {
     }
     let recordsContainer = document.body.xGet('#records-accordion') // middle part of the document.
     let accordionItems = recordsContainer.xGetN('.accordion-item')
+    let num = 0
     for (let i=0; i<accordionItems.length; i++) {
         let accordionItem = accordionItems[i]
         let button = accordionItem.xGet('.accordion-button')
@@ -187,10 +187,12 @@ function filterRecords(value) {
             if (accordionItem.classList.contains('d-none')) {
                 accordionItem.classList.remove('d-none')
             }
+            num += 1
         } else {
             if (!accordionItem.classList.contains('d-none')) {
                 accordionItem.classList.add('d-none')
             }
         }
     }
+    xget('#x-num-records').xInnerHTML(num)
 }

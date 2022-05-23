@@ -127,6 +127,7 @@ function loadCallback(text) {
         oldMenuPrefsDlg.replaceWith(newMenuPrefsDlg)
     }
     let warned = 0
+    let num = 0
     for (let i=0; i<json.records.length; i++) {
         let row = json.records[i]
         let title = row.title
@@ -163,19 +164,16 @@ function loadCallback(text) {
                 continue
             }
         }
-        //console.log(`row[${i}]: "${title}"`)
+        num +=1
         let recordFields = []
         for (let j=0; j<row.fields.length; j++ ) {
             let field = row.fields[j]
-            /*console.log(`  field[${j}]`)
-            console.log(`    name: "${field.name}"`)
-            console.log(`    type: "${field.type}"`)
-            console.log(`    value: "${field.value}"`)*/
             recordFields.push( mkRecordField(field.name, field.type, field.value) )
         }
         let newRecord = mkRecord(title, ...recordFields)
         insertRecord(newRecord, title)
     }
+    xget('#x-num-records').xInnerHTML(num)
 }
 
 function invalidPasswordCallback(error) {

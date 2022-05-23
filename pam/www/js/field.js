@@ -3,6 +3,7 @@ import { xmk } from './lib.js'
 import { icon, isURL, mkDraggableRow, sortDictByKey } from './utils.js'
 import { findRecord } from './record.js'
 import { mkGeneratePasswordDlg } from './password.js'
+import { statusBlip } from './status.js'
 
 // Make record field with the name, type and value.
 export function mkRecordField(name, type, value) {
