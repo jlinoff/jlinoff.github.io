@@ -219,17 +219,19 @@ function mkRecordEditField(name, type, container, value) {
     } else if ( type === 'password' ) {
         let e0 = xmk('input').xAttrs({'type': type, 'value': value})
             .xAddEventListener('change', (event1) => {
-                let e1 = event1.target.parentElement.xGet('.x-fld-value-length')
+                let row = event1.target.xGetParentWithClass('row')
+                let e1 = row.parentElement.xGet('.x-fld-value-length')
                 e1.innerHTML = event1.target.value.length
             })
             .xAddEventListener('input', (event1) => {
-                let e1 = event1.target.parentElement.xGet('.x-fld-value-length')
+                let row = event1.target.xGetParentWithClass('row')
+                let e1 = row.parentElement.xGet('.x-fld-value-length')
                 e1.innerHTML = event1.target.value.length
             })
         inputs.push(e0)
         // password length element
         let len = value ? value.length : 0
-        passwordLength = xmk('span').xClass('x-fld-value-length', 'mx-2').xInnerHTML(len)
+        passwordLength = xmk('span').xClass('x-fld-value-length', 'ms-4').xInnerHTML(len)
     } else {
         let e = xmk('input').xAttrs({'type': type, 'value': value})
         inputs.push(e)
@@ -254,7 +256,7 @@ function mkRecordEditField(name, type, container, value) {
     // define delete button
     let recordDeleteButton = xmk('button')
         .xAttrs({'type': 'button', 'title': `delete field`})
-        .xClass('btn', 'btn-lg', 'ms-2')
+        .xClass('btn', 'btn-lg', 'ms-4')
         .xAppend(icon('bi-trash3-fill', 'delete'),
                  xmk('span').xInnerHTML('&nbsp;Delete Field '))
         .xAddEventListener('click', (event) => {
@@ -269,7 +271,7 @@ function mkRecordEditField(name, type, container, value) {
         passwordShowHide = xmk('button')
             .xAttrs({'type': 'button',
                      'title': 'show or hide password'})
-            .xClass('btn', 'btn-lg', 'px-0', 'ms-2')
+            .xClass('btn', 'btn-lg', 'px-0', 'ms-4')
             .xAppend(icon('bi-eye', 'show or hide password'))
             .xAddEventListener('click', (event) => {
                 let button = event.target.parentElement
@@ -292,7 +294,7 @@ function mkRecordEditField(name, type, container, value) {
         // generate button
         passwordGenerate = xmk('button')
             .xAttrs({'type': 'button'})
-            .xClass('btn', 'btn-lg', 'px-0', 'ms-2')
+            .xClass('btn', 'btn-lg', 'px-0', 'ms-4')
             .xAppend(icon('bi-gear', 'generate a password'))
             .xAddEventListener('click', (event) => {
                 mkGeneratePasswordDlg(event)
@@ -311,12 +313,12 @@ function mkRecordEditField(name, type, container, value) {
 
                 // Field name
                 xmk('div').xClass('row').xAppend(
-                    xmk('div').xClass('col', 'col-sm-3').xAppend(
+                    xmk('div').xClass('col', 'col-sm-2').xAppend(
                         xmk('label')
                             .xClass('col-form-label')
-                            .xInnerHTML('Field Name')
+                            .xInnerHTML('Name')
                     ),
-                    xmk('div').xClass('col-12', 'col-sm-9').xAppend(
+                    xmk('div').xClass('col-12', 'col-sm-10').xAppend(
                         xmk('div').xClass('input-group').xAppend(
                             xmk('input')
                                 .xAttrs({'value': name,})
@@ -344,16 +346,15 @@ function mkRecordEditField(name, type, container, value) {
 
                 // Field value
                 xmk('div').xClass('row').xAppend(
-                    xmk('div').xClass('col-12', 'col-sm-3').xAppend(
+                    xmk('div').xClass('col-12', 'col-sm-2').xAppend(
                         xmk('label')
                             .xClass('col-form-label')
-                            .xInnerHTML('Field Value')
+                            .xInnerHTML('Value')
                     ),
-                    xmk('div').xClass('col-12', 'col-sm-9', 'x-fld-value-div', 'overflow-auto').xAppend(
+                    xmk('div').xClass('col-12', 'col-sm-10', 'x-fld-value-div', 'overflow-auto').xAppend(
                         xmk('div').xClass('input-group').xAppend(
                             ...inputs,
                             xmk('span').xClass('input-group-append').xAppend(
-                                passwordLength, // optional only for password
                                 xmk('button')
                                     .xClass('btn', 'btn-lg', 'px-0', 'ms-2')
                                     .xAttr('type', 'button')
@@ -376,12 +377,16 @@ function mkRecordEditField(name, type, container, value) {
                                     .xAppend(
                                         icon('bi-x-circle', `clear ${type} value`)
                                     ),
-                                passwordShowHide, // optional, only for password
-                                passwordGenerate, // optional only for password
                             ),
                         ),
                     ),
-                    xmk('div').xClass('col-12', 'col-sm-auto').xAppend(...buttons),
+                    xmk('div').xClass('col-12', 'col-sm-auto')
+                        .xAppend(
+                            ...buttons,
+                            passwordLength,
+                            passwordShowHide,
+                            passwordGenerate,
+                        ),
                 ),
             ),
         ),

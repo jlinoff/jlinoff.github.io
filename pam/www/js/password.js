@@ -87,7 +87,7 @@ export function getMemorablePassword(length) {
     return result
 }
 
-// make the generate password dialogue for record fields and save
+// make the generate password dialogue for record fields and
 // reuse it if it already exists
 export function mkGeneratePasswordDlg(event) {
     let button = event.target.parentElement
@@ -113,6 +113,8 @@ export function mkGeneratePasswordDlg(event) {
                 .xInnerHTML(pwd)
                 .xAddEventListener('click', (event) => {
                     rowElement.xGet('.x-fld-value').value = event.target.innerHTML
+                    let e1 = rowElement.parentElement.xGet('.x-fld-value-length')
+                    e1.innerHTML = event.target.innerHTML.length
                 })
             mbs.push(button)
         }
@@ -147,6 +149,9 @@ export function mkGeneratePasswordDlg(event) {
                     .xInnerHTML(cp0)
                     .xAddEventListener('click', (event) => {
                         row.xGet('.x-fld-value').value = event.target.innerHTML
+                        let e1 = row.parentElement.xGet('.x-fld-value-length')
+                        e1.innerHTML = event.target.innerHTML.length
+
                     }),
                 xmk('p').xClass('fs-5').xInnerHTML('Memorable Passwords'),
                 ...mbs,
