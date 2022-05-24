@@ -24,6 +24,10 @@ export function initPrefs() {
     window.prefs = {
         fileName: 'example.pam',
         filePass: '',
+        searchCaseInsensitive: true,
+        searchRecordTitles: true,
+        searchRecordFieldNames: false,
+        searchRecordFieldValues: false,
         passwordRangeLengthDefault: 20,
         passwordRangeMinLength: 12,
         passwordRangeMaxLength: 32,
@@ -83,11 +87,13 @@ export function menuPrefsDlg() {
     let body = xmk('span').xAppendChild(
         xmk('p').xInnerHTML(`See the ${helpLink} documentation for detailed information.`),
         // miscellaneous
-        mkFieldset('Miscellaneous').xAppend(
-            prefLogStatusToConsole(labelClasses, inputClasses),
-            prefClearBeforeLoad(labelClasses, inputClasses),
-            prefLoadDupStrategy(labelClasses, inputClasses),
-            prefCloneFieldValues(labelClasses, inputClasses),
+        mkFieldset('Search').xAppend(
+            prefSearchCaseInsensitive(labelClasses, inputClasses),
+            prefSearchRecordTitles(labelClasses, inputClasses),
+            prefSearchRecordFieldNames(labelClasses, inputClasses),
+            prefSearchRecordFieldValues(labelClasses, inputClasses),
+        ),
+        mkFieldset('Passwords').xAppend(
             prefPasswordRangeMinLength(labelClasses, inputClasses),
             prefPasswordRangeMaxLength(labelClasses, inputClasses),
             prefMemorablePasswordMinWordLength(labelClasses, inputClasses),
@@ -99,6 +105,12 @@ export function menuPrefsDlg() {
             prefMemorablePasswordSuffix(labelClasses, inputClasses),
             //prefProjectLink(['col-2'],['col-10']),  // user cannot change this
             //prefHelpLink(['col-2'],['col-10']),  // user cannot change this
+        ),
+        mkFieldset('Miscellaneous').xAppend(
+            prefLogStatusToConsole(labelClasses, inputClasses),
+            prefClearBeforeLoad(labelClasses, inputClasses),
+            prefLoadDupStrategy(labelClasses, inputClasses),
+            prefCloneFieldValues(labelClasses, inputClasses),
             prefCustomAboutInfo(['col-2'],['col-10']),
         ),
         // record fields
@@ -396,6 +408,162 @@ function prefCloneFieldValues(labelClasses, inputClasses) {
                             icon.classList.remove('bi-square')
                             icon.classList.add('bi-check2-square')
                             let msg = 'do not clone field values when cloning records'
+                            button.xAttr('title', msg)
+                            icon.xAttr('title', msg)
+                        }
+                    }),
+            ),
+        ),
+    )
+}
+
+function prefSearchCaseInsensitive(labelClasses, inputClasses) {
+    let checkbox = window.prefs.searchCaseInsensitive ? 'bi-check2-square' : 'bi-square'
+    return xmk('div').xClass('row').xAppend(
+        prefLabel(labelClasses, 'Case Insensisitive Searches'),
+        xmk('div').xClass(...inputClasses).xAppend(
+            xmk('div').xClass('input-group').xAppend(
+                xmk('button')
+                    .xClass('form-control', 'btn', 'btn-lg')
+                    .xAttrs({'type': 'button',
+                             'title': 'do case insensitiv searches',
+                             'data-pref-id': 'searchCaseInsensitive',
+                            })
+                    .xAppend(icon(checkbox, 'enable or disable'))
+                    .xAddEventListener('click', (event) => {
+                        //console.log(event)
+                        //console.log(event.target.parentElement.tagName)
+                        let button = event.target.xGetParentOfType('button')
+                        let icon = button.xGet('i')
+                        let enabled = icon.classList.contains('bi-check2-square')
+                        let mbody = event.target.xGetParentWithClass('modal-body')
+                        if (enabled) {
+                            icon.classList.remove('bi-check2-square')
+                            icon.classList.add('bi-square')
+                            let msg = 'do not log status to console'
+                            button.xAttr('title', msg)
+                            icon.xAttr('title', msg)
+                        } else {
+                            icon.classList.remove('bi-square')
+                            icon.classList.add('bi-check2-square')
+                            let msg = 'log status to console'
+                            button.xAttr('title', msg)
+                            icon.xAttr('title', msg)
+                        }
+                    }),
+            ),
+        ),
+    )
+}
+
+function prefSearchRecordTitles(labelClasses, inputClasses) {
+    let checkbox = window.prefs.searchRecordTitles ? 'bi-check2-square' : 'bi-square'
+    return xmk('div').xClass('row').xAppend(
+        prefLabel(labelClasses, 'Search Record Titles'),
+        xmk('div').xClass(...inputClasses).xAppend(
+            xmk('div').xClass('input-group').xAppend(
+                xmk('button')
+                    .xClass('form-control', 'btn', 'btn-lg')
+                    .xAttrs({'type': 'button',
+                             'title': 'search record titles',
+                             'data-pref-id': 'searchRecordTitles',
+                            })
+                    .xAppend(icon(checkbox, 'enable or disable'))
+                    .xAddEventListener('click', (event) => {
+                        //console.log(event)
+                        //console.log(event.target.parentElement.tagName)
+                        let button = event.target.xGetParentOfType('button')
+                        let icon = button.xGet('i')
+                        let enabled = icon.classList.contains('bi-check2-square')
+                        let mbody = event.target.xGetParentWithClass('modal-body')
+                        if (enabled) {
+                            icon.classList.remove('bi-check2-square')
+                            icon.classList.add('bi-square')
+                            let msg = 'do not log status to console'
+                            button.xAttr('title', msg)
+                            icon.xAttr('title', msg)
+                        } else {
+                            icon.classList.remove('bi-square')
+                            icon.classList.add('bi-check2-square')
+                            let msg = 'log status to console'
+                            button.xAttr('title', msg)
+                            icon.xAttr('title', msg)
+                        }
+                    }),
+            ),
+        ),
+    )
+}
+
+function prefSearchRecordFieldNames(labelClasses, inputClasses) {
+    let checkbox = window.prefs.searchRecordFieldNames ? 'bi-check2-square' : 'bi-square'
+    return xmk('div').xClass('row').xAppend(
+        prefLabel(labelClasses, 'Search Record Field Names'),
+        xmk('div').xClass(...inputClasses).xAppend(
+            xmk('div').xClass('input-group').xAppend(
+                xmk('button')
+                    .xClass('form-control', 'btn', 'btn-lg')
+                    .xAttrs({'type': 'button',
+                             'title': 'search record field names',
+                             'data-pref-id': 'searchRecordFieldNames',
+                            })
+                    .xAppend(icon(checkbox, 'enable or disable'))
+                    .xAddEventListener('click', (event) => {
+                        //console.log(event)
+                        //console.log(event.target.parentElement.tagName)
+                        let button = event.target.xGetParentOfType('button')
+                        let icon = button.xGet('i')
+                        let enabled = icon.classList.contains('bi-check2-square')
+                        let mbody = event.target.xGetParentWithClass('modal-body')
+                        if (enabled) {
+                            icon.classList.remove('bi-check2-square')
+                            icon.classList.add('bi-square')
+                            let msg = 'do not log status to console'
+                            button.xAttr('title', msg)
+                            icon.xAttr('title', msg)
+                        } else {
+                            icon.classList.remove('bi-square')
+                            icon.classList.add('bi-check2-square')
+                            let msg = 'log status to console'
+                            button.xAttr('title', msg)
+                            icon.xAttr('title', msg)
+                        }
+                    }),
+            ),
+        ),
+    )
+}
+
+function prefSearchRecordFieldValues(labelClasses, inputClasses) {
+    let checkbox = window.prefs.searchRecordFieldValues ? 'bi-check2-square' : 'bi-square'
+    return xmk('div').xClass('row').xAppend(
+        prefLabel(labelClasses, 'Search Record Field Values'),
+        xmk('div').xClass(...inputClasses).xAppend(
+            xmk('div').xClass('input-group').xAppend(
+                xmk('button')
+                    .xClass('form-control', 'btn', 'btn-lg')
+                    .xAttrs({'type': 'button',
+                             'title': 'search record field values',
+                             'data-pref-id': 'searchRecordFieldValues',
+                            })
+                    .xAppend(icon(checkbox, 'enable or disable'))
+                    .xAddEventListener('click', (event) => {
+                        //console.log(event)
+                        //console.log(event.target.parentElement.tagName)
+                        let button = event.target.xGetParentOfType('button')
+                        let icon = button.xGet('i')
+                        let enabled = icon.classList.contains('bi-check2-square')
+                        let mbody = event.target.xGetParentWithClass('modal-body')
+                        if (enabled) {
+                            icon.classList.remove('bi-check2-square')
+                            icon.classList.add('bi-square')
+                            let msg = 'do not log status to console'
+                            button.xAttr('title', msg)
+                            icon.xAttr('title', msg)
+                        } else {
+                            icon.classList.remove('bi-square')
+                            icon.classList.add('bi-check2-square')
+                            let msg = 'log status to console'
                             button.xAttr('title', msg)
                             icon.xAttr('title', msg)
                         }

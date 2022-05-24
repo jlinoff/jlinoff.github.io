@@ -11,6 +11,7 @@ import { initPrefs, menuPrefsDlg } from './prefs.js'
 import { menuSaveDlg } from './save.js'
 import { menuLoadDlg } from './load.js'
 import { mkMenu } from './menu.js'
+import { mkSearchInputElement, searchRecords } from './search.js'
 
 /**
  * Actions to take when the window is loaded.
@@ -82,7 +83,7 @@ function topLayout() {
                     'fs-5',
                     'text-center',
                     'text-light')
-            .xAppendChild(createSearchAndMenu()),
+            .xAppendChild(createSearchInputAndMenuEntry()),
         xmk('div')
             .xId('mid-section')
             .xClass('h-100',
@@ -109,7 +110,7 @@ function topLayout() {
 }
 
 // Create the search input and the menu at the top.
-function createSearchAndMenu() {
+function createSearchInputAndMenuEntry() {
     let popup = 'clear the search field'
     let e = xmk('div')
         .xClass('row',
@@ -119,7 +120,7 @@ function createSearchAndMenu() {
         .xAppendChild(
             xmk('div')
                 .xClass('col')
-                .xAppendChild(searchInput()),
+                .xAppendChild(mkSearchInputElement()),
             xmk('div')
                 .xClass('col-auto', 'text-start')
                 .xAppendChild(
@@ -131,7 +132,7 @@ function createSearchAndMenu() {
                         })
                         .xAddEventListener('click', (event) => {
                             document.body.xGet('#search').value = ''
-                            filterRecords('')
+                            searchRecords('')
                         })
                         .xAppend(
                             icon('bi-x-circle', popup),
@@ -143,56 +144,4 @@ function createSearchAndMenu() {
                 .xAppendChild(mkMenu()),
         )
     return e
-}
-
-// search input element
-function searchInput() {
-    let e = xmk('input')
-        .xId('search')
-        .xClass('m-1', 'w-100')
-        .xAttrs({
-            'type': 'search',
-            'title': 'search as you type',
-            'placeholder': 'Search',
-            'aria-label': 'Search'
-        })
-        .xAddEventListener('click', (event) => { filterRecords(event.target.value) })
-        .xAddEventListener('input', (event) => { filterRecords(event.target.value) })
-        .xAddEventListener('change', (event) => { filterRecords(event.target.value) })
-        .xAddEventListener('paste', (event) => { filterRecords(event.target.value) })
-    return e
-}
-
-function filterRecords(value) {
-    if (!value) {
-        value = '.'
-    }
-    let regex = null
-    try {
-        regex = new RegExp(value, 'i')
-    } catch (exc) {
-        // This can occur when a partial expresion is being typed in.
-        //alert(`ERROR! invalid search expression: "${value}"\nregexp:${exc}`)
-        console.log(`WARNING! invalid search expression: "${value}"\nregexp:${exc}`)
-        regex = new RegExp('.', 'i')
-    }
-    let recordsContainer = document.body.xGet('#records-accordion') // middle part of the document.
-    let accordionItems = recordsContainer.xGetN('.accordion-item')
-    let num = 0
-    for (let i=0; i<accordionItems.length; i++) {
-        let accordionItem = accordionItems[i]
-        let button = accordionItem.xGet('.accordion-button')
-        let title = button.innerHTML
-        if (title.match(regex)) {
-            if (accordionItem.classList.contains('d-none')) {
-                accordionItem.classList.remove('d-none')
-            }
-            num += 1
-        } else {
-            if (!accordionItem.classList.contains('d-none')) {
-                accordionItem.classList.add('d-none')
-            }
-        }
-    }
-    xget('#x-num-records').xInnerHTML(num)
 }
