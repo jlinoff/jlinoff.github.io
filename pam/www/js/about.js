@@ -18,6 +18,11 @@ export function menuAboutDlg() {
             xmk('p').xInnerHTML('<i>A web app that allows you to securely manage your ' +
                                 'personal accounts data without ever communicating with a server.</i>'),
             xmk('p').xId('x-about-info').xInnerHTML(custom),
+            xmk('p').xClass('fs-6').xAppend(
+                xmk('div').xInnerHTML(`total: ${window.screen.width}x${window.screen.height}`),
+                xmk('div').xInnerHTML(`avail: ${window.screen.availWidth}x${window.screen.availHeight}`),
+                xmk('div').xInnerHTML(`inner: ${window.innerWidth}x${window.innerHeight}`),
+            ),
         )
     let b1 = mkPopupModalDlgButton('Close',
                                  'btn-secondary',
