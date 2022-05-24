@@ -231,7 +231,7 @@ function mkRecordEditField(name, type, container, value) {
         inputs.push(e0)
         // password length element
         let len = value ? value.length : 0
-        passwordLength = xmk('span').xClass('x-fld-value-length', 'ms-4').xInnerHTML(len)
+        passwordLength = xmk('span').xClass('x-fld-value-length', 'ms-3').xInnerHTML(len)
     } else {
         let e = xmk('input').xAttrs({'type': type, 'value': value})
         inputs.push(e)
@@ -256,7 +256,7 @@ function mkRecordEditField(name, type, container, value) {
     // define delete button
     let recordDeleteButton = xmk('button')
         .xAttrs({'type': 'button', 'title': `delete field`})
-        .xClass('btn', 'btn-lg', 'ms-4')
+        .xClass('btn', 'btn-lg', 'ms-0')
         .xAppend(icon('bi-trash3-fill', 'delete'),
                  xmk('span').xInnerHTML('&nbsp;Delete Field '))
         .xAddEventListener('click', (event) => {
@@ -271,7 +271,7 @@ function mkRecordEditField(name, type, container, value) {
         passwordShowHide = xmk('button')
             .xAttrs({'type': 'button',
                      'title': 'show or hide password'})
-            .xClass('btn', 'btn-lg', 'px-0', 'ms-4')
+            .xClass('btn', 'btn-lg', 'px-0', 'ms-3')
             .xAppend(icon('bi-eye', 'show or hide password'))
             .xAddEventListener('click', (event) => {
                 let button = event.target.parentElement
@@ -294,7 +294,7 @@ function mkRecordEditField(name, type, container, value) {
         // generate button
         passwordGenerate = xmk('button')
             .xAttrs({'type': 'button'})
-            .xClass('btn', 'btn-lg', 'px-0', 'ms-4')
+            .xClass('btn', 'btn-lg', 'px-0', 'ms-3')
             .xAppend(icon('bi-gear', 'generate a password'))
             .xAddEventListener('click', (event) => {
                 mkGeneratePasswordDlg(event)
@@ -380,6 +380,8 @@ function mkRecordEditField(name, type, container, value) {
                             ),
                         ),
                     ),
+
+                    // Buttons
                     xmk('div').xClass('col-12', 'col-sm-auto')
                         .xAppend(
                             ...buttons,
