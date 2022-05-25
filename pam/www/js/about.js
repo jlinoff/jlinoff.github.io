@@ -35,16 +35,13 @@ export function menuAboutDlg() {
                                  (el) => {
                                      return true
                                  })
-    let b2 = mkPopupModalDlgButton('Refresh',
-                                 'btn-secondary',
-                                 'refresh the dialogue',
-                                   (el) => {
-                                       let oldAbout = xget('#about')
-                                       let newAbout = mkAbout()
-                                       oldAbout.replaceWith(newAbout)
-                                       return false
-                                 })
-    let e = mkPopupModalDlg('menuAboutDlg', 'About', body, b1, b2)
+    let e = mkPopupModalDlg('menuAboutDlg', 'About', body, b1)
     return e
+}
+
+export function refreshAbout() {
+    let oldAbout = xget('#about')
+    let newAbout = mkAbout()
+    oldAbout.replaceWith(newAbout)
 }
 

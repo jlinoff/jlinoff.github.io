@@ -3,6 +3,7 @@ import { xmk, xget, xgetn, enableFunctionChaining } from './lib.js'
 import { statusBlip } from './status.js'
 import { convertDictKeys2List, icon, mkPopupModalDlgButton, mkPopupModalDlg, sortDictByKey } from './utils.js'
 import { updateRecordFieldTypes }  from './field.js'
+import { refreshAbout } from './about.js'
 
 // These are the input types that the tool knows how to handle.
 export const VALID_FIELD_TYPES = {
@@ -218,6 +219,7 @@ function setPrefs(el) {
         }
         window.prefs.predefinedRecordFields[name] = value
     }
+    refreshAbout()
     return true
 }
 

@@ -9,12 +9,14 @@ import { icon } from './utils.js'
 import { initPrefs } from './prefs.js'
 import { mkMenu } from './menu.js'
 import { mkSearchInputElement, searchRecords } from './search.js'
+import { refreshAbout } from './about.js'
 
 /**
  * Actions to take when the window is loaded.
  * @global
  */
 window.onload = () => { initPrefs(); main() }
+window.onresize = () => { refreshAbout() }
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Window#events
 /**
