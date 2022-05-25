@@ -110,7 +110,7 @@ export function mkMenu() {
                     console.log(event)
                 }),*/
             xmk('ul')
-                .xClass('dropdown-menu', 'dropdown-menu-dark', 'fs-4')
+                .xClass('dropdown-menu', 'dropdown-menu-dark', 'fs-5')
                 .xAttrs({
                     'aria-labelledby': 'menu',
                 })

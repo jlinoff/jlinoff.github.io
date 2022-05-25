@@ -125,7 +125,7 @@ export function mkPopupModalDlg(id, title, body, ...buttons) {
                                 .xAppend(
                                     xmk('span')
                                         .xId(lid)
-                                        .xClass('modal-title', 'fs-4')
+                                        .xClass('modal-title', 'fs-5')
                                         .xInnerHTML(title)
                                 ),
                             xmk('div')

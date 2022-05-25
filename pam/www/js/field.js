@@ -43,7 +43,8 @@ export function mkRecordField(name, type, value) {
 function mkRecordFldElement(name, type, value, rawValue, ...buttons) {
     return xmk('div').xClass('row', 'p-0').xAppend(
         xmk('div')
-            .xClass('col-12', 'col-sm-3', 'text-start')
+            //.xClass('col-12', 'col-sm-3', 'text-start')
+            .xClass('col-12', 'text-start')
             .xAppend(
                 xmk('div')
                     //.xClass('border', 'fst-italic', 'x-fld-name')
@@ -52,7 +53,8 @@ function mkRecordFldElement(name, type, value, rawValue, ...buttons) {
             ),
         //xmk('div').xClass('col', 'text-center').xAppend(xmk('div').xInnerHTML(type)),
         xmk('div')
-            .xClass('col-12', 'col-sm-7', 'text-start').xAppend(
+            //.xClass('col-12', 'col-sm-7', 'text-start').xAppend(
+            .xClass('col-12', 'text-start').xAppend(
                 xmk('div')
                     .xClass('x-fld-value', 'border', 'font-monospace', 'overflow-auto')
                     .xAttrs({
@@ -63,7 +65,8 @@ function mkRecordFldElement(name, type, value, rawValue, ...buttons) {
                     .xInnerHTML(value)
             ),
         xmk('div')
-            .xClass('col-12', 'col-sm-2', 'text-end').xAppend(...buttons)
+            //.xClass('col-12', 'col-sm-2', 'text-end').xAppend(...buttons)
+            .xClass('col-12', 'text-end').xAppend(...buttons)
     )
 }
 
@@ -417,7 +420,7 @@ export function mkRecordEditDlg(title) {
             // Title input
             xmk('div').xClass('col-12').xAppend(
                 xmk('input')
-                    .xClass('w-100', 'fs-4', 'm-2', 'x-record-title')
+                    .xClass('w-100', 'fs-5', 'm-2', 'x-record-title')
                     .xAttrs({
                         'value': title,
                         'placeholder': 'Record Title',
