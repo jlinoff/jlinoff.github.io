@@ -51,6 +51,7 @@ export function initPrefs() {
             'account': 'text',
             'datetime': 'datetime-local',
             'email': 'email',
+            'host': 'text',
             'key': 'password',
             'login': 'text',
             'name': 'text',
@@ -115,8 +116,8 @@ export function menuPrefsDlg() {
             prefCustomAboutInfo(['col-2'],['col-10']),
         ),
         // record fields
-        mkFieldset('Pre-defined Record Fields').xAppend(
-            xmk('p').xInnerHTML('These are the fields pre-defined for creating a new record.'),
+        mkFieldset('Record Fields').xAppend(
+            xmk('p').xInnerHTML('These are the fields pre-defined to simplify creating a new record.'),
             fldsList),
     )
     let b1 = mkPopupModalDlgButton('Close',

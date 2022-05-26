@@ -15,10 +15,10 @@ export function menuSaveDlg() {
             xmk('form').xClass('container').xAppend(
                 // save file name
                 xmk('div').xClass('row').xAppend(
-                    xmk('div').xClass('col-12', 'col-sm-3', 'overflow-auto').xAppend(
+                    xmk('div').xClass('col-12', 'overflow-auto').xAppend(
                         xmk('label').xClass('col-form-label').xInnerHTML('Filename')
                     ),
-                    xmk('div').xClass('col-12', 'col-sm-9', 'overflow-auto').xAppend(
+                    xmk('div').xClass('col-12', 'overflow-auto').xAppend(
                         xmk('div').xClass('input-group').xAppend(
                             xmk('input').xClass('form-control', 'ps-1').xId('x-save-filename')
                                 .xAttrs({'type': 'text', 'value': window.prefs.fileName}),
@@ -39,10 +39,10 @@ export function menuSaveDlg() {
                 ),
                 // save file password
                 xmk('div').xClass('row').xAppend(
-                    xmk('div').xClass('col-12', 'col-sm-3', 'overflow-auto').xAppend(
+                    xmk('div').xClass('col-12', 'overflow-auto').xAppend(
                         xmk('label').xClass('col-form-label').xInnerHTML('Password')
                     ),
-                    xmk('div').xClass('col-12', 'col-sm-9', 'x-fld-value-div', 'overflow-auto').xAppend(
+                    xmk('div').xClass('col-12', 'x-fld-value-div', 'overflow-auto').xAppend(
                         mkLoadSavePassword('x-save-password')
                     ),
                 ),

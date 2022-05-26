@@ -63,11 +63,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-25T16:47:46-07:00</code></td>
+<td><code>2022-05-26 15:07:28 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>418b8c2</code></td>
+<td><code>51e2942</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -106,6 +106,25 @@ Table of Contents
 </ul></li>
 <li><a href="#preferences">Preferences</a></li>
 <li><a href="#security-considerations">Security Considerations</a></li>
+<li><a href="#usage-examples">Usage Examples</a>
+<ul>
+<li><a href="#personal-account-records">Personal Account Records</a>
+<ul>
+<li><a href="#create-record-and-file">Create Record and File</a></li>
+<li><a href="#use-record-data-to-log-into-a-site">Use Record Data to Log
+into a Site</a></li>
+<li><a href="#edit%20an-existing-record">Edit an Existing
+Record</a></li>
+<li><a href="#delete-an-existing-record">Delete an Existing
+Record</a></li>
+<li><a href="#clone-an-existing-record">Clone an Existing
+Record</a></li>
+</ul></li>
+<li><a href="#shared-credentials-for-a-small-group">Shared Credentials
+for a Small Group</a></li>
+<li><a href="#recipes">Recipes</a></li>
+<li><a href="#books">Books</a></li>
+</ul></li>
 <li><a href="#developer-notes">Developer Notes</a>
 <ul>
 <li><a href="#release-pam">Release PAM</a></li>
@@ -214,12 +233,11 @@ many as you want. Fields are added, modified and deleted by the
 <q>Edit</q> option.</p>
 </blockquote>
 <p>In addition to the cliboard icon there is another icon that looks
-like an eye
-<img src="./eye.svg" height="32" width="32" alt="clipboard"/>. that
-shows up for password field. If you click or tap it, the password will
-be shown in plaintext and the icon will change to an eye with a slash
-through it
-<img src="./eye-slash.svg" height="32" width="32" alt="clipboard"/>. By
+like an eye <img src="./eye.svg" height="32" width="32" alt="eye"/>.
+that shows up for password field. If you click or tap it, the password
+will be shown in plaintext and the icon will change to an eye with a
+slash through it
+<img src="./eye-slash.svg" height="32" width="32" alt="eye-slash"/>. By
 default all passwords are hidden so that they are not visible to casual
 observers. Click it again to re-hide the password.</p>
 <p>In addition there are three buttons at the bottom
@@ -236,8 +254,207 @@ anything.</p>
 <p>TBD</p>
 <h4 id="security-considerations">Security Considerations</h4>
 <p>TBD</p>
+<h4 id="usage-examples">Usage Examples</h4>
+<p>The examples in this section talk about how to use this app under
+different scenarios.</p>
+<h5 id="personal-account-records">Personal Account Records</h5>
+<p>This is the most common usage. It is where personal account records
+are stored so that you have a permanent, encrypted record of all of your
+passwords.</p>
+<h6 id="create-record-and-file">Create Record and File</h6>
+<p>To create a file and a record follow these steps:</p>
+<ol type="1">
+<li>Navigate to the app: <a
+href="https://jlinoff.github.io/pam/www/">https://jlinoff.github.io/pam/www/</a>
+<ol type="1">
+<li>Or to wherever you installed it, if you built it locally.</li>
+<li>This can be done from any device, like your phone, tablet or
+computer but you must have access to cloud storage (on iphone and ipads
+that would be iCloud).</li>
+</ol></li>
+<li>Select the <q>Add New Record</q> option from the menu in the upper
+right hand corner.</li>
+<li>When the new record dialogue pops up, enter the account name as the
+title, an example might be <q>Google email</q>.</li>
+<li>Add fields like <q>url</q>, <q>login</q> and <q>password</q>.</li>
+<li>Save the record.</li>
+<li>At this point it will appear as your first record on the
+display.</li>
+<li>Now save it to a file by selecting <q>Save File</q> from the
+menu.</li>
+<li>Enter the file name, perhaps something like <q>mystuff.pam</q> or
+<q>joe.pam</q> if your name is <q>Joe</q>,</li>
+<li>Enter a password.
+<ol type="1">
+<li>This is the password that you need to access all of the records in
+the file.</li>
+<li>The password is <em>not</em> stored so make sure that you keep track
+of it somewhere because if it is lost, the records <em>cannot</em> be
+retrieved.</li>
+</ol></li>
+</ol>
+<p>At this point your data is stored. You can add as many additional
+records as you want or change existing records. As long as you save
+them, they will be available to you.</p>
+<h6 id="use-record-data-to-log-into-a-site">Use Record Data to Log into
+a Site</h6>
+<p>To use the data to log into a site.</p>
+<ol type="1">
+<li>Navigate to the app as described above.</li>
+<li>Click on the record that contains the information.</li>
+<li>Click on the <q>url</q> link so that the site opens up in a
+different tab.</li>
+<li>Enter the login name or email by clicking on the
+<img src="./clipboard.svg" height="32" width="32" alt="clipboard"/> icon
+next to the login name and paste into the site.</li>
+<li>Enter the password by clicking on the
+<img src="./clipboard.svg" height="32" width="32" alt="clipboard"/> icon
+next to the password and paste into the site.
+<ol type="1">
+<li>You do <em>not</em> need to make the password visible to do
+this.</li>
+<li>It picks up the correct password even when it is hidden.</li>
+</ol></li>
+</ol>
+<h6 id="edit-an-existing-record">Edit an Existing Record</h6>
+<p>To edit an existing record.</p>
+<ol type="1">
+<li>Navigate to the app as described above.</li>
+<li>Click on the record that contains the information.</li>
+<li>Click on the edit
+<img src='./pencil-square.svg' height='32' width='32' /> icon.</li>
+<li>Edit the record the same way you did when adding it.</li>
+<li>Save the record.</li>
+<li>Make sure to save the file when you are done editing.</li>
+</ol>
+<h6 id="delete-an-existing-record">Delete an Existing Record</h6>
+<p>To delete an existing record.</p>
+<ol type="1">
+<li>Navigate to the app as described above.</li>
+<li>Click on the record that contains the information.</li>
+<li>Click on the delte <img src='./trash.svg' height='32' width='32' />
+icon.</li>
+<li>Make sure to save the file when you are done editing.</li>
+</ol>
+<h6 id="clone-an-existing-record">Clone an Existing Record</h6>
+<p>This is a really powerful operation that allows you to quickly create
+records with the same fields.</p>
+<p>To clone a record.</p>
+<ol type="1">
+<li>Navigate to the app as described above.</li>
+<li>Click on the record that contains the information.</li>
+<li>Click on the edit <img src='./files.svg' height='32' width='32' />
+icon.</li>
+<li>Edit the record the same way you did when adding it.</li>
+<li>Save the record.</li>
+<li>Make sure to save the file when you are done editing.</li>
+</ol>
+<p>If you want to disable the copying of field data turn off the
+<q>Clone Field Values when Cloning Records</q> preference. That avoids
+having to delete each old field value before typing in the new field
+value.</p>
+<h5 id="shared-credentials-for-a-small-group">Shared Credentials for a
+Small Group</h5>
+<p>This scenario assumes that a small group shares a common file of
+account records with credentials that can only be decrypted using a
+single shared password that is only known to the group. Because it is so
+easy to manage, such simple setup it might be useful for a
+<em>small</em> group that requires administrative access to a
+<em>small</em> number of accounts.</p>
+<blockquote>
+<p>Because it involves sharing a password, this approach may be too
+insecure for some.</p>
+</blockquote>
+<p>If this approach is adopted, it would be wise to change the shared
+password frequently, to audit all access to the shared file as well as
+auditing all access to the accounts. Also, since the shared file
+<em>must</em> be on a mounted volume that can be seen by the input file
+dialogue, access to the mount and, by extension, to the file can also be
+restricted.</p>
+<p>Here are the high level steps necessary to share the pam file.</p>
+<ol type="1">
+<li>Create the mounted volume.</li>
+<li>Create the pam file and populate it with the shared records.
+<ol type="1">
+<li>Optionally, you may wish to limit the fields to <code>login</code>,
+<code>password</code>, <code>note</code> and <code>host</code> by
+editing the preferences and removing the other fields since these
+records have a specific format.</li>
+</ol></li>
+<li>Save the file to the mounted volume with a password.</li>
+<li>Communicate the location of the file and the password to the members
+of the group in a secure way.</li>
+</ol>
+<h5 id="recipes">Recipes</h5>
+<p>This is a bit of contrived example because you could easily keep all
+of your recipes with your other personal account data but it might be
+useful if you want to keep them separated.</p>
+<p>The key notion here is the idea of creating two new fields in the
+preference dialogue: <q>difficulty</q>, <q>ingredients</q> and
+<q>steps</q>, and then using them when you enter recipes.</p>
+<p>Here are the high level steps necessary to get started.</p>
+<ol type="1">
+<li>Open the preferences dialogue from the menu in pam.</li>
+<li>Add the three new fields by clicking on the
+<img src="./plus-circle.svg" height="32" width="32" alt="trash"/> icon
+in the <q>Record Fields</q> section.
+<ol type="1">
+<li><q>difficulty</q> of type <q>text</q>.</li>
+<li><q>ingredients</q> of type <q>textarea</q>.</li>
+<li><q>steps</q> of type <q>textarea</q>.</li>
+</ol></li>
+<li>Delete all of the other fields by clicking on the trashcan
+<img src="./trash3-fill.svg" height="32" width="32" alt="trash"/>
+icon.</li>
+</ol>
+<p>To search by an ingredient, set the <q>Search Record Field Values</q>
+preference to true by clicking on it and then saving it.</p>
+<h5 id="books">Books</h5>
+<p>This is another somewhat of contrived example because you could
+easily keep all of your book reviews with your other personal account
+data but it might be useful if you want to keep them separated.</p>
+<p>For my book reviews, I enter the book title as the record title and
+added the following fields using the methodology described in the
+recipes section above.</p>
+<blockquote>
+<p>Note that i only add records or books that i have completed.</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th>name</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>author</td>
+<td>textarea</td>
+<td>there maybe multiple authors</td>
+</tr>
+<tr class="even">
+<td>date-read</td>
+<td>text</td>
+<td>when i read it</td>
+</tr>
+<tr class="odd">
+<td>thoughts</td>
+<td>textarea</td>
+<td>my thoughts about the book</td>
+</tr>
+</tbody>
+</table>
+<p>To search by author, set the <q>Search Record Field Values</q>
+preference to true by clicking on it and then saving it.</p>
 <h4 id="developer-notes">Developer Notes</h4>
 <p>These are things that developers might be interested in.</p>
+<p>It was built using pure javascript and relies on a secure context to
+provide encryption and decryption.</p>
+<p>It uses <a
+href="#https://getbootstrap.com/docs/5.0/getting-started/introduction/">bootstrap-5</a>
+to make it work better in mobile browsers.</p>
+<p>All of the FOSS (free and open source).</p>
 <h5 id="release-pam">Release PAM</h5>
 <ol type="1">
 <li>Update the <code>VERSION</code> file using semantic versioning.</li>

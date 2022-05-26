@@ -16,10 +16,10 @@ export function menuLoadDlg() {
             xmk('p').xInnerHTML('Enter a password if the file was encrypted.'),
             xmk('form').xClass('container').xAppend(
                 xmk('div').xClass('row').xAppend(
-                    xmk('div').xClass('col-12', 'col-sm-3', 'overflow-auto').xAppend(
+                    xmk('div').xClass('col-12', 'overflow-auto').xAppend(
                         xmk('label').xClass('col-form-label').xInnerHTML('Password')
                     ),
-                    xmk('div').xClass('col-12', 'col-sm-9', 'overflow-auto').xAppend(
+                    xmk('div').xClass('col-12', 'overflow-auto').xAppend(
                         mkLoadSavePassword('x-load-password')
                     ),
                 )
