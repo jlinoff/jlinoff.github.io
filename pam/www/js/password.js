@@ -120,8 +120,8 @@ export function mkGeneratePasswordDlg(event) {
         }
         topdiv.xAppend(
             // Close button.
+            xmk('hr'),
             xmk('div').xClass('col-12', 'x-fld-pw-gen', 'mt-1').xAppend(
-                //xmk('hr'),
                 xmk('button')
                     .xClass('btn', 'btn-small', 'w-100')
                     .xAppend(
@@ -137,7 +137,6 @@ export function mkGeneratePasswordDlg(event) {
             ),
             // Cryptic and memorable password buttons.
             xmk('div').xClass('col-auto', 'x-fld-pw-gen').xAppend(
-                //xmk('hr'),
                 xmk('p').xClass('m-1', 'fs-3').xInnerHTML('Password Generator'),
                 xmk('p').xClass('m-1', 'fs-6').xInnerHTML('Click on the generated password to select it. ' +
                                                           'Click the Generate button or use the length slider ' +

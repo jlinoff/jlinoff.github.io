@@ -316,12 +316,12 @@ function mkRecordEditField(name, type, container, value) {
 
                 // Field name
                 xmk('div').xClass('row').xAppend(
-                    xmk('div').xClass('col', 'col-sm-2').xAppend(
+                    xmk('div').xClass('col-12').xAppend(
                         xmk('label')
                             .xClass('col-form-label')
                             .xInnerHTML('Name')
                     ),
-                    xmk('div').xClass('col-12', 'col-sm-10').xAppend(
+                    xmk('div').xClass('col-12').xAppend(
                         xmk('div').xClass('input-group').xAppend(
                             xmk('input')
                                 .xAttrs({'value': name,})
@@ -349,12 +349,12 @@ function mkRecordEditField(name, type, container, value) {
 
                 // Field value
                 xmk('div').xClass('row').xAppend(
-                    xmk('div').xClass('col-12', 'col-sm-2').xAppend(
+                    xmk('div').xClass('col-12').xAppend(
                         xmk('label')
                             .xClass('col-form-label')
                             .xInnerHTML('Value')
                     ),
-                    xmk('div').xClass('col-12', 'col-sm-10', 'x-fld-value-div', 'overflow-auto').xAppend(
+                    xmk('div').xClass('col-12', 'overflow-auto').xAppend(
                         xmk('div').xClass('input-group').xAppend(
                             ...inputs,
                             xmk('span').xClass('input-group-append').xAppend(
@@ -385,7 +385,7 @@ function mkRecordEditField(name, type, container, value) {
                     ),
 
                     // Buttons
-                    xmk('div').xClass('col-12', 'col-sm-auto')
+                    xmk('div').xClass('col-12', 'x-fld-value-div')
                         .xAppend(
                             ...buttons,
                             passwordLength,
