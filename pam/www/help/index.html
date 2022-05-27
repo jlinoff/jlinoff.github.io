@@ -63,11 +63,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-26 23:25:13 -0700</code></td>
+<td><code>2022-05-27 09:31:18 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>7fa7b09</code></td>
+<td><code>c6790d9</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -164,7 +164,8 @@ Attack</a></li>
 <li><a href="#unattended-browser">Unattended Browser</a></li>
 <li><a href="#website-spoofing">Website Spoofing</a></li>
 <li><a href="#protecting-yourself">Protecting Yourself</a></li>
-<li><a href="#mfa">MFA</a></li>
+<li><a href="#multi-factor-authentication">Multi-Factor
+Authentication</a></li>
 </ul></li>
 <li><a href="#usage-examples">Usage Examples</a>
 <ul>
@@ -192,7 +193,7 @@ for a Small Group</a></li>
 </ul>
 <!--t3-->
 </details>
-<h4 id="introduction">Introduction</h4>
+<h2 id="introduction">Introduction</h2>
 <p><em>PAM</em> or Personal Account Manager is a free and open source
 single page web app that runs in your browser in a secure context that
 enables you to securely manage your confidential personal account data
@@ -204,10 +205,10 @@ encrypt it was strong</em>.</p>
 <p>You can run the application locally, from your own server or from the
 public github.io servers here: <a
 href="https://jlinoff.github.io/pam/www/index.html">https://jlinoff.github.io/pam/www/index.html</a>.</p>
-<h4 id="overview">Overview</h4>
+<h2 id="overview">Overview</h2>
 <p>Probably the easiest way to understand how the app works is to look
 at some simple examples that reflect common ways to use the app.</p>
-<h5 id="menu">Menu</h5>
+<h3 id="menu">Menu</h3>
 <p>The menu is the control center for the app. It provides the basic
 operations for creating records, loading records, saving them and it
 provide information about the app including this help.</p>
@@ -252,7 +253,7 @@ entry to see this help message.</p>
 menu.</p>
 <p>At the bottom of the screen is a status bar that shows status
 messages.</p>
-<h5 id="load-records">Load Records</h5>
+<h3 id="load-records">Load Records</h3>
 <p>This example shows what the records look like. It shows seven records
 that contain confidential information for <q>Amazon</q>, <q>Email</q>,
 <q>Facebook</q>, <q>Github</q>, <q>Google</q>, <q>Netflix</q> and
@@ -276,7 +277,7 @@ button.</p>
 menu.</p>
 <p>At the bottom of the screen is a status bar that shows status
 messages.</p>
-<h5 id="expand-record">Expand Record</h5>
+<h3 id="expand-record">Expand Record</h3>
 <p>The most common operation is expanding a record to see the
 information. This example shows the fictional <q>Facebook</q> account
 data.</p>
@@ -307,7 +308,7 @@ the record,
 the record and
 <q><img src='./pencil-square.svg' height='32' width='32' /> Edit</q> to
 edit the record fields.</p>
-<h4 id="preferences">Preferences</h4>
+<h2 id="preferences">Preferences</h2>
 <p>Preferences allow you to customized the behavior of the app. The
 defaults are set so that most people will never have to change
 anything.</p>
@@ -333,36 +334,32 @@ suffix.
 <li>Miscellaneous - preferences for other stuff.</li>
 <li>Record Fields - the definitions of the available fields.</li>
 </ol>
-<p>Each preference is discussed in more detail in the subsections below.
-##### Miscellaneous Preferences These preferences don’t fall into a
-single category.</p>
-<h5 id="record-fields">Record Fields</h5>
-<p>These are the pre-defined record fields that are used when creating
-or editing records. They can be overridden.</p>
-<h5 id="search-preferences">Search Preferences</h5>
+<p>Each preference is discussed in more detail in the subsections
+below.</p>
+<h3 id="search-preferences">Search Preferences</h3>
 <p>These preferences control search options.</p>
-<h6 id="case-insensitive-searches">Case Insensitive Searches</h6>
+<h4 id="case-insensitive-searches">Case Insensitive Searches</h4>
 <p>If enabled, all searches are case insensitive, otherwise they are
 case sensitive.</p>
 <p>The default is enabled.</p>
-<h6 id="search-record-titles">Search Record Titles</h6>
+<h4 id="search-record-titles">Search Record Titles</h4>
 <p>If enabled, all searches look at the record titles, otherwise they do
 not.</p>
 <p>The default is enabled.</p>
-<h6 id="search-record-field-names">Search Record Field Names</h6>
+<h4 id="search-record-field-names">Search Record Field Names</h4>
 <p>If enabled, all searches look at the record field names, otherwise
 they do not.</p>
 <p>The default is not enabled.</p>
 <p>You would want to enable this you wanted to see records that
 contained a specific field.</p>
-<h6 id="search-record-field-values">Search Record Field Values</h6>
+<h4 id="search-record-field-values">Search Record Field Values</h4>
 <p>If enabled, all searches look at the record field values, otherwise
 they do not.</p>
 <p>The default is not enabled.</p>
 <p>You would want to enable this you wanted to see records that
 contained a specific field value like an obsolete email or really old
 password.</p>
-<h5 id="password-preferences">Password Preferences</h5>
+<h3 id="password-preferences">Password Preferences</h3>
 <p>These preferences control automatic password creation.</p>
 <p>Cryptic passwords consist of letters, digits and special characters
 in a single string. An example would look something like this
@@ -372,30 +369,31 @@ hard to memorize for most people.</p>
 passwords are composed of lower case English words with an optional
 prefix, an optional separator between each word and an optional suffix.
 An example would look something like this
-<code>'rebates/restructuring/jamaica'</code>. q ###### Minimum Password
-Length Defines the minimum length of generated cryptic and memorable
+<code>'rebates/restructuring/jamaica'</code>.</p>
+<h4 id="minimum-password-length">Minimum Password Length</h4>
+<p>Defines the minimum length of generated cryptic and memorable
 passwords.</p>
 <p>The default is 12.</p>
 <p>I would recommend not making it shorter than the default unless a
 website specifically demands it because shorter passwords are easier to
 crack.</p>
-<h6 id="maximum-password-length">Maximum Password Length</h6>
+<h4 id="maximum-password-length">Maximum Password Length</h4>
 <p>Defines the minimum length of generated cryptic and memorable
 passwords.</p>
 <p>The default is 32.</p>
 <p>I would recommend making it longer than the default if you can but
 many websites have an upper bound for the length of password. The chosen
 default seems to work for most of them.</p>
-<h6 id="memorable-password-min-word-length">Memorable Password Min Word
-Length</h6>
+<h4 id="memorable-password-min-word-length">Memorable Password Min Word
+Length</h4>
 <p>Defines the minimum size of a word in a generated memorable password.
 &gt; It has no affect on cryptic passwords.</p>
 <p>The default is 2.</p>
 <p>If you do not want short words like <code>'as'</code> or
 <code>'it'</code>, then make this longer. I would not recommend making
 it shorter.</p>
-<h6 id="memorable-password-word-separator">Memorable Password Word
-Separator</h6>
+<h4 id="memorable-password-word-separator">Memorable Password Word
+Separator</h4>
 <p>The string used to separate the words in a generated memorable
 password.</p>
 <blockquote>
@@ -406,13 +404,13 @@ password.</p>
 can be multiple characters. Other reasonable choices might be
 <code>':'</code> or <code>'.'</code> or <code>'@@'</code> or whatever
 you like. It is best not to use letters.</p>
-<h6 id="memorable-password-min-words">Memorable Password Min Words</h6>
+<h4 id="memorable-password-min-words">Memorable Password Min Words</h4>
 <p>The minimum number of words in a generated memorable password.</p>
 <blockquote>
 <p>It has no affect on cryptic passwords.</p>
 </blockquote>
 <p>The default is 3.</p>
-<h6 id="memorable-password-max-tries">Memorable Password Max Tries</h6>
+<h4 id="memorable-password-max-tries">Memorable Password Max Tries</h4>
 <p>The maximum number of attempts to generate a memorable password that
 meets the specified criteria from the other password preferences.</p>
 <blockquote>
@@ -422,7 +420,7 @@ meets the specified criteria from the other password preferences.</p>
 <p>There is normally no need to ever change this but, if you change it
 and make it too small, <em>PAM</em> will report errors if it fails to
 generate passwords after the maximum number of tries.</p>
-<h6 id="memorable-password-prefix">Memorable Password Prefix</h6>
+<h4 id="memorable-password-prefix">Memorable Password Prefix</h4>
 <p>The prefix to add to all generated memorable passwords.</p>
 <p>The default is <code>''</code> (empty string).</p>
 <p>You might want to add a prefix or suffix to make sure that the
@@ -432,7 +430,7 @@ case letter, digits and special characters.</p>
 meet the criteria which might create passwords like
 <code>'A1!!/html/wishes/combined'</code> or
 <code>'A1!!/rebates/restructuring/jamaica'</code>.</p>
-<h6 id="memorable-password-suffix">Memorable Password Suffix</h6>
+<h4 id="memorable-password-suffix">Memorable Password Suffix</h4>
 <p>The suffix to add to all generated memorable passwords.</p>
 <p>The default is <code>''</code> (empty string).</p>
 <p>You might want to add a prefix or suffix to make sure that the
@@ -442,16 +440,16 @@ case letter, digits and special characters.</p>
 meet the criteria which might create passwords like
 <code>'html/wishes/combined/A1!!'</code> or
 <code>'rebates/restructuring/jamaica/A1!!'</code>.</p>
-<h5 id="miscellaneous-preferences">Miscellaneous Preferences</h5>
+<h3 id="miscellaneous-preferences">Miscellaneous Preferences</h3>
 <p>These are the preferences did’t fall into the other categories.</p>
-<h6 id="log-status-to-the-console">Log Status to the Console</h6>
+<h4 id="log-status-to-the-console">Log Status to the Console</h4>
 <p>Log status messages to the console as well as the screen to aid
 debugging.</p>
 <p>The default is false which says do not log status messages to the
 console.</p>
 <p>You might want to enable console logging if you are debugging a
 problem and are working in a browser that supports debugging.</p>
-<h6 id="clear-records-on-load">Clear Records On Load</h6>
+<h4 id="clear-records-on-load">Clear Records On Load</h4>
 <p>Clear all records before loading records from a file.</p>
 <p>The default is true which says to clear the records before a loading
 new records from a file.</p>
@@ -460,8 +458,8 @@ Record Strategy</q> will appear that is not normally visible to ask you
 with strategy you want to used for conflicts.</p>
 <p>You might set this preference to false if you want to to merge sets
 of records from different files.</p>
-<h6 id="load-duplicate-record-strategy">Load Duplicate Record
-Strategy</h6>
+<h4 id="load-duplicate-record-strategy">Load Duplicate Record
+Strategy</h4>
 <p>This preference is not visible unless the <q>Clear Records On
 Load</q> preference is false.</p>
 <p>It presents three strategies for handling duplicate records during a
@@ -474,8 +472,8 @@ file would be renamed to <q>Google Clone</q>.</p>
 loaded. If there is a conflict it prefers the one already present.</p>
 <p>The <q>replace</q> strategy ignores the duplicate record that already
 exists. If there is a conflict it prefers the record being loaded.</p>
-<h6 id="clone-field-values-when-cloning-records">Clone Field Values when
-Cloning Records</h6>
+<h4 id="clone-field-values-when-cloning-records">Clone Field Values when
+Cloning Records</h4>
 <p>This preference specifies that all data is kept when cloning a
 record.</p>
 <p>Remember that cloning a record is very simple and powerful way to
@@ -485,27 +483,27 @@ values before entering new ones which is very simple.</p>
 cloning.</p>
 <p>Set this preference if you want to avoid deleting the fields
 manually.</p>
-<h6 id="custom-about">Custom About</h6>
+<h4 id="custom-about">Custom About</h4>
 <p>Customized HTML that is added to the about page. It can be used in
 cases where the field records have been customized to provide an
 explanation or link to internal documentation.</p>
-<h5 id="record-fields-1">Record Fields</h5>
+<h3 id="record-fields">Record Fields</h3>
 <p>These are the pre-defined record fields that are used when creating
 or editing records. They can be overridden.</p>
 <h3 id="todo-finish-up-preferences">TODO: finish up preferences</h3>
-<h4 id="security-considerations">Security Considerations</h4>
+<h2 id="security-considerations">Security Considerations</h2>
 <p><em>PAM</em>, like all web applications, has security challenges. By
 fully disclosing them here you can understand the challenges and improve
 your ability to protect your record data.</p>
-<h5 id="mitm">MITM</h5>
+<h3 id="mitm">MITM</h3>
 <p>Unlike many other web applications, <em>PAM</em> does <em>not</em>
 talk to an internet based web server which means that the data is never
 transported from your computer over the internet. Because no data is
 ever transmitted, it is protected from monster-in-the-middle (MITM)
 attacks.</p>
 <p>Thus, <em>PAM</em> mitigates MITM attacks by design.</p>
-<h5 id="third-party-web-site-security">Third Party Web Site
-Security</h5>
+<h3 id="third-party-web-site-security">Third Party Web Site
+Security</h3>
 <p>Because <em>PAM</em> does not send the data to a server, it is not
 vulnerable to how cybersecurity is managed on the server by a third
 party.</p>
@@ -522,8 +520,8 @@ seriously by organizations that develop Chrome, Edge, Firefox and other
 browsers.</p>
 <p>You can read more about secure contexts <a
 href="#https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts">here</a>.</p>
-<h5 id="over-the-shoulder-surfing-attack">Over the Shoulder Surfing
-Attack</h5>
+<h3 id="over-the-shoulder-surfing-attack">Over the Shoulder Surfing
+Attack</h3>
 <p>The user enters the record data in decrypted form, so it may be
 vulnerable to over the shoulder surfing attacks where someone or
 something (like a camera) watches or films the user typing or opening a
@@ -535,8 +533,8 @@ surroundings to make sure you are not being watched or filmed.</p>
 <p>This is different and easier to mitigate than <q>key-logging and
 screen recording</q> as discussed in the next subsection.</p>
 </blockquote>
-<h5 id="malware-key-logging-and-screen-recording">Malware: Key Logging
-and Screen Recording</h5>
+<h3 id="malware-key-logging-and-screen-recording">Malware: Key Logging
+and Screen Recording</h3>
 <p>If malware that takes screenshots or does key logging has been
 installed on your computer, phone or tablet, you are in trouble for a
 variety of reasons. It means that an attacker can see what you are doing
@@ -544,7 +542,7 @@ and capture what you are typing.</p>
 <p>The best way to mitigate these forms of attacks is to keep your
 system up to date by installing security patches and by using some sort
 of security tool or tools to protect your system.</p>
-<h5 id="malware-clipboard-attack">Malware: Clipboard Attack</h5>
+<h3 id="malware-clipboard-attack">Malware: Clipboard Attack</h3>
 <p>Yet another type of vulnerability is the <q>clipboard attack</q>
 if/when data is copied to the clipboard for cut and paste operations.
 This vulnerability exists because the clipboard is a global resource
@@ -560,13 +558,13 @@ simply selection a single letter or word and copying it.</p>
 would be to eliminate the need for the clipboard by modifying
 <em>PAM</em> to automatically login in for you based on record data
 using an HTTP POST operation but that is not currently available.</p>
-<h5 id="unattended-browser">Unattended Browser</h5>
+<h3 id="unattended-browser">Unattended Browser</h3>
 <p>If you leave the browser unattended after you have loaded your record
 data, someone can sit down and see the records because they are
 impersonating you <em>after you have logged in</em>.</p>
 <p>The best way to mitigate this attach is to always lock your screen
 when you leave the computer unattended.</p>
-<h5 id="website-spoofing">Website Spoofing</h5>
+<h3 id="website-spoofing">Website Spoofing</h3>
 <p>Web site spoofing could be used to direct you to a website that could
 be used to steal your information using a look alike web
 application.</p>
@@ -574,14 +572,62 @@ application.</p>
 known, trusted site.</p>
 <p>If you are concerned about this, you can always download, build and
 run <em>PAM</em> from your own site.</p>
-<h4 id="usage-examples">Usage Examples</h4>
+<h3 id="protecting-yourself">Protecting Yourself</h3>
+<p>In summary, security can never be fully guaranteed, the best way to
+protect your data is to follow commonly recommended security
+practices:</p>
+<ol type="1">
+<li>Keep all of your security patches up to date.</li>
+<li>Keep malware off of your systems.</li>
+<li>Make sure that you are not observed.</li>
+<li>Never share sensitive information (like passwords).</li>
+<li>Backup your data.</li>
+<li>Use a strong password for encrypting your files.
+<ol type="1">
+<li>It should be at least 20 characters.</li>
+<li>It should not contain personally identifiable information like
+dates.</li>
+<li>It should be memorable and fairly easy to type.</li>
+<li>I suggest using a memorable password of length 30 or more that
+contains 3 to 5 words with a custom prefix and suffix. Perhaps something
+with a structure like this:
+<q><code>A1/jeans/chosen/since/tuition?!!</code></q> (do NOT use this
+specific password!).</li>
+</ol></li>
+</ol>
+<h3 id="multi-factor-authentication">Multi-Factor Authentication</h3>
+<p>Several folks asked why Multi-Factor Authentication (MFA) was not
+included in <em>PAM</em> to provide and additional layer of
+security.</p>
+<p>In general the MFA approach assumes that the users identity must be
+checked and validated (authentication) so that the site offering the
+services knows that it is dealing with the valid user not an
+impersonator <em>which is a great thing</em> but it is not necessary for
+<em>PAM</em> because <em>PAM</em> has no <em>site</em>. It is a single
+page web application which, once it is loaded, makes it more like a
+local word processor that is tailored to managing customized records in
+<em>local</em> files so any additional communication over the internet
+represents a risk as does storing any user information. Everything is
+done inside the browser in a secure context.</p>
+<p>No outbound information is ever sent to the internet unless the user
+specifically requests it via the <code>Load File</code> and
+<code>Save File</code> operations but at that point all data is
+encrypted both at the file level and as the HTTPS transport level which
+is required for the browser secure context which, in turn, is required
+by <em>PAM</em> to function which is pretty safe if you protect your
+data with a strong password.</p>
+<p>You can verify that <em>PAM</em> is functioning securely by
+monitoring outbound internet traffic. You should never see any outbound
+traffic from <em>PAM</em> that is not related to the file load and save
+operations.</p>
+<h2 id="usage-examples">Usage Examples</h2>
 <p>The examples in this section talk about how to use this app under
 different scenarios.</p>
-<h5 id="personal-account-records">Personal Account Records</h5>
+<h3 id="personal-account-records">Personal Account Records</h3>
 <p>This is the most common usage. It is where personal account records
 are stored so that you have a permanent, encrypted record of all of your
 passwords.</p>
-<h6 id="create-record-and-file">Create Record and File</h6>
+<h4 id="create-record-and-file">Create Record and File</h4>
 <p>To create a file and a record follow these steps:</p>
 <ol type="1">
 <li>Navigate to the app: <a
@@ -616,8 +662,8 @@ retrieved.</li>
 <p>At this point your data is stored. You can add as many additional
 records as you want or change existing records. As long as you save
 them, they will be available to you.</p>
-<h6 id="use-record-data-to-log-into-a-site">Use Record Data to Log into
-a Site</h6>
+<h4 id="use-record-data-to-log-into-a-site">Use Record Data to Log into
+a Site</h4>
 <p>To use the data to log into a site.</p>
 <ol type="1">
 <li>Navigate to the app as described above.</li>
@@ -636,7 +682,7 @@ this.</li>
 <li>It picks up the correct password even when it is hidden.</li>
 </ol></li>
 </ol>
-<h6 id="edit-an-existing-record">Edit an Existing Record</h6>
+<h3 id="edit-an-existing-record">Edit an Existing Record</h3>
 <p>To edit an existing record.</p>
 <ol type="1">
 <li>Navigate to the app as described above.</li>
@@ -648,7 +694,7 @@ title.</li>
 <li>Save the record.</li>
 <li>Make sure to save the file when you are done.</li>
 </ol>
-<h6 id="delete-an-existing-record">Delete an Existing Record</h6>
+<h4 id="delete-an-existing-record">Delete an Existing Record</h4>
 <p>To delete an existing record.</p>
 <ol type="1">
 <li>Navigate to the app as described above.</li>
@@ -657,7 +703,7 @@ title.</li>
 icon.</li>
 <li>Make sure to save the file when you are done.</li>
 </ol>
-<h6 id="clone-an-existing-record">Clone an Existing Record</h6>
+<h4 id="clone-an-existing-record">Clone an Existing Record</h4>
 <p>This is a really powerful operation that allows you to quickly create
 records with the same fields.</p>
 <p>To clone a record.</p>
@@ -674,8 +720,8 @@ icon.</li>
 <q>Clone Field Values when Cloning Records</q> preference. That avoids
 having to delete each old field value before typing in the new field
 value.</p>
-<h5 id="shared-credentials-for-a-small-group">Shared Credentials for a
-Small Group</h5>
+<h3 id="shared-credentials-for-a-small-group">Shared Credentials for a
+Small Group</h3>
 <p>This scenario assumes that a small group shares a common file of
 account records with credentials that can only be decrypted using a
 single shared password that is only known to the group. Because it is so
@@ -706,7 +752,7 @@ records have a specific format.</li>
 <li>Communicate the location of the file and the password to the members
 of the group in a secure way.</li>
 </ol>
-<h5 id="recipes">Recipes</h5>
+<h3 id="recipes">Recipes</h3>
 <p>This is a bit of contrived example because you could easily keep all
 of your recipes with your other personal account data but it might be
 useful if you want to keep them separated.</p>
@@ -730,7 +776,7 @@ icon.</li>
 </ol>
 <p>To search by an ingredient, set the <q>Search Record Field Values</q>
 preference to true by clicking on it and then saving it.</p>
-<h5 id="books">Books</h5>
+<h3 id="books">Books</h3>
 <p>This is another somewhat of contrived example because you could
 easily keep all of your book reviews with your other personal account
 data but it might be useful if you want to keep them separated.</p>
@@ -768,15 +814,15 @@ recipes section above.</p>
 </table>
 <p>To search by author, set the <q>Search Record Field Values</q>
 preference to true by clicking on it and then saving it.</p>
-<h4 id="developer-notes">Developer Notes</h4>
+<h2 id="developer-notes">Developer Notes</h2>
 <p>These are things that developers might be interested in.</p>
-<p>It was built using pure javascript and relies on a secure context to
-provide encryption and decryption.</p>
+<p>It was built using pure javascript and relies on the browser secure
+context to provide encryption and decryption.</p>
 <p>It uses <a
 href="#https://getbootstrap.com/docs/5.0/getting-started/introduction/">bootstrap-5</a>
 to make it work better in mobile browsers.</p>
 <p>It is free and open-source (FOSS) software.</p>
-<h5 id="release-pam">Release PAM</h5>
+<h3 id="release-pam">Release PAM</h3>
 <ol type="1">
 <li>Update the <code>VERSION</code> file using semantic versioning.</li>
 <li>Run <code>make</code> to propagate the new version.</li>
