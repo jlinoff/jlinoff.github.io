@@ -496,14 +496,37 @@ or editing records. They can be overridden.</p>
 fully disclosing them here you can understand the challenges and improve
 your ability to protect your record data.</p>
 <h3 id="mitm">MITM</h3>
-<p>Unlike many other web applications, <em>PAM</em> does <em>not</em>
-talk to an internet based web server which means that the data is never
-transported from your computer over the internet. Because no data is
-ever transmitted, it is protected from monster-in-the-middle (MITM)
-attacks.</p>
-<p>Thus, <em>PAM</em> mitigates MITM attacks by design.</p>
+<p>MITM refers to <q>Monster In The Middle</q> attacks or, historically,
+<q>Man In The Middle</q> attacks. It an attack where a hostile
+eavesdropper inserts themselves in the communications stream between a
+client and a server to capture or alter the communications for nefarious
+purposes like stealing credentials.</p>
+<p><em>PAM</em> is not susceptible to this attack because it <em>does
+not communicate with a server</em>. That is because it is a single page
+web application that is downloaded and run within your browser. All data
+is local. Nothing is ever transferred over the internet for an
+eavesdropper to capture.</p>
 <h3 id="third-party-web-site-security">Third Party Web Site
 Security</h3>
+<p>Third party web site security can be a major source of cybersecurity
+vulnerabilities because clients cannot know how well such cybersecurity
+vulnerabilities are mitigated unless that site publishes a detailed
+report, on a periodic basis, of how often they were attacked
+successfully and how many attacks they have successfully fended off.</p>
+<p>Sadly, most companies do not provide that information. If you are
+using a password manager or any other service that uses a server, you
+might want to consider asking them how vulnerable they are to
+cyberattacks. At a minimum, you will want to understand what is done to
+protect your data from insider attacks where an employee steals the
+data.</p>
+<p>Sometimes you can get associated information about the security of a
+site by looking at Common Vulnerability and Exposures (CVE) reports. See
+<a href="https://www.cve.org/">https://www.cve.org/</a> for more
+information.</p>
+<blockquote>
+<p>Poor reporting of third party web site cybersecurity vulnerabilities
+and exposures is what motivated me to write <em>PAM</em>.</p>
+</blockquote>
 <p>Because <em>PAM</em> does not send the data to a server, it is not
 vulnerable to how cybersecurity is managed on the server by a third
 party.</p>
