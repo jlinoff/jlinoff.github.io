@@ -63,11 +63,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-26 23:19:39 -0700</code></td>
+<td><code>2022-05-26 23:25:13 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>0e5c0db</code></td>
+<td><code>7fa7b09</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -135,8 +135,17 @@ Prefix</a></li>
 <li><a href="#memorable-password-suffix">memorable Password
 Suffix</a></li>
 </ul></li>
-<li><a href="#miscellaneous-preferences">Miscellaneous
-Preferences</a></li>
+<li><a href="#miscellaneous-preferences">Miscellaneous Preferences</a>
+<ul>
+<li><a href="#log-status-to-the-console">Log Status to the
+Console</a></li>
+<li><a href="#clear-records-on-load">Clear Records On Load</a></li>
+<li><a href="#load-duplicate-record-strategy">Load Duplicate Record
+Strategy</a></li>
+<li><a href="#clone-field-values-when-cloning-records">Clone Field
+Values when Cloning Records</a></li>
+<li><a href="#custom-about">Custom About</a></li>
+</ul></li>
 <li><a href="#record-fields">Record Fields</a></li>
 </ul></li>
 <li><a href="#security-considerations">Security Considerations</a>
@@ -434,7 +443,52 @@ meet the criteria which might create passwords like
 <code>'html/wishes/combined/A1!!'</code> or
 <code>'rebates/restructuring/jamaica/A1!!'</code>.</p>
 <h5 id="miscellaneous-preferences">Miscellaneous Preferences</h5>
-<p>These preferences don’t fall into a single category.</p>
+<p>These are the preferences did’t fall into the other categories.</p>
+<h6 id="log-status-to-the-console">Log Status to the Console</h6>
+<p>Log status messages to the console as well as the screen to aid
+debugging.</p>
+<p>The default is false which says do not log status messages to the
+console.</p>
+<p>You might want to enable console logging if you are debugging a
+problem and are working in a browser that supports debugging.</p>
+<h6 id="clear-records-on-load">Clear Records On Load</h6>
+<p>Clear all records before loading records from a file.</p>
+<p>The default is true which says to clear the records before a loading
+new records from a file.</p>
+<p>If you set this to false, another option titled <q>Load Duplicate
+Record Strategy</q> will appear that is not normally visible to ask you
+with strategy you want to used for conflicts.</p>
+<p>You might set this preference to false if you want to to merge sets
+of records from different files.</p>
+<h6 id="load-duplicate-record-strategy">Load Duplicate Record
+Strategy</h6>
+<p>This preference is not visible unless the <q>Clear Records On
+Load</q> preference is false.</p>
+<p>It presents three strategies for handling duplicate records during a
+load operation: <q>allow</q>, <q>ignore</q>, <q>replace</q>.</p>
+<p>The <q>allow</q> strategy allows duplicate records to exist by
+cloning them. For example if a record with the title <q>Google</q>
+exists in the records and in the file being loaded, the record from the
+file would be renamed to <q>Google Clone</q>.</p>
+<p>The <q>ignore</q> strategy ignores the duplicate record that is being
+loaded. If there is a conflict it prefers the one already present.</p>
+<p>The <q>replace</q> strategy ignores the duplicate record that already
+exists. If there is a conflict it prefers the record being loaded.</p>
+<h6 id="clone-field-values-when-cloning-records">Clone Field Values when
+Cloning Records</h6>
+<p>This preference specifies that all data is kept when cloning a
+record.</p>
+<p>Remember that cloning a record is very simple and powerful way to
+create records with the same fields but you have to delete the existing
+values before entering new ones which is very simple.</p>
+<p>The default is false which says to keep the field values when
+cloning.</p>
+<p>Set this preference if you want to avoid deleting the fields
+manually.</p>
+<h6 id="custom-about">Custom About</h6>
+<p>Customized HTML that is added to the about page. It can be used in
+cases where the field records have been customized to provide an
+explanation or link to internal documentation.</p>
 <h5 id="record-fields-1">Record Fields</h5>
 <p>These are the pre-defined record fields that are used when creating
 or editing records. They can be overridden.</p>
