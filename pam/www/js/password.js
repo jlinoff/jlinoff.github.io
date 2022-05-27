@@ -120,8 +120,8 @@ export function mkGeneratePasswordDlg(event) {
         }
         topdiv.xAppend(
             // Close button.
-            xmk('hr'),
             xmk('div').xClass('col-12', 'x-fld-pw-gen', 'mt-1').xAppend(
+                xmk('hr'),
                 xmk('button')
                     .xClass('btn', 'btn-small', 'w-100')
                     .xAppend(

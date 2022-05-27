@@ -267,10 +267,9 @@ function mkRecordEditField(name, type, container, value) {
             row.remove()
         })
 
-    let buttons = [recordDeleteButton] // buttons common to all types
-
     // define password buttons
     if ( type === 'password' ) {
+        // password show/hide button
         passwordShowHide = xmk('button')
             .xAttrs({'type': 'button',
                      'title': 'show or hide password'})
@@ -294,7 +293,7 @@ function mkRecordEditField(name, type, container, value) {
                 }
             })
 
-        // generate button
+        // password generate button
         passwordGenerate = xmk('button')
             .xAttrs({'type': 'button'})
             .xClass('btn', 'btn-lg', 'px-0', 'ms-3')
@@ -387,7 +386,7 @@ function mkRecordEditField(name, type, container, value) {
                     // Buttons
                     xmk('div').xClass('col-12', 'x-fld-value-div')
                         .xAppend(
-                            ...buttons,
+                            recordDeleteButton,
                             passwordLength,
                             passwordShowHide,
                             passwordGenerate,
@@ -478,4 +477,3 @@ export function copyRecordFieldsToEditDlg(title, body, clone) {
         body.xAppend(fld)
     }
 }
-
