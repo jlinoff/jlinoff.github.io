@@ -423,7 +423,7 @@ function prefCloneFieldValues(labelClasses, inputClasses) {
 function prefSearchCaseInsensitive(labelClasses, inputClasses) {
     let checkbox = window.prefs.searchCaseInsensitive ? 'bi-check2-square' : 'bi-square'
     return xmk('div').xClass('row').xAppend(
-        prefLabel(labelClasses, 'Case Insensisitive Searches'),
+        prefLabel(labelClasses, 'Case Insensitive Searches'),
         xmk('div').xClass(...inputClasses).xAppend(
             xmk('div').xClass('input-group').xAppend(
                 xmk('button')

@@ -63,11 +63,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-26 16:50:31 -0700</code></td>
+<td><code>2022-05-26 17:42:47 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>9d47c35</code></td>
+<td><code>c317d75</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -98,14 +98,59 @@ Table of Contents
 <!--ts-->
 <ul>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#brief-overview">Brief Overview</a>
+<li><a href="#overview">Overview</a>
 <ul>
 <li><a href="#menu">Menu</a></li>
 <li><a href="#load-records">Load Records</a></li>
 <li><a href="#expand-record">Expand Record</a></li>
 </ul></li>
-<li><a href="#preferences">Preferences</a></li>
-<li><a href="#security-considerations">Security Considerations</a></li>
+<li><a href="#preferences">Preferences</a>
+<ul>
+<li><a href="#search-case-insensitive-searches">Search: Case Insensitive
+Searches</a></li>
+<li><a href="#search-search-record-titles">Search: Search Record
+Titles</a></li>
+<li><a href="#search-search-record-field-names">Search: Search Record
+Field Names</a></li>
+<li><a href="#search-search-record-field-names">Search: Search Record
+Field Names</a></li>
+<li><a href="#search-search-record-field-values">Search: Search Record
+Field Values</a></li>
+<li><a href="#password-minimum-password-length">Password: Minimum
+Password Length</a></li>
+<li><a href="#password:%20maximum%20password%20length">Password: Maximum
+Password Length</a></li>
+<li><a href="#password-memorable-password-min-word-length">Password:
+Memorable Password Min Word Length</a></li>
+<li><a href="#password-memorable-password-word-separator">Password:
+Memorable Password Word Separator</a></li>
+<li><a href="#password-memorable-password-min-words">Password: Memorable
+Password Min Words</a></li>
+<li><a href="#password-memorable-password-max-tries">Password: Memorable
+Password Max Tries</a></li>
+<li><a href="#password-memorable-password-prefix">Password: Memorable
+Password Prefix</a></li>
+<li><a href="#password-memorable-password-suffix">Password: memorable
+Password Suffix</a></li>
+</ul></li>
+<li><a href="#security-considerations">security considerations</a>
+<ul>
+<li><a href="#mitm">MITM</a></li>
+<li><a href="#third-party-web-site-security">Third Party Web Site
+Security</a></li>
+<li><a href="#third-party-web-site-reliability">Third Party Web Site
+Reliability</a></li>
+<li><a href="#over-the-shoulder-surfing-attack">Over the Shoulder
+Surfing Attack</a></li>
+<li><a href="#malware-key-logging-and-screen-recording">Malware: Key
+Logging and Screen Recording</a></li>
+<li><a href="#malware-clipboard-attack">Malware: Clipboard
+Attack</a></li>
+<li><a href="#unattended-browser">Unattended Browser</a></li>
+<li><a href="#website-spoofing">Website Spoofing</a></li>
+<li><a href="#protecting-yourself">Protecting Yourself</a></li>
+<li><a href="#mfa">MFA</a></li>
+</ul></li>
 <li><a href="#usage-examples">Usage Examples</a>
 <ul>
 <li><a href="#personal-account-records">Personal Account Records</a>
@@ -144,7 +189,7 @@ encrypt it was strong</em>.</p>
 <p>You can run the application locally, from your own server or from the
 public github.io servers here: <a
 href="https://jlinoff.github.io/pam/www/index.html">https://jlinoff.github.io/pam/www/index.html</a>.</p>
-<h4 id="brief-overview">Brief Overview</h4>
+<h4 id="overview">Overview</h4>
 <p>Probably the easiest way to understand how the app works is to look
 at some simple examples that reflect common ways to use the app.</p>
 <h5 id="menu">Menu</h5>
@@ -251,9 +296,212 @@ edit the record fields.</p>
 <p>Preferences allow you to customized the behavior of the app. The
 defaults are set so that most people will never have to change
 anything.</p>
-<p>TBD</p>
+<p>The preferences dialogue is a big one. It is broken into 4
+sections:</p>
+<ol type="1">
+<li>Search - preferences that control searches.</li>
+<li>Passwords - preferences that control password creation and length.
+<ol type="1">
+<li>There are two types of passwords: cryptic and memorable.</li>
+<li>Cryptic passwords consist of letters, digits and special characters
+in a single string.
+<ul>
+<li>Cryptic passwords are very hard to memorize for most people.</li>
+</ul></li>
+<li>Memorable passwords are composed of lower case English words with an
+optional prefix, an optional separator between each word and an optional
+suffix.
+<ul>
+<li>Memorable passwords are easier to memorize for most people.</li>
+</ul></li>
+</ol></li>
+<li>Miscellaneous - preferences for other stuff.</li>
+<li>Record Fields - the definitions of the available fields.</li>
+</ol>
+<p>Each preference is discussed in more detail in the subsections
+below.</p>
+<h5 id="search-case-insensitive-searches">Search: Case Insensitive
+Searches</h5>
+<p>If enabled, all searches are case insensitive, otherwise they are
+case sensitive.</p>
+<p>The default is enabled.</p>
+<h5 id="search-search-record-titles">Search: Search Record Titles</h5>
+<p>If enabled, all searches look at the record titles, otherwise they do
+not.</p>
+<p>The default is enabled.</p>
+<h5 id="search-search-record-field-names">Search: Search Record Field
+Names</h5>
+<p>If enabled, all searches look at the record field names, otherwise
+they do not.</p>
+<p>The default is not enabled.</p>
+<p>You would want to enable this you wanted to see records that
+contained a specific field.</p>
+<h5 id="search-search-record-field-values">Search: Search Record Field
+Values</h5>
+<p>If enabled, all searches look at the record field values, otherwise
+they do not.</p>
+<p>The default is not enabled.</p>
+<p>You would want to enable this you wanted to see records that
+contained a specific field value like an obsolete email or really old
+password.</p>
+<h5 id="password-minimum-password-length">Password: Minimum Password
+Length</h5>
+<p>Defines the minimum length of generated cryptic and memorable
+passwords.</p>
+<p>The default is 12.</p>
+<p>I would recommend not making it shorter than the default unless a
+website specifically demands it because shorter passwords are easier to
+crack.</p>
+<h5 id="password-maximum-password-length">Password: Maximum Password
+Length</h5>
+<p>Defines the minimum length of generated cryptic and memorable
+passwords.</p>
+<p>The default is 32.</p>
+<p>I would recommend making it longer than the default if you can but
+many websites have an upper bound for the length of password. The chosen
+default seems to work for most of them.</p>
+<h5 id="password-memorable-password-min-word-length">Password: Memorable
+Password Min Word Length</h5>
+<p>Defines the minimum size of a word in a generated memorable password.
+&gt; It has no affect on cryptic passwords.</p>
+<p>The default is 2.</p>
+<p>If you do not want short words like <code>'as'</code> or
+<code>'it'</code>, then make this longer. I would not recommend making
+it shorter.</p>
+<h5 id="password-memorable-password-word-separator">Password: Memorable
+Password Word Separator</h5>
+<p>The string used to separate the words in a generated memorable
+password.</p>
+<blockquote>
+<p>It has no affect on cryptic passwords.</p>
+</blockquote>
+<p>The default is a single character: <code>'/'</code>.</p>
+<p>If you want to change the character, add any string that you like. It
+can be multiple characters. Other reasonable choices might be
+<code>':'</code> or <code>'.'</code> or <code>'@@'</code> or whatever
+you like. It is best not to use letters.</p>
+<h5 id="password-memorable-password-min-words">Password: Memorable
+Password Min Words</h5>
+<p>The minimum number of words in a generated memorable password.</p>
+<blockquote>
+<p>It has no affect on cryptic passwords.</p>
+</blockquote>
+<p>The default is 3.</p>
+<h5 id="password-memorable-password-max-tries">Password: Memorable
+Password Max Tries</h5>
+<p>The maximum number of attempts to generate a memorable password that
+meets the specified criteria from the other password preferences.</p>
+<blockquote>
+<p>It has no affect on cryptic passwords.</p>
+</blockquote>
+<p>The default is 10000.</p>
+<p>There is normally no need to ever change this but, if you change it
+and make it too small, <em>PAM</em> will report errors if it fails to
+generate passwords after the maximum number of tries.</p>
+<h5 id="password-memorable-password-prefix">Password: Memorable Password
+Prefix</h5>
+<p>The prefix to add to all generated memorable passwords.</p>
+<p>The default is <code>''</code> (empty string).</p>
+<p>You might want to add a prefix or suffix to make sure that the
+generated passwords meet the requirements of websites that require upper
+case letter, digits and special characters.</p>
+<p>For example, you might specify something like <code>'A1!!/'</code> to
+meet the criteria which might create passwords like
+<code>'A1!!/html/wishes/combined'</code> or
+<code>'A1!!/rebates/restructuring/jamaica'</code>.</p>
+<h5 id="password-memorable-password-suffix">Password: Memorable Password
+Suffix</h5>
+<p>The suffix to add to all generated memorable passwords.</p>
+<p>The default is <code>''</code> (empty string).</p>
+<p>You might want to add a prefix or suffix to make sure that the
+generated passwords meet the requirements of websites that require upper
+case letter, digits and special characters.</p>
+<p>For example, you might specify something like <code>'/A1!!'</code> to
+meet the criteria which might create passwords like
+<code>'html/wishes/combined/A1!!'</code> or
+<code>'rebates/restructuring/jamaica/A1!!'</code>.</p>
+<h3 id="todo-finish-up-preferences">TODO: finish up preferences</h3>
 <h4 id="security-considerations">Security Considerations</h4>
-<p>TBD</p>
+<p><em>PAM</em>, like all web applications, has security challenges. By
+fully disclosing them here you can understand the challenges and improve
+your ability to protect your record data.</p>
+<h5 id="mitm">MITM</h5>
+<p>Unlike many other web applications, <em>PAM</em> does <em>not</em>
+talk to an internet based web server which means that the data is never
+transported from your computer over the internet. Because no data is
+ever transmitted, it is protected from monster-in-the-middle (MITM)
+attacks.</p>
+<p>Thus, <em>PAM</em> mitigates MITM attacks by design.</p>
+<h5 id="third-party-web-site-security">Third Party Web Site
+Security</h5>
+<p>Because <em>PAM</em> does not send the data to a server, it is not
+vulnerable to how cybersecurity is managed on the server by a third
+party.</p>
+<blockquote>
+<p>You can verify that <em>PAM</em> is not sending data out by
+monitoring outbound traffic from your system. <em>PAM</em> never sends
+any outbound data.</p>
+</blockquote>
+<p>Instead, encryption and decryption is run <em>inside</em> the browser
+using the <em>secure context of the browser</em>. This is the same
+context used for accessing sites securely for transactions, like your
+bank. The security of the <em>secure context</em> is taken very
+seriously by organizations that develop Chrome, Edge, Firefox and other
+browsers.</p>
+<p>You can read more about secure contexts <a
+href="#https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts">here</a>.</p>
+<h5 id="over-the-shoulder-surfing-attack">Over the Shoulder Surfing
+Attack</h5>
+<p>The user enters the record data in decrypted form, so it may be
+vulnerable to over the shoulder surfing attacks where someone or
+something (like a camera) watches or films the user typing or opening a
+record and then clicking on a password field to display the password in
+plaintext which could allow that information to be stolen.</p>
+<p>This vulnerability can be mitigated by being aware of your
+surroundings to make sure you are not being watched or filmed.</p>
+<blockquote>
+<p>This is different and easier to mitigate than <q>key-logging and
+screen recording</q> as discussed in the next subsection.</p>
+</blockquote>
+<h5 id="malware-key-logging-and-screen-recording">Malware: Key Logging
+and Screen Recording</h5>
+<p>If malware that takes screenshots or does key logging has been
+installed on your computer, phone or tablet, you are in trouble for a
+variety of reasons. It means that an attacker can see what you are doing
+and capture what you are typing.</p>
+<p>The best way to mitigate these forms of attacks is to keep your
+system up to date by installing security patches and by using some sort
+of security tool or tools to protect your system.</p>
+<h5 id="malware-clipboard-attack">Malware: Clipboard Attack</h5>
+<p>Yet another type of vulnerability is the <q>clipboard attack</q>
+if/when data is copied to the clipboard for cut and paste operations.
+This vulnerability exists because the clipboard is a global resource
+that can be accessed by other, independent applications.</p>
+<p>Clipboard attacks can be mitigated by making sure that your computer
+does not have malware installed or by not copying to the clipboard.
+Although it is probably impractical to not use the clipboard at all so,
+if you do use the clipboard, make sure that you always reset it after
+any copy/paste operation to minimize any chances that it will be
+captured by malware or observed by an attacker. You can reset it by
+simply selection a single letter or word and copying it.</p>
+<p>Another, perhaps better, way to mitigate the clipboard vulnerability
+would be to eliminate the need for the clipboard by modifying
+<em>PAM</em> to automatically login in for you based on record data
+using an HTTP POST operation but that is not currently available.</p>
+<h5 id="unattended-browser">Unattended Browser</h5>
+<p>If you leave the browser unattended after you have loaded your record
+data, someone can sit down and see the records because they are
+impersonating you <em>after you have logged in</em>.</p>
+<p>The best way to mitigate this attach is to always lock your screen
+when you leave the computer unattended.</p>
+<h5 id="website-spoofing">Website Spoofing</h5>
+<p>Web site spoofing could be used to direct you to a website that could
+be used to steal your information using a look alike web
+application.</p>
+<p>To mitigate that make sure that you accessing the <em>PAM</em> from a
+known, trusted site.</p>
+<p>If you are concerned about this, you can always download, build and
+run <em>PAM</em> from your own site.</p>
 <h4 id="usage-examples">Usage Examples</h4>
 <p>The examples in this section talk about how to use this app under
 different scenarios.</p>
@@ -323,18 +571,19 @@ this.</li>
 <li>Click on the record that contains the information.</li>
 <li>Click on the edit
 <img src='./pencil-square.svg' height='32' width='32' /> icon.</li>
-<li>Edit the record the same way you did when adding it.</li>
+<li>Edit the record to make the necessary changes to the fields or
+title.</li>
 <li>Save the record.</li>
-<li>Make sure to save the file when you are done editing.</li>
+<li>Make sure to save the file when you are done.</li>
 </ol>
 <h6 id="delete-an-existing-record">Delete an Existing Record</h6>
 <p>To delete an existing record.</p>
 <ol type="1">
 <li>Navigate to the app as described above.</li>
 <li>Click on the record that contains the information.</li>
-<li>Click on the delte <img src='./trash.svg' height='32' width='32' />
+<li>Click on the delete <img src='./trash.svg' height='32' width='32' />
 icon.</li>
-<li>Make sure to save the file when you are done editing.</li>
+<li>Make sure to save the file when you are done.</li>
 </ol>
 <h6 id="clone-an-existing-record">Clone an Existing Record</h6>
 <p>This is a really powerful operation that allows you to quickly create
@@ -345,9 +594,9 @@ records with the same fields.</p>
 <li>Click on the record that contains the information.</li>
 <li>Click on the edit <img src='./files.svg' height='32' width='32' />
 icon.</li>
-<li>Edit the record the same way you did when adding it.</li>
+<li>Edit the record to update the fields.</li>
 <li>Save the record.</li>
-<li>Make sure to save the file when you are done editing.</li>
+<li>Make sure to save the file when you are done.</li>
 </ol>
 <p>If you want to disable the copying of field data turn off the
 <q>Clone Field Values when Cloning Records</q> preference. That avoids
