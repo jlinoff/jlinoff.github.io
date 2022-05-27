@@ -63,11 +63,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-26 17:42:47 -0700</code></td>
+<td><code>2022-05-26 23:19:39 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>c317d75</code></td>
+<td><code>0e5c0db</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -106,34 +106,40 @@ Table of Contents
 </ul></li>
 <li><a href="#preferences">Preferences</a>
 <ul>
-<li><a href="#search-case-insensitive-searches">Search: Case Insensitive
+<li><a href="#search-preferences">Search Preferences</a>
+<ul>
+<li><a href="#case-insensitive-searches">Case Insensitive
 Searches</a></li>
-<li><a href="#search-search-record-titles">Search: Search Record
-Titles</a></li>
-<li><a href="#search-search-record-field-names">Search: Search Record
-Field Names</a></li>
-<li><a href="#search-search-record-field-names">Search: Search Record
-Field Names</a></li>
-<li><a href="#search-search-record-field-values">Search: Search Record
-Field Values</a></li>
-<li><a href="#password-minimum-password-length">Password: Minimum
-Password Length</a></li>
-<li><a href="#password:%20maximum%20password%20length">Password: Maximum
-Password Length</a></li>
-<li><a href="#password-memorable-password-min-word-length">Password:
-Memorable Password Min Word Length</a></li>
-<li><a href="#password-memorable-password-word-separator">Password:
-Memorable Password Word Separator</a></li>
-<li><a href="#password-memorable-password-min-words">Password: Memorable
-Password Min Words</a></li>
-<li><a href="#password-memorable-password-max-tries">Password: Memorable
-Password Max Tries</a></li>
-<li><a href="#password-memorable-password-prefix">Password: Memorable
-Password Prefix</a></li>
-<li><a href="#password-memorable-password-suffix">Password: memorable
-Password Suffix</a></li>
+<li><a href="#search-record-titles">Search Record Titles</a></li>
+<li><a href="#search-record-field-names">Search Record Field
+Names</a></li>
+<li><a href="#search-record-field-names">Search Record Field
+Names</a></li>
+<li><a href="#search-record-field-values">Search Record Field
+Values</a></li>
 </ul></li>
-<li><a href="#security-considerations">security considerations</a>
+<li><a href="#password-preferences">Password Preferences</a>
+<ul>
+<li><a href="#minimum-password-length">Minimum Password Length</a></li>
+<li><a href="#maximum-password-length">Maximum Password Length</a></li>
+<li><a href="#memorable-password-min-word-length">Memorable Password Min
+Word Length</a></li>
+<li><a href="#memorable-password-word-separator">Memorable Password Word
+Separator</a></li>
+<li><a href="#memorable-password-min-words">Memorable Password Min
+Words</a></li>
+<li><a href="#memorable-password-max-tries">Memorable Password Max
+Tries</a></li>
+<li><a href="#memorable-password-prefix">Memorable Password
+Prefix</a></li>
+<li><a href="#memorable-password-suffix">memorable Password
+Suffix</a></li>
+</ul></li>
+<li><a href="#miscellaneous-preferences">Miscellaneous
+Preferences</a></li>
+<li><a href="#record-fields">Record Fields</a></li>
+</ul></li>
+<li><a href="#security-considerations">Security Considerations</a>
 <ul>
 <li><a href="#mitm">MITM</a></li>
 <li><a href="#third-party-web-site-security">Third Party Web Site
@@ -318,58 +324,69 @@ suffix.
 <li>Miscellaneous - preferences for other stuff.</li>
 <li>Record Fields - the definitions of the available fields.</li>
 </ol>
-<p>Each preference is discussed in more detail in the subsections
-below.</p>
-<h5 id="search-case-insensitive-searches">Search: Case Insensitive
-Searches</h5>
+<p>Each preference is discussed in more detail in the subsections below.
+##### Miscellaneous Preferences These preferences don’t fall into a
+single category.</p>
+<h5 id="record-fields">Record Fields</h5>
+<p>These are the pre-defined record fields that are used when creating
+or editing records. They can be overridden.</p>
+<h5 id="search-preferences">Search Preferences</h5>
+<p>These preferences control search options.</p>
+<h6 id="case-insensitive-searches">Case Insensitive Searches</h6>
 <p>If enabled, all searches are case insensitive, otherwise they are
 case sensitive.</p>
 <p>The default is enabled.</p>
-<h5 id="search-search-record-titles">Search: Search Record Titles</h5>
+<h6 id="search-record-titles">Search Record Titles</h6>
 <p>If enabled, all searches look at the record titles, otherwise they do
 not.</p>
 <p>The default is enabled.</p>
-<h5 id="search-search-record-field-names">Search: Search Record Field
-Names</h5>
+<h6 id="search-record-field-names">Search Record Field Names</h6>
 <p>If enabled, all searches look at the record field names, otherwise
 they do not.</p>
 <p>The default is not enabled.</p>
 <p>You would want to enable this you wanted to see records that
 contained a specific field.</p>
-<h5 id="search-search-record-field-values">Search: Search Record Field
-Values</h5>
+<h6 id="search-record-field-values">Search Record Field Values</h6>
 <p>If enabled, all searches look at the record field values, otherwise
 they do not.</p>
 <p>The default is not enabled.</p>
 <p>You would want to enable this you wanted to see records that
 contained a specific field value like an obsolete email or really old
 password.</p>
-<h5 id="password-minimum-password-length">Password: Minimum Password
-Length</h5>
-<p>Defines the minimum length of generated cryptic and memorable
+<h5 id="password-preferences">Password Preferences</h5>
+<p>These preferences control automatic password creation.</p>
+<p>Cryptic passwords consist of letters, digits and special characters
+in a single string. An example would look something like this
+<code>'N5yAb!XfGa3vELPsK95K4/AAz8mts'</code>. Cryptic passwords are very
+hard to memorize for most people.</p>
+<p>There are two types of passwords: cryptic and memorable. Memorable
+passwords are composed of lower case English words with an optional
+prefix, an optional separator between each word and an optional suffix.
+An example would look something like this
+<code>'rebates/restructuring/jamaica'</code>. q ###### Minimum Password
+Length Defines the minimum length of generated cryptic and memorable
 passwords.</p>
 <p>The default is 12.</p>
 <p>I would recommend not making it shorter than the default unless a
 website specifically demands it because shorter passwords are easier to
 crack.</p>
-<h5 id="password-maximum-password-length">Password: Maximum Password
-Length</h5>
+<h6 id="maximum-password-length">Maximum Password Length</h6>
 <p>Defines the minimum length of generated cryptic and memorable
 passwords.</p>
 <p>The default is 32.</p>
 <p>I would recommend making it longer than the default if you can but
 many websites have an upper bound for the length of password. The chosen
 default seems to work for most of them.</p>
-<h5 id="password-memorable-password-min-word-length">Password: Memorable
-Password Min Word Length</h5>
+<h6 id="memorable-password-min-word-length">Memorable Password Min Word
+Length</h6>
 <p>Defines the minimum size of a word in a generated memorable password.
 &gt; It has no affect on cryptic passwords.</p>
 <p>The default is 2.</p>
 <p>If you do not want short words like <code>'as'</code> or
 <code>'it'</code>, then make this longer. I would not recommend making
 it shorter.</p>
-<h5 id="password-memorable-password-word-separator">Password: Memorable
-Password Word Separator</h5>
+<h6 id="memorable-password-word-separator">Memorable Password Word
+Separator</h6>
 <p>The string used to separate the words in a generated memorable
 password.</p>
 <blockquote>
@@ -380,15 +397,13 @@ password.</p>
 can be multiple characters. Other reasonable choices might be
 <code>':'</code> or <code>'.'</code> or <code>'@@'</code> or whatever
 you like. It is best not to use letters.</p>
-<h5 id="password-memorable-password-min-words">Password: Memorable
-Password Min Words</h5>
+<h6 id="memorable-password-min-words">Memorable Password Min Words</h6>
 <p>The minimum number of words in a generated memorable password.</p>
 <blockquote>
 <p>It has no affect on cryptic passwords.</p>
 </blockquote>
 <p>The default is 3.</p>
-<h5 id="password-memorable-password-max-tries">Password: Memorable
-Password Max Tries</h5>
+<h6 id="memorable-password-max-tries">Memorable Password Max Tries</h6>
 <p>The maximum number of attempts to generate a memorable password that
 meets the specified criteria from the other password preferences.</p>
 <blockquote>
@@ -398,8 +413,7 @@ meets the specified criteria from the other password preferences.</p>
 <p>There is normally no need to ever change this but, if you change it
 and make it too small, <em>PAM</em> will report errors if it fails to
 generate passwords after the maximum number of tries.</p>
-<h5 id="password-memorable-password-prefix">Password: Memorable Password
-Prefix</h5>
+<h6 id="memorable-password-prefix">Memorable Password Prefix</h6>
 <p>The prefix to add to all generated memorable passwords.</p>
 <p>The default is <code>''</code> (empty string).</p>
 <p>You might want to add a prefix or suffix to make sure that the
@@ -409,8 +423,7 @@ case letter, digits and special characters.</p>
 meet the criteria which might create passwords like
 <code>'A1!!/html/wishes/combined'</code> or
 <code>'A1!!/rebates/restructuring/jamaica'</code>.</p>
-<h5 id="password-memorable-password-suffix">Password: Memorable Password
-Suffix</h5>
+<h6 id="memorable-password-suffix">Memorable Password Suffix</h6>
 <p>The suffix to add to all generated memorable passwords.</p>
 <p>The default is <code>''</code> (empty string).</p>
 <p>You might want to add a prefix or suffix to make sure that the
@@ -420,6 +433,11 @@ case letter, digits and special characters.</p>
 meet the criteria which might create passwords like
 <code>'html/wishes/combined/A1!!'</code> or
 <code>'rebates/restructuring/jamaica/A1!!'</code>.</p>
+<h5 id="miscellaneous-preferences">Miscellaneous Preferences</h5>
+<p>These preferences don’t fall into a single category.</p>
+<h5 id="record-fields-1">Record Fields</h5>
+<p>These are the pre-defined record fields that are used when creating
+or editing records. They can be overridden.</p>
 <h3 id="todo-finish-up-preferences">TODO: finish up preferences</h3>
 <h4 id="security-considerations">Security Considerations</h4>
 <p><em>PAM</em>, like all web applications, has security challenges. By
