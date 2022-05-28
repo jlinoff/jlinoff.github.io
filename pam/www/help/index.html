@@ -63,11 +63,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-28 14:05:32 -0700</code></td>
+<td><code>2022-05-28 15:21:14 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>d4e83b1</code></td>
+<td><code>ea163f6</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -299,20 +299,40 @@ login name and the password. Something like this:</p>
 <p>As you can see both records look quite different. Recipes records
 have fields for <q>ingredients</q> and <q>instructions</q> whereas
 account records have fields for the <q>url</q>, <q>login</q> and
-<q>password</q>. Other types of records for things like books read would
-other different fields. As you define more and more record types and
-create more and more records having a tool like <em>PAM</em> to organize
-it for you and provide searching simplifies finding and maintaining your
-information.</p>
+<q>password</q>. Other records that contain information for things like
+<em><q>books read</q></em> or <em><q>unidentified aerial
+phenomena</q></em> or <em><q>bird watching</q></em> would undoubtedly
+require other, different fields.</p>
+<p>As you define more records fields to support information about about
+new topics like <q>books read</q>, <q>unidentified aerial phenomena</q>
+or <q>bird watching</q>, it becomes increasingly difficult to manage (or
+even remember) all of the different fields.</p>
+<p>Similarly as you add more records it becomes increasingly difficult
+to manage or find records of interest.</p>
+<p>This is where <em>PAM</em> becomes more useful. For example, if you
+want to search your favorite 10,000 dessert recipes to find the ones
+that use vanilla ice cream as an ingredient, you can use the built in
+search function whereas scrolling though a text file would be
+tedious.</p>
 <p>This is why I prefer the <em>PAM</em> record approach. It feels like
-a more natural format for the data that I am interested in storing.</p>
+a more natural format for the record data that I am interested in
+storing.</p>
+<p>Of course, if you <em>really</em> want to store 10,000 items <em>of
+anything</em> and you want to be able to search it efficiently, you
+probably want to use a database but that is a topic for another
+time.</p>
+<p><em>PAM</em> is great for small collections not gargantuan ones. I
+never store more than about 150 records which is probably a reasonable
+upper bound but, in practice, <em>PAM</em> does not impose any
+limits.</p>
 <h4 id="reason-3-searching">Reason 3: Searching</h4>
 <p><em>PAM</em> allows you to search records by their title or their
 field names and value to filter out records that do not match the search
 pattern. This is extremely useful when the number of records grows.</p>
-<p>I use this a lot for finding things like old password and obsolete
-accounts.</p>
-<p>It supports case insensitive searches and regular expressions.</p>
+<p>I use this a lot for finding things like where i am still using old
+passwords and obsolete accounts.</p>
+<p>The search function supports case insensitive searches and regular
+expressions.</p>
 <h4 id="reason-4-automatic-password-generation">Reason 4: Automatic
 Password Generation</h4>
 <p>I always find it hard to come up with passwords in the spur of the
@@ -331,15 +351,18 @@ file means that the user does not have to rely on the cybersecurity
 defenses of a company running a web server at their site or another
 third party site.</p>
 <p>A collection of records is stored in a file. You can have multiple
-files for different types of records like recipes vs book reviews vs
-login information for accounts. The user controls the organization of
-the records and file.</p>
-<p>I store my record files in cloud IaaS storage and mount that storage
-as a local volume on each device so that the files look like they are
-local but they are, in fact, stored in the cloud. That allows me to
-access the files from any of my devices: laptops, phones and tablets. I
-personally use iCloud because it does all the volume mount work
-automatically.</p>
+files for different types of records like <em><q>recipes</q></em> or
+<em><q>book reviews</q></em> or <em><q>login information for
+accounts</q></em>. The user controls the organization of the records and
+file as discussed in <a href="#reason-2-record-format">Reason 2: Record
+Format</a></p>
+<p>I store my record files in cloud <em>IaaS</em> (infrastructure as a
+service) storage and mount that storage as a local volume on each device
+so that the files look like they are local but they are, in fact, stored
+in the cloud. That allows me to access the files from any of my devices:
+laptops, phones and tablets.</p>
+<p>I personally use iCloud because it does all the volume mount work
+automatically on all of my devices.</p>
 <h4 id="reason-6-record-customization">Reason 6: Record
 Customization</h4>
 <p>The record fields are fully customizable.</p>
@@ -356,12 +379,12 @@ Encryption</h4>
 standard symmetric encryption algorithm: <code>AES-256-CBC</code>. That
 means, if a file is stolen, the record data is safe, if it has been
 encrypted with a strong password.</p>
-<blockquote>
-<p>Note that AES-256-CBC has also been theorized less vulnerable to a
-quantum hack as discussed in <a
-href="#https://crypto.stackexchange.com/questions/6712/is-aes-256-a-post-quantum-secure-cipher-or-not">this</a>
-cryto.stackexchange.com discussion.</p>
-</blockquote>
+<p>As an added benefit, note that <code>AES-256-CBC</code> has also been
+theorized as being less vulnerable to a quantum hack as discussed in the
+literature. <a
+href="#https://crypto.stackexchange.com/questions/6712/is-aes-256-a-post-quantum-secure-cipher-or-not">Here</a>
+is one relevant ecxchange from a <code>crypto.stackexchange.com</code>
+discussion.</p>
 <p><em>PAM</em> encryption and decryption operations are provided by and
 run <em>in</em> the browser using the <em>secure context of the
 browser</em>. This is the same context used for accessing sites securely
@@ -425,19 +448,34 @@ messages are displayed. These are used to provide activity feedback like
 showing how many bytes were copied to a clipboard when a copy button is
 clicked as shown in the example below.</p>
 <p><img src="./pam-status-msg.png" alt="status-message"></p>
+<p>You can control the duration of the messages in the preferences.</p>
 <h2 id="functions">Functions</h2>
 <p>The following sections will go over the basic functions that
 <em>PAM</em> provides.</p>
 <p>In a nutshell they are:</p>
 <ol type="1">
-<li>Create a record.</li>
-<li>Edit a record.</li>
-<li>Delete a record.</li>
-<li>Generate a password.</li>
-<li>Save a collection of records into an encrypted file.</li>
-<li>Load a collection of record from an encrypted file.</li>
-<li>Search for records.</li>
+<li>About - Display information about the application.</li>
+<li>Create Record</li>
+<li>Edit Record</li>
+<li>Delete Record</li>
+<li>Generate Password</li>
+<li>Save File - save records to an encrypted file.</li>
+<li>Load File - load a collection of records from an encrypted
+file.</li>
+<li>Search Records</li>
+<li>Get Help</li>
 </ol>
+<p>Each function will be discussed in a separate subsection.</p>
+<p>Note that Preferences were not included because they have their own
+top level section in this document.</p>
+<h3 id="about">About</h3>
+<p>Click on the <q>About</q> menu entry to get information about
+<em>PAM</em>. You can even add custom HTML through the preferences.</p>
+<p>Here is a screen shot of what you would see.</p>
+<p><img src="./pam-about.png" alt="about"></p>
+<p>Here is the annotated view</p>
+<p><img src="./pam-about-annotated.png" alt="about-annotated"></p>
+<h3 id="create-record">Create Record</h3>
 <h3 id="menu">Menu</h3>
 <p>The menu is the control center for the app. It provides the basic
 operations for creating records, loading records, saving them and it
