@@ -63,11 +63,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-28 09:50:28 -0700</code></td>
+<td><code>2022-05-28 13:44:32 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>36274a4</code></td>
+<td><code>0079761</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -102,9 +102,28 @@ Table of Contents
 <ul>
 <li><a href="#reasons-to-not-use-pam">Reasons to not use PAM</a></li>
 <li><a href="#reasons-to-consider-using-pam">Reasons to consider using
-PAM</a></li>
+PAM</a>
+<ul>
+<li><a href="#reason-1-no-client-server-communications">Reason 1: No
+Client Server Communications</a></li>
+<li><a href="#reason-2-record-format">Reason 2: Record Format</a></li>
+<li><a href="#reason-3-searching">Reason 3: Searching</a></li>
+<li><a href="#reason-4-automatic-password-generation">Reason 4:
+Automatic Password Generation</a></li>
+<li><a href="#reason-5-file-based-storage">Reason 5: File Based
+Storage</a></li>
+<li><a href="#reason-6-record-customization">Reason 6: Record
+Customization</a></li>
+<li><a href="#reason-7-secure-context-encryption">Reason 7: Secure
+Context Encryption</a></li>
+<li><a href="#reason-8-hiding-passwords-from-causal-observers">Reason 8:
+Hiding Passwords from Causal Observers</a></li>
+<li><a href="#reason-9-access-from-mobile-devices">Reason 9: Access from
+mobile devices</a></li>
+<li><a href="#reason-10-foss">Reason 10: FOSS</a></li>
 </ul></li>
-<li><a href="#layout">Layout</a>
+</ul></li>
+<li><a href="#layout">layout</a>
 <ul>
 <li><a href="#menu-and-search-section">Menu and Search Section</a></li>
 <li><a href="#records-section">Records Section</a></li>
@@ -222,28 +241,40 @@ record editor that runs in your browser that allows you create records
 with interesting information that can then be stored and retrieved in a
 secure way.</p>
 <h3 id="reasons-to-not-use-pam">Reasons to not use PAM</h3>
-<p>It is very reasonable to ask yourself why, if it is like an editor,
-you can’t simply just use something like Excel or a text file or keep
-passwords on sheets of paper or use one of the many commercially
-available password managers?</p>
-<p>That is an excellent question and the answer is that you can! In
-fact, you probably should if you it works well for you.</p>
-<p>Furthermore, it is quite likely that <em>PAM</em> is not suitable for
-novice users for, at least, two reasons.</p>
-<p>First, it assumes some knowledge of things like HTML element types
-and other concepts which may not be familiar to novice users.</p>
+<p>It is very reasonable to ask yourself why, if <em>PAM</em> is like an
+editor, you can’t simply just use something like an Excel spreadsheet or
+a text file or keep passwords on sheets of paper or use one of the many
+commercially available password managers?</p>
+<p>That is an excellent question and the answer is that you can and you
+should!</p>
+<p>If you are already using an Excel spreadsheet or a text file or a
+sheet of paper or a password management service or anything else that
+works for you, <em>please continue to use it and ignore PAM</em>.</p>
+<p>Not only that, it is quite likely that <em>PAM</em> is not suitable
+for novice users for, at least, two reasons.</p>
+<p>First, it assumes some knowledge of things like HTML input element
+types and other concepts which may not be familiar to novice users.</p>
 <p>And, second, I really suck at developing user interfaces (UIs). In
 fact, it should be painfully obvious to even the most casual observer
 that I am <em>not a UI programmer</em> which means that is may not be
 sufficiently polished for novice users which, in turn, may frustrate
-them. Of course, the poor UI may frustrate experienced users as well but
+them.</p>
+<p>Of course, the poor UI may frustrate experienced users as well but
 hopefully they can, if they wish, provide guidance about how to improve
 it.</p>
+<p>The bottom line is that I wrote <em>PAM</em> to provide some features
+I wanted and to address some concerns I had with existing approaches.
+Those features and concerns are discussed in the next section to help
+you understand my reasoning and decide whether any of them are important
+to you. If you don’t care about the features and the concerns that
+bother me are not relevant to you. There is no reason to use this
+tool.</p>
 <h3 id="reasons-to-consider-using-pam">Reasons to consider using
 PAM</h3>
 <p>However, having said that, I feel that <em>PAM</em> provides a number
-of useful features that might make it interesting to some folks so here
-are a few reasons why I chose to write and use <em>PAM</em>.</p>
+of useful features and addresses some concerns that might make it
+interesting to some folks so here are a few reasons why I chose to write
+and use <em>PAM</em>.</p>
 <h4 id="reason-1-no-client-server-communications">Reason 1: No Client
 Server Communications</h4>
 <p><em>PAM</em> is a single page web application (SPA) that has no
@@ -256,26 +287,26 @@ section.</p>
 a unique title and are composed of fields that are stored in files where
 each field has a name and a value, a bit like recipe cards or a
 rolodex.</p>
-<p>Following the recipe card analogy we can say that each single recipe
-is a record, a group of recipes for desserts could be a file of dessert
-recipe records and the record fields themselves would be composed of the
-ingredients, the instructions for combining them and the instructions
-for cooking so a natural format for a recipe might look something like
-this:</p>
+<p>Following the recipe card analogy we can say that each recipe is a
+single record, a collection of recipes for desserts would be a file of
+dessert recipe records where each record or recipe had three sections or
+fields: a title (the name of the recipe), the ingredients and the
+instructions. This is what a recipe record might look like in
+<em>PAM</em>.</p>
 <p><img src="./pam-ice-cream-sundae.png" alt="ice-cream-sundae-example"></p>
 <p>On the other hand a record for an account might have the url, the
 login name and the password. Something like this:</p>
 <p><img src="./pam-google-account.png" alt="google-account-example"></p>
-<p>As you can see both records look quite different which would make it
-bit challenging to put them both in the same spreadsheet but when you
-have hundreds of such records with varying formats it would become quite
-difficult to organize them efficiently.</p>
-<p>You could, of course, store them in a text file. That would be quite
-compact and would allow each entry to have a unique format but
-similarly, when you hundreds of such records with varying formats, it
-might be difficult to find them or filter them by keywords.</p>
-<p>This is why I prefer the <em>PAM</em> semi-structured record
-approach. It feels like a more natural format for the data.</p>
+<p>As you can see both records look quite different. Recipes records
+have fields for <q>ingredients</q> and <q>instructions</q> whereas
+account records have fields for the <q>url</q>, <q>login</q> and
+<q>password</q>. Other types of records for things like books read would
+other different fields. As you define more and more record types and
+create more and more records having a tool like <em>PAM</em> to organize
+it for you and provide searching simplifies finding and maintaining your
+information.</p>
+<p>This is why I prefer the <em>PAM</em> record approach. It feels like
+a more natural format for the data that I am interested in storing.</p>
 <h4 id="reason-3-searching">Reason 3: Searching</h4>
 <p><em>PAM</em> allows you to search records by their title or their
 field names and value to filter out records that do not match the search
@@ -290,8 +321,8 @@ moment.</p>
 <p>Fortunately, <em>PAM</em> provides an automatic password generation
 capability that I find really useful. Of course almost all browsers do
 this as well these days, but they generate cryptic, hard to memorize
-passwords which is perfectly fine if you never have to remember
-them.</p>
+passwords which is perfectly fine if you never have to remember them but
+if you want a more memorable password, you are out of luck.</p>
 <p><em>PAM</em> gives you a choice because it has the concept of cryptic
 and memorable passwords as you can see here.</p>
 <p><img src="./pam-password-generator.png" alt="password-generator"></p>
@@ -307,8 +338,9 @@ the records and file.</p>
 <p>I store my record files in cloud IaaS storage and mount that storage
 as a local volume on each device so that the files look like they are
 local but they are, in fact, stored in the cloud. That allows me to
-access the files from any of my devices. I personally use iCloud because
-it does all the volume mount work automatically.</p>
+access the files from any of my devices: laptops, phones and tablets. I
+personally use iCloud because it does all the volume mount work
+automatically.</p>
 <h4 id="reason-6-record-customization">Reason 6: Record
 Customization</h4>
 <p>The record fields are fully customizable.</p>
@@ -321,10 +353,16 @@ a new record. They are only provided for convenience.</p>
 <p><img src="./pam-change-field-name.png" alt="change-field-name"></p>
 <h4 id="reason-7-secure-context-encryption">Reason 7: Secure Context
 Encryption</h4>
-<p>Records are encrypted using a strong, well defined, standard
-encryption algorithm: AES-256-CBC. That means, if a file is stolen, the
-record data is safe, if it has been encrypted with a strong
-password.</p>
+<p>Records are encrypted using an NIST certified, strong, well defined,
+standard symmetric encryption algorithm: <code>AES-256-CBC</code>. That
+means, if a file is stolen, the record data is safe, if it has been
+encrypted with a strong password.</p>
+<blockquote>
+<p>Note that AES-256-CBC has also been theorized less vulnerable to a
+quantum hack as discussed in <a
+href="#https://crypto.stackexchange.com/questions/6712/is-aes-256-a-post-quantum-secure-cipher-or-not">this</a>
+cryto.stackexchange.com discussion.</p>
+</blockquote>
 <p><em>PAM</em> encryption and decryption operations are provided by and
 run <em>in</em> the browser using the <em>secure context of the
 browser</em>. This is the same context used for accessing sites securely
