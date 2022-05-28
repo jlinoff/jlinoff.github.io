@@ -87,6 +87,18 @@ export function getMemorablePassword(length) {
     return result
 }
 
+function saveGeneratedPassword(event) {
+    event.preventDefault() // very important
+    let row = event.target.xGetParentWithClass('row')
+    let e2 = row.xGet('.x-fld-value') // field value input
+    let e1 = row.parentElement.xGet('.x-fld-value-length') // span
+    console.log('row', row)
+    console.log('x-fld-value', e1)
+    console.log('x-fld-value-length', e2)
+    e2.value = event.target.innerHTML
+    e1.innerHTML = event.target.innerHTML.length
+}
+
 // make the generate password dialogue for record fields and
 // reuse it if it already exists
 export function mkGeneratePasswordDlg(event) {
@@ -112,9 +124,7 @@ export function mkGeneratePasswordDlg(event) {
                 .xAttrs({'title': 'click to save this memorable password'})
                 .xInnerHTML(pwd)
                 .xAddEventListener('click', (event) => {
-                    rowElement.xGet('.x-fld-value').value = event.target.innerHTML
-                    let e1 = rowElement.parentElement.xGet('.x-fld-value-length')
-                    e1.innerHTML = event.target.innerHTML.length
+                    saveGeneratedPassword(event)
                 })
             mbs.push(button)
         }
@@ -128,6 +138,7 @@ export function mkGeneratePasswordDlg(event) {
                         icon('bi-x-circle', 'close the section'),
                         xmk('span').xInnerHTML('&nbsp;Close Password Generator'))
                     .xAddEventListener('click', (event) => {
+                        event.preventDefault() // very important
                         let row = button.xGetParentWithClass('row')
                         console.log(row)
                         row.xGetN('.x-fld-pw-gen').forEach( (col) => {
@@ -147,10 +158,7 @@ export function mkGeneratePasswordDlg(event) {
                     .xAttrs({'title': 'click to save cryptic password'})
                     .xInnerHTML(cp0)
                     .xAddEventListener('click', (event) => {
-                        row.xGet('.x-fld-value').value = event.target.innerHTML
-                        let e1 = row.parentElement.xGet('.x-fld-value-length')
-                        e1.innerHTML = event.target.innerHTML.length
-
+                        saveGeneratedPassword(event)
                     }),
                 xmk('p').xClass('fs-5').xInnerHTML('Memorable Passwords'),
                 ...mbs,
