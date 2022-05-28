@@ -53,7 +53,8 @@ export function searchRecords(value) {
         }
         if (!matched && window.prefs.searchRecordFieldNames) {
             let names = accordionItem.xGetN('.x-fld-name')
-            names.forEach( (element) => {
+            for (let element of names) {
+            //names.forEach( (element) => {
                 let name = element.innerHTML
                 if (name.match(regex)) {
                     num += 1
@@ -62,11 +63,13 @@ export function searchRecords(value) {
                         accordionItem.classList.remove('d-none')
                     }
                 }
-            })
+                //})
+            }
         }
         if (!matched && window.prefs.searchRecordFieldValues) {
             let values = accordionItem.xGetN('.x-fld-value')
-            values.forEach( (element) => {
+            for (let element of values) {
+            //values.forEach( (element) => {
                 let type = element.getAttribute('data-fld-type')
                 // how should passwords be managed? using the raw value
                 let value = element.getAttribute('data-fld-raw-value')
@@ -77,7 +80,8 @@ export function searchRecords(value) {
                         accordionItem.classList.remove('d-none')
                     }
                 }
-            })
+                //})
+            }
         }
     }
     xget('#x-num-records').xInnerHTML(num)

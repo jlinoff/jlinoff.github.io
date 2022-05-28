@@ -78,7 +78,7 @@ function mkRecordFieldCopyToClipboardButton(raw_value) {
         .xAttrs({'type': 'button'})
         .xAppend(icon('bi-clipboard', 'copy to clipboard')) // also bi-files
         .xAddEventListener('click', (event) => {
-            statusBlip(`copying ${value.length} bytes to clipboard`, 1500)
+            statusBlip(`copying ${value.length} bytes to clipboard`)
             //console.log(status)
             if (navigator.clipboard) {
                 navigator.clipboard
@@ -86,23 +86,23 @@ function mkRecordFieldCopyToClipboardButton(raw_value) {
                     .then(
                         (text) => {
                             // succeeded
-                            statusBlip(`copied ${value.length} bytes to clipboard`, 1500)
+                            statusBlip(`copied ${value.length} bytes to clipboard`)
                         },
                         (error) => {
                             // failed
                             const msg = `internal error:\nnavigator.clipboard.writeText() error:\n${error}`
-                            statusBlip(msg, 1500)
+                            statusBlip(msg)
                             alert(msg)
                         }
                     )
                     .catch((error) => {
                         const msg = `internal error:\nnavigator.clipboard.writeText() exception:\n${error}`
-                        statusBlip(msg, 1500)
+                        statusBlip(msg)
                         alert(msg)
                     })
             } else {
                 const msg = `internal error:\nnavigator.clipboard not found\ncould be a permissions problem`
-                statusBlip(msg, 1500)
+                statusBlip(msg)
                 alert(msg)
             }
          })

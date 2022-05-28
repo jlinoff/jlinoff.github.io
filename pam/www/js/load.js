@@ -63,7 +63,7 @@ function loadFile(password) {
             reader.addEventListener('load', (event2) => {
                 const text = event2.target.result
                 let type = file.type ? file.type : '???'
-                statusBlip(`loaded ${text.length} bytes from: "${file.name}" "<code>${type}</code>".`, 1500)
+                statusBlip(`loaded ${text.length} bytes from: "${file.name}" "<code>${type}</code>".`)
             })
             reader.readAsText(file)
             reader.onload = (event3) => {
@@ -93,10 +93,10 @@ function loadFileContent(filename, password, content) {
     let size = content.length
     if (content[0] === '{') {
         // This file is plain json, it is not encrypted
-        statusBlip(`not encrypted ${filename} (${size}B)`, 1500)
+        statusBlip(`not encrypted ${filename} (${size}B)`)
         loadCallback(content)
     } else {
-        statusBlip(`encrypted ${filename} (${size}B)`, 1500)
+        statusBlip(`encrypted ${filename} (${size}B)`)
         decrypt(password, content, loadCallback, invalidPasswordCallback)
     }
 }

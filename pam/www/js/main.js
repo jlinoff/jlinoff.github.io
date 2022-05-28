@@ -38,7 +38,7 @@ export function main() {
     adjust()
     //setTimeout(() => {adjust()}, 1000)
     const secure = window.isSecureContext? '(secure)' : ''
-    statusBlip(`initializing PAM... ${secure} ${window.screen.width}x${window.screen.height}`, 1500)
+    statusBlip(`initializing PAM... ${secure} ${window.screen.width}x${window.screen.height}`)
 }
 
 function adjust() {

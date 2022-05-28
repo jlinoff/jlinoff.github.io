@@ -51,7 +51,7 @@ export function encrypt(password, plaintext, filename, callback) {
     }
     let ciphertext = plaintext
     if (window.isSecureContext) {
-        statusBlip(`encrypting ${plaintext.length}B...`, 1500)
+        statusBlip(`encrypting ${plaintext.length}B...`)
         // https://dev.to/halan/4-ways-of-symmetric-cryptography-and-javascript-how-to-aes-with-javascript-3o1b
         const iv = window.crypto.getRandomValues(new Uint8Array(16))
         const salt = window.crypto.getRandomValues(new Uint8Array(16))
@@ -65,7 +65,7 @@ export function encrypt(password, plaintext, filename, callback) {
                         console.log('encrypted', encrypted)
                         //ciphertext = buf2hex(encrypted)
                         ciphertext = toBase64([...salt, ...iv, ...new Uint8Array(encrypted)])
-                        statusBlip(`encrypted ${plaintext.length}B -> ${ciphertext.length}B ...`, 1500)
+                        statusBlip(`encrypted ${plaintext.length}B -> ${ciphertext.length}B ...`)
                         callback(ciphertext, filename)
                     })
                     .catch( (error) => {
@@ -76,7 +76,7 @@ export function encrypt(password, plaintext, filename, callback) {
                 console.log(error)
             })
     } else {
-        statusBlip('encryption not enabled', 1500)
+        statusBlip('encryption not enabled')
     }
 }
 
@@ -96,7 +96,7 @@ export function decrypt(password, ciphertext, callback, callback2) {
     let plaintext = ciphertext
 
     if (window.isSecureContext) {
-        statusBlip(`decrypting ${ciphertext.length}B...`, 1500)
+        statusBlip(`decrypting ${ciphertext.length}B...`)
         const salt_len = 16
         const iv_len = 16
         const encrypted = fromBase64(ciphertext)
@@ -116,7 +116,7 @@ export function decrypt(password, ciphertext, callback, callback2) {
                         } else {
                             plaintext = fromBase64(base64)
                         }
-                        statusBlip(`decrypted ${ciphertext.length}B -> ${plaintext.length}B ...`, 1500)
+                        statusBlip(`decrypted ${ciphertext.length}B -> ${plaintext.length}B ...`)
                         callback(plaintext)
                     })
                     .catch( (error) => {
@@ -127,8 +127,8 @@ export function decrypt(password, ciphertext, callback, callback2) {
             .catch((error) => {
                 callback2(`Decryption setup failed!\nPlease try another password.\n${error}`)
             })
-        statusBlip(`decrypted ${ciphertext.length}B -> ${plaintext.length}B ...`, 1500)
+        statusBlip(`decrypted ${ciphertext.length}B -> ${plaintext.length}B ...`)
     } else {
-        statusBlip('decryption not enabled', 1500)
+        statusBlip('decryption not enabled')
     }
 }

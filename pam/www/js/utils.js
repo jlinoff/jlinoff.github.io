@@ -1,6 +1,5 @@
 // Utility functions.
 import { xmk, xget, xgetn, enableFunctionChaining } from './lib.js'
-import { statusBlip } from './status.js'
 import { ALPHABET, getCrypticPassword, getMemorablePassword } from './password.js'
 
 // global id map

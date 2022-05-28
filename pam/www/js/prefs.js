@@ -1,6 +1,5 @@
 // preferences stuff
 import { xmk, xget, xgetn, enableFunctionChaining } from './lib.js'
-import { statusBlip } from './status.js'
 import { convertDictKeys2List, icon, mkPopupModalDlgButton, mkPopupModalDlg, sortDictByKey } from './utils.js'
 import { updateRecordFieldTypes }  from './field.js'
 import { refreshAbout } from './about.js'
@@ -47,6 +46,7 @@ export function initPrefs() {
         // valid dup strategies are 'ignore', 'replace', 'allow'
         loadDupStrategy: 'ignore', // only used if clearBeforeLoad is false
         logStatusToConsole: false, // tee the status to console.log
+        statusMsgDurationMS: 1500, // status message duration.
         predefinedRecordFields: { // key=name and value=type
             'account': 'text',
             'datetime': 'datetime-local',
@@ -109,6 +109,7 @@ export function menuPrefsDlg() {
             //prefHelpLink(['col-2'],['col-10']),  // user cannot change this
         ),
         mkFieldset('Miscellaneous').xAppend(
+            prefStatusMsgDurationMS(labelClasses, inputClasses),
             prefLogStatusToConsole(labelClasses, inputClasses),
             prefClearBeforeLoad(labelClasses, inputClasses),
             prefLoadDupStrategy(labelClasses, inputClasses),
@@ -242,6 +243,26 @@ function prefCustomAboutInfo(labelClasses, inputClasses) {
                              'title': 'custom about information',
                              'placeholder': 'HTML custom about information',
                              'data-pref-id': 'customAboutInfo',
+                            })
+            ),
+        ),
+    )
+}
+
+function prefStatusMsgDurationMS(labelClasses, inputClasses) {
+    return xmk('div').xClass('row').xAppend(
+        prefLabel(labelClasses, 'Status Message Duration (milliseconds)'),
+        xmk('div').xClass(...inputClasses).xAppend(
+            xmk('div').xClass('input-group').xAppend(
+                xmk('input')
+                    .xId('x-prefs-status-msg-duration-ms')
+                    .xClass('form-control', 'text-end')
+                    .xAttrs({'type': 'number',
+                             'value': window.prefs.statusMsgDurationMS,
+                             'min': 500,
+                             'max': 30000,
+                             'title': `min=500, max=30000`,
+                             'data-pref-id': 'statusMsgDurationMS',
                             })
             ),
         ),

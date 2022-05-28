@@ -82,7 +82,7 @@ export function menuSaveDlg() {
                                      document.body.xGet('#x-save-password').value = fp
                                      window.prefs.fileName = fn
                                      window.prefs.filePass = fp
-                                     statusBlip(`saving to ${fn}...`, 1500)
+                                     statusBlip(`saving to ${fn}...`)
                                      saveFile(fn, fp)
                                      return true
                                 })

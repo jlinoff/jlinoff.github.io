@@ -83,7 +83,7 @@ function menuClearDlg() {
                                  (el) => {
                                      console.log(el)
                                      clearRecords()
-                                     statusBlip('all records cleared', 1500)
+                                     statusBlip('all records cleared')
                                      return true
                                 })
     let e = mkPopupModalDlg('menuClearDlg', 'Clear All Records', body, b1, b2)

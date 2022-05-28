@@ -23,6 +23,6 @@ export function statusBlipCustom(msg, ms) {
 // Report a status message for 1.5s, then clear it.
 export function statusBlip(msg) {
     status(msg)
-    setTimeout(() => {xget('#status').innerHTML = '&nbsp;'}, STATUS_TIMEOUT)
+    setTimeout(() => {xget('#status').innerHTML = '&nbsp;'}, window.prefs.statusMsgDurationMS)
 }
 
