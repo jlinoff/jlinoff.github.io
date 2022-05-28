@@ -63,11 +63,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-27 17:46:35 -0700</code></td>
+<td><code>2022-05-27 18:16:31 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>04df209</code></td>
+<td><code>64bca80</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -221,22 +221,23 @@ with interesting information that can then be stored and retrieved in a
 secure way.</p>
 <h3 id="reasons-to-not-use-pam">Reasons to not use PAM</h3>
 <p>It is very reasonable to ask yourself why, if it is like an editor,
-you can’t simply just use something like Excel or a text file or keeping
-passwords on a sheets of paper?</p>
+you can’t simply just use something like Excel or a text file or keep
+passwords on sheets of paper or use one of the many commercially
+available password managers?</p>
 <p>That is an excellent question and the answer is that you can! In
 fact, you probably should if you are comfortable with that.</p>
-<p>Furthermore, i think that it is likely that <em>PAM</em> is not
-suitable for novice users for, at least, two reasons. First, it assumes
-some knowledge of things like HTML element types which may not be
-familiar to some folks. And, second, i really suck at UIs. In fact, it
-should be painfully obvious to even the most casual observer that I am
-<em>not a UI programmer</em> which could also frustrate novice
-users.</p>
+<p>Furthermore, it is quite likely that <em>PAM</em> is not suitable for
+novice users for, at least, two reasons. First, it assumes some
+knowledge of things like HTML element types and other concepts which may
+not be familiar to novice users. And, second, I really suck at UIs. In
+fact, it should be painfully obvious to even the most casual observer
+that I am <em>not a UI programmer</em> which could also frustrate novice
+users. Of course, it may frustrate experienced users as well.</p>
 <h3 id="reasons-to-consider-using-pam">Reasons to consider using
 PAM</h3>
 <p>However, having said that, I feel that <em>PAM</em> provides a number
 of useful features that might make it interesting to some folks so here
-are a few reasons why i chose to write and use <em>PAM</em>.</p>
+are a few reasons why I chose to write and use <em>PAM</em>.</p>
 <p>The information is organized in records made up of fields a bit like
 recipe cards or a rolodex rather than forcing a grid format like a
 spreadsheet or completely unstructured approach like a text file. This
@@ -248,19 +249,24 @@ have the same fields as other records, you choose. The fields are
 customizable and can almost any HTML input element type like
 <code>number</code>, <code>text</code>, <code>textarea</code> or
 <code>password</code>.</p>
-<p>It provides a generate password capability that i find really
-useful.</p>
+<p>It provides a generate password capability that I find really useful.
+I especially like the concept of cryptic and memorable passwords.</p>
+<p><em>PAM</em> uses files to load and store the record data. Using a
+file means that the user does not have to rely on the cybersecurity
+defenses of a company running a web server at their site or another
+third party site.</p>
 <p>A collection of records is stored in a file. You can have multiple
 files for different types of records like recipes vs book reviews vs
-login information for accounts.</p>
-<p>The fields are customizable.</p>
+login information for accounts. The user controls the organization of
+the records and file.</p>
+<p>The record fields are fully customizable.</p>
 <p>The records are encrypted using a strong encryption algorithm:
-AES-256-CBC. That means, if a file is stolen, the record data is safe if
-it has been encrypted with strong password.</p>
-<p>Passwords and other secrets are automatically hidden so that someone
-looking over your shoulder cannot read them.</p>
-<p>The files can be accessed from mobile devices to i have access to the
-information anywhere.</p>
+AES-256-CBC. That means, if a file is stolen, the record data is safe,
+if it has been encrypted with a strong password.</p>
+<p>Passwords and other secrets are automatically hidden on the screen so
+that someone looking over your shoulder cannot read them.</p>
+<p>The files can be accessed from mobile devices so the user has access
+to the records anywhere.</p>
 <h2 id="layout">Layout</h2>
 <p><em>PAM</em> is a simple single page web application (SPA). It
 consists three basic parts: the menu and search section, the records
