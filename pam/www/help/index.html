@@ -63,11 +63,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-28 16:59:07 -0700</code></td>
+<td><code>2022-05-28 18:42:57 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>b188e39</code></td>
+<td><code>1a5ba04</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -106,7 +106,7 @@ PAM</a>
 <ul>
 <li><a href="#reason-1-no-client-server-communications">Reason 1: No
 Client Server Communications</a></li>
-<li><a href="#reason-2-record-format">Reason 2: Record Format</a></li>
+<li><a href="#reason-2-record-model">Reason 2: Record Model</a></li>
 <li><a href="#reason-3-searching">Reason 3: Searching</a></li>
 <li><a href="#reason-4-automatic-password-generation">Reason 4:
 Automatic Password Generation</a></li>
@@ -129,7 +129,17 @@ mobile devices</a></li>
 <li><a href="#records-section">Records Section</a></li>
 <li><a href="#status-section">Status Section</a></li>
 </ul></li>
-<li><a href="#functions">Functions</a></li>
+<li><a href="#functions">Functions</a>
+<ul>
+<li><a href="#create-record">Create Record</a>
+<ul>
+<li><a href="#topics">Topics</a></li>
+<li><a href="#fields">Fields</a></li>
+<li><a href="#menu-approach">Menu Approach</a></li>
+<li><a href="#clone-approach">Clone Approach</a></li>
+<li><a href="#javascript-approach">Javascript Approach</a></li>
+</ul></li>
+</ul></li>
 <li><a href="#preferences">Preferences</a>
 <ul>
 <li><a href="#search-preferences">Search Preferences</a>
@@ -245,29 +255,22 @@ secure way.</p>
 editor, you can’t simply just use something like an Excel spreadsheet or
 a text file or keep passwords on sheets of paper or use one of the many
 commercially available password managers?</p>
-<p>That is an excellent question and the answer is that you can and you
-should!</p>
-<p>If you are already using an Excel spreadsheet or a text file or a
-sheet of paper or a password management service or anything else that
-works for you, <em>please continue to use it and ignore PAM</em>.</p>
-<p>Not only that, it is quite likely that <em>PAM</em> is not suitable
-for novice users for, at least, two reasons.</p>
-<p>First, it assumes some knowledge of things like HTML input element
-types and other concepts which may not be familiar to novice users.</p>
-<p>And, second, I really suck at developing user interfaces (UIs). In
-fact, it should be painfully obvious to even the most casual observer
-that I am <em>not a UI programmer</em> which means that is may not be
-sufficiently polished for novice users which, in turn, may frustrate
-them.</p>
-<p>Of course, the poor UI may frustrate experienced users as well but
-hopefully they can, if they wish, provide guidance about how to improve
-it.</p>
+<p>That is an excellent question. The answer is that you <em>can</em>
+and, if you are already using an Excel spreadsheet or a text file or a
+sheet of paper or a password management service or anything other method
+that works well for you, <em>you should</em>.</p>
+<p>Even if you do not already have a method for managing passwords
+<em>PAM</em> may not be the right choice. <em>PAM</em> requires that you
+understand a bit about HTML input and textarea elements which may be
+confusing. Also the <em>PAM</em> user interface (UI) and record data
+model may be confusing or hard to understand and use because I am not a
+UI programmer.</p>
 <p>The bottom line is that I wrote <em>PAM</em> to provide some features
 I wanted and to address some concerns I had with existing approaches.
 Those features and concerns are discussed in the next section to help
-you understand my reasoning and decide whether any of them are important
-to you. If you don’t care about the features and the concerns that
-bother me, there is no reason to use this tool.</p>
+you understand my reasoning so that you can decide whether any of them
+are important to you. If you don’t care about the features and the
+concerns that bother me, there is no reason to use this tool.</p>
 <h3 id="reasons-to-consider-using-pam">Reasons to consider using
 PAM</h3>
 <p>As mentioned in the previous section, I wrote <em>PAM</em> provide
@@ -281,10 +284,10 @@ backend which means that it never communicates information with an
 external site. This makes it safe from cyber attacks as detailed in the
 <a href="#security-considerations">Security Considerations</a>
 section.</p>
-<h4 id="reason-2-record-format">Reason 2: Record Format</h4>
+<h4 id="reason-2-record-model">Reason 2: Record Model</h4>
 <p>In <em>PAM</em>, information is organized into records that each have
 a unique title and are composed of fields that are stored in files where
-each field has a name and a value, a bit like recipe cards or a
+each field has a name, a type and a value, a bit like recipe cards or a
 rolodex.</p>
 <p>Following the recipe card analogy we can say that each recipe is a
 single record, a collection of recipes for desserts would be a file of
@@ -293,34 +296,34 @@ fields: a title (the name of the recipe), the ingredients and the
 instructions. This is what a recipe record might look like in
 <em>PAM</em>.</p>
 <p><img src="./pam-ice-cream-sundae.png" alt="ice-cream-sundae-example"></p>
+<p>As you can see, in this recipe record, the record title is
+<code>"Ice Cream Sundae"</code> and the two fields <q>ingredients</q>
+and <q>instructions</q> contain the multiline (<code>textarea</code>)
+descriptions of what the ingredients and instructions are for this
+specific recipe.</p>
 <p>On the other hand a record for an account might have the url, the
 login name and the password. Something like this:</p>
 <p><img src="./pam-google-account.png" alt="google-account-example"></p>
+<p>In the acount example above, the record title is
+<code>"Google"</code>, the url field value is
+<code>"https/google.com"</code>, the login field value is
+<code>"pbrain81@gmail.com"</code> and the password value is hidden.</p>
 <p>As you can see both records look quite different. Recipes records
 have fields for <q>ingredients</q> and <q>instructions</q> whereas
 account records have fields for the <q>url</q>, <q>login</q> and
-<q>password</q>. Other records that contain information for things like
-<em><q>books read</q></em> or <em><q>unidentified aerial
-phenomena</q></em> or <em><q>bird watching</q></em> would undoubtedly
-require other, different fields.</p>
-<p>As you define more records fields to support information about about
-new topics like <q>books read</q>, <q>unidentified aerial phenomena</q>
-or <q>bird watching</q>, it becomes increasingly difficult to manage (or
-even remember) all of the different fields.</p>
-<p>Similarly as you add more records it becomes increasingly difficult
-to manage or find records of interest.</p>
-<p>This is where <em>PAM</em> becomes more useful. For example, if you
-want to search your favorite 10,000 dessert recipes to find the ones
-that use vanilla ice cream as an ingredient, you can use the built in
-search function whereas scrolling though a text file would be
-tedious.</p>
-<p>This is why I prefer the <em>PAM</em> record approach. It feels like
-a more natural format for the record data that I am interested in
-storing.</p>
-<p>Of course, if you <em>really</em> want to store 10,000 items <em>of
-anything</em> and you want to be able to search it efficiently, you
-probably want to use a database but that is a topic for another
-time.</p>
+<q>password</q>.</p>
+<p>You could easily imagine defining other records that contain
+information for other topics like <em><q>books read</q></em> or
+<em><q>unidentified aerial phenomena</q></em> or <em><q>bird
+watching</q></em> which would undoubtedly require additional, different
+fields.</p>
+<p>This demonstrates why <em>PAM</em> was organized around the notion of
+records that are composed of flexible, user defined fields. In my view,
+the record/field structure does a better job of representing this type
+of topic data than a spreadsheet or a text file.</p>
+<p>If the number of records plan to store is large like 10,000 recipes
+or address information for mailing list, you probably want to use a
+database not <em>PAM</em>.</p>
 <p><em>PAM</em> is great for small collections not gargantuan ones. I
 never store more than about 150 records which is probably a reasonable
 upper bound but, in practice, <em>PAM</em> does not impose any
@@ -329,10 +332,22 @@ limits.</p>
 <p><em>PAM</em> allows you to search records by their title or their
 field names and value to filter out records that do not match the search
 pattern. This is extremely useful when the number of records grows.</p>
-<p>I use this a lot for finding things like where i am still using old
-passwords and obsolete accounts.</p>
 <p>The search function supports case insensitive searches and regular
-expressions.</p>
+expressions to make it easier to find stuff.</p>
+<p>I use this a lot for finding things like where i am still using old
+passwords and obsolete accounts or even something like all of the
+recipes that reference vanilla ice cream.</p>
+<p>Here is an made up list of accounts:</p>
+<p><img src="./pam-search.png" alt="pam-search"></p>
+<p>Here is the same list after filtering for those whose titles contain
+the letter <code>"g"</code>.</p>
+<p><img src="./pam-search-g.png" alt="pam-search-g"></p>
+<p>To filter only those that start with <code>"g"</code> you would use
+this regular expression search term instead: <code>"^g"</code>.</p>
+<p>For more information about regular expression syntax see the
+documentation for <a
+href="#https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">Javascript
+Regular Expressions</a>.</p>
 <h4 id="reason-4-automatic-password-generation">Reason 4: Automatic
 Password Generation</h4>
 <p>I always find it hard to come up with passwords in the spur of the
@@ -354,13 +369,13 @@ third party site.</p>
 files for different types of records like <em><q>recipes</q></em> or
 <em><q>book reviews</q></em> or <em><q>login information for
 accounts</q></em>. The user controls the organization of the records and
-file as discussed in <a href="#reason-2-record-format">Reason 2: Record
-Format</a></p>
-<p>I store my record files in cloud <em>IaaS</em> (infrastructure as a
-service) storage and mount that storage as a local volume on each device
-so that the files look like they are local but they are, in fact, stored
-in the cloud. That allows me to access the files from any of my devices:
-laptops, phones and tablets.</p>
+fields in a file as discussed in <a href="#reason-2-record-model">Reason
+2: Record Model</a></p>
+<p>I store my record files in cloud <em>IaaS</em> storage
+(infrastructure as a service) and mount that storage as a local volume
+on each device so that the files look like they are local but they are,
+in fact, stored in the cloud. That allows me to access the files from
+any of my devices: laptops, phones and tablets.</p>
 <p>I personally use iCloud because it does all the volume mount work
 automatically on all of my devices.</p>
 <h4 id="reason-6-record-customization">Reason 6: Record
@@ -416,17 +431,16 @@ try it and use it without any obligation or cost. You can also fix bugs
 or customize it yourself.</p>
 <h2 id="layout">Layout</h2>
 <p><em>PAM</em> is a simple single page web application (SPA). It
-consists three basic parts: the menu and search section, the records
+consists of three basic parts: the menu and search section, the records
 section and the status section.</p>
 <p>It looks something like this</p>
 <p><img src="./pam-basic-sections.png" alt="menu-bar"></p>
 <h3 id="menu-and-search-section">Menu and Search Section</h3>
-<p>The top section that contains a search input and a menu. The search
-input is used to search for records that match what is being searched
-and filter out the other records. There are preferences to control the
-scope of the search.</p>
-<p>The menu is the control center for the application it has a number of
-options as you can see below.</p>
+<p>The top section that contains a search input and a menu.</p>
+<p>The search input is used to find records that match the input to make
+them easier to find.</p>
+<p>The menu at the top right is the control center for the application
+it has a number of options as you can see below.</p>
 <p><img src="./pam-basic-menu.png" alt="menu"></p>
 <h3 id="records-section">Records Section</h3>
 <p>Underneath the top level bar is the records section. Each record is
@@ -434,7 +448,8 @@ shown as entry that is displayed by its title. If you click on it, it
 will expand. This is called an accordion display and is shown below with
 the <q>Facebook</q> entry expanded.</p>
 <p><img src="./pam-record-expanded.png" alt="record-expanded"></p>
-<p>As you can see the records has three fields</p>
+<p>As you can see the expanded <q>Facebook</q> record has three fields:
+<q>url</q>, <q>login</q> and <q>password</q>.</p>
 <p><img src="./pam-record-expanded-fields.png" alt="record-expanded"></p>
 <p>You can copy the field values to the clipboard so that they can be
 pasted into login forms. The copy works for passwords whether the
@@ -444,7 +459,8 @@ password is visible or not.</p>
 <p>You can also click on the title of the opened record to close it.</p>
 <h3 id="status-section">Status Section</h3>
 <p>Below the records section is the section where ephemeral status
-messages are displayed. These are used to provide activity feedback like
+messages are displayed (they disappear after about 1.5 seconds).</p>
+<p>The status messages are used to provide activity feedback like
 showing how many bytes were copied to a clipboard when a copy button is
 clicked as shown in the example below.</p>
 <p><img src="./pam-status-msg.png" alt="status-message"></p>
@@ -475,34 +491,64 @@ top level section in this document.</p>
 <p><img src="./pam-about.png" alt="about"></p>
 <p>Here is the annotated view</p>
 <p><img src="./pam-about-annotated.png" alt="about-annotated"></p>
+<p>Here is an about dialogue with custom message.</p>
+<p><img src="./pam-about-custom.png" alt="about-custom"></p>
+<p>Custom messages are defined in preferences as follows.</p>
+<p><img src="./pam-about-custom-pref.png" alt="about-custom-pref"></p>
 <h3 id="create-record">Create Record</h3>
-<p>Creating a record is one of the most common things done in
-<em>PAM</em>, search is probably the other most common thing done, so I
+<p>Creating a record is a very common activity in <em>PAM</em> so I
 tried to make it as easy as possible.</p>
-<p>There are two ways to create record: a record can be created by
-clicking the <q>Create Record</q> menu option or it can be created by
-cloning an existing record. Both approaches will be discussed here with
+<p>There are three ways to create record: 1. A record can be created in
+the application by clicking the <q>Create Record</q> menu option, 2. A
+record can be created in the application by cloning an existing record
+or 3. A record can be created outside of the application by editing
+javascript. All three approaches will be discussed here with
 examples.</p>
-<p>The menu based <q>Create Record</q> approach is useful for creating
-new records for a given topic family the first time.</p>
-<p>The clone based approach is useful for creating new records that have
-the same format as an existing record. Typically they are a new record
-in a topic family where at least one other record in the same family
-already exists.</p>
-<p>A topic family is a group of records for a similar topic where the
-topic is something like <q>recipes</q>, <q>accounts</q> or
-<q>unidentified aerial phenomena</q>. Most of the time records in a
-topic will have the same or very similar fields so cloning makes sense
-to guarantee consistency.</p>
+<p>Creating the record by clicking the <q>Create Record</q> menu option
+in the application is probably the best way to create the first new
+record for a topic family. THis is also known as the <q>menu</q>
+approach.</p>
+<p>Creating a record by cloning an existing record in the application is
+useful when you want to use the same fields as the existing record. It
+is a great way to guarantee uniformity. Although if the number of fields
+is small using the <q>menu</q> approach is also fine.</p>
+<p>Creating a record by editing javascript is most useful if you are
+interested in creating record programmatically (perhaps a subset of
+accounts that shared with a small group of users).</p>
+<p>Before any of the creation approaches can be discussed it is very
+important to understands record topics and record fields to provide
+background information for understanding some of the terms.</p>
+<h4 id="topics">Topics</h4>
+<p>Topics are a way of organizing records that have similar fields.
+Topics are arbitrary. For example, a topic could be something like
+<q>recipes</q>, <q>accounts</q>, or <q>unidentified aerial
+phenomena</q>.</p>
+<p>One way to use topics is to define a file all records in that topic.
+For example you could have a <q><code>recipe.pam</code></q> file for all
+of your recipe records or you could put all of your records,
+irregardless of topic, into a single file like
+<q><code>mystuff.pam</code></q>.</p>
 <h4 id="fields">Fields</h4>
-<p>Before doing anything with records, it is important to understand
-fields and their types.</p>
-<p>Furthermore, before creating a new record make sure that you know
-exactly what fields you want to use.</p>
-<p>Each field has a name and a type. The types are based on HTML element
-input types and is, in fact, how they are presented to the user. Here is
-a brief overview of the types and when to use them. You can search the
-web for more details.</p>
+<p>Records are composed of fields. Before creating a new record make
+sure that you know exactly what fields you want to use.</p>
+<p>Each field has a name, a type and a value.</p>
+<p>To keep things simple, I decided to bind the field name and type so
+that the field name unambiguously defines the type. Fields are defined
+in <a href="#Preferences">Preferences</a>. Here is what they are by
+default.</p>
+<p><img src="./pam-predefined-fields.png" alt="predefined-fields"></p>
+<p>You can change them at any time. The fields are stored, in each file
+so they can be different for each topic file, if you choose to organize
+things that way.</p>
+<p><em>PAM</em> is very flexible so it doesn’t impose any strict rules
+on the fields. Thus, you can also change the names of the pre-defined
+fields when creating a new record. They are only provided for
+convenience.</p>
+<p><img src="./pam-change-field-name.png" alt="change-field-name"></p>
+<p>The field types are based on HTML element input types and is, in
+fact, how they are presented to the user. Here is a brief overview of
+the types and when to use them. You can search the web for more
+details.</p>
 <table>
 <colgroup>
 <col style="width: 44%" />
@@ -582,6 +628,9 @@ and <q>instructions</q> fields.</p>
 <h4 id="menu-approach">Menu Approach</h4>
 <p>To create a new record using</p>
 <h4 id="clone-approach">Clone Approach</h4>
+<p>TBD</p>
+<h4 id="javascript-approach">Javascript Approach</h4>
+<p>TBD</p>
 <h3 id="menu">Menu</h3>
 <p>The menu is the control center for the app. It provides the basic
 operations for creating records, loading records, saving them and it
