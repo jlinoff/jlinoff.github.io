@@ -476,6 +476,112 @@ top level section in this document.</p>
 <p>Here is the annotated view</p>
 <p><img src="./pam-about-annotated.png" alt="about-annotated"></p>
 <h3 id="create-record">Create Record</h3>
+<p>Creating a record is one of the most common things done in
+<em>PAM</em>, search is probably the other most common thing done, so I
+tried to make it as easy as possible.</p>
+<p>There are two ways to create record: a record can be created by
+clicking the <q>Create Record</q> menu option or it can be created by
+cloning an existing record. Both approaches will be discussed here with
+examples.</p>
+<p>The menu based <q>Create Record</q> approach is useful for creating
+new records for a given topic family the first time.</p>
+<p>The clone based approach is useful for creating new records that have
+the same format as an existing record. Typically they are a new record
+in a topic family where at least one other record in the same family
+already exists.</p>
+<p>A topic family is a group of records for a similar topic where the
+topic is something like <q>recipes</q>, <q>accounts</q> or
+<q>unidentified aerial phenomena</q>. Most of the time records in a
+topic will have the same or very similar fields so cloning makes sense
+to guarantee consistency.</p>
+<h4 id="fields">Fields</h4>
+<p>Before doing anything with records, it is important to understand
+fields and their types.</p>
+<p>Furthermore, before creating a new record make sure that you know
+exactly what fields you want to use.</p>
+<p>Each field has a name and a type. The types are based on HTML element
+input types and is, in fact, how they are presented to the user. Here is
+a brief overview of the types and when to use them. You can search the
+web for more details.</p>
+<table>
+<colgroup>
+<col style="width: 44%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>datetime-local</td>
+<td>A datetime text string. A typical usage might be the date that you
+finished reading a book.</td>
+</tr>
+<tr class="even">
+<td>email</td>
+<td>An email text string. A typical usage might be the email address of
+a contact.</td>
+</tr>
+<tr class="odd">
+<td>number</td>
+<td>A numeric text string. A typical usage might be a measurement like
+height or width or any other numeric value.</td>
+</tr>
+<tr class="even">
+<td>password</td>
+<td>A secret text string that is normally displayed as asterisks
+(<code>****</code>) with an eye
+(<img src="./eye.svg" height="32" width="32" alt="eye"/>) button that
+can be clicked to show the value.</td>
+</tr>
+<tr class="odd">
+<td>phone</td>
+<td>A phone number text string. A typical usage might be a mobile phone
+number.</td>
+</tr>
+<tr class="even">
+<td>text</td>
+<td>A string, like a name or keyword. A typical usage might be a login
+name.</td>
+</tr>
+<tr class="odd">
+<td>textarea</td>
+<td>A multi-line text box. A typical usage might be a note or a list of
+recipe ingredients. Note that this is <em>not</em> strictly speaking an
+HTML input element type, it is a separate element. It is treated as an
+input type here for convenience.</td>
+</tr>
+<tr class="even">
+<td>url</td>
+<td>A text string that is a uniform resource locator (URL). A typical
+usage might be the path to an account like https://google.com</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Remember that the types were not made up by me, they were taken
+directly from input element description <a
+href="#https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">here</a>,
+the separate textarea element is described <a
+href="#https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement">here</a>.</p>
+</blockquote>
+<p>It is oftentimes the case that all of the types are not needed. This
+is especially true for well cases where you have a very clear
+understanding record field requirements. If that is the case you might
+want to use the preferences to delete fields that are not relevant for
+your usage (you can always add them back later if you want).</p>
+<p>Here is an example that shows a recipe record with <q>ingredients</q>
+and <q>instructions</q> fields.</p>
+<p><img src="./pam-ice-cream-sundae.png" alt="ice-cream-sundae-example"></p>
+<p>Here is an example that shows an account record with <q>url</q>,
+<q>login</q> and <q>password</q> fields.</p>
+<p><img src="./pam-google-account.png" alt="google-account-example"></p>
+<h4 id="menu-approach">Menu Approach</h4>
+<p>To create a new record using</p>
+<h4 id="clone-approach">Clone Approach</h4>
 <h3 id="menu">Menu</h3>
 <p>The menu is the control center for the app. It provides the basic
 operations for creating records, loading records, saving them and it
