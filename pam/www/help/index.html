@@ -63,11 +63,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-29 23:54:20 -0700</code></td>
+<td><code>2022-05-30 09:06:57 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>1d24f0a</code></td>
+<td><code>86c1241</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -277,12 +277,12 @@ secure way.</p>
 <h3 id="reasons-to-not-use-pam">Reasons to not use PAM</h3>
 <p>It is very reasonable to ask yourself why, if <em>PAM</em> is like an
 editor, you can’t simply just use something like an Excel spreadsheet or
-a text file or keep passwords on sheets of paper or use one of the many
-commercially available password managers?</p>
+a text file editor or keep passwords on sheets of paper or use one of
+the many commercially available password managers?</p>
 <p>That is an excellent question. The answer is that you <em>can</em>
-and, if you are already using an Excel spreadsheet or a text file or a
-sheet of paper or a password management service or anything other method
-that works well for you, <em>you should</em>.</p>
+and, if you are already using an Excel spreadsheet or a text file editor
+or a sheet of paper or a password management service or anything other
+method that works well for you, <em>you should</em>.</p>
 <p>Even if you do not already have a method for managing passwords
 <em>PAM</em> may not be the right choice. <em>PAM</em> requires that you
 understand a bit about HTML input and textarea elements which may be
@@ -305,8 +305,8 @@ of reasons presented below.</p>
 Server Communications</h4>
 <p><em>PAM</em> is a single page web application (SPA) that has no
 backend which means that it never communicates information with an
-external site. This makes it safe from cyber attacks as detailed in the
-<a href="#security-considerations">Security Considerations</a>
+external site. This makes it safe from some cyber attacks as detailed in
+the <a href="#security-considerations">Security Considerations</a>
 section.</p>
 <h4 id="reason-2-record-model">Reason 2: Record Model</h4>
 <p>In <em>PAM</em>, information is organized into records that each have
@@ -344,7 +344,7 @@ fields.</p>
 <p>This demonstrates why <em>PAM</em> was organized around the notion of
 records that are composed of flexible, user defined fields. In my view,
 the record/field structure does a better job of representing this type
-of topic data than a spreadsheet or a text file.</p>
+of topic data than a spreadsheet or a text file editor.</p>
 <p>If the number of records plan to store is large like 10,000 recipes
 or address information for mailing list, you probably want to use a
 database not <em>PAM</em>.</p>
