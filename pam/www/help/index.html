@@ -126,11 +126,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-30 13:43:01 -0700</code></td>
+<td><code>2022-05-30 14:58:19 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>9179ccb</code></td>
+<td><code>41319b4</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -175,13 +175,13 @@ Client Server Communications</a></li>
 Automatic Password Generation</a></li>
 <li><a href="#reason-5-file-based-storage">Reason 5: File Based
 Storage</a></li>
-<li><a href="#reason-7-secure-context-encryption">Reason 6: Secure
+<li><a href="#reason-6-secure-context-encryption">Reason 6: Secure
 Context Encryption</a></li>
 <li><a href="#reason-8-hiding-passwords-from-causal-observers">Reason 7:
 Hiding Passwords from Causal Observers</a></li>
-<li><a href="#reason-9-access-from-mobile-devices">Reason 8: Access from
+<li><a href="#reason-8-access-from-mobile-devices">Reason 8: Access from
 mobile devices</a></li>
-<li><a href="#reason-10-foss">Reason 9: FOSS</a></li>
+<li><a href="#reason-9-foss">Reason 9: FOSS</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#layout">Layout</a>
@@ -269,6 +269,7 @@ Values when Cloning Records</a></li>
 <li><a href="#custom-about">Custom About</a></li>
 </ul></li>
 <li><a href="#record-fields">Record Fields</a></li>
+<li><a href="#saving-preferences">Saving Preferences</a></li>
 </ul></li>
 <li><a href="#security-considerations">Security Considerations</a>
 <ul>
@@ -309,7 +310,9 @@ for a Small Group</a></li>
 </ul></li>
 <li><a href="#developer-notes">Developer Notes</a>
 <ul>
+<li><a href="#license">License</a></li>
 <li><a href="#release-pam">Release PAM</a></li>
+<li><a href="#history">History</a></li>
 </ul></li>
 </ul>
 <!--t3-->
@@ -448,6 +451,10 @@ document.</p>
 volume on each device so that the files look like they are local but
 they are, in fact, stored in the cloud. That allows me to access the
 files from any of my devices: laptops, phones and tablets.</p>
+<p>Of course you could simply load and save the data to a local file but
+that might restrict access to it from other devices (like mobile phones
+or tables) and you would have to be very diligent about keeping it
+backed up.</p>
 <h4 id="reason-6-secure-context-encryption">Reason 6: Secure Context
 Encryption</h4>
 <p>Records are encrypted using an <a
@@ -467,8 +474,8 @@ run <em>inside</em> the <em>secure context</em> of the browser. This is
 the same <em>secure context</em> used for accessing sites securely for
 transactions, like your bank. In practice this means that you must
 access <em>PAM</em> from an HTTPS site.</p>
-<p>The safety security of <em>secure context</em> operations is taken
-very seriously by the internet standards organization and the
+<p>The safety and security of <em>secure context</em> operations is
+taken very seriously by the internet standards organization and the
 organizations that develop the major browsers.</p>
 <p>You can read more about secure contexts <a
 href="#https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts">here</a>.</p>
@@ -1108,7 +1115,7 @@ subsection.</p>
 <p>To save records and preferences to a file by choose the
 <q><img src='./file-arrow-down-fill.svg' height='32' width='32' /> Save
 File</q> option from the menu. See the <a href="#menu">Menu</a> section
-to see screenshots.</p>
+for screenshots.</p>
 <p>This is the save file dialogue.</p>
 <p><img src="./pam-file-save.png" alt="file-save"></p>
 <p>If you want the records to be encrypted, enter or generate a password
@@ -1120,19 +1127,20 @@ section.</p>
 password is lost, <em>PAM</em> cannot recover the data it is lost
 forever.</p>
 <p>More details about the encryption algorith used can be found in <a
-href="#reason-7-secure-context-encryption">Reason 6: Secure Context
+href="#reason-6-secure-context-encryption">Reason 6: Secure Context
 Encryption</a>.</p>
-<p>Note that if you do not enter a password, the output will javascript
-which can be read by anyone. It is <em>NOT</em> secure. If you have
-records with passwords <em>ALWAYS</em> use a password unless you
-understand the consquences. This can sometimes be convenient because it
-allows you to see how the <em>PAM</em> data is organized which can aid
-automation.</p>
+<p>Note that if you do not enter a password, the output will be plain
+javascript that can be read by anyone.</p>
+<p>Plain javascript is <em>NOT</em> secure.</p>
+<p>If you have records with passwords <em>ALWAYS</em> use a password
+unless you understand the consquences. For example, saving the data
+without a password can sometimes be convenient because it allows you to
+see how the <em>PAM</em> data is organized which can aid automation.</p>
 <h3 id="load-file">Load File</h3>
-<p>To load records and preferences to a file by choose the
+<p>To load records and preferences from a file by choose the
 <q><img src='./file-arrow-up-fill.svg' height='32' width='32' /> Load
 File</q> option from the menu. See the <a href="#menu">Menu</a> section
-to see screenshots.</p>
+for screenshots.</p>
 <p>This is the load file dialogue.</p>
 <p><img src="./pam-file-load.png" alt="file-load"></p>
 <p>If the file was saved with a password, you must enter that password
@@ -1144,9 +1152,8 @@ search pattern. This is extremely useful when the number of records
 grows.</p>
 <p>The search function supports case insensitive searches and regular
 expressions to make it easier to find stuff.</p>
-<p>I use this a lot for finding things like where i am still using old
-passwords and obsolete accounts or even something like all of the
-recipes that reference vanilla ice cream.</p>
+<p>This can be very helpful for finding out where old passwords and
+obsolete accounts are still being used.</p>
 <p>Here is an made up list of accounts:</p>
 <p><img src="./pam-search.png" alt="pam-search"></p>
 <p>Here is the same list after filtering for those whose titles contain
@@ -1162,15 +1169,16 @@ Regular Expressions</a>.</p>
 <p>To get this help message, choose the <code>"Help"</code> option from
 the menu.</p>
 <p>If you find a bug or want to request a change or submit an
-improvement, got <a href="#pam---personal-account-manager">Metadata
-section</a> at the top of file click or tap on the project link.</p>
+improvement, go to the <a
+href="#pam---personal-account-manager">Metadata section</a> at the top
+of this help and click or tap on the project link.</p>
 <h2 id="menu">Menu</h2>
 <p>The menu is the control center for the app. It provides the basic
 operations for creating records, loading records, saving them and it
 provide information about the app including this help.</p>
-<p>Note that much of this material has been discussed in earlier
-sections but having it consolidated here might be helpful. Plus there
-are links to the sections with relevant details.</p>
+<p>Note that much of this material presented here has been discussed in
+earlier sections but having it consolidated here might be helpful. Plus
+there are links to the sections with relevant details.</p>
 <p>This is what the menu looks like.</p>
 <p><img src="./pam-menu.png" alt="menu"></p>
 <p>As you can see, there are seven menu options: <q>About</q>,
@@ -1237,13 +1245,15 @@ messages.</p>
 <h3 id="expanded-view-of-a-record">Expanded View of a Record</h3>
 <p>Once you click on or tap a record it expands as shown below where the
 <q>Facebook</q> record was tapped.</p>
-<p><img src="./pam-example-record-expanded.png" alt="example-record-expanded"></p>
+<p><img src="./pam-record-expanded.png" alt="record-expanded"></p>
 <p>You can see that there are three fields in the record: <q>url</q>,
 <q>login</q> and <q>password</q>, next to each field there is a icon
 that looks like a clipboard
-<img src="./clipboard.svg" height="32" width="32" alt="clipboard"/>. If
-you click or tap it the field contents will be copied to the clipboard
-so that you can paste them into a login dialogue.</p>
+<img src="./clipboard.svg" height="32" width="32" alt="clipboard"/>.</p>
+<p><img src="./pam-record-expanded-fields.png" alt="record-expanded"></p>
+<p>If you click or tap the clipboard icon, the field contents will be
+copied to the clipboard so that you can paste them into a login
+dialogue.</p>
 <blockquote>
 <p>Note that the fields are completely customizable. You can have as
 many as you want. Fields are added, modified and deleted by the
@@ -1264,12 +1274,14 @@ the record,
 the record and
 <q><img src='./pencil-square.svg' height='32' width='32' /> Edit</q> to
 edit the record fields.</p>
+<p>As you can see here.</p>
+<p><img src="./pam-record-expanded-fields2.png" alt="record-expanded"></p>
 <h2 id="preferences">Preferences</h2>
 <p>Preferences allow you to customized the behavior of the app. The
 defaults are set so that most people will never have to change
 anything.</p>
-<p>The preferences dialogue is a big one. It is broken into 4
-sections:</p>
+<p>The preferences dialogue is a big one. It is broken into 4 sections
+to make it easier to understand:</p>
 <ol type="1">
 <li>Search - preferences that control searches.</li>
 <li>Passwords - preferences that control password creation and
@@ -1377,7 +1389,7 @@ meet the criteria which might create passwords like
 <code>'html/wishes/combined/A1!!'</code> or
 <code>'rebates/restructuring/jamaica/A1!!'</code>.</p>
 <h3 id="miscellaneous-preferences">Miscellaneous Preferences</h3>
-<p>These are the preferences did’t fall into the other categories.</p>
+<p>These are the preferences didn’t fall into the other categories.</p>
 <h4 id="log-status-to-the-console">Log Status to the Console</h4>
 <p>Log status messages to the console as well as the screen to aid
 debugging.</p>
@@ -1425,8 +1437,19 @@ cases where the field records have been customized to provide an
 explanation or link to internal documentation.</p>
 <h3 id="record-fields">Record Fields</h3>
 <p>These are the pre-defined record fields that are used when creating
-or editing records. They can be overridden.</p>
-<h3 id="todo-finish-up-preferences">TODO: finish up preferences</h3>
+or editing record fields. They can be overridden.</p>
+<p>At the top of the section there is
+<img src="./plus-circle.svg" height="32" width="32" alt="add"/> icon
+that is used to create a new record field.</p>
+<p>Each pre-defined record field has a name, a type (from a pulldown
+menu) and a delete button
+(<img src="./trash3-fill.svg" height="32" width="32" alt="trash"/>) that
+you click to delete the record field.</p>
+<p>The record field names must be unique.</p>
+<h3 id="saving-preferences">Saving Preferences</h3>
+<p>You <em>must</em> scroll to the bottom of the dialogue and click on
+the <code>"Save"</code> button at the end to save changes. If you do
+not, any changes you made will be lost.</p>
 <h2 id="security-considerations">Security Considerations</h2>
 <p><em>PAM</em>, like all web applications, has security challenges. By
 fully disclosing them here you can understand the challenges and improve
@@ -1455,13 +1478,13 @@ might want to consider asking them how vulnerable they are to
 cyberattacks. At a minimum, you will want to understand what is done to
 protect your data from insider attacks where an employee steals the
 data.</p>
-<p>Sometimes you can get associated information about the security of a
-site by looking at Common Vulnerability and Exposures (CVE) reports. See
-<a href="https://www.cve.org/">https://www.cve.org/</a> for more
+<p>Sometimes you can get information about the security of a site by
+looking at Common Vulnerability and Exposures (CVE) reports. See <a
+href="https://www.cve.org/">https://www.cve.org/</a> for more
 information.</p>
 <blockquote>
 <p>Poor reporting of third party web site cybersecurity vulnerabilities
-and exposures is what motivated me to write <em>PAM</em>.</p>
+and exposures was one thing that motivated me to write <em>PAM</em>.</p>
 </blockquote>
 <p>Because <em>PAM</em> does not send the data to a server, it is not
 vulnerable to how cybersecurity is managed on the server by a third
@@ -1471,39 +1494,45 @@ party.</p>
 monitoring outbound traffic from your system. <em>PAM</em> never sends
 any outbound data.</p>
 </blockquote>
-<p>Instead, encryption and decryption is run <em>inside</em> the browser
-using the <em>secure context of the browser</em>. This is the same
-context used for accessing sites securely for transactions, like your
-bank. The security of the <em>secure context</em> is taken very
-seriously by organizations that develop Chrome, Edge, Firefox and other
-browsers.</p>
+<p><em>PAM</em> encryption and decryption operations are provided by and
+run <em>inside</em> the <em>secure context</em> of the browser. This is
+the same <em>secure context</em> used for accessing sites securely for
+transactions, like your bank. In practice this means that you must
+access <em>PAM</em> from an HTTPS site.</p>
+<p>The safety and security of <em>secure context</em> operations is
+taken very seriously by the internet standards organization and the
+organizations that develop the major browsers.</p>
 <p>You can read more about secure contexts <a
-href="#https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts">here</a>.</p>
+href="#https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts">here</a>
+and in <a href="#reason-6-secure-context-encryption">Reason 6: Secure
+Context Encryption</a>.</p>
 <h3 id="site-reliability">Site Reliability</h3>
 <p>Although it is not an attack vector <em>per se</em>, site reliability
 is another consideration when choosing a web application because a
 distributed denial of service (DDoS) attack on the site or a power
 failure at the site could make it unusable.</p>
 <p>Fortunately, most modern web applications are built using commercial
-cloud software as a service (SaaS) products from vendors like Azure, GCP
-and AWS so they tend to be <em>very</em> reliable but it is still
-something to be aware of because if the site goes down so does the web
+cloud software as a service (SaaS) and infrastructure as a service
+(IaaS) products from vendors like AWS, Azure and GCP so they tend to be
+<em>very</em> reliable but it is still something to be aware of because
+if the site or the gateway to the site goes down so does the web
 application.</p>
 <p><em>PAM</em>, is hosted and served from <em>github.io</em> which also
 appears to be very reliable but if you are concerned, you can host it
 wherever you like. Also <em>PAM</em> does not do any backend server
-communication (as mentioned earlier) to it will like continue to run
+communication (as mentioned earlier) so it will like continue to run
 even if the site goes down temporarily because, once it is loaded, it
 will stay resident until you close the browser tab.</p>
-<p>Another thing to consider is where you store your records file. I use
-iCloud which is also quite reliable and allows acess to iCloud files
-directly from computers mobile devices or tablets.</p>
+<p>Another thing to consider is where you store your <em>PAM</em> record
+file(s). I use iCloud which is also quite reliable and allows acess to
+iCloud files directly from my computers, mobile devices and tablets.</p>
 <p>Just make sure that whichever infrastructure as a service (IaaS)
 offering you choose it is reliable as well because you don’t want to
-lose access to your file because the IaaS service is not available. Of
-course, you could simply load and save the data to a local file but that
-would restrict access to it from other devices (like mobile phones or
-tables) and you have to be very diligent about keeping it backed up.</p>
+lose access to your file because the IaaS service is not available.</p>
+<p>Of course you could simply load and save the data to a local file but
+that might restrict access to it from other devices (like mobile phones
+or tables) and you would have to be very diligent about keeping it
+backed up.</p>
 <h3 id="over-the-shoulder-surfing-attack">Over the Shoulder Surfing
 Attack</h3>
 <p>The user enters the record data in decrypted form, so it may be
@@ -1526,7 +1555,8 @@ variety of reasons. It means that an attacker can see what you are doing
 and capture what you are typing.</p>
 <p>The best way to mitigate these forms of attacks is to keep your
 system up to date by installing security patches and by using some sort
-of security tool or tools to protect your system.</p>
+of security tool or tools to protect your system or, at the very least,
+recognize the infection.</p>
 <h3 id="malware-clipboard-attack">Malware: Clipboard Attack</h3>
 <p>Yet another type of vulnerability is the <q>clipboard attack</q>
 if/when data is copied to the clipboard for cut and paste operations.
@@ -1540,13 +1570,18 @@ any copy/paste operation to minimize any chances that it will be
 captured by malware or observed by an attacker. You can reset it by
 simply selection a single letter or word and copying it.</p>
 <p>Another, perhaps better, way to mitigate the clipboard vulnerability
-would be to eliminate the need for the clipboard by modifying
+<em>might</em> be to eliminate the need for the clipboard by modifying
 <em>PAM</em> to automatically login in for you based on record data
 using an HTTP POST operation but that is not currently available.</p>
+<blockquote>
+<p>Note that I say <em>might</em> here, because I do not know how secure
+POST operations are.</p>
+</blockquote>
 <h3 id="unattended-browser">Unattended Browser</h3>
-<p>If you leave the browser unattended after you have loaded your record
-data, someone can sit down and see the records because they are
-impersonating you <em>after you have logged in</em>.</p>
+<p>If you leave the browser unattended without locking your screen after
+you have loaded your record data, someone can sit down and see the
+records because they are impersonating you <em>after you have logged
+in</em>.</p>
 <p>The best way to mitigate this attach is to always lock your screen
 when you leave the computer unattended.</p>
 <h3 id="website-spoofing">Website Spoofing</h3>
@@ -1556,7 +1591,7 @@ application.</p>
 <p>To mitigate that make sure that you accessing the <em>PAM</em> from a
 known, trusted site.</p>
 <p>If you are concerned about this, you can always download, build and
-run <em>PAM</em> from your own site.</p>
+run <em>PAM</em> from your own trusted site.</p>
 <h3 id="protecting-yourself">Protecting Yourself</h3>
 <p>In summary, security can never be fully guaranteed, the best way to
 protect your data is to follow commonly recommended security
@@ -1589,23 +1624,26 @@ security.</p>
 checked and validated (authentication) so that the site offering the
 services knows that it is dealing with the valid user not an
 impersonator <em>which is a great thing</em> but it is not necessary for
-<em>PAM</em> because <em>PAM</em> has no <em>site</em>. It is a single
-page web application which, once it is loaded, makes it more like a
+<em>PAM</em> because <em>PAM</em> has no <em>site</em>.</p>
+<p>Instead <em>PAM</em> is a single page web application with <em>no
+backend processing</em>, which, once it is loaded, makes it more like a
 local word processor that is tailored to managing customized records in
 <em>local</em> files so any additional communication over the internet
 represents a risk as does storing any user information. Everything is
 done inside the browser in a secure context.</p>
 <p>No outbound information is ever sent to the internet unless the user
-specifically requests it via the <code>Load File</code> and
-<code>Save File</code> operations but at that point all data is
-encrypted both at the file level and as the HTTPS transport level which
-is required for the browser secure context which, in turn, is required
-by <em>PAM</em> to function which is pretty safe if you protect your
-data with a strong password.</p>
+specifically requests it via the <code>"Load File"</code> and
+<code>"Save File"</code> operations while using cloud storage but at
+that point all data is encrypted both at the file level and as the HTTPS
+transport level which is required for the browser secure context which,
+in turn, is required by <em>PAM</em> to function which is pretty safe if
+you protect your data with a strong password.</p>
 <p>You can verify that <em>PAM</em> is functioning securely by
 monitoring outbound internet traffic. You should never see any outbound
 traffic from <em>PAM</em> that is not related to the file load and save
 operations.</p>
+<p>For all of the above reasons, I felt the MFA would not improve
+security and, hence, was not needed.</p>
 <h2 id="usage-examples">Usage Examples</h2>
 <p>The examples in this section talk about how to use this app under
 different scenarios.</p>
@@ -1617,25 +1655,32 @@ passwords.</p>
 <p>To create a file and a record follow these steps:</p>
 <ol type="1">
 <li>Navigate to the app: <a
-href="https://jlinoff.github.io/pam/www/">https://jlinoff.github.io/pam/www/</a>
-<ol type="1">
-<li>Or to wherever you installed it, if you built it locally.</li>
+href="https://jlinoff.github.io/pam/www/">https://jlinoff.github.io/pam/www/</a>.
+<ul>
 <li>This can be done from any device, like your phone, tablet or
 computer but you must have access to cloud storage (on iphone and ipads
 that would be iCloud).</li>
-</ol></li>
-<li>Select the <q>Add New Record</q> option from the menu in the upper
-right hand corner.</li>
+</ul></li>
+<li>Select the <code>"New Record"</code> option from the menu in the
+upper right hand corner.</li>
 <li>When the new record dialogue pops up, enter the account name as the
 title, an example might be <q>Google email</q>.</li>
-<li>Add fields like <q>url</q>, <q>login</q> and <q>password</q>.</li>
+<li>Add fields like <q>url</q>, <q>login</q> and <q>password</q> and set
+their values.</li>
 <li>Save the record.</li>
 <li>At this point it will appear as your first record on the
 display.</li>
 <li>Now save it to a file by selecting <q>Save File</q> from the
 menu.</li>
-<li>Enter the file name, perhaps something like <q>mystuff.pam</q> or
-<q>joe.pam</q> if your name is <q>Joe</q>,</li>
+<li>Enter the file name, perhaps something like
+<code>"mystuff.pam"</code> or <code>"joe.pam"</code> if your name is
+<q>Joe</q> or <code>"account.pam"</code>.
+<ul>
+<li>I have found that some devices do not like the <code>".pam"</code>
+file extension. I that is the case use the <code>".txt"</code> file
+extension. Everything loves that and the data is guaranteed to be ASCII
+text (even when encrypted).</li>
+</ul></li>
 <li>Enter a password.
 <ol type="1">
 <li>This is the password that you need to access all of the records in
@@ -1708,32 +1753,33 @@ having to delete each old field value before typing in the new field
 value.</p>
 <h3 id="shared-credentials-for-a-small-group">Shared Credentials for a
 Small Group</h3>
-<p>This scenario assumes that a small group shares a common file of
-account records with credentials that can only be decrypted using a
-single shared password that is only known to the group. Because it is so
-easy to manage, such simple setup it might be useful for a
-<em>small</em> group that requires administrative access to a
-<em>small</em> number of accounts.</p>
+<p>This scenario assumes that a small group of trusted people wants to
+share a common file of account records with credentials that can only be
+decrypted using a single shared password that is only known to the
+group.</p>
+<p>This might be suitablefor a <em>small</em> group that requires
+administrative access to a <em>small</em> number of accounts.</p>
 <blockquote>
 <p>Because it involves sharing a password, this approach may be too
 insecure for some.</p>
 </blockquote>
 <p>If this approach is adopted, it would be wise to change the shared
 password frequently, to audit all access to the shared file as well as
-auditing all access to the accounts. Also, since the shared file
+audit all access to the accounts. Also, since the shared file
 <em>must</em> be on a mounted volume that can be seen by the input file
 dialogue, access to the mount and, by extension, to the file can also be
 restricted.</p>
-<p>Here are the high level steps necessary to share the pam file.</p>
+<p>Here are the high level steps necessary to share a <em>PAM</em>
+file.</p>
 <ol type="1">
-<li>Create the mounted volume.</li>
+<li>Create the mounted volume where the file will be located.</li>
 <li>Create the pam file and populate it with the shared records.
-<ol type="1">
-<li>Optionally, you may wish to limit the fields to <code>login</code>,
-<code>password</code>, <code>note</code> and <code>host</code> by
-editing the preferences and removing the other fields since these
-records have a specific format.</li>
-</ol></li>
+<ul>
+<li>Optionally, you may wish to limit the record fields to
+<code>login</code>, <code>password</code>, <code>note</code> and
+<code>host</code> by editing the preferences and removing the other
+fields since all of the records have a specific, known format.</li>
+</ul></li>
 <li>Save the file to the mounted volume with a password.</li>
 <li>Communicate the location of the file and the password to the members
 of the group in a secure way.</li>
@@ -1743,23 +1789,23 @@ of the group in a secure way.</li>
 of your recipes with your other personal account data but it might be
 useful if you want to keep them separated.</p>
 <p>The key notion here is the idea of creating two new fields in the
-preference dialogue: <q>difficulty</q>, <q>ingredients</q> and
-<q>steps</q>, and then using them when you enter recipes.</p>
-<p>Here are the high level steps necessary to get started.</p>
+preference dialogue: <q>ingredients</q> and <q>instructions</q>, and
+then use them when you enter recipes.</p>
+<p>Here are the high level steps necessary to get the fields
+defined.</p>
 <ol type="1">
-<li>Open the preferences dialogue from the menu in pam.</li>
-<li>Add the three new fields by clicking or tapping on the
+<li>Open the preferences dialogue from the menu.</li>
+<li>Add the new fields by clicking or tapping on the
 <img src="./plus-circle.svg" height="32" width="32" alt="trash"/> icon
-in the <q>Record Fields</q> section.
+in the <code>"Record Fields"</code> in the preferences section.
 <ol type="1">
-<li><q>difficulty</q> of type <q>text</q>.</li>
-<li><q>ingredients</q> of type <q>textarea</q>.</li>
-<li><q>steps</q> of type <q>textarea</q>.</li>
+<li><code>"ingredients"</code> of type <q>textarea</q>.</li>
+<li><code>"instructions"</code> of type <q>textarea</q>.</li>
 </ol></li>
-<li>Delete all of the other fields by clicking or tapping on the
-trashcan
-<img src="./trash3-fill.svg" height="32" width="32" alt="trash"/>
-icon.</li>
+<li>Delete all of the other record fields defined in the preferences by
+clicking or tapping on the
+<img src="./trash3-fill.svg" height="32" width="32" alt="trash"/> icon
+because there is no need for them.</li>
 </ol>
 <p>To search by an ingredient, set the <q>Search Record Field Values</q>
 preference to true by clicking or tapping on it and then saving it.</p>
@@ -1771,7 +1817,8 @@ data but it might be useful if you want to keep them separated.</p>
 added the following fields using the methodology described in the
 recipes section above.</p>
 <blockquote>
-<p>Note that only add records or books that have been read.</p>
+<p>Note that I <em>only</em> add records for books that have been
+read.</p>
 </blockquote>
 <table>
 <thead>
@@ -1808,17 +1855,111 @@ context to provide encryption and decryption.</p>
 <p>It uses <a
 href="#https://getbootstrap.com/docs/5.0/getting-started/introduction/">bootstrap-5</a>
 to make it work better in mobile browsers.</p>
-<p>It is free and open-source (FOSS) software.</p>
+<h3 id="license">License</h3>
+<p><em>PAM</em> is free and open-source (FOSS) software that licensed
+under the MIT Licensing terms.</p>
+<p>Although not required, I would appreciate attibution if you decide to
+copy and use the source code.</p>
+<p><a href="#https://en.wikipedia.org/wiki/MIT_License">MIT License
+Terms</a></p>
 <h3 id="release-pam">Release PAM</h3>
+<p>Note that <em>PAM</em> will not work unless it is released to a
+secure (HTTPS) server because it requires a <em>secure context</em>.</p>
+<p>Note that installing it on local server (localhost or 127.0.0.1) is
+considered secure which is convenient for personal use.</p>
+<p>Here are the steps.</p>
 <ol type="1">
 <li>Update the <code>VERSION</code> file using semantic versioning.</li>
-<li>Run <code>make</code> to propagate the new version.</li>
-<li>Run <code>make app-help</code> to propagate any changes to
-<code>HELP.md</code>.</li>
+<li>Run <code>make</code> to propagate the new version and update
+<code>HELP.md</code></li>
 <li>Run <code>make web</code> to create <code>pam-www.tar</code> which
-contains the app in <code>pam/www</code>. It can be used to release to a
-secure (HTTPS) server. The app cannot be used on a non-secure (HTTP)
-server because it requires a secure context.</li>
+contains the app in <code>pam/www</code>.</li>
+<li>Untar the <code>pam-www.tar</code> on your site.</li>
 </ol>
+<p>This pre-supposes that you have clone the pam project and have made
+modifications.</p>
+<h3 id="history">History</h3>
+<p>This is the one of the many times that i have written password
+manager from scratch over many years and it is intended to be the
+last.</p>
+<p>This version is good enough for my needs and should provide a decent
+start for someone who wants to improve it.</p>
+<p>If you are interested in the evolution of thought here the previous
+implementations that are still around:</p>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 20%" />
+<col style="width: 24%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Date</th>
+<th>Name</th>
+<th>Project</th>
+<th>App</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2019</td>
+<td>qspm</td>
+<td><a href="#https://github.com/eSentire/qspm">link</a></td>
+<td><a href="#https://esentire.github.io/qspm/">link</a></td>
+<td>This is the oldest surviving effort. It was implemented using Rust
+and javascript. The UI is quite complex.</td>
+</tr>
+<tr class="even">
+<td>2021</td>
+<td>myvault</td>
+<td><a href="#https://github.com/jlinoff/myvault">link</a></td>
+<td><a
+href="#https://jlinoff.github.io/myvault/index.html">link</a></td>
+<td>This is the precursor to pam. It was implemented using Rust and
+javascript. I used it for a number of years. It has poor implementations
+of the record create and edit dialogues and a poor implementation of the
+password generator dialogue. Other than that it is okay.</td>
+</tr>
+<tr class="odd">
+<td>2022</td>
+<td>pam</td>
+<td><a href="#https://github.com/jlinoff/pam">link</a></td>
+<td><a
+href="#https://jlinoff.github.io/pam/www/index.html">link</a></td>
+<td>The latest incarnation that is pure javascript. It fixes some of the
+earlier problems but could still be improved.</td>
+</tr>
+</tbody>
+</table>
+<p>I first wrote a password manager in the early 2000’s in javascript.
+In those days I had to write my own uncertified implementations of the
+encrytion algorithms like AES-256-CBC and AES-256-GCM and DES3 but that
+was perfectly okay because, back then, my day job involved a lot of
+security stuff like designing hardware and software (in C++) to
+implement certified algorithms.</p>
+<p>As time went on, i would continue to re-implement password managers
+as a hobby to learn new skills and refresh old ones. That pretty quickly
+got me into javascript, python, docker, golang and, a few years ago, to
+rust. It has been a fun journey.</p>
+<p>By the time, i got around to writing <em>PAM</em>, i was using the
+prototype for a lot more than password management (mostly because i
+could enter records from my phone). It was a useful idiom for record
+management in general which is where things are today.</p>
+<p>You will see that i dropped Rust in the latest incarnation but that
+is not because i don’t think Rust is suitable or wonderful. It is most
+definitely suitable and wonderful. I dropped it because i did not need
+it. The secure context had everything i needed.</p>
+<p>In a perfect world, i would have done this in emacs
+<code>org-mode</code> (yes, i am one of those) but i was never able to
+get remote access from multiple devices working as well as i liked so i
+stuck with javascript.</p>
+<p>I hope that there is something here that others can learn something
+from it and have has much fun as i have had but if not, it doesn’t
+matter, i have really enjoyed playing around with this over the years.
+The journey was worth it.</p>
+<p>Enjoy.</p>
 </body>
 </html>
