@@ -126,11 +126,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-30 16:16:33 -0700</code></td>
+<td><code>2022-05-30 16:27:16 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>edb7aad</code></td>
+<td><code>109b0b5</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -1880,60 +1880,122 @@ contains the app in <code>pam/www</code>.</li>
 modifications.</p>
 <h3 id="history">History</h3>
 <p>This is the one of the many times that i have written a password
-manager from scratch over many years and it is intended to be the
-last.</p>
-<p>This version is good enough for my needs and should provide a decent
-start for someone who wants to improve it.</p>
-<p>If you are interested in the evolution of thought here the previous
-implementations that are still around:</p>
+manager from scratch over many years and it is intended to be the last
+because this version and while it is <em>far</em> from perfect, is good
+enough for my needs and should provide a decent start for someone who
+wants to improve it.</p>
+<p>If you are interested in the evolution of this project read on.</p>
+<p>Below are three previous implementations that are still around
+followed by a brief chronology of things progressed over the years.</p>
+<h4 id="qspm">qspm</h4>
 <table>
 <colgroup>
-<col style="width: 16%" />
-<col style="width: 20%" />
-<col style="width: 24%" />
-<col style="width: 20%" />
-<col style="width: 20%" />
+<col style="width: 50%" />
+<col style="width: 50%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Date</th>
-<th>Name</th>
-<th>Project</th>
-<th>App</th>
-<th>Note</th>
+<th><!-- --></th>
+<th><!-- --></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>2019</td>
-<td>qspm</td>
-<td><a href="#https://github.com/eSentire/qspm">link</a></td>
-<td><a href="#https://esentire.github.io/qspm/">link</a></td>
-<td>This is the oldest surviving effort. It was implemented using Rust
-and javascript. The UI is quite complex.</td>
+<td>Circa</td>
+<td>2018</td>
 </tr>
 <tr class="even">
-<td>2021</td>
-<td>myvault</td>
-<td><a href="#https://github.com/jlinoff/myvault">link</a></td>
+<td>Project</td>
 <td><a
-href="#https://jlinoff.github.io/myvault/index.html">link</a></td>
-<td>This is the precursor to pam. It was implemented using Rust and
-javascript. I used it for a number of years. It has poor implementations
-of the record create and edit dialogues and a poor implementation of the
-password generator dialogue. Other than that it is okay.</td>
+href="#https://github.com/eSentire/qspm">https://github.com/eSentire/qspm</a></td>
 </tr>
 <tr class="odd">
-<td>2022</td>
-<td>pam</td>
-<td><a href="#https://github.com/jlinoff/pam">link</a></td>
+<td>Webapp</td>
 <td><a
-href="#https://jlinoff.github.io/pam/www/index.html">link</a></td>
-<td>The latest incarnation that is pure javascript. It fixes some of the
-earlier problems but could still be improved.</td>
+href="#https://esentire.github.io/qspm/">https://esentire.github.io/qspm/</a></td>
 </tr>
 </tbody>
 </table>
+<p>This is the oldest surviving effort. It was implemented using Rust
+and javascript and was funded by my employer at that time (eSentire,
+Inc.) for a hackweek project. The UI and the implementation are quite
+complex.</p>
+<p>The acronym stands for Quantum Safe Password Manager. An ambitious
+name to say the least.</p>
+<h4 id="myvault">myvault</h4>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Circa</td>
+<td>2020</td>
+</tr>
+<tr class="even">
+<td>Project</td>
+<td><a
+href="#https://github.com/jlinoff/myvault">https://github.com/jlinoff/myvault</a></td>
+</tr>
+<tr class="odd">
+<td>Webapp</td>
+<td><a
+href="#https://github.com/jlinoff/myvault">https://github.com/jlinoff/myvault</a></td>
+</tr>
+</tbody>
+</table>
+<p>This is the precursor to pam. It was implemented using Rust and
+javascript. I used it for a several of years.</p>
+<p>It has poor implementations of the record create and edit dialogues
+and a poor implementation of the password generator dialogue.</p>
+<p>Other than that it was okay.</p>
+<h4 id="pam">pam</h4>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Circa</td>
+<td>2022</td>
+</tr>
+<tr class="even">
+<td>Project</td>
+<td><a
+href="#https://github.com/jlinoff/pam">https://github.com/jlinoff/pam</a></td>
+</tr>
+<tr class="odd">
+<td>Webapp</td>
+<td><a
+href="#https://jlinoff.github.io/pam/www/">https://jlinoff.github.io/pam/www/</a></td>
+</tr>
+<tr class="even">
+<td>Help</td>
+<td><a
+href="#https://jlinoff.github.io/pam/www/help/">https://jlinoff.github.io/pam/www/help/</a></td>
+</tr>
+</tbody>
+</table>
+<p>This is the latest incarnation and it is pure javascript. It fixes
+some of the earlier problems and leverages bootstrap-5 but could still
+be improved.</p>
+<p>The acronym stands for Personal Accounts Manager or PAssword Manager
+or whatever. I just wanted something short and easy to remember.</p>
+<h4 id="chronology">Chronology</h4>
 <p>I first wrote a password manager in the early 2000’s in javascript.
 In those days I had to write my own uncertified implementations of the
 encrytion algorithms like AES-256-CBC and AES-256-GCM and DES3 but that
@@ -1949,17 +2011,17 @@ prototype for a lot more than password management (mostly because i
 could enter records from my phone). It was a useful idiom for record
 management in general which is where things are today.</p>
 <p>You will see that i dropped Rust in the latest incarnation but that
-is not because i don’t think Rust is suitable or wonderful. It is most
+is not because i don’t think Rust is suitable or wonderful. Rust is most
 definitely suitable and wonderful. I dropped it because i did not need
 it. The secure context had everything i needed.</p>
 <p>In a perfect world, i would have done this in emacs
 <code>org-mode</code> (yes, i am one of those) but i was never able to
 get remote access from multiple devices working as well as i liked so i
 stuck with javascript.</p>
-<p>I hope that there is something here that others can learn something
-from it and have has much fun as i have had but if not, it doesn’t
-matter, i have really enjoyed playing around with this over the years.
-The journey was worth it.</p>
+<p>I sincerely hope that there is something here that others can learn
+something from it and have as much fun as i have had but, if not, it
+doesn’t matter, i have really enjoyed playing around with this over the
+years. The journey was worth it.</p>
 <p>Enjoy.</p>
 </body>
 </html>
