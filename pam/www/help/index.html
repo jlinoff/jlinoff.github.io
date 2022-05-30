@@ -63,11 +63,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-30 09:16:41 -0700</code></td>
+<td><code>2022-05-30 10:30:42 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>0f03031</code></td>
+<td><code>929bd67</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -300,42 +300,46 @@ PAM</h3>
 <p>As mentioned in the previous section, I wrote <em>PAM</em> provide
 some features I wanted and to address some concerns I had with existing
 approaches. This section lists those concerns and features in the each
-of reasons presented below.</p>
+of ten reasons presented below.</p>
 <h4 id="reason-1-no-client-server-communications">Reason 1: No Client
 Server Communications</h4>
 <p><em>PAM</em> is a single page web application (SPA) that has no
-backend which means that it never communicates information with an
-external site. This makes it safe from some cyber attacks as detailed in
-the <a href="#security-considerations">Security Considerations</a>
-section.</p>
+backend which means that it never communicates with an external site
+which protects it from some types of cyber attacks as detailed in the <a
+href="#security-considerations">Security Considerations</a> section.</p>
 <h4 id="reason-2-record-model">Reason 2: Record Model</h4>
 <p>In <em>PAM</em>, information is organized into files composed of
 records that each have a unique title and are, in turn, composed of
-fields that each field have a name, a type and a value. This approach is
-similar to organizing information using recipe cards or a rolodex.</p>
-<p>Following the recipe card analogy a little further, we can say that
-each recipe is a single record, a collection of recipes for desserts
-would be a file of dessert recipe records where each record or recipe
-had three sections or fields: a title (the name of the recipe), the
-ingredients and the instructions. This is what a recipe record might
-look like in <em>PAM</em>.</p>
+fields that have a name, a type and a value. This approach is similar to
+organizing information using recipe cards or a rolodex.</p>
+<p>Following the recipe card analogy a little further using a simple
+example, each recipe would be a single record, a collection of recipes
+for, say, desserts would be a file of dessert recipe records where each
+record or recipe would have three parts: a title (the name of the
+recipe), the ingredients (a field) and the instructions (another field).
+This is what a simple dessert recipe record might look like in
+<em>PAM</em>.</p>
 <p><img src="./pam-ice-cream-sundae.png" alt="ice-cream-sundae-example"></p>
 <p>As you can see, in this recipe record, the record title is
 <code>"Ice Cream Sundae"</code> and the two fields <q>ingredients</q>
 and <q>instructions</q> contain the multiline (<code>textarea</code>)
 descriptions of what the ingredients and instructions are for this
 specific recipe.</p>
-<p>On the other hand a record for an account might have the url, the
-login name and the password. Something like this:</p>
+<p>On the other hand, a record for an account that provides information
+about how to login into an account on the internet might have the url,
+the login name and the password of the account. Something like this:</p>
 <p><img src="./pam-google-account.png" alt="google-account-example"></p>
 <p>In the acount example above, the record title is
-<code>"Google"</code>, the url field value is
-<code>"https://google.com"</code>, the login field value is
-<code>"pbrain81@gmail.com"</code> and the password value is hidden.</p>
+<code>"Google"</code>, the <q>url</q> field value is
+<code>"https://google.com"</code>, the <q>login</q> field value is
+<code>"pbrain81@gmail.com"</code> and the <q>password</q> field value is
+hidden because <em>PAM</em> hides the contents of passwords by
+default.</p>
 <p>As you can see both records look quite different. Recipes records
 have fields for <q>ingredients</q> and <q>instructions</q> whereas
 account records have fields for the <q>url</q>, <q>login</q> and
-<q>password</q>.</p>
+<q>password</q>. In both cases they have the same basic structure: a
+title and a set of fields that are relevant to them.</p>
 <p>You could easily imagine defining other records that contain
 information for other topics like <em><q>books read</q></em> or
 <em><q>unidentified aerial phenomena</q></em> or <em><q>bird
@@ -343,31 +347,23 @@ watching</q></em> which would undoubtedly require additional, different
 fields.</p>
 <p>This demonstrates why <em>PAM</em> was organized around the notion of
 records that are composed of flexible, user defined fields. In my view,
-the record/field structure does a better job of representing this type
-of topic data than a spreadsheet or a text file editor.</p>
-<p>If the number of records plan to store is large like 10,000 recipes
-or address information for mailing list, you probably want to use a
-database not <em>PAM</em>.</p>
-<p><em>PAM</em> is great for small collections not gargantuan ones. I
-never store more than about 150 records which is probably a reasonable
-upper bound but, in practice, <em>PAM</em> does not impose any
-limits.</p>
+this file/record/field structure does a better job of representing this
+type of information than a spreadsheet or a text file editor.</p>
 <h4 id="reason-3-searching">Reason 3: Searching</h4>
 <p><em>PAM</em> allows you to search records by their title or their
-field names and values to filter out records that do not match the
-search pattern. This is extremely useful when the number of records
-grows.</p>
+field names and values. It also filters out the records that don’t match
+to make it easier to see the matching records visually.</p>
 <p>See <a href="#search-records">Search Records</a> for more
 details.</p>
 <h4 id="reason-4-automatic-password-generation">Reason 4: Automatic
 Password Generation</h4>
 <p>I always find it hard to come up with passwords in the spur of the
-moment.</p>
-<p>Fortunately, <em>PAM</em> provides an automatic password generation
-capability that I find really useful. Of course almost all browsers do
-this as well these days, but they generate cryptic, hard to memorize
-passwords which is perfectly fine if you never have to remember them but
-if you want a more memorable password, you are out of luck.</p>
+moment so <em>PAM</em> was built with an automatic password generation
+capability.</p>
+<p>Of course almost all browsers and password tools provide this same
+capability these days, but they tend to generate cryptic, hard to
+memorize passwords which is perfectly fine if you never have to remember
+them but if you want a more memorable password, you are out of luck.</p>
 <p><em>PAM</em> gives you a choice because it has the concept of cryptic
 and memorable passwords as discussed in detail in <a
 href="#password-fields">Password Fields</a> section.</p>
@@ -383,7 +379,7 @@ like records of <em><q>recipes</q></em> or <em><q>book reviews</q></em>
 or <em><q>my favorite species of Euglena</q></em>.</p>
 <p>For a discussion about how the user controls the organization of the
 records and fields in a file see the <a
-href="#reason-2-record-model">Reason 2: Record Model</a> sectionof this
+href="#reason-2-record-model">Reason 2: Record Model</a> section of this
 document.</p>
 <p>I store my record files in cloud <em>IaaS</em> storage
 (infrastructure as a service) and mount that storage as a local volume
@@ -395,9 +391,10 @@ automatically on all of my devices.</p>
 <h4 id="reason-6-record-field-customization">Reason 6: Record Field
 Customization</h4>
 <p>The record fields are fully customizable. The advantage of using a
-record model to represent the data was discussed earlier (in reason 2)
-but being able to change the basic building blocks of the record (the
-record fields) extends the advantage of this approach.</p>
+record model to represent the data was discussed earlier (in <a
+href="#reason-2-record-model">Reason 2: Record Model</a> ) but being
+able to change the basic building blocks of the record (the record
+fields) extends the advantage of the basic record paradigm.</p>
 <p>For more information on fields see the <a href="#fields">Fields</a>
 section.</p>
 <p><em>PAM</em> provides a set of pre-defined record fields in the <a
@@ -409,10 +406,12 @@ a new record. They are only provided for convenience.</p>
 <p><img src="./pam-change-field-name.png" alt="change-field-name"></p>
 <h4 id="reason-7-secure-context-encryption">Reason 7: Secure Context
 Encryption</h4>
-<p>Records are encrypted using an NIST certified, strong, well defined,
-standard symmetric encryption algorithm: <code>AES-256-CBC</code>. That
-means, if a file is stolen, the record data is safe, if it has been
-encrypted with a strong password.</p>
+<p>Records are encrypted using an <a
+href="#https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program"><em>NIST
+certified</em></a>, symmetric encryption algorithm:
+<code>AES-256-CBC</code>. That is a strong security guarantee which
+means, that if an encrypted <em>PAM</em> file is stolen, the record data
+is safe, if it has been encrypted with a strong password.</p>
 <p>As an added benefit, note that <code>AES-256-CBC</code> is thought to
 be reasonably resistant to quantum attacks as discussed in the
 literature. <a
@@ -420,19 +419,22 @@ href="#https://crypto.stackexchange.com/questions/6712/is-aes-256-a-post-quantum
 is one relevant exchange from a <code>crypto.stackexchange.com</code>
 discussion.</p>
 <p><em>PAM</em> encryption and decryption operations are provided by and
-run <em>in</em> the browser using the <em>secure context of the
-browser</em>. This is the same context used for accessing sites securely
-for transactions, like your bank.</p>
-<p>The security of the <em>secure context</em> operations is taken very
-seriously by organizations that develop Chrome, Edge, Firefox and other
-browsers.</p>
+run <em>inside</em> the <em>secure context</em> of the browser. This is
+the same <em>secure context</em> used for accessing sites securely for
+transactions, like your bank. In practice this means that you must
+access <em>PAM</em> from an HTTPS site.</p>
+<p>The safety security of <em>secure context</em> operations is taken
+very seriously by the internet standards organization and the
+organizations that develop the major browsers.</p>
 <p>You can read more about secure contexts <a
 href="#https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts">here</a>.</p>
 <h4 id="reason-8-hiding-passwords-from-causal-observers">Reason 8:
 Hiding Passwords from Causal Observers</h4>
 <p>Passwords and other secrets are automatically hidden on the screen
 (displayed as asterisks) so that someone looking over your shoulder
-cannot read them unless you choose to make them visible.</p>
+cannot read them unless you choose to make them visible. You can read
+more about why this is beneficial in the <a
+href="#security-considerations">Security Considerations</a> section.</p>
 <p>This is the default hidden view of a password.</p>
 <p><img src="./pam-password-hidden.png" alt="password-hidden"></p>
 <p>This is the view of a password when it is not hidden.</p>
