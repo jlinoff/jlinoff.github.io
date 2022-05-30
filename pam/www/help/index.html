@@ -112,8 +112,8 @@ Client Server Communications</a></li>
 Automatic Password Generation</a></li>
 <li><a href="#reason-5-file-based-storage">Reason 5: File Based
 Storage</a></li>
-<li><a href="#reason-6-record-customization">Reason 6: Record
-Customization</a></li>
+<li><a href="#reason-6-record-field-customization">Reason 6: Record
+Field Customization</a></li>
 <li><a href="#reason-7-secure-context-encryption">Reason 7: Secure
 Context Encryption</a></li>
 <li><a href="#reason-8-hiding-passwords-from-causal-observers">Reason 8:
@@ -369,19 +369,22 @@ this as well these days, but they generate cryptic, hard to memorize
 passwords which is perfectly fine if you never have to remember them but
 if you want a more memorable password, you are out of luck.</p>
 <p><em>PAM</em> gives you a choice because it has the concept of cryptic
-and memorable passwords as you can see here.</p>
-<p><img src="./pam-password-generator.png" alt="password-generator"></p>
+and memorable passwords as discussed in detail in <a
+href="#password-fields">Password Fields</a> section.</p>
 <h4 id="reason-5-file-based-storage">Reason 5: File Based Storage</h4>
-<p><em>PAM</em> uses files to load and store the record data. Using a
-file means that the user does not have to rely on the cybersecurity
-defenses of a company running a web server at their site or another
-third party site.</p>
-<p>A collection of records is stored in a file. You can have multiple
-files for different types of records like <em><q>recipes</q></em> or
-<em><q>book reviews</q></em> or <em><q>login information for
-accounts</q></em>. The user controls the organization of the records and
-fields in a file as discussed in <a href="#reason-2-record-model">Reason
-2: Record Model</a></p>
+<p><em>PAM</em> uses files to load and store the record data.</p>
+<p>Using a file means that the user does not have to rely on the
+cybersecurity defenses of a company running a web server at their site
+or another third party site.</p>
+<p>A <em>PAM</em> file is composed of a set of records. Any records you
+like. You can use a single file for all of your records or you can have
+multiple files where each file contains records that are somehow related
+like records of <em><q>recipes</q></em> or <em><q>book reviews</q></em>
+or <em><q>my favorite species of Euglena</q></em>.</p>
+<p>For a discussion about how the user controls the organization of the
+records and fields in a file see the <a
+href="#reason-2-record-model">Reason 2: Record Model</a> sectionof this
+document.</p>
 <p>I store my record files in cloud <em>IaaS</em> storage
 (infrastructure as a service) and mount that storage as a local volume
 on each device so that the files look like they are local but they are,
@@ -389,9 +392,14 @@ in fact, stored in the cloud. That allows me to access the files from
 any of my devices: laptops, phones and tablets.</p>
 <p>I personally use iCloud because it does all the volume mount work
 automatically on all of my devices.</p>
-<h4 id="reason-6-record-customization">Reason 6: Record
+<h4 id="reason-6-record-field-customization">Reason 6: Record Field
 Customization</h4>
-<p>The record fields are fully customizable.</p>
+<p>The record fields are fully customizable. The advantage of using a
+record model to represent the data was discussed earlier (in reason 2)
+but being able to change the basic building blocks of the record (the
+record fields) extends the advantage of this approach.</p>
+<p>For more information on fields see the <a href="#fields">Fields</a>
+section.</p>
 <p><em>PAM</em> provides a set of pre-defined record fields in the <a
 href="#Preferences">Preferences</a> but you can tailor them to your
 needs as shown below.</p>
