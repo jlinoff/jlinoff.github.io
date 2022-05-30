@@ -63,11 +63,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-30 11:28:55 -0700</code></td>
+<td><code>2022-05-30 11:42:03 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>29d18c5</code></td>
+<td><code>20753f9</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -112,15 +112,13 @@ Client Server Communications</a></li>
 Automatic Password Generation</a></li>
 <li><a href="#reason-5-file-based-storage">Reason 5: File Based
 Storage</a></li>
-<li><a href="#reason-6-record-field-customization">Reason 6: Record
-Field Customization</a></li>
-<li><a href="#reason-7-secure-context-encryption">Reason 7: Secure
+<li><a href="#reason-7-secure-context-encryption">Reason 6: Secure
 Context Encryption</a></li>
-<li><a href="#reason-8-hiding-passwords-from-causal-observers">Reason 8:
+<li><a href="#reason-8-hiding-passwords-from-causal-observers">Reason 7:
 Hiding Passwords from Causal Observers</a></li>
-<li><a href="#reason-9-access-from-mobile-devices">Reason 9: Access from
+<li><a href="#reason-9-access-from-mobile-devices">Reason 8: Access from
 mobile devices</a></li>
-<li><a href="#reason-10-foss">Reason 10: FOSS</a></li>
+<li><a href="#reason-10-foss">Reason 9: FOSS</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#layout">Layout</a>
@@ -300,7 +298,7 @@ PAM</h3>
 <p>As mentioned in the previous section, I wrote <em>PAM</em> provide
 some features I wanted and to address some concerns I had with existing
 approaches. This section lists those concerns and features in the each
-of ten reasons presented below.</p>
+of reasons presented below.</p>
 <h4 id="reason-1-no-client-server-communications">Reason 1: No Client
 Server Communications</h4>
 <p><em>PAM</em> is a single page web application (SPA) that has no
@@ -381,30 +379,12 @@ or <em><q>my favorite species of Euglena</q></em>.</p>
 records and fields in a file see the <a
 href="#reason-2-record-model">Reason 2: Record Model</a> section of this
 document.</p>
-<p>I store my record files in cloud <em>IaaS</em> storage
-(infrastructure as a service) and mount that storage as a local volume
-on each device so that the files look like they are local but they are,
-in fact, stored in the cloud. That allows me to access the files from
-any of my devices: laptops, phones and tablets.</p>
-<p>I personally use iCloud because it does all the volume mount work
-automatically on all of my devices.</p>
-<h4 id="reason-6-record-field-customization">Reason 6: Record Field
-Customization</h4>
-<p>The record fields are fully customizable. The advantage of using a
-record model to represent the data was discussed earlier (in <a
-href="#reason-2-record-model">Reason 2: Record Model</a> ) but being
-able to change the basic building blocks of the record (the record
-fields) extends the advantage of the basic record paradigm.</p>
-<p>For more information on fields see the <a href="#fields">Fields</a>
-section.</p>
-<p><em>PAM</em> provides a set of pre-defined record fields in the <a
-href="#Preferences">Preferences</a> but you can tailor them to your
-needs as shown below.</p>
-<p><img src="./pam-predefined-fields.png" alt="predefined-fields"></p>
-<p>You can also change the names of the pre-defined fields when creating
-a new record. They are only provided for convenience.</p>
-<p><img src="./pam-change-field-name.png" alt="change-field-name"></p>
-<h4 id="reason-7-secure-context-encryption">Reason 7: Secure Context
+<p>I store my record files in iCloud <em>IaaS</em> storage
+(infrastructure as a service) that is automatically mounted as a local
+volume on each device so that the files look like they are local but
+they are, in fact, stored in the cloud. That allows me to access the
+files from any of my devices: laptops, phones and tablets.</p>
+<h4 id="reason-6-secure-context-encryption">Reason 6: Secure Context
 Encryption</h4>
 <p>Records are encrypted using an <a
 href="#https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program"><em>NIST
@@ -428,7 +408,7 @@ very seriously by the internet standards organization and the
 organizations that develop the major browsers.</p>
 <p>You can read more about secure contexts <a
 href="#https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts">here</a>.</p>
-<h4 id="reason-8-hiding-passwords-from-causal-observers">Reason 8:
+<h4 id="reason-7-hiding-passwords-from-causal-observers">Reason 7:
 Hiding Passwords from Causal Observers</h4>
 <p>Passwords and other secrets are automatically hidden on the screen
 (displayed as asterisks) so that someone looking over your shoulder
@@ -439,13 +419,13 @@ href="#security-considerations">Security Considerations</a> section.</p>
 <p><img src="./pam-password-hidden.png" alt="password-hidden"></p>
 <p>This is the view of a password when it is not hidden.</p>
 <p><img src="./pam-password-shown.png" alt="password-shown"></p>
-<h4 id="reason-9-access-from-mobile-devices">Reason 9: Access from
+<h4 id="reason-8-access-from-mobile-devices">Reason 8: Access from
 mobile devices</h4>
 <p>The files can be accessed from mobile devices so the user has access
 to the records anywhere. In addition it uses <a
 href="#https://getbootstrap.com/docs/5.0/getting-started/introduction/">bootstrap-5</a>
 to make it work better in mobile browsers.</p>
-<h4 id="reason-10-foss">Reason 10: FOSS</h4>
+<h4 id="reason-9-foss">Reason 9: FOSS</h4>
 <p>Last but not least, one the more compelling reasons to try
 <em>PAM</em> is that it is free and open source software (FOSS). You can
 try it and use it without any obligation or cost. You can also fix bugs
