@@ -63,11 +63,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-30 11:10:56 -0700</code></td>
+<td><code>2022-05-30 11:28:55 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>fde692d</code></td>
+<td><code>29d18c5</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -465,9 +465,13 @@ it has a number of options as you can see below.</p>
 <p><img src="./pam-basic-menu.png" alt="menu"></p>
 <h3 id="records-section">Records Section</h3>
 <p>Underneath the top level bar is the records section. Each record is
-shown as entry that is displayed by its title. If you click or tap on
-it, it will expand. This is called an accordion display and is shown
-below with the <q>Facebook</q> entry expanded.</p>
+shown as an entry that is displayed by its title. If you click or tap on
+the record title, the record will expand to show the record contents
+(fields) and provide options for deleting, cloning or editing the record
+contents.</p>
+<p>This way of presenting the records is called an accordion display.
+Below you can see how it expands after the <q>Facebook</q> entry has
+been selected.</p>
 <p><img src="./pam-record-expanded.png" alt="record-expanded"></p>
 <p>As you can see the expanded <q>Facebook</q> record has three fields:
 <q>url</q>, <q>login</q> and <q>password</q>.</p>
@@ -475,35 +479,35 @@ below with the <q>Facebook</q> entry expanded.</p>
 <p>You can copy the field values to the clipboard so that they can be
 pasted into login forms. The copy works for passwords whether the
 password is visible or not.</p>
-<p>You also delete, clone or edit the records:</p>
+<p>As mentioned earlier, you also delete, clone or edit the records:</p>
 <p><img src="./pam-record-expanded-fields2.png" alt="record-expanded"></p>
 <p>You can also click or tap on the title of the opened record to close
 it.</p>
 <h3 id="status-section">Status Section</h3>
 <p>Below the records section is the section where ephemeral status
-messages are displayed (they disappear after about 1.5 seconds).</p>
+messages are displayed. The messages disappear after about 1.5 seconds
+but the duration is controlled by a preference that you can set. See the
+<a href="#preferences">Preferences</a> section for more information.</p>
 <p>The status messages are used to provide activity feedback like
 showing how many bytes were copied to a clipboard when a copy button is
 clicked or tapped as shown in the example below.</p>
 <p><img src="./pam-status-msg.png" alt="status-message"></p>
-<p>You can control the duration of the messages in the preferences.</p>
 <h2 id="functions">Functions</h2>
 <p>The following sections will go over the basic functions that
 <em>PAM</em> provides.</p>
 <p>In a nutshell they are:</p>
 <ol type="1">
-<li>About - Display information about the application.</li>
-<li>Create Record</li>
-<li>Edit Record</li>
-<li>Delete Record</li>
-<li>Clone Record</li>
-<li>Save File - save records to an encrypted file.</li>
-<li>Load File - load a collection of records from an encrypted
-file.</li>
-<li>Search Records</li>
-<li>Get Help</li>
+<li>Display information about the application.</li>
+<li>Create Record.</li>
+<li>Edit Record.</li>
+<li>Delete Record.</li>
+<li>Clone Record.</li>
+<li>Save records to an encrypted file.</li>
+<li>Load a collection of records from an encrypted file.</li>
+<li>Search Records.</li>
+<li>Get Help.</li>
 </ol>
-<p>Each function will be discussed in a separate subsection.</p>
+<p>Each function will be discussed in a separate subsection below.</p>
 <p>Note that Preferences were not included because they have their own
 top level section in this document.</p>
 <h3 id="about">About</h3>
@@ -517,9 +521,14 @@ top level section in this document.</p>
 <p><img src="./pam-about-custom.png" alt="about-custom"></p>
 <p>Custom messages are defined in preferences as follows.</p>
 <p><img src="./pam-about-custom-pref.png" alt="about-custom-pref"></p>
+<p>The motivation for allowing custom messages is that someone might
+want share a <em>PAM</em> file among users. The custom message would
+allow the person to provide their <em>imprimatur</em> on the
+collection.</p>
 <h3 id="create-record">Create Record</h3>
-<p>This is a long section because it covers a number of concepts that
-are needed by other sections like topic and fields.</p>
+<p>This is a long section because it covers a number of general concepts
+that are needed by other functions like <q>topics</q> and
+<q>fields</q>.</p>
 <p>Creating a record is a very common activity in <em>PAM</em> so I
 tried to make it as easy as possible.</p>
 <p>There are three ways to create record:</p>
@@ -541,21 +550,26 @@ useful when you want to use the same fields as the existing record. It
 is a great way to guarantee uniformity. Although if the number of fields
 is small using the <q>menu</q> approach is also fine.</p>
 <p>Creating a record by editing javascript is most useful if you are
-interested in creating record programmatically (perhaps a subset of
-accounts that shared with a small group of users).</p>
-<p>Before any of the creation approaches can be discussed it is very
-important to understands record topics and record fields to provide
-background information for understanding some of the terms.</p>
+interested in creating records programmatically (perhaps a subset of
+accounts that shared with a small group of users that is automatically
+generated from a database).</p>
+<p>But, before any of the record creation approaches can be discussed in
+any detail, it is very important to understand record topics and record
+fields.</p>
 <h4 id="topics">Topics</h4>
-<p>Topics are a way of organizing records that have similar fields.
-Topics are arbitrary. For example, a topic could be something like
-<q>recipes</q>, <q>accounts</q>, or <q>unidentified aerial
-phenomena</q>.</p>
-<p>One way to use topics is to define a file all records in that topic.
-For example you could have a <q><code>recipe.pam</code></q> file for all
-of your recipe records or you could put all of your records,
-irregardless of topic, into a single file like
-<q><code>mystuff.pam</code></q>.</p>
+<p>Topics are a way of organizing records that have similar fields.</p>
+<p>Topics are completely arbitrary associations between records based
+what is important to you. For example, a topic could be something like
+<em><q>recipes</q></em>, <em><q>accounts</q></em>, or
+<em><q>unidentified aerial phenomena</q></em> or <em><q>my favorite
+mathematical spaces</q></em>.</p>
+<p>One way to use topics is to help you organize records in files. For
+example you could define a <q><code>recipes.pam</code></q> file for all
+of your recipe records and an <q><code>accounts.pam</code></q> for your
+account records. Or, you could put all of your records, irregardless of
+topic, into a single file like <q><code>mystuff.pam</code></q>. Either
+way, topics provide a useful abstraction for describing the fundamental
+organizing principle.</p>
 <h4 id="fields">Fields</h4>
 <p>Records are composed of fields. Before creating a new record make
 sure that you know exactly what fields you want to use but before you
@@ -565,6 +579,11 @@ can do that you need to understand how they are defined.</p>
 that the field name unambiguously defines the type. That means that a
 field like <code>"login"</code> is always a <code>"text"</code> field.
 It will never be a phone number or a date.</p>
+<blockquote>
+<p>Note this keeps things simple by not having multiple fields with the
+same name but different types which would add more complexity to the
+UI.</p>
+</blockquote>
 <p>Fields are defined in <a href="#Preferences">Preferences</a> and they
 are stored in each file with the along with the records. Here is what
 they are by default.</p>
