@@ -63,11 +63,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-28 18:42:57 -0700</code></td>
+<td><code>2022-05-29 18:44:35 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>1a5ba04</code></td>
+<td><code>0a45181</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -135,10 +135,34 @@ mobile devices</a></li>
 <ul>
 <li><a href="#topics">Topics</a></li>
 <li><a href="#fields">Fields</a></li>
+<li><a href="#password-fields">Password Fields</a>
+<ul>
+<li><a href="#cryptic-passwords">Cryptic Passwords</a></li>
+<li><a href="#memorable-passwords">Memorable Passwords</a></li>
+<li><a href="#hidden-password-representation">Hidden Password
+Representation</a></li>
+<li><a href="#visible-password-representation">Visible Password
+Representation</a></li>
+<li><a href="#password-generator">Password Generator</a></li>
+</ul></li>
 <li><a href="#menu-approach">Menu Approach</a></li>
 <li><a href="#clone-approach">Clone Approach</a></li>
 <li><a href="#javascript-approach">Javascript Approach</a></li>
 </ul></li>
+<li><a href="#edit-record">Edit Record</a></li>
+<li><a href="#delete-record">Delete Record</a></li>
+<li><a href="#save-file">Save File</a></li>
+<li><a href="#load-file">Load File</a></li>
+<li><a href="#search-records">Search Records</a></li>
+<li><a href="#get-help">Get Help</a></li>
+</ul></li>
+<li><a href="#menu">Menu</a></li>
+<li><a href="#records">Records</a>
+<ul>
+<li><a href="#unexpanded-view-of-all-records">Unexpanded View of all
+Records</a></li>
+<li><a href="#expanded-view-of-a-record">Expanded View of a
+Record</a></li>
 </ul></li>
 <li><a href="#preferences">Preferences</a>
 <ul>
@@ -330,24 +354,11 @@ upper bound but, in practice, <em>PAM</em> does not impose any
 limits.</p>
 <h4 id="reason-3-searching">Reason 3: Searching</h4>
 <p><em>PAM</em> allows you to search records by their title or their
-field names and value to filter out records that do not match the search
-pattern. This is extremely useful when the number of records grows.</p>
-<p>The search function supports case insensitive searches and regular
-expressions to make it easier to find stuff.</p>
-<p>I use this a lot for finding things like where i am still using old
-passwords and obsolete accounts or even something like all of the
-recipes that reference vanilla ice cream.</p>
-<p>Here is an made up list of accounts:</p>
-<p><img src="./pam-search.png" alt="pam-search"></p>
-<p>Here is the same list after filtering for those whose titles contain
-the letter <code>"g"</code>.</p>
-<p><img src="./pam-search-g.png" alt="pam-search-g"></p>
-<p>To filter only those that start with <code>"g"</code> you would use
-this regular expression search term instead: <code>"^g"</code>.</p>
-<p>For more information about regular expression syntax see the
-documentation for <a
-href="#https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">Javascript
-Regular Expressions</a>.</p>
+field names and values to filter out records that do not match the
+search pattern. This is extremely useful when the number of records
+grows.</p>
+<p>See <a href="#search-records">Search Records</a> for more
+details.</p>
 <h4 id="reason-4-automatic-password-generation">Reason 4: Automatic
 Password Generation</h4>
 <p>I always find it hard to come up with passwords in the spur of the
@@ -444,9 +455,9 @@ it has a number of options as you can see below.</p>
 <p><img src="./pam-basic-menu.png" alt="menu"></p>
 <h3 id="records-section">Records Section</h3>
 <p>Underneath the top level bar is the records section. Each record is
-shown as entry that is displayed by its title. If you click on it, it
-will expand. This is called an accordion display and is shown below with
-the <q>Facebook</q> entry expanded.</p>
+shown as entry that is displayed by its title. If you click or tap on
+it, it will expand. This is called an accordion display and is shown
+below with the <q>Facebook</q> entry expanded.</p>
 <p><img src="./pam-record-expanded.png" alt="record-expanded"></p>
 <p>As you can see the expanded <q>Facebook</q> record has three fields:
 <q>url</q>, <q>login</q> and <q>password</q>.</p>
@@ -456,13 +467,14 @@ pasted into login forms. The copy works for passwords whether the
 password is visible or not.</p>
 <p>You also delete, clone or edit the records:</p>
 <p><img src="./pam-record-expanded-fields2.png" alt="record-expanded"></p>
-<p>You can also click on the title of the opened record to close it.</p>
+<p>You can also click or tap on the title of the opened record to close
+it.</p>
 <h3 id="status-section">Status Section</h3>
 <p>Below the records section is the section where ephemeral status
 messages are displayed (they disappear after about 1.5 seconds).</p>
 <p>The status messages are used to provide activity feedback like
 showing how many bytes were copied to a clipboard when a copy button is
-clicked as shown in the example below.</p>
+clicked or tapped as shown in the example below.</p>
 <p><img src="./pam-status-msg.png" alt="status-message"></p>
 <p>You can control the duration of the messages in the preferences.</p>
 <h2 id="functions">Functions</h2>
@@ -474,7 +486,7 @@ clicked as shown in the example below.</p>
 <li>Create Record</li>
 <li>Edit Record</li>
 <li>Delete Record</li>
-<li>Generate Password</li>
+<li>Clone Record</li>
 <li>Save File - save records to an encrypted file.</li>
 <li>Load File - load a collection of records from an encrypted
 file.</li>
@@ -485,7 +497,7 @@ file.</li>
 <p>Note that Preferences were not included because they have their own
 top level section in this document.</p>
 <h3 id="about">About</h3>
-<p>Click on the <q>About</q> menu entry to get information about
+<p>Click or tap on the <q>About</q> menu entry to get information about
 <em>PAM</em>. You can even add custom HTML through the preferences.</p>
 <p>Here is a screen shot of what you would see.</p>
 <p><img src="./pam-about.png" alt="about"></p>
@@ -496,17 +508,23 @@ top level section in this document.</p>
 <p>Custom messages are defined in preferences as follows.</p>
 <p><img src="./pam-about-custom-pref.png" alt="about-custom-pref"></p>
 <h3 id="create-record">Create Record</h3>
+<p>This is a long section because it covers a number of concepts that
+are needed by other sections like topic and fields.</p>
 <p>Creating a record is a very common activity in <em>PAM</em> so I
 tried to make it as easy as possible.</p>
-<p>There are three ways to create record: 1. A record can be created in
-the application by clicking the <q>Create Record</q> menu option, 2. A
-record can be created in the application by cloning an existing record
-or 3. A record can be created outside of the application by editing
-javascript. All three approaches will be discussed here with
-examples.</p>
-<p>Creating the record by clicking the <q>Create Record</q> menu option
-in the application is probably the best way to create the first new
-record for a topic family. THis is also known as the <q>menu</q>
+<p>There are three ways to create record:</p>
+<ol type="1">
+<li>A record can be created in the application by clicking or tapping
+the <q>New Record</q> menu option,</li>
+<li>A record can be created in the application by cloning an existing
+record or</li>
+<li>A record can be created outside of the application by editing
+javascript.</li>
+</ol>
+<p>All three approaches will be discussed here with examples.</p>
+<p>Creating the record by clicking or tapping the <q>New Record</q> menu
+option in the application is probably the best way to create the first
+new record for a topic family. This is also known as the <q>menu</q>
 approach.</p>
 <p>Creating a record by cloning an existing record in the application is
 useful when you want to use the same fields as the existing record. It
@@ -530,25 +548,29 @@ irregardless of topic, into a single file like
 <q><code>mystuff.pam</code></q>.</p>
 <h4 id="fields">Fields</h4>
 <p>Records are composed of fields. Before creating a new record make
-sure that you know exactly what fields you want to use.</p>
+sure that you know exactly what fields you want to use but before you
+can do that you need to understand how they are defined.</p>
 <p>Each field has a name, a type and a value.</p>
 <p>To keep things simple, I decided to bind the field name and type so
-that the field name unambiguously defines the type. Fields are defined
-in <a href="#Preferences">Preferences</a>. Here is what they are by
-default.</p>
+that the field name unambiguously defines the type. That means that a
+field like <code>"login"</code> is always a <code>"text"</code> field.
+It will never be a phone number or a date.</p>
+<p>Fields are defined in <a href="#Preferences">Preferences</a> and they
+are stored in each file with the along with the records. Here is what
+they are by default.</p>
 <p><img src="./pam-predefined-fields.png" alt="predefined-fields"></p>
-<p>You can change them at any time. The fields are stored, in each file
-so they can be different for each topic file, if you choose to organize
-things that way.</p>
+<p>You can change them at any time. Because the fields are stored in
+each file they can be different for each topic file, if you choose to
+organize things that way.</p>
 <p><em>PAM</em> is very flexible so it doesn’t impose any strict rules
 on the fields. Thus, you can also change the names of the pre-defined
 fields when creating a new record. They are only provided for
 convenience.</p>
 <p><img src="./pam-change-field-name.png" alt="change-field-name"></p>
-<p>The field types are based on HTML element input types and is, in
-fact, how they are presented to the user. Here is a brief overview of
-the types and when to use them. You can search the web for more
-details.</p>
+<p>The field types are based on HTML element input types and that is, in
+fact, how they are presented to the user in the preferences dialogue.
+Here is a brief overview of the types and when to use them. You can
+search the web for more details.</p>
 <table>
 <colgroup>
 <col style="width: 44%" />
@@ -581,7 +603,7 @@ height or width or any other numeric value.</td>
 <td>A secret text string that is normally displayed as asterisks
 (<code>****</code>) with an eye
 (<img src="./eye.svg" height="32" width="32" alt="eye"/>) button that
-can be clicked to show the value.</td>
+can be clicked or tapped to show the value.</td>
 </tr>
 <tr class="odd">
 <td>phone</td>
@@ -625,31 +647,241 @@ and <q>instructions</q> fields.</p>
 <p>Here is an example that shows an account record with <q>url</q>,
 <q>login</q> and <q>password</q> fields.</p>
 <p><img src="./pam-google-account.png" alt="google-account-example"></p>
+<h4 id="password-fields">Password Fields</h4>
+<p>Passwords fields show up in a lot of places. I chose to document them
+here because you will probably first encounter them when creating a
+record.</p>
+<p>Password fields are a special case for the following three
+reasons.</p>
+<p>First, they provide a generator that allows you to automatically
+create passwords at the click or tap of a button. For information about
+preferences that can be used to customize password generation see <a
+href="#password-preferences">Password Preferences</a></p>
+<p>Second, they always hide the value so that it can be seen by someone
+observing your screen.</p>
+<p>And, finally, because they provide the ability to generate two
+different types of passwords: cryptic and memorable.</p>
+<h5 id="cryptic-passwords">Cryptic Passwords</h5>
+<p>Cryptic passwords consist of letters, digits and special characters
+in a single string.</p>
+<p>Here is an example: <code>'N5yAb!XfGa3vELPsK95K4/AAz8mts'</code>.</p>
+<p>Cryptic passwords tend to be hard to memorize for most people.</p>
+<h5 id="memorable-passwords">Memorable Passwords</h5>
+<p>Memorable passwords are composed of lower case English words with an
+optional prefix, an optional separator between each word and an optional
+suffix.</p>
+<p>Here is an example: <code>'rebates/restructuring/jamaica'</code>.</p>
+<p>Memorable passwords tend to be easier to memorize than cryptic
+passwords for most people.</p>
+<h5 id="hidden-password-representation">Hidden Password
+Representation</h5>
+<p>Here is an example that shows a password in its standard hidden
+form.</p>
+<p><img src="./pam-record-expanded-fields.png" alt="record-expanded"></p>
+<p>To make the password visible, click or tap on the
+<img src="./eye.svg" height="32" width="32" alt="eye"/> icon.</p>
+<h5 id="visible-password-representation">Visible Password
+Representation</h5>
+<p>Here is an example that shows a password in its visible hidden
+form.</p>
+<p><img src="./pam-record-expanded-password.png" alt="record-expanded-password"></p>
+<p>To hide the password, click or tap on the
+<img src="./eye-slash.svg" height="32" width="32" alt="eye"/> icon.</p>
+<h5 id="password-generator">Password Generator</h5>
+<p>This is what the password field dialogue looks like with no
+generator.</p>
+<p><img src="./pam-password-no-generator.png" alt="password-no-generator"></p>
+<p>When you click or tap on the
+<img src='./gear.svg' height='32' width='32' /> icon, cryptic and
+memorable passwords are generated and the password generator dialogue
+appears.</p>
+<p><img src="./pam-password-generator.png" alt="password-generator"></p>
+<p>As you can see it always generates five memorable passwords to
+provide some choices. I found that more useful than the original
+implementation which only had a single choice. The decision to present 5
+was arbitrary but it seems to work well enough for my needs.</p>
+<p>This is what the password generator looks like with annotations.</p>
+<p><img src="./pam-password-generator-annotated.png" alt="password-generator-annotated"></p>
+<p>If you click or tap on the
+<img src='./gear.svg' height='32' width='32' /> icon a second time, new
+passwords will be generated. You must click or tap on the
+<img src='./x-circle.svg' height='32' width='32' /> icon to close the
+dialogue. I chose this non-intuitive approach was chosen because I
+wanted the <img src='./gear.svg' height='32' width='32' /> icon to be
+used to generate new passwords. That may not have been the most
+intuitive way to implement it but it works well enough.</p>
+<p>To choose a password simply click or tap on it and it will be added
+to the field value.</p>
 <h4 id="menu-approach">Menu Approach</h4>
-<p>To create a new record using</p>
+<p>Click or tap on the <code>"New Record"</code> option from the
+menu.</p>
+<p><img src="./pam-new-record-menu.png" alt="new-record"></p>
+<p>That will popup a dialogue that looks like this.</p>
+<p><img src="./pam-new-record.png" alt="new-record"></p>
+<p>You can now type in the record title.</p>
+<p><img src="./pam-new-record-title.png" alt="new-record"></p>
+<p>From there you click or tap on the <code>"Type"</code> pulldown to
+select and create the first record field. Don’t worry if you select the
+wrong one, they are easy to delete.</p>
+<p>For this example we will choose <q>note</q> because it is a
+<q>textarea</q> field and then rename it to <q>ingredients</q> and type
+in some basic ingredients in the value input.</p>
+<p>Here is where you select <q>note</q> for the first field.</p>
+<p><img src="pam-new-record-field-1-select.png" alt="new-record-field-1-select"></p>
+<p>And then change the field name to <q>ingredients</q> and populate
+it.</p>
+<p><img src="pam-new-record-field-1.png" alt="new-record-field-1"></p>
+<p>Now do the same thing to create a <q>instructions</q> field. Remember
+to choose <q>note</q> just like in the previous step. This is what it
+looks like after you have added the second field.</p>
+<p><img src="pam-new-record-field-2.png" alt="new-record-field-2"></p>
+<p>One interesting thing to note is that you can <em>change the order of
+the fields</em> by dragging them up or down. To do that select the field
+title at the top of the box (fieldset) and move it. Here is what it
+looks like when i dragged instructions up.</p>
+<p><img src="pam-new-record-drag.png" alt="new-record-drag"></p>
+<p>I then dragged instructions back down because it should appear after
+ingredients.</p>
+<p>When you are finished click or tap on the <code>"Save"</code> button
+to save it and you will see it show up as a new record.</p>
+<p><img src="pam-new-record-done.png" alt="new-record-done"></p>
+<p>You can click or tap on the record to expand it and see the fields
+you just defined.</p>
+<p><img src="pam-new-record-done-expand.png" alt="new-record-done-expand"></p>
 <h4 id="clone-approach">Clone Approach</h4>
-<p>TBD</p>
+<p>Cloning a record is simple. Just expand the record and click or tap
+on the clone button and an edit dialogue pops up.</p>
+<p>Using the record that was created in the previous section here is
+what happens when you click or tap the <code>"Clone"</code> button.</p>
+<p><img src="pam-clone-record-popup.png" alt="clone-record-popup"></p>
+<p>At this point you would typically change the title and field values
+but for this demonstration will not do anything. <em>PAM</em> makes sure
+that the title is unique so it can be saved.</p>
+<p>Click or tap the <code>"Save"</code> button and you will see
+this.</p>
+<p><img src="pam-clone-records-1.png" alt="clone-records-1"></p>
+<p>As you can see, <em>PAM</em> still remembers that you had the
+original record open. That is so that it is easy to continue clicking or
+tapping the <code>"Clone"</code> button to create more records. In this
+case we only care about one record so you can click or tap on the new
+record to expand it.</p>
+<p><img src="pam-clone-records-2.png" alt="clone-records-1"></p>
 <h4 id="javascript-approach">Javascript Approach</h4>
-<p>TBD</p>
-<h3 id="menu">Menu</h3>
+<p>This approach is not going to have any screenshots because it deals
+with <em>PAM</em> internals and may change from time to time. Instead a
+set of instructions is provided that should allows you to figure it out
+pretty easily.</p>
+<ol type="1">
+<li>Create one record using the menu approach.</li>
+<li>Save the record to a file <em>without a password</em>. Normally this
+is a very bad idea because it could expose your data to a hacker so take
+precautions to protect the file.</li>
+<li>Look the <q>records</q> section of the file and use that as a
+template to create more records.</li>
+<li>When you have added the records, load the file.</li>
+<li>Then save it again <em>with a password</em>.</li>
+</ol>
+<p>The reason that this has to be done without a password is because I
+have not yet written a command line utility to encrypt/decrypt the
+files. It should be straightforward to do because it uses the standard
+<code>"AWS_256-CBC"</code> algorithm.</p>
+<h3 id="edit-record">Edit Record</h3>
+<p>To edit a record, select it from the records list and click or tap on
+the <code>"Edit"</code> button to popup the edit dialogue <em>which is
+exactly the same</em> as the dialogue used to create record.</p>
+<p>In fact, it is implemented using the <em>same code</em> so you can
+use the instructions from the <a href="#create-record">Create Record</a>
+section to change or add new fields.</p>
+<h3 id="delete-record">Delete Record</h3>
+<p>To delete a record, select it from the records list and click or tap
+on the <code>"Delete"</code> button.</p>
+<p><em>Beware</em> that <em>PAM</em> trusts you and will not ask you if
+you <em>really</em> want to delete the record, it will just go ahead and
+do it so be careful.</p>
+<h3 id="clone-record">Clone Record</h3>
+<p>To clone a record, select it from the records list and click or tap
+on the <code>"Clone"</code> button. This will create a new record that
+you can edit.</p>
+<p>The clone operation is described in detail in the <a
+href="#create-record">Create Record</a> section.</p>
+<h3 id="save-file">Save File</h3>
+<p>To save records and preferences to a file by choose the
+<q><img src='./file-arrow-down-fill.svg' height='32' width='32' /> Save
+File</q> option from the menu. See the <a href="#menu">Menu</a> section
+to see screenshots.</p>
+<p>If you want the records encrypted, enter or generate a password. Make
+sure that you do not forget this password. It is the <em>master</em>
+password this is used to unlock all of the records and <em>PAM</em> does
+<em>not</em> keep track of it. That means that if the password is lost,
+<em>PAM</em> cannot recover the data it is lost forever.</p>
+<p>Encryption is done using the <code>"AWS-CBC-256"</code> encryption
+algorithm which is known to be secure (even to quantum attacks) but it
+means that you must remember it because the file records cannot be
+retrieved if the password is lost.</p>
+<p>If you do not enter a password, the output will javascript which can
+be read by anyone. It is <em>NOT</em> secure. If you have records with
+passwords <em>ALWAYS</em> use a password unless you understand the
+consquences. This can sometimes be convenient because it allows you to
+see how the <em>PAM</em> data is organized which can aid automation.</p>
+<h3 id="load-file">Load File</h3>
+<p>To load records and preferences to a file by choose the
+<q><img src='./file-arrow-up-fill.svg' height='32' width='32' /> Load
+File</q> option from the menu. See the <a href="#menu">Menu</a> section
+to see screenshots.</p>
+<p>If the file was saved with a password, you must enter that password
+or the file will not load.</p>
+<h3 id="search-records">Search Records</h3>
+<p><em>PAM</em> allows you to search records by their title or their
+field names and values to filter out records that do not match the
+search pattern. This is extremely useful when the number of records
+grows.</p>
+<p>The search function supports case insensitive searches and regular
+expressions to make it easier to find stuff.</p>
+<p>I use this a lot for finding things like where i am still using old
+passwords and obsolete accounts or even something like all of the
+recipes that reference vanilla ice cream.</p>
+<p>Here is an made up list of accounts:</p>
+<p><img src="./pam-search.png" alt="pam-search"></p>
+<p>Here is the same list after filtering for those whose titles contain
+the letter <code>"g"</code>.</p>
+<p><img src="./pam-search-g.png" alt="pam-search-g"></p>
+<p>To filter only those that start with <code>"g"</code> you would use
+this regular expression search term instead: <code>"^g"</code>.</p>
+<p>For more information about regular expression syntax see the
+documentation for <a
+href="#https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">Javascript
+Regular Expressions</a>.</p>
+<h3 id="get-help">Get Help</h3>
+<p>To get this help message, choose the <code>"Help"</code> option from
+the menu.</p>
+<p>If you find a bug or want to request a change or submit an
+improvement, got <a href="#pam---personal-account-manager">Metadata
+section</a> at the top of file click or tap on the project link.</p>
+<h2 id="menu">Menu</h2>
 <p>The menu is the control center for the app. It provides the basic
 operations for creating records, loading records, saving them and it
 provide information about the app including this help.</p>
-<p><img src="./image03.png" alt="menu"></p>
+<p>Note that much of this material has been discussed in earlier
+sections but having it consolidated here might be helpful. Plus there
+are links to the sections with relevant details.</p>
+<p>This is what the menu looks like.</p>
+<p><img src="./pam-menu.png" alt="menu"></p>
 <p>As you can see, there are seven menu options: <q>About</q>,
 <q>Preferences</q>, <q>New Record</q>, <q>Clear Records</q>, <q>Load
 File</q>, <q>Save File</q>, and <q>Help</q>.</p>
 <p>Click or tap on the
 <q><img src='./info-circle.svg' height='32' width='32' /> About</q>
-entry to see information about the app.</p>
+entry to see information about the app. See the <a
+href="#about">About</a> section for more details.</p>
 <p>Click or tap on the
-<q><img src='./gear.svg' height='32' width='32' /> Preferences</q> entry
-to see the preferences dialogue which allows you to customize some of
-the app behavior. There is a lot of stuff so you might want to read the
-preferences section before trying it.</p>
+<q><img src='./gear.svg' height=' 32' width='32' /> Preferences</q>
+entry to see the preferences dialogue which allows you to customize some
+of the app behavior. There is a lot of stuff so you might want to read
+the <a href="#preferences">Preferences</a> section before trying it.</p>
 <p>Click or tap on the
 <q><img src='./plus-circle-fill.svg' height='32' width='32' /> New
-Record</q> entry to create a new record.</p>
+Record</q> entry to create a new record. See the <a
+href="#create-record">Create Record</a> section for more details.</p>
 <p>Click or tap on the
 <q><img src='./trash3-fill.svg' height='32' width='32' /> Clear
 Records</q> entry to delete all of the records. This is useful for times
@@ -659,16 +891,12 @@ personal accounts in one file and a collection shared accounts for a
 group of folks (like a development team sharing AWS accounts).</p>
 <p>Click or tap on the
 <q><img src='./file-arrow-up-fill.svg' height='32' width='32' /> Load
-File</q> entry to load a records file. You will typically have to enter
-a password to decrypt the file so that the records can be displayed.</p>
+File</q> entry to load a records file. See the <a href="#load-file">Load
+File</a> section for more details.</p>
 <p>Click or tap on the
 <q><img src='./file-arrow-down-fill.svg' height='32' width='32' /> Save
-File</q> entry to save all of the records to a file. You will want to
-enter a password to make sure that the records in the file are
-encrypted. Encryption is done using the AWS-CBC-256 encryption algorithm
-which is known to be secure (even to quantum attacks) but it means that
-you must remember it because the file records cannot be retrieved if the
-password is lost.</p>
+File</q> entry to save all of the records to a file. See the <a
+href="#save-file">Save File</a> section for more details.</p>
 <p>Click or tap on the
 <q><img src='./question-circle.svg' height='32' width='32' /> Help</q>
 entry to see this help message.</p>
@@ -676,35 +904,33 @@ entry to see this help message.</p>
 menu.</p>
 <p>At the bottom of the screen is a status bar that shows status
 messages.</p>
-<h3 id="load-records">Load Records</h3>
-<p>This example shows what the records look like. It shows seven records
-that contain confidential information for <q>Amazon</q>, <q>Email</q>,
-<q>Facebook</q>, <q>Github</q>, <q>Google</q>, <q>Netflix</q> and
-<q>Stack Exchange</q> fictional accounts.</p>
-<p>The records were created by clicking on the <q>New Record</q> option
-from the menu and then adding the individual fields in some cases or by
-clicking the <q>Clone</q> option on an existing record and updating the
-field values for the other cases. The <q>Clone</q> operation is
-particularly convenient for creating records with similar formats.</p>
-<blockquote>
-<p>The information is all made up and has no relation to any real
-accounts AFAIK.</p>
-</blockquote>
-<p><img src="./image01.png" alt="Example records"></p>
-<p>As you can see there are seven records in an accordion format in the
-middle of the screen. You can click on each one to expand it to make the
-record data visible.</p>
+<h2 id="records">Records</h2>
+<p>This section talks about how records are presented in <em>PAM</em>
+using an example with seven records that contain confidential
+information for <q>Amazon</q>, <q>Email</q>, <q>Facebook</q>,
+<q>Github</q>, <q>Google</q>, <q>Netflix</q> and <q>Stack Exchange</q>
+fictional accounts.</p>
+<p>See the <a href="#create-record">Create Record</a> section for
+details about how to create records.</p>
+<h3 id="unexpanded-view-of-all-records">Unexpanded View of all
+Records</h3>
+<p>We start with the unexpanded view of all records as shown below.</p>
+<p><img src="./pam-example-records.png" alt="example-records"></p>
+<p>As you can see <em>PAM</em> presents the records as an accordion.
+Each record is one entry in the accordion that you can expand to view
+the record fields or <a href="#delete-record">delete</a>, <a
+href="#clone-record">clone</a> or <a href="#edit-record">edit</a> edit
+the record.</p>
 <p>To get the information for an account you click or tap the
 button.</p>
 <p>At the top of the screen is the search bar and, at the far right, the
 menu.</p>
 <p>At the bottom of the screen is a status bar that shows status
 messages.</p>
-<h3 id="expand-record">Expand Record</h3>
-<p>The most common operation is expanding a record to see the
-information. This example shows the fictional <q>Facebook</q> account
-data.</p>
-<p><img src="./image02.png" alt="Expanded Facebook record"></p>
+<h3 id="expanded-view-of-a-record">Expanded View of a Record</h3>
+<p>Once you click on or tap a record it expands as shown below where the
+<q>Facebook</q> record was tapped.</p>
+<p><img src="./pam-example-record-expanded.png" alt="example-record-expanded"></p>
 <p>You can see that there are three fields in the record: <q>url</q>,
 <q>login</q> and <q>password</q>, next to each field there is a icon
 that looks like a clipboard
@@ -723,7 +949,7 @@ will be shown in plaintext and the icon will change to an eye with a
 slash through it
 <img src="./eye-slash.svg" height="32" width="32" alt="eye-slash"/>. By
 default all passwords are hidden so that they are not visible to casual
-observers. Click it again to re-hide the password.</p>
+observers. Click or tap it again to re-hide the password.</p>
 <p>In addition there are three buttons at the bottom
 <q><img src='./trash.svg' height='32' width='32' /> Delete</q> to delete
 the record,
@@ -739,21 +965,8 @@ anything.</p>
 sections:</p>
 <ol type="1">
 <li>Search - preferences that control searches.</li>
-<li>Passwords - preferences that control password creation and length.
-<ol type="1">
-<li>There are two types of passwords: cryptic and memorable.</li>
-<li>Cryptic passwords consist of letters, digits and special characters
-in a single string.
-<ul>
-<li>Cryptic passwords are very hard to memorize for most people.</li>
-</ul></li>
-<li>Memorable passwords are composed of lower case English words with an
-optional prefix, an optional separator between each word and an optional
-suffix.
-<ul>
-<li>Memorable passwords are easier to memorize for most people.</li>
-</ul></li>
-</ol></li>
+<li>Passwords - preferences that control password creation and
+length.</li>
 <li>Miscellaneous - preferences for other stuff.</li>
 <li>Record Fields - the definitions of the available fields.</li>
 </ol>
@@ -784,15 +997,8 @@ contained a specific field value like an obsolete email or really old
 password.</p>
 <h3 id="password-preferences">Password Preferences</h3>
 <p>These preferences control automatic password creation.</p>
-<p>Cryptic passwords consist of letters, digits and special characters
-in a single string. An example would look something like this
-<code>'N5yAb!XfGa3vELPsK95K4/AAz8mts'</code>. Cryptic passwords are very
-hard to memorize for most people.</p>
-<p>There are two types of passwords: cryptic and memorable. Memorable
-passwords are composed of lower case English words with an optional
-prefix, an optional separator between each word and an optional suffix.
-An example would look something like this
-<code>'rebates/restructuring/jamaica'</code>.</p>
+<p>For more information about passwords see <a
+href="#password-fields">Password Fields</a></p>
 <h4 id="minimum-password-length">Minimum Password Length</h4>
 <p>Defines the minimum length of generated cryptic and memorable
 passwords.</p>
@@ -996,8 +1202,9 @@ Attack</h3>
 <p>The user enters the record data in decrypted form, so it may be
 vulnerable to over the shoulder surfing attacks where someone or
 something (like a camera) watches or films the user typing or opening a
-record and then clicking on a password field to display the password in
-plaintext which could allow that information to be stolen.</p>
+record and then clicking or tapping on a password field to display the
+password in plaintext which could allow that information to be
+stolen.</p>
 <p>This vulnerability can be mitigated by being aware of your
 surroundings to make sure you are not being watched or filmed.</p>
 <blockquote>
@@ -1139,13 +1346,13 @@ a Site</h4>
 <p>To use the data to log into a site.</p>
 <ol type="1">
 <li>Navigate to the app as described above.</li>
-<li>Click on the record that contains the information.</li>
-<li>Click on the <q>url</q> link so that the site opens up in a
+<li>Click or tap on the record that contains the information.</li>
+<li>Click or tap on the <q>url</q> link so that the site opens up in a
 different tab.</li>
-<li>Enter the login name or email by clicking on the
+<li>Enter the login name or email by clicking or tapping on the
 <img src="./clipboard.svg" height="32" width="32" alt="clipboard"/> icon
 next to the login name and paste into the site.</li>
-<li>Enter the password by clicking on the
+<li>Enter the password by clicking or tapping on the
 <img src="./clipboard.svg" height="32" width="32" alt="clipboard"/> icon
 next to the password and paste into the site.
 <ol type="1">
@@ -1158,8 +1365,8 @@ this.</li>
 <p>To edit an existing record.</p>
 <ol type="1">
 <li>Navigate to the app as described above.</li>
-<li>Click on the record that contains the information.</li>
-<li>Click on the edit
+<li>Click or tap on the record that contains the information.</li>
+<li>Click or tap on the edit
 <img src='./pencil-square.svg' height='32' width='32' /> icon.</li>
 <li>Edit the record to make the necessary changes to the fields or
 title.</li>
@@ -1170,9 +1377,9 @@ title.</li>
 <p>To delete an existing record.</p>
 <ol type="1">
 <li>Navigate to the app as described above.</li>
-<li>Click on the record that contains the information.</li>
-<li>Click on the delete <img src='./trash.svg' height='32' width='32' />
-icon.</li>
+<li>Click or tap on the record that contains the information.</li>
+<li>Click or tap on the delete
+<img src='./trash.svg' height='32' width='32' /> icon.</li>
 <li>Make sure to save the file when you are done.</li>
 </ol>
 <h4 id="clone-an-existing-record">Clone an Existing Record</h4>
@@ -1181,9 +1388,9 @@ records with the same fields.</p>
 <p>To clone a record.</p>
 <ol type="1">
 <li>Navigate to the app as described above.</li>
-<li>Click on the record that contains the information.</li>
-<li>Click on the edit <img src='./files.svg' height='32' width='32' />
-icon.</li>
+<li>Click or tap on the record that contains the information.</li>
+<li>Click or tap on the edit
+<img src='./files.svg' height='32' width='32' /> icon.</li>
 <li>Edit the record to update the fields.</li>
 <li>Save the record.</li>
 <li>Make sure to save the file when you are done.</li>
@@ -1234,7 +1441,7 @@ preference dialogue: <q>difficulty</q>, <q>ingredients</q> and
 <p>Here are the high level steps necessary to get started.</p>
 <ol type="1">
 <li>Open the preferences dialogue from the menu in pam.</li>
-<li>Add the three new fields by clicking on the
+<li>Add the three new fields by clicking or tapping on the
 <img src="./plus-circle.svg" height="32" width="32" alt="trash"/> icon
 in the <q>Record Fields</q> section.
 <ol type="1">
@@ -1242,12 +1449,13 @@ in the <q>Record Fields</q> section.
 <li><q>ingredients</q> of type <q>textarea</q>.</li>
 <li><q>steps</q> of type <q>textarea</q>.</li>
 </ol></li>
-<li>Delete all of the other fields by clicking on the trashcan
+<li>Delete all of the other fields by clicking or tapping on the
+trashcan
 <img src="./trash3-fill.svg" height="32" width="32" alt="trash"/>
 icon.</li>
 </ol>
 <p>To search by an ingredient, set the <q>Search Record Field Values</q>
-preference to true by clicking on it and then saving it.</p>
+preference to true by clicking or tapping on it and then saving it.</p>
 <h3 id="books">Books</h3>
 <p>This is another somewhat of contrived example because you could
 easily keep all of your book reviews with your other personal account
@@ -1285,7 +1493,7 @@ recipes section above.</p>
 </tbody>
 </table>
 <p>To search by author, set the <q>Search Record Field Values</q>
-preference to true by clicking on it and then saving it.</p>
+preference to true by clicking or tapping on it and then saving it.</p>
 <h2 id="developer-notes">Developer Notes</h2>
 <p>These are things that developers might be interested in.</p>
 <p>It was built using pure javascript and relies on the browser secure
