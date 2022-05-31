@@ -125,11 +125,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-30 18:09:46 -0700</code></td>
+<td><code>2022-05-30 18:15:17 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>eaff814</code></td>
+<td><code>bbbb082</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -395,7 +395,7 @@ specific recipe.</p>
 about how to login into an account on the internet might have the url,
 the login name and the password of the account. Something like this:</p>
 <p><img src="./pam-google-account.png" alt="google-account-example"></p>
-<p>In the acount example above, the record title is
+<p>In the account example above, the record title is
 <code>"Google"</code>, the <q>url</q> field value is
 <code>"https://google.com"</code>, the <q>login</q> field value is
 <code>"pbrain81@gmail.com"</code> and the <q>password</q> field value is
@@ -1127,14 +1127,14 @@ section.</p>
 <em>PAM</em> does <em>not</em> keep track of it. That means that if the
 password is lost, <em>PAM</em> cannot recover the data it is lost
 forever.</p>
-<p>More details about the encryption algorith used can be found in <a
+<p>More details about the encryption algorithm used can be found in <a
 href="#reason-6-secure-context-encryption">Reason 6: Secure Context
 Encryption</a>.</p>
 <p>Note that if you do not enter a password, the output will be plain
 javascript that can be read by anyone.</p>
 <p>Plain javascript is <em>NOT</em> secure.</p>
 <p>If you have records with passwords <em>ALWAYS</em> use a password
-unless you understand the consquences. For example, saving the data
+unless you understand the consequences. For example, saving the data
 without a password can sometimes be convenient because it allows you to
 see how the <em>PAM</em> data is organized which can aid automation.</p>
 <h3 id="load-file">Load File</h3>
@@ -1260,7 +1260,7 @@ dialogue.</p>
 many as you want. Fields are added, modified and deleted by the
 <q>Edit</q> option.</p>
 </blockquote>
-<p>In addition to the cliboard icon there is another icon that looks
+<p>In addition to the clipboard icon there is another icon that looks
 like an eye <img src="./eye.svg" height="32" width="32" alt="eye"/>.
 that shows up for password field. If you click or tap it, the password
 will be shown in plaintext and the icon will change to an eye with a
@@ -1525,7 +1525,7 @@ communication (as mentioned earlier) so it will like continue to run
 even if the site goes down temporarily because, once it is loaded, it
 will stay resident until you close the browser tab.</p>
 <p>Another thing to consider is where you store your <em>PAM</em> record
-file(s). I use iCloud which is also quite reliable and allows acess to
+file(s). I use iCloud which is also quite reliable and allows access to
 iCloud files directly from my computers, mobile devices and tablets.</p>
 <p>Just make sure that whichever infrastructure as a service (IaaS)
 offering you choose it is reliable as well because you don’t want to
@@ -1758,7 +1758,7 @@ Small Group</h3>
 share a common file of account records with credentials that can only be
 decrypted using a single shared password that is only known to the
 group.</p>
-<p>This might be suitablefor a <em>small</em> group that requires
+<p>This might be suitable for a <em>small</em> group that requires
 administrative access to a <em>small</em> number of accounts.</p>
 <blockquote>
 <p>Because it involves sharing a password, this approach may be too
@@ -1859,8 +1859,8 @@ to make it work better in mobile browsers.</p>
 <h3 id="license">License</h3>
 <p><em>PAM</em> is free and open-source (FOSS) software that licensed
 under the MIT Licensing terms.</p>
-<p>Although not required, I would appreciate attibution if you decide to
-copy and use the source code.</p>
+<p>Although not required, I would appreciate attribution if you decide
+to copy and use the source code.</p>
 <p><a href="#https://en.wikipedia.org/wiki/MIT_License">MIT License
 Terms</a></p>
 <h3 id="build-pam">Build PAM</h3>
@@ -1885,7 +1885,7 @@ locally from http://localhost:8081 in a secure context.</li>
 <ol type="1">
 <li><code>make test</code></li>
 </ol>
-<p>THe test infrastructure uses python and pylenium to automate user
+<p>The test infrastructure uses python and pylenium to automate user
 interactions.</p>
 <h3 id="release-pam">Release PAM</h3>
 <p>Note that <em>PAM</em> will not work unless it is released to a
@@ -1943,7 +1943,7 @@ href="#https://esentire.github.io/qspm/">https://esentire.github.io/qspm/</a></t
 </table>
 <p>This is the oldest surviving effort. It was implemented using Rust
 and javascript and was funded by my employer at that time (eSentire,
-Inc.) for a hackweek project. The UI and the implementation are quite
+Inc.) for a hack week project. The UI and the implementation are quite
 complex.</p>
 <p>The acronym stands for Quantum Safe Password Manager. An ambitious
 name to say the least.</p>
@@ -2018,12 +2018,12 @@ href="#https://jlinoff.github.io/pam/www/help/">https://jlinoff.github.io/pam/ww
 <p>This is the latest incarnation and it is pure javascript. It fixes
 some of the earlier problems and leverages bootstrap-5 but could still
 be improved.</p>
-<p>The acronym stands for Personal Accounts Manager or PAssword Manager
+<p>The acronym stands for Personal Accounts Manager or Password Manager
 or whatever. I just wanted something short and easy to remember.</p>
 <h4 id="chronology">Chronology</h4>
 <p>I first wrote a password manager in the early 2000’s in javascript.
 In those days I had to write my own uncertified implementations of the
-encrytion algorithms like AES-256-CBC and AES-256-GCM and DES3 but that
+encryption algorithms like AES-256-CBC and AES-256-GCM and DES3 but that
 was perfectly okay because, back then, my day job involved a lot of
 security stuff like designing hardware and software (in C++) to
 implement certified algorithms.</p>
