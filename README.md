@@ -44,9 +44,8 @@ This version works in python2 and python3 and can be compatible with openssl.
 myVault is a user friendly secure records manager that is much easier to use
 than `qspm`, has more features, is customizable and works better on mobile devices.
 
-The webapp can be found [here](https://jlinoff.github.io/myvault/index.html).
-
-The documentation can be found [here](https://jlinoff.github.io/myvault/help/index.html).
+* The webapp can be found [here](https://jlinoff.github.io/myvault/index.html).
+* The documentation can be found [here](https://jlinoff.github.io/myvault/help/index.html).
 
 ## Quantum Safe Password Manager
 The quantum safe password manager (`qspm`) is a single page application (SPA) demonstration
@@ -74,9 +73,8 @@ use than `myvault` and `qspm`, has more features, is customizable and
 works better on mobile devices. It is intended to be the last version
 of a password manager that i write.
 
-The webapp can be found [here](https://jlinoff.github.io/pam/www).
-
-The documentation can be found [here](https://jlinoff.github.io/pam/www/help/).
+* The webapp can be found [here](https://jlinoff.github.io/pam/www).
+* The documentation can be found [here](https://jlinoff.github.io/pam/www/help/).
 
 ## RSA Demo
 This roject generates a wheel that contains tools to implement the RSA algorithm to help people
