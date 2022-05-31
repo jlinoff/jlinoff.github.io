@@ -8,6 +8,7 @@
 1. [Lock Files](#lock-files)
 1. [myVault](#myvault) - _a user friendly replacement of qspm_
 1. [Quantum Safe Password Manager (qspm)](#quantum-safe-password-manager)
+1. [PAM](#pam) - a a user friendly replacement of myvault and qspm_
 1. [RSA Demo](#rsa-demo)
 1. [z-tables](#z-tables)
 
@@ -66,6 +67,16 @@ test both the Rust code and the web interface using a headless chrome browser an
 
 * The webapp is available [here](https://esentire.github.io/qspm/).
 * The project is available [here](https://github.com/eSentire/qspm).
+
+## PAM
+PAM is a user friendly secure records manager that is much easier to
+use than `myvault` and `qspm`, has more features, is customizable and
+works better on mobile devices. It is intended to be the last version
+of a password manager that i write.
+
+The webapp can be found [here](https://jlinoff.github.io/pam/www).
+
+The documentation can be found [here](https://jlinoff.github.io/pam/www/help/).
 
 ## RSA Demo
 This roject generates a wheel that contains tools to implement the RSA algorithm to help people
