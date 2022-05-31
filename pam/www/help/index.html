@@ -87,9 +87,8 @@
 <header id="title-block-header">
 <h1 class="title">PAM - help</h1>
 </header>
-<p>WARNING! This document is not complete.</p>
-<h2 id="pam---personal-account-manager">PAM - personal account
-manager</h2>
+<h1 id="pam">pam</h1>
+<p>personal account manager webapp</p>
 <details>
 <summary>
 Metadata
@@ -126,11 +125,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-30 16:27:16 -0700</code></td>
+<td><code>2022-05-30 17:43:35 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>109b0b5</code></td>
+<td><code>e8cbeb6</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -311,6 +310,8 @@ for a Small Group</a></li>
 <li><a href="#developer-notes">Developer Notes</a>
 <ul>
 <li><a href="#license">License</a></li>
+<li><a href="#build-pam">Build PAM</a></li>
+<li><a href="#test-pam">Test PAM</a></li>
 <li><a href="#release-pam">Release PAM</a></li>
 <li><a href="#history">History</a></li>
 </ul></li>
@@ -1862,6 +1863,30 @@ under the MIT Licensing terms.</p>
 copy and use the source code.</p>
 <p><a href="#https://en.wikipedia.org/wiki/MIT_License">MIT License
 Terms</a></p>
+<h3 id="build-pam">Build PAM</h3>
+<p>Here are the steps to build PAM.</p>
+<ol type="1">
+<li><code>git clone https://github.com/jlinoff/pam.git</code></li>
+<li><code>make init</code>
+<ul>
+<li>This installs the python test infrastructure including pylenium as
+well as bootstrap.</li>
+<li>It also creates the <code>www/js/version.js</code> file and the
+help.</li>
+</ul></li>
+<li><code>make run</code>
+<ul>
+<li>Runs the python server on port 8081 so that you can access the app
+locally from http://localhost:8081 in a secure context.</li>
+</ul></li>
+</ol>
+<h3 id="test-pam">Test PAM</h3>
+<p>Here are the steps to test PAM.</p>
+<ol type="1">
+<li><code>make test</code></li>
+</ol>
+<p>THe test infrastructure uses python and pylenium to automate user
+interactions.</p>
 <h3 id="release-pam">Release PAM</h3>
 <p>Note that <em>PAM</em> will not work unless it is released to a
 secure (HTTPS) server because it requires a <em>secure context</em>.</p>
@@ -1871,7 +1896,7 @@ considered secure which is convenient for personal use.</p>
 <ol type="1">
 <li>Update the <code>VERSION</code> file using semantic versioning.</li>
 <li>Run <code>make</code> to propagate the new version and update
-<code>HELP.md</code></li>
+<code>README.md</code></li>
 <li>Run <code>make web</code> to create <code>pam-www.tar</code> which
 contains the app in <code>pam/www</code>.</li>
 <li>Untar the <code>pam-www.tar</code> on your site.</li>
@@ -1956,7 +1981,7 @@ javascript. I used it for a several of years.</p>
 <p>It has poor implementations of the record create and edit dialogues
 and a poor implementation of the password generator dialogue.</p>
 <p>Other than that it was okay.</p>
-<h4 id="pam">pam</h4>
+<h4 id="pam-1">pam</h4>
 <table>
 <colgroup>
 <col style="width: 50%" />
