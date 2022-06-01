@@ -121,15 +121,15 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Version</td>
-<td><code>1.0.0-alpha01</code></td>
+<td><code>1.0.0-alpha02</code></td>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-31 11:52:14 -0700</code></td>
+<td><code>2022-06-01 10:05:05 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>0c844c0</code></td>
+<td><code>36567e3</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -320,16 +320,17 @@ for a Small Group</a></li>
 </details>
 <h2 id="introduction">Introduction</h2>
 <p><em>PAM</em> or Personal Account Manager is a free open source single
-page web application that runs in a secure context in your browser that
-enables you to keep your confidential personal account information as
-searchable records in a secure and persistent manner <em>without ever
-having to visit a server</em>.</p>
-<p><em>PAM</em> can do that because it stores the <em>your
-information</em> in a file that <em>you control</em>.</p>
+page web application that helps you manage your your confidential
+information as searchable records in a secure and persistent manner
+<em>without ever having to rely on backend services from a third party
+server</em>.</p>
+<p><em>PAM</em> can do that because it runs in your browser and because
+it stores the <em>your information</em> in a file that <em>you
+control</em>.</p>
 <p>The file is encrypted so even if it were stolen the data would be
 safe <em>if the password you used to encrypt it was strong</em>.</p>
-<p>You can serve run <em>PAM</em> locally, from your own server or from
-the public github.io server <a
+<p>You can access <em>PAM</em> from your own HTTP server (including
+localhost) or from the public github.io server <a
 href="https://jlinoff.github.io/pam/www/index.html">here</a>.</p>
 <p>See the <em><a href="#security-considerations">Security
 Considerations</a></em> and <em><a
@@ -338,7 +339,8 @@ PAM</a></em> sections below if you are interested in what motivated me
 to write <em>PAM</em>.</p>
 <p>This is not the first tool I have written to manage passwords but it
 is meant to be the last. If you are interested in the genesis of
-<em>PAM</em> see the <a href="#history">History</a> section.</p>
+<em>PAM</em> and the stories of its predeccesors see the <a
+href="#history">History</a> section.</p>
 <h2 id="overview">Overview</h2>
 <p><em>PAM</em> is a pretty simple application. I think of it as a
 record editor that runs in your browser that allows you to create
