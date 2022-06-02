@@ -383,13 +383,15 @@ href="#security-considerations">Security Considerations</a> section.</p>
 records that each have a unique title and are, in turn, composed of
 fields that have a name, a type and a value. This approach is similar to
 organizing information using recipe cards or a rolodex.</p>
-<p>Following the recipe card analogy a little further using a simple
-example, each recipe would be a single record, a collection of recipes
-for, say, desserts would be a file of dessert recipe records where each
-record or recipe would have three parts: a title (the name of the
-recipe), the ingredients (a field) and the instructions (another field).
-Further assume that you have a simple dessert recipe like this written
-on a card.</p>
+<p>Following the recipe card analogy a little further, we can use a
+simple example to understand the record model a bit better.</p>
+<p>A recipe would be a single record that might contain <em>title</em>
+(the name of the recipe), the <em>ingredients</em> (a field) and the
+<em>instructions</em> (another field). It would certainly be possible to
+organize it differently but this is fine for such a simple example.</p>
+<p>So what would a dessert record (recipe) look like in <em>PAM</em>?
+Well, if you had a simple dessert recipe like this written on a
+card.</p>
 <pre><code>Ice Cream Sundae
 
 ingredients
@@ -407,16 +409,29 @@ instructions
 4. pour chocolate on top
 5. add whip cream
 6. put the cherry on top.</code></pre>
-<p>This is what it would look like in <em>PAM</em>.</p>
+<p>It might look like this.</p>
 <p><img src="./pam-ice-cream-sundae.png" alt="ice-cream-sundae-example"></p>
-<p>As you can see, in this recipe record, the record title is
+<p>As you can see, in this <em><q>recipe</q></em> record, the title is
 <code>"Ice Cream Sundae"</code> and the two fields <q>ingredients</q>
 and <q>instructions</q> contain the multiline (<code>textarea</code>)
 descriptions of what the ingredients and instructions are for this
 specific recipe.</p>
-<p>On the other hand, a record for an account that provides information
-about how to login into an account on the internet might have the url,
-the login name and the password of the account. Something like this:</p>
+<p>Of course, there are many other types of records that might be
+interesting to store in <em>PAM</em>.</p>
+<p>One common one is a record for each account that you need to login
+into where you information about how to login is stored so you don’t
+have to remember it.</p>
+<p>Such an <em><q>account</q></em> record would have, at a minimum, the
+URL, the login name and the password of the account.</p>
+<p>Note that this is simplified example is only meant to show the basic
+idea of importance of support <em>other</em> record formats.</p>
+<p>For a real account record, you might also want to keep track of the
+secrets it the site wants identify you (like what was the name of your
+first pet) or keep a note to remind why you of little details about the
+account (like the last customer service person you spoke to) but since
+you can always add new fields <em>after</em> you create a record,
+leaving them out for now is not a big deal.</p>
+<p>Here is what a simple account record might look like.</p>
 <p><img src="./pam-google-account.png" alt="google-account-example"></p>
 <p>In the account example above, the record title is
 <code>"Google"</code>, the <q>url</q> field value is
