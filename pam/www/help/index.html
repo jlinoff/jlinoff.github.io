@@ -125,11 +125,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-06-04 11:13:14 -0700</code></td>
+<td><code>2022-06-04 11:16:03 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>a01b9b8</code></td>
+<td><code>8010752</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -512,49 +512,51 @@ section.</p>
 <h4 id="reason-5-file-based-storage">Reason 5: File Based Storage</h4>
 <p><em>PAM</em> uses files to load and store the record data.</p>
 <p>Using a file means that the user does not have to rely on the
-cybersecurity defenses of a company running a web server at their site
-or another third party site. This was alluded in <a
-href="#reason-1-no-client-server-communications">Reason 1: No Client
-Server Communications</a> but that is not the only advantage of using
-files.</p>
+cybersecurity infrastructure of a company running a web server and
+storing your data at their site or another third party site. This was
+alluded in <a href="#reason-1-no-client-server-communications">Reason 1:
+No Client Server Communications</a> but that is not the <em>only</em>
+advantage of using files.</p>
 <p>A <em>PAM</em> file is composed of a set of records. Any records you
 like. You can use a single file for all of your records or you can have
 multiple files where each file contains records that are somehow related
 like records of <em><q>recipes</q></em> or <em><q>book reviews</q></em>
 or <em><q>my favorite species of Euglena</q></em>.</p>
-<p>What this means is that you can group associated records in different
-files to make them easier to organize and find. This ability to organize
-files around topics is one the reasons I prefer the file based storage
-model.</p>
+<p>What this means is that you can group records associated by a topic
+in different files to make them easier to organize and find. This
+ability to organize files around topics is one the reasons I prefer the
+file based storage model.</p>
 <p>For a more detailed discussion about how the user controls the
 organization of the records and fields in a file see the <a
 href="#reason-2-record-model">Reason 2: Record Model</a> section of this
 document.</p>
-<p>I store my <em>PAM</em> record files in iCloud <em>IaaS</em> storage
-(infrastructure as a service) that is automatically mounted as a local
-volume on each device so that the files look like they are local but
-they are, in fact, stored in the cloud. That allows me to access the
-files from any of my devices: laptops, phones and tablets.</p>
+<p>As a side note, I store my <em>PAM</em> record files in iCloud
+<em>IaaS</em> storage (infrastructure as a service) that is
+automatically mounted as a local volume on each device so that the files
+look like they are local but they are, in fact, stored in the cloud.
+That allows me to access the files from any of my devices: laptops,
+phones and tablets.</p>
 <p>Of course you could simply load and save the data to a local file but
-that might restrict access to it from other devices (like mobile phones
-or tables) and you would have to be very diligent about keeping it
-backed up.</p>
+that <em>might</em> restrict your ability to access to it from other
+devices (like mobile phones or tables). Not only that but you would have
+to be very diligent about keeping it backed up so that you would not
+lose data if the local file was corrupted or lost.</p>
 <h4 id="reason-6-secure-context-encryption">Reason 6: Secure Context
 Encryption</h4>
-<p>When records are stored in a file they can be encrypted using a
-password. The password is then used by an <a
+<p>When records are stored in a <em>PAM</em> file they can be encrypted
+using a password. The password is then used by an <a
 href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program"><em>NIST
 certified</em></a>, symmetric encryption algorithm:
 <code>AES-256-CBC</code> to encode the records.</p>
 <p>Using a certified encryption algorithm provides a strong security
 guarantee which means, that if an encrypted <em>PAM</em> file is stolen,
-the record data is considered safe from hackers trying to read the
+the record data is considered safe from hackers trying to crack the
 contents <em>if a strong password was used</em>.</p>
 <p>A password like <em><q>secret</q></em> or <em><q>password123</q></em>
-is <em>not</em> strong and will not protect your data because it easy to
-guess.</p>
+is <em>not</em> strong and will not protect your data because it is easy
+to guess.</p>
 <p><em>Always</em> use a strong password to make it hard to guess.
-Typically a strong password would have more than 20 characters would not
+Typically a strong password would at least 20 characters would not
 include any personally identifiable information (PII) like your name,
 birth date or address. Also never ever use the same password for two
 different sites.</p>
