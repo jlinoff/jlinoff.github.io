@@ -477,9 +477,13 @@ moment so <em>PAM</em> was built with the ability to automatically
 generate passwords.</p>
 <p>Of course almost all browsers and password tools provide this same
 capability nowadays, but they tend to generate secure, cryptic, hard to
-memorize passwords. This is perfectly fine for passwords you do not need
-to remember but sometimes I found, that I wanted a more memorable
-password so I added the ability to create memorable passwords.</p>
+memorize passwords which is perfectly fine for passwords for most
+accounts.</p>
+<p>But there are a cases when a more memorable, easy to type password is
+desirable such as the login password for your work computer, where there
+is no way to easily access and use a password management system and the
+ability to type the password easily is important because you can’t paste
+it from the clipboard.</p>
 <p>To make these concepts a bit clearer, here are examples of a cryptic
 and a memorable password</p>
 <table>
@@ -492,18 +496,19 @@ and a memorable password</p>
 <tbody>
 <tr class="odd">
 <td>cryptic</td>
-<td><code>Rf5NaR7LH2LbZMRhkPCfeG89TicLiZ</code></td>
+<td><code>Rf5NaR7LH2LbZMRhkPCfeG8</code></td>
 </tr>
 <tr class="even">
 <td>memorable</td>
-<td><code>health/mpegs/hopes/beside/call</code></td>
+<td><code>A1/health/mpegs/hopes!!</code></td>
 </tr>
 </tbody>
 </table>
-<p>Thus, when it comes to creating a new password, <em>PAM</em> gives
-you a choice because it has the concept of <em>cryptic</em> and
-<em>memorable</em> passwords. This is discussed in more detail in <a
-href="#password-fields">Password Fields</a> section.</p>
+<p>As a result, <em>PAM</em> was built with the ability to generate
+<em>cryptic</em> and <em>memorable</em> passwords.</p>
+<p>For more detailed information about password generation in
+<em>PAM</em> see the <a href="#password-fields">Password Fields</a>
+section.</p>
 <h4 id="reason-5-file-based-storage">Reason 5: File Based Storage</h4>
 <p><em>PAM</em> uses files to load and store the record data.</p>
 <p>Using a file means that the user does not have to rely on the
