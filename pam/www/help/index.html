@@ -121,15 +121,15 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Version</td>
-<td><code>1.0.0-alpha02</code></td>
+<td><code>1.0.0-alpha03</code></td>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-06-04 23:01:54 -0700</code></td>
+<td><code>2022-06-05 16:02:10 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>f5229c9</code></td>
+<td><code>a672649</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -319,15 +319,16 @@ for a Small Group</a></li>
 <!--t3-->
 </details>
 <h2 id="introduction">Introduction</h2>
-<p><em>PAM</em> or Personal Account Manager is a free open source single
-page web application that helps you manage your confidential information
-as searchable records in a secure and persistent manner <em>without ever
-having to rely on backend services from a third party server</em>.</p>
-<p><em>PAM</em> can do that because it runs in your browser and because
-it stores the <em>your information</em> in a file that <em>you
+<p><em>PAM</em> or Personal Account Manager is a free open source,
+single page web application that helps you manage your confidential
+information as searchable records <em>without having to rely on services
+from a third party server</em>.</p>
+<p><em>PAM</em> can do that because it runs inside your browser and
+because it stores the <em>your information</em> in a file that <em>you
 control</em>.</p>
-<p>The file is encrypted so even if it were stolen the data would be
-safe <em>if the password you used to encrypt it was strong</em>.</p>
+<p>The <em>PAM</em> file is encrypted so the contents would be safe from
+hackers if the file was stolen assuming, of course, <em>that the
+password you used to encrypt it was strong</em>.</p>
 <p>You can access <em>PAM</em> from your own HTTP server (including
 localhost) or from the public github.io server <a
 href="https://jlinoff.github.io/pam/www/index.html">here</a>.</p>
@@ -348,7 +349,7 @@ retrieved in a secure way.</p>
 <h3 id="reasons-to-not-use-pam">Reasons to not use PAM</h3>
 <p>It is very reasonable to ask yourself why, if <em>PAM</em> is like an
 editor, you can’t simply just use something like an Excel spreadsheet or
-a text file editor or keep passwords on sheets of paper or use one of
+a text file editor or keep passwords on a sheet of paper or use one of
 the many commercially available password managers?</p>
 <p>That is an excellent question. The answer is that you <em>can</em>
 and, if you are already using an Excel spreadsheet or a text file editor
@@ -381,16 +382,15 @@ href="#security-considerations">Security Considerations</a> section.</p>
 <p>In <em>PAM</em>, information is organized into files composed of
 records that each have a unique title and are, in turn, composed of
 fields that have a name, a type and a value. This approach is similar to
-organizing information using recipe cards or a rolodex.</p>
-<p>Following the recipe card analogy a little further, we can use a
+organizing information using index cards or a rolodex.</p>
+<p>Following the index card analogy a little further, we can use a
 simple example to understand the record model a bit better.</p>
-<p>A recipe would be a single record that might contain the
-<em>title</em> (the name of the recipe), the <em>ingredients</em> (a
-field) and the <em>instructions</em> (another field). It would certainly
-be possible to organize it differently but this is fine for such a
-simple example.</p>
-<p>So what would a dessert record (recipe) look like in <em>PAM</em>?
-Well, if you had a simple dessert recipe like this written on a
+<p>A recipe would be something you might store on an index card. Each
+recipe could be a single record that might contain the <em>title</em>
+(the name of the recipe), the <em>ingredients</em> (a field) and the
+<em>instructions</em> (another field).</p>
+<p>So what would a simple dessert recipe look like as a in <em>PAM</em>
+record? Well, if you had a simple dessert recipe like this written on a
 card.</p>
 <pre><code>Ice Cream Sundae
 
@@ -424,43 +424,25 @@ have to remember it.</p>
 <p>Such an <em><q>account</q></em> record would have, at a minimum, the
 web address (URL), the login name and the password of the account.</p>
 <p>Note that this is simplified example is only meant to show the basic
-idea of importance of support <em>other</em> record formats.</p>
-<p>For a real account record, you might also want to keep track of the
-secrets the site asks you to enter so that it can identify you if you
-ever lose your password (unlikely if you are using this tool or some
-other tool like it).</p>
-<p>The secrets they ask for might be something like your mothers maiden
-name or the name of your first pet or other such, personal, things. I am
-always wary of entering that kind of information on a third party site
-because it can be stolen and used against you so I <em>always</em> make
-things up, like my first car might be the <q>Bistromath</q> or the
-<q>Tanngrisnir</q>, which gets hard to remember for many sites with many
-made up secrets.</p>
-<p>Or, you might want to keep a note to remind you of little details
-about the account (like your favorite customer service representative)
-but since you can always add new fields <em>after</em> you create a
-record, leaving them out for now is not a big deal.</p>
+idea of importance of supporting record formats that are different than
+recipes.</p>
 <p>Here is what a simple account record might look like.</p>
 <p><img src="./pam-google-account.png" alt="google-account-example"></p>
-<p>In the account example above, the record title is
-<code>"Google"</code>, the <q>url</q> field value is
-<code>"https://google.com"</code>, the <q>login</q> field value is
-<code>"pbrain81@gmail.com"</code> and the <q>password</q> field value is
-hidden because <em>PAM</em> hides the contents of passwords by
-default.</p>
+<p>Note that the password is hidden in the example above. <em>PAM</em>
+always hides the contents of passwords by default.</p>
 <p>As you can see both records look quite different. Recipes records
 have fields for <q>ingredients</q> and <q>instructions</q> whereas
 account records have fields for the <q>url</q>, <q>login</q> and
-<q>password</q>. In both cases they have the same basic structure: a
-title and a set of fields that are relevant to them.</p>
+<q>password</q>. However, in both cases they have the same basic
+structure: a title and a set of fields that are relevant to recipes or
+accounts.</p>
 <p>You could easily imagine defining other records that contain
 information for other topics like <em><q>books read</q></em> or
 <em><q>unidentified aerial phenomena</q></em> or <em><q>bird
-watching</q></em> which would undoubtedly require additional, different
-fields.</p>
-<p>In my view, this <em>fields in records</em> organization does a
-better job of representing this type of information than a spreadsheet
-or a text file editor.</p>
+watching</q></em> which would undoubtedly require different fields.</p>
+<p>In my view, this approach of using <em>records composed of
+fields</em> does a better job of representing this type of information
+than a spreadsheet or a text file editor.</p>
 <h4 id="reason-3-searching">Reason 3: Searching</h4>
 <p><em>PAM</em> allows you to search records by their title or their
 field names and values. It also filters out the records that don’t match
@@ -481,8 +463,9 @@ accounts.</p>
 <p>But there are a cases when you need a password that must be typed in
 manually like the login password for a computer that does not use
 biometric scanning or a key FOB. In those cases it is beneficial to have
-a password that is easy to remember and easy to type because you cannot
-accesss a password management system <em>before you login</em>.</p>
+a password that is secure, easy to remember and easy to type because you
+cannot accesss a password management system <em>before you
+login</em>.</p>
 <p>I call passwords of this type <em>memorable</em> passwords. They are
 composed of common lower case English words with an optional prefix, an
 optional separator between each word and an optional suffix.</p>
@@ -533,8 +516,8 @@ like records of <em><q>recipes</q></em> or <em><q>book reviews</q></em>
 or <em><q>my favorite species of Euglena</q></em>.</p>
 <p>What this means is that you can group records associated by a topic
 in different files to make them easier to organize and find. This
-ability to organize files around topics is one the reasons I prefer the
-file based storage model.</p>
+ability to organize files around topics is the other reason that I
+prefer the file based storage model.</p>
 <p>For a more detailed discussion about how the user controls the
 organization of the records and fields in a file see the <a
 href="#reason-2-record-model">Reason 2: Record Model</a> section of this
@@ -561,14 +544,18 @@ certified</em></a>, symmetric encryption algorithm:
 guarantee which means, that if an encrypted <em>PAM</em> file is stolen,
 the record data is considered safe from hackers trying to crack the
 contents <em>if a strong password was used</em>.</p>
-<p>A password like <em><q>secret</q></em> or <em><q>password123</q></em>
-is <em>not</em> strong and will not protect your data because it is easy
-to guess.</p>
+<p>Passwords like <em><q>secret</q></em> or <em><q>password123</q></em>
+or any other password that can be found in freely available password
+dictionaries like the <a
+href="https://kalitut.com/best-password-dictionary/#Kali_password_dictionary">Kali
+password dictionary</a> are <em>not</em> strong and will not protect
+your data because they are easy to guess.</p>
 <p><em>Always</em> use a strong password to make it hard to guess.
 Typically a strong password would at least 20 characters would not
 include any personally identifiable information (PII) like your name,
-birth date or address. Also never ever use the same password for two
-different sites.</p>
+birth date or address. Also <em>never, ever</em> use the same password
+for two different sites. This is to protect you from hackers if a site
+you use to is attacked and your password is stolen.</p>
 <p>I recommend reading <a
 href="#https://www.auditboard.com/blog/nist-password-guidelines/">NIST
 Password Guidelines</a> for more information about how to create strong
@@ -609,8 +596,8 @@ to make the interface work better in mobile browsers.</p>
 <h4 id="reason-9-foss">Reason 9: FOSS</h4>
 <p>Last but not least, one compelling reason to try <em>PAM</em> is that
 it is free and open source software (FOSS) so you can try it without any
-obligation or cost. You can also help find and fix bugs or customize it
-yourself.</p>
+obligation or cost. You can also help find and fix bugs or improve the
+UI.</p>
 <h2 id="layout">Layout</h2>
 <p><em>PAM</em> is a simple single page web application (SPA). It
 consists of three basic parts: the menu and search section, the records
@@ -678,15 +665,14 @@ top level section in this document.</p>
 <em>PAM</em>. You can even add custom HTML through the preferences.</p>
 <p>Here is a screen shot of what you would see.</p>
 <p><img src="./pam-about.png" alt="about"></p>
-<p>Here is the annotated view</p>
-<p><img src="./pam-about-annotated.png" alt="about-annotated"></p>
 <p>Here is an about dialogue with a simple custom message.</p>
 <p><img src="./pam-about-custom.png" alt="about-custom"></p>
 <p>Custom messages are defined in preferences as follows.</p>
 <p><img src="./pam-about-custom-pref.png" alt="about-custom-pref"></p>
 <p>The motivation for allowing custom messages is that someone might
-want to share a <em>PAM</em> file. The custom message would allow the
-person to provide their <em>imprimatur</em> on the collection.</p>
+want to share a <em>PAM</em> file or describe how the records are
+related. The custom message would allow the person to provide their
+<em>imprimatur</em> on the collection.</p>
 <h3 id="create-record">Create Record</h3>
 <p>This is a long section because it covers a number of general concepts
 that are needed by other functions like <q>topics</q> and
@@ -886,7 +872,7 @@ in because they are hard to crack.</p>
 in manually, as described in the <a
 href="#reason-4-automatic-password-generation">Reason 4: Automatic
 Password Generation</a> section which means that it is important that
-they are easy to type and to remember.</p>
+they are secure, easy to type and to remember.</p>
 <p>They are composed of common lower case English words with an optional
 prefix, an optional separator between each word and an optional suffix.
 Often, the prefix and suffix are used to guarantee that the password
