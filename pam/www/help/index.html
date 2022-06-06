@@ -125,11 +125,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-06-05 16:02:10 -0700</code></td>
+<td><code>2022-06-05 16:48:40 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>a672649</code></td>
+<td><code>61e2514</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -194,7 +194,11 @@ mobile devices</a></li>
 <li><a href="#create-record">Create Record</a>
 <ul>
 <li><a href="#topics">Topics</a></li>
-<li><a href="#fields">Fields</a></li>
+<li><a href="#fields">Fields</a>
+<ul>
+<li><a href="#field-types">Field Types</a></li>
+<li><a href="#custom-field-types">Custom Field Types</a></li>
+</ul></li>
 <li><a href="#password-fields">Password Fields</a>
 <ul>
 <li><a href="#cryptic-passwords">Cryptic Passwords</a></li>
@@ -212,6 +216,8 @@ Approach</a></li>
 </ul></li>
 <li><a href="#edit-record">Edit Record</a></li>
 <li><a href="#delete-record">Delete Record</a></li>
+<li><a href="#clone-record">Clone Record</a></li>
+<li><a href="#clear-records">Clear Records</a></li>
 <li><a href="#save-file">Save File</a></li>
 <li><a href="#load-file">Load File</a></li>
 <li><a href="#search-records">Search Records</a></li>
@@ -284,6 +290,8 @@ Logging and Screen Recording</a></li>
 Attack</a></li>
 <li><a href="#unattended-browser">Unattended Browser</a></li>
 <li><a href="#website-spoofing">Website Spoofing</a></li>
+<li><a href="#dictionary-and-brute-force-password-attacks">Dictionary
+and Brute Force Password Attacks</a></li>
 <li><a href="#protecting-yourself">Protecting Yourself</a></li>
 <li><a href="#multi-factor-authentication">Multi-Factor
 Authentication</a></li>
@@ -557,7 +565,7 @@ birth date or address. Also <em>never, ever</em> use the same password
 for two different sites. This is to protect you from hackers if a site
 you use to is attacked and your password is stolen.</p>
 <p>I recommend reading <a
-href="#https://www.auditboard.com/blog/nist-password-guidelines/">NIST
+href="https://www.auditboard.com/blog/nist-password-guidelines/">NIST
 Password Guidelines</a> for more information about how to create strong
 passwords.</p>
 <p>As an interesting aside, note that <code>AES-256-CBC</code> algorithm
@@ -652,6 +660,7 @@ clicked or tapped as shown in the example below.</p>
 <li>Edit Record.</li>
 <li>Delete Record.</li>
 <li>Clone Record.</li>
+<li>Clear Records.</li>
 <li>Save records to an encrypted file.</li>
 <li>Load a collection of records from an encrypted file.</li>
 <li>Search Records.</li>
@@ -705,31 +714,34 @@ that is automatically generated from a database).</p>
 more detail, it is very important to understand record topics and record
 fields.</p>
 <h4 id="topics">Topics</h4>
-<p>Topics are a way of organizing records that have similar fields.</p>
+<p>Topics provide a convenient abstraction for organizing records in
+files.</p>
 <p>Topics are completely arbitrary associations between records that are
 defined by you based what is important to you. For example, a topic
 could be something like <em><q>recipes</q></em>,
 <em><q>accounts</q></em>, or <em><q>unidentified aerial
-phenomena</q></em> or <em><q>my favorite mathematical
-spaces</q></em>.</p>
-<p>One way to use topics is to help you organize records in files. For
-example you could define a <q><code>recipes.pam</code></q> file for all
-of your recipe records and an <q><code>accounts.pam</code></q> for your
-account records. Or, you could put all of your records, irregardless of
-topic, into a single file like <q><code>mystuff.pam</code></q>.</p>
-<p>Either way, topics provide a useful abstraction for describing the
-fundamental organizing principle.</p>
+phenomena</q></em> or <em><q>my favorite cryptography
+algorithms</q></em>.</p>
+<p>For example you could define a <q><code>recipes.pam</code></q> file
+for all of your recipe records and an <q><code>accounts.pam</code></q>
+for your account records. Or, you could put all of your records,
+irregardless of topic, into a single file like
+<q><code>mystuff.pam</code></q>.</p>
+<p>Topics are also discussed in the <a
+href="#reason-2-record-model">Reason 2: Record Model</a> section.</p>
 <h4 id="fields">Fields</h4>
 <p>Records are composed of fields. Each field has a name, a type and a
 value.</p>
 <p>The field name is arbitrary and is meant to describe the data in the
 field. For example, an <q>ingredients</q> field would indicate that the
 value is a list of ingredients.</p>
-<p>The field type describes the type of data. The available types are
-described in detail below.</p>
+<p>The field type describes the type of data that field holds like a
+number or an email. A complete description list of the available types
+is presented in the <a href="#field-types">Field Types</a> table
+below.</p>
 <p>The field value is the unique value for the field in an individual
-record. For example, a <q>url</q> field in a record would have different
-value than the <q>url</q> field in a different record.</p>
+record. For example, an <q>email</q> field in one record would have
+different value than the <q>email</q> field in a different record.</p>
 <p>To keep things simple, I decided to tightly bind the field name and
 type so that the field name unambiguously defines the type. That means
 that a field like <code>"login"</code> is always a <code>"text"</code>
@@ -751,10 +763,13 @@ on the fields. Thus, you can also change the names of the pre-defined
 fields when creating a new record. They are only provided for
 convenience.</p>
 <p><img src="./pam-change-field-name.png" alt="change-field-name"></p>
-<p>The field types are based on HTML element input types and that is, in
-fact, how they are presented to the user in the preferences dialogue.
-Here is a brief overview of the types and when to use them. You can
-search the web for more details.</p>
+<h5 id="field-types">Field Types</h5>
+<p>The field types are based on HTML <em>input</em> element types except
+for the <em>textarea</em> type which is an HTML <em>textarea</em>
+element. They are presented below as simple types regardless of the
+underlying HTML element to avoid unnecessary complexity.</p>
+<p>The table below presents a brief overview of the types and when to
+use them. You can search the web for more details.</p>
 <table>
 <colgroup>
 <col style="width: 44%" />
@@ -800,33 +815,31 @@ number.</td>
 </tr>
 <tr class="even">
 <td>text</td>
-<td>A string, like a name or keyword. You can use this for anything. A
-typical usage might be a login name where the value might be a name like
-<q>wiley</q> or an email like <q>wcoyote@acme.io</q> or a number like
-<q>12345678</q>.</td>
+<td>A string, like a name or keyword. You can use this for any text but
+it is especially useful when a field can be multiple types like an email
+or a name. A typical usage might be a login name where the value might
+be a name like <q>wiley</q> or an email like <q>wcoyote@acme.io</q> or a
+number like <q>12345678</q>.</td>
 </tr>
 <tr class="odd">
 <td>textarea</td>
 <td>A multi-line text box. A typical usage might be a note or a list of
-recipe ingredients. Note that this is <em>not</em> strictly speaking an
-HTML input element type, it is a separate element. It is treated as an
-input type here for convenience.</td>
+recipe ingredients.</td>
 </tr>
 <tr class="even">
 <td>url</td>
 <td>A text string that is a uniform resource locator (URL). Use it if
 you <em>only</em> want to accept a URL value. A typical usage might be
-the path to an account like https://google.com</td>
+the path to an account like <code>https://google.com</code></td>
 </tr>
 </tbody>
 </table>
-<blockquote>
 <p>Remember that the types were not made up by me, they were taken
 directly from input element description <a
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">here</a>,
 the separate textarea element is described <a
 href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement">here</a>.</p>
-</blockquote>
+<h5 id="custom-field-types">Custom Field Types</h5>
 <p>It is oftentimes the case that all of the <em>available</em> types
 are not needed for the records you are keeping. This is especially true
 in cases where you have a very clear understanding of the record field
@@ -959,13 +972,14 @@ it.</p>
 preferences so that the list of fields is shorter.</p>
 </blockquote>
 <p><img src="pam-new-record-field-1.png" alt="new-record-field-1"></p>
-<p>Now do the same thing to create a <q>instructions</q> field. Remember
-to choose <q>note</q> just like in the previous step. This is what it
-looks like after you have added the second field.</p>
+<p>Now do the same thing to create an <q>instructions</q> field.
+Remember to choose <q>note</q> just like in the previous step. This is
+what it looks like after you have added the second field.</p>
 <p><img src="pam-new-record-field-2.png" alt="new-record-field-2"></p>
-<p>One interesting thing to note is that you can <em>change the order of
-the fields</em> by dragging them up or down. To do that select the field
-title at the top of the box (fieldset) and move it.</p>
+<p>One interesting thing to understand is that you can <em>change the
+order of the fields</em> by dragging them up or down. To do that select
+the field title at the top of the box (fieldset) and move it. This can
+also be done when editing the record.</p>
 <p>Here is what it looks like when I dragged the <q>instructions</q>
 field up.</p>
 <p><img src="pam-new-record-drag.png" alt="new-record-drag"></p>
@@ -1223,6 +1237,17 @@ you can edit.</p>
 href="#create-record">Create Record</a> section under the <a
 href="#method-2-clone-approach">Method 2: Clone Approach</a>
 subsection.</p>
+<h3 id="clear-records">Clear Records</h3>
+<p>Clear all of the records currently defined.</p>
+<p>This is normally done automatically when a new file is loaded but
+could be useful if you want to enter new a set of records from scratch
+using the currently defined fields. Of course, you could simply delete
+all of the records manually but this is simpler.</p>
+<p>To clear all records choose the
+<q><img src='./trash3-fill.svg' height='32' width='32' /> Clear
+Records</q> option from the menu. See the <a href="#menu">Menu</a>
+section for screenshots.</p>
+<p>This option will ask you to confirm.</p>
 <h3 id="save-file">Save File</h3>
 <p>To save records and preferences to a file by choose the
 <q><img src='./file-arrow-down-fill.svg' height='32' width='32' /> Save
@@ -1293,9 +1318,16 @@ earlier sections but having it consolidated here might be helpful. Plus
 there are links to the sections with relevant details.</p>
 <p>This is what the menu looks like.</p>
 <p><img src="./pam-menu.png" alt="menu"></p>
-<p>As you can see, there are seven menu options: <q>About</q>,
-<q>Preferences</q>, <q>New Record</q>, <q>Clear Records</q>, <q>Load
-File</q>, <q>Save File</q>, and <q>Help</q>.</p>
+<p>As you can see, there are seven menu options:</p>
+<ol type="1">
+<li><q>About</q>,</li>
+<li><q>Preferences</q>,</li>
+<li><q>New Record</q>,</li>
+<li><q>Clear Records</q>,</li>
+<li><q>Load File</q>,</li>
+<li><q>Save File</q>, and</li>
+<li><q>Help</q>.</li>
+</ol>
 <p>Click or tap on the
 <q><img src='./info-circle.svg' height='32' width='32' /> About</q>
 entry to see information about the app. See the <a
@@ -1704,6 +1736,43 @@ application.</p>
 known, trusted site.</p>
 <p>If you are concerned about this, you can always download, build and
 run <em>PAM</em> from your own trusted site.</p>
+<h3 id="dictionary-and-brute-force-password-attacks">Dictionary and
+Brute Force Password Attacks</h3>
+<p>In general a brute force attack is any attach that uses trial and
+error to crack passwords.</p>
+<p>A dictionary attack is a brute force password attack that tries every
+password in a dictionary to break decrypt sensitive data.</p>
+<p>Both attacks are very effective in cases where the attacker has the
+ability to try many passwords without being locked out and where the
+password is short.</p>
+<p><em>PAM</em> is vulnerable to dictionary attacks and brute force
+atttacks because it can be run locally where the attacker can setup an
+automatic system to try to decrypt the file using the set of available
+passwords.</p>
+<p>Sites that require passwords for authentication can mitigate this
+type of attack by limiting the number of login attempts allowed.</p>
+<p><em>PAM</em> can also mitigate these types of attacks but it cannot
+do so <em>automatically</em> because the attacker has access to the
+source code. Instead you can mitigate these attacks by using strong
+(high entropy) passwords.</p>
+<p>To give you some feel for just how effective this approach is,
+consider a simple example where we have a password composed of say 20
+pseudo-random upper case letters (26), lower case letters (26), digits
+(10) and 2 special characters.</p>
+<p>Thus for 20 characters, there are 64<sup>20</sup> or
+1,329,227,995,784,915,872,903,807,060,280,344,576 (~1.3 undecillion)
+possible passwords which is which is <em>one heck of a lot
+possibilities</em>!</p>
+<p>If an attacker were to try to crack such a password using a super
+powerful computer that could perform <em>1 billion tests per second</em>
+(close to the limit of todays technology), it would take something on
+the order of about a sextillion (10<sup>21</sup>) years to crack which
+means that your data is pretty safe if you use such a password.</p>
+<p>On the other hand if you use a simple, six character password like
+<q><code>secret</code></q> it would take about about a minute so don’t
+do that.</p>
+<p>Ideas for generating strong password are discussed in the next
+section.</p>
 <h3 id="protecting-yourself">Protecting Yourself</h3>
 <p>In summary, security can never be fully guaranteed, the best way to
 protect your data is to follow commonly recommended security
