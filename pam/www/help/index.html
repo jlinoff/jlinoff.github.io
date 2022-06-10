@@ -121,15 +121,15 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Version</td>
-<td><code>1.0.0-alpha01</code></td>
+<td><code>1.0.0-alpha04</code></td>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-05-31 11:52:14 -0700</code></td>
+<td><code>2022-06-10 15:54:29 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>0c844c0</code></td>
+<td><code>fec2a60</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -194,7 +194,11 @@ mobile devices</a></li>
 <li><a href="#create-record">Create Record</a>
 <ul>
 <li><a href="#topics">Topics</a></li>
-<li><a href="#fields">Fields</a></li>
+<li><a href="#fields">Fields</a>
+<ul>
+<li><a href="#field-types">Field Types</a></li>
+<li><a href="#custom-field-types">Custom Field Types</a></li>
+</ul></li>
 <li><a href="#password-fields">Password Fields</a>
 <ul>
 <li><a href="#cryptic-passwords">Cryptic Passwords</a></li>
@@ -212,6 +216,8 @@ Approach</a></li>
 </ul></li>
 <li><a href="#edit-record">Edit Record</a></li>
 <li><a href="#delete-record">Delete Record</a></li>
+<li><a href="#clone-record">Clone Record</a></li>
+<li><a href="#clear-records">Clear Records</a></li>
 <li><a href="#save-file">Save File</a></li>
 <li><a href="#load-file">Load File</a></li>
 <li><a href="#search-records">Search Records</a></li>
@@ -284,6 +290,8 @@ Logging and Screen Recording</a></li>
 Attack</a></li>
 <li><a href="#unattended-browser">Unattended Browser</a></li>
 <li><a href="#website-spoofing">Website Spoofing</a></li>
+<li><a href="#dictionary-and-brute-force-password-attacks">Dictionary
+and Brute Force Password Attacks</a></li>
 <li><a href="#protecting-yourself">Protecting Yourself</a></li>
 <li><a href="#multi-factor-authentication">Multi-Factor
 Authentication</a></li>
@@ -319,18 +327,21 @@ for a Small Group</a></li>
 <!--t3-->
 </details>
 <h2 id="introduction">Introduction</h2>
-<p><em>PAM</em> or Personal Account Manager is a free open source single
-page web application that runs in a secure context in your browser that
-enables you to keep your confidential personal account information as
-searchable records in a secure and persistent manner <em>without ever
-having to visit a server</em>.</p>
-<p><em>PAM</em> can do that because it stores the <em>your
-information</em> in a file that <em>you control</em>.</p>
-<p>The file is encrypted so even if it were stolen the data would be
-safe <em>if the password you used to encrypt it was strong</em>.</p>
-<p>You can serve run <em>PAM</em> locally, from your own server or from
-the public github.io server <a
+<p><em>PAM</em> or Personal Account Manager is a free open source,
+single page web application that helps you manage your confidential
+information as searchable records <em>without having to rely on services
+from a third party server</em>.</p>
+<p><em>PAM</em> can do that because it runs inside your browser and
+because it stores the <em>your information</em> in a file that <em>you
+control</em>.</p>
+<p>The <em>PAM</em> file is encrypted so the contents would be safe from
+hackers if the file was stolen assuming, of course, <em>that the
+password you used to encrypt it was strong</em>.</p>
+<p>You can access <em>PAM</em> from your own HTTP server (including
+localhost) or from the public github.io server <a
 href="https://jlinoff.github.io/pam/www/index.html">here</a>.</p>
+<p>It looks something like this.</p>
+<p><img src="./pam-iphone-screenshot.png" alt="iphone-screenshot" width="300"></p>
 <p>See the <em><a href="#security-considerations">Security
 Considerations</a></em> and <em><a
 href="#reasons-to-consider-using-pam">Reasons to consider using
@@ -338,7 +349,8 @@ PAM</a></em> sections below if you are interested in what motivated me
 to write <em>PAM</em>.</p>
 <p>This is not the first tool I have written to manage passwords but it
 is meant to be the last. If you are interested in the genesis of
-<em>PAM</em> see the <a href="#history">History</a> section.</p>
+<em>PAM</em> and the stories of its predecessors see the <a
+href="#history">History</a> section.</p>
 <h2 id="overview">Overview</h2>
 <p><em>PAM</em> is a pretty simple application. I think of it as a
 record editor that runs in your browser that allows you to create
@@ -347,7 +359,7 @@ retrieved in a secure way.</p>
 <h3 id="reasons-to-not-use-pam">Reasons to not use PAM</h3>
 <p>It is very reasonable to ask yourself why, if <em>PAM</em> is like an
 editor, you can’t simply just use something like an Excel spreadsheet or
-a text file editor or keep passwords on sheets of paper or use one of
+a text file editor or keep passwords on a sheet of paper or use one of
 the many commercially available password managers?</p>
 <p>That is an excellent question. The answer is that you <em>can</em>
 and, if you are already using an Excel spreadsheet or a text file editor
@@ -367,10 +379,9 @@ are important to you. If you don’t care about the features and the
 concerns that bother me, there is no reason to use this tool.</p>
 <h3 id="reasons-to-consider-using-pam">Reasons to consider using
 PAM</h3>
-<p>As mentioned in the previous section, I wrote <em>PAM</em> provide
-some features I wanted and to address some concerns I had with existing
-approaches. This section lists those concerns and features in the each
-of reasons presented below.</p>
+<p>This section presents the nine primary reasons that motivated me to
+develop <em>PAM</em>. They are provided to to help you determine whether
+<em>PAM</em> might be interesting to you.</p>
 <h4 id="reason-1-no-client-server-communications">Reason 1: No Client
 Server Communications</h4>
 <p><em>PAM</em> is a single page web application (SPA) that has no
@@ -381,14 +392,16 @@ href="#security-considerations">Security Considerations</a> section.</p>
 <p>In <em>PAM</em>, information is organized into files composed of
 records that each have a unique title and are, in turn, composed of
 fields that have a name, a type and a value. This approach is similar to
-organizing information using recipe cards or a rolodex.</p>
-<p>Following the recipe card analogy a little further using a simple
-example, each recipe would be a single record, a collection of recipes
-for, say, desserts would be a file of dessert recipe records where each
-record or recipe would have three parts: a title (the name of the
-recipe), the ingredients (a field) and the instructions (another field).
-Further assume that you have a simple dessert recipe like this written
-on a card.</p>
+organizing information using index cards or a rolodex.</p>
+<p>Following the index card analogy a little further, we can use a
+simple example to understand the record model a bit better.</p>
+<p>A recipe would be something you might store on an index card. Each
+recipe could be a single record that might contain the <em>title</em>
+(the name of the recipe), the <em>ingredients</em> (a field) and the
+<em>instructions</em> (another field).</p>
+<p>So what would a simple dessert recipe look like as a in <em>PAM</em>
+record? Well, if you had a simple dessert recipe like this written on a
+card.</p>
 <pre><code>Ice Cream Sundae
 
 ingredients
@@ -406,89 +419,161 @@ instructions
 4. pour chocolate on top
 5. add whip cream
 6. put the cherry on top.</code></pre>
-<p>This is what it would look like in <em>PAM</em>.</p>
+<p>It might look like this.</p>
 <p><img src="./pam-ice-cream-sundae.png" alt="ice-cream-sundae-example"></p>
-<p>As you can see, in this recipe record, the record title is
+<p>As you can see, in this <em><q>recipe</q></em> record, the title is
 <code>"Ice Cream Sundae"</code> and the two fields <q>ingredients</q>
 and <q>instructions</q> contain the multiline (<code>textarea</code>)
 descriptions of what the ingredients and instructions are for this
 specific recipe.</p>
-<p>On the other hand, a record for an account that provides information
-about how to login into an account on the internet might have the url,
-the login name and the password of the account. Something like this:</p>
+<p>Of course, there are many other types of records that might be
+interesting to store in <em>PAM</em>.</p>
+<p>One common one is a record for each account that you need to login
+into where you information about how to login is stored so you don’t
+have to remember it.</p>
+<p>Such an <em><q>account</q></em> record would have, at a minimum, the
+web address (URL), the login name and the password of the account.</p>
+<p>Note that this is simplified example is only meant to show the basic
+idea of importance of supporting record formats that are different than
+recipes.</p>
+<p>Here is what a simple account record might look like.</p>
 <p><img src="./pam-google-account.png" alt="google-account-example"></p>
-<p>In the account example above, the record title is
-<code>"Google"</code>, the <q>url</q> field value is
-<code>"https://google.com"</code>, the <q>login</q> field value is
-<code>"pbrain81@gmail.com"</code> and the <q>password</q> field value is
-hidden because <em>PAM</em> hides the contents of passwords by
-default.</p>
+<p>Note that the password is hidden in the example above. <em>PAM</em>
+always hides the contents of passwords by default.</p>
 <p>As you can see both records look quite different. Recipes records
 have fields for <q>ingredients</q> and <q>instructions</q> whereas
 account records have fields for the <q>url</q>, <q>login</q> and
-<q>password</q>. In both cases they have the same basic structure: a
-title and a set of fields that are relevant to them.</p>
+<q>password</q>. However, in both cases they have the same basic
+structure: a title and a set of fields that are relevant to recipes or
+accounts.</p>
 <p>You could easily imagine defining other records that contain
 information for other topics like <em><q>books read</q></em> or
 <em><q>unidentified aerial phenomena</q></em> or <em><q>bird
-watching</q></em> which would undoubtedly require additional, different
-fields.</p>
-<p>In my view, this <em>fields in records</em> organization does a
-better job of representing this type of information than a spreadsheet
-or a text file editor.</p>
+watching</q></em> which would undoubtedly require different fields.</p>
+<p>In my view, this approach of using <em>records composed of
+fields</em> does a better job of representing this type of information
+than a spreadsheet or a text file editor.</p>
 <h4 id="reason-3-searching">Reason 3: Searching</h4>
 <p><em>PAM</em> allows you to search records by their title or their
 field names and values. It also filters out the records that don’t match
 to make it easier to see the matching records visually.</p>
+<p>The availability of fast interactive searching makes finding records
+easy.</p>
 <p>See <a href="#search-records">Search Records</a> for more
 details.</p>
 <h4 id="reason-4-automatic-password-generation">Reason 4: Automatic
 Password Generation</h4>
 <p>I always find it hard to come up with passwords in the spur of the
-moment so <em>PAM</em> was built with an automatic password generation
-capability.</p>
+moment so <em>PAM</em> was built with the ability to automatically
+generate passwords.</p>
 <p>Of course almost all browsers and password tools provide this same
-capability these days, but they tend to generate cryptic, hard to
-memorize passwords which is perfectly fine if you never have to remember
-them but if you want a more memorable password, you are out of luck.</p>
-<p><em>PAM</em> gives you a choice because it has the concept of cryptic
-and memorable passwords as discussed in detail in <a
-href="#password-fields">Password Fields</a> section.</p>
+capability nowadays, but they tend to generate secure, cryptic, hard to
+memorize passwords which is perfectly fine for passwords for most
+accounts.</p>
+<p>But there are a cases when you need a password that must be typed in
+manually like the login password for a computer that does not use
+biometric scanning or a key FOB. In those cases it is beneficial to have
+a password that is secure, easy to remember and easy to type because you
+cannot accesss a password management system <em>before you
+login</em>.</p>
+<p>I call passwords of this type <em>memorable</em> passwords. They are
+composed of common lower case English words with an optional prefix, an
+optional separator between each word and an optional suffix.</p>
+<p>Often, the prefix and suffix are used to guarantee that the password
+contains the correct mix of characters that the authentication system
+requires, like, at least one capital letter, at least one digit and at
+least one special character.</p>
+<p>To make these concepts a bit clearer, here are examples of a cryptic
+and a memorable password.</p>
+<table>
+<thead>
+<tr class="header">
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>cryptic</td>
+<td><code>Rf5NaR7LH2LbZMRhkPCfeG8</code></td>
+</tr>
+<tr class="even">
+<td>memorable</td>
+<td><code>A1/health/mpegs/hopes!!</code></td>
+</tr>
+</tbody>
+</table>
+<p>In this example, the memorable password word separator is
+<code>"/"</code>, the prefix is <code>"A1/"</code> (capital letter and
+digit) and the suffix is <code>"!!"</code> (special characters).</p>
+<p>To help with this, <em>PAM</em> was built with the ability to
+generate <em>cryptic</em> and <em>memorable</em> passwords.</p>
+<p>For more detailed information about password generation in
+<em>PAM</em> see the <a href="#password-fields">Password Fields</a>
+section.</p>
 <h4 id="reason-5-file-based-storage">Reason 5: File Based Storage</h4>
 <p><em>PAM</em> uses files to load and store the record data.</p>
 <p>Using a file means that the user does not have to rely on the
-cybersecurity defenses of a company running a web server at their site
-or another third party site.</p>
+cybersecurity infrastructure of a company running a web server and
+storing your data at their site or another third party site. This was
+alluded in <a href="#reason-1-no-client-server-communications">Reason 1:
+No Client Server Communications</a> but that is not the <em>only</em>
+advantage of using files.</p>
 <p>A <em>PAM</em> file is composed of a set of records. Any records you
 like. You can use a single file for all of your records or you can have
 multiple files where each file contains records that are somehow related
 like records of <em><q>recipes</q></em> or <em><q>book reviews</q></em>
 or <em><q>my favorite species of Euglena</q></em>.</p>
-<p>For a discussion about how the user controls the organization of the
-records and fields in a file see the <a
+<p>What this means is that you can group records associated by a topic
+in different files to make them easier to organize and find. This
+ability to organize files around topics is the other reason that I
+prefer the file based storage model.</p>
+<p>For a more detailed discussion about how the user controls the
+organization of the records and fields in a file see the <a
 href="#reason-2-record-model">Reason 2: Record Model</a> section of this
 document.</p>
-<p>I store my record files in iCloud <em>IaaS</em> storage
-(infrastructure as a service) that is automatically mounted as a local
-volume on each device so that the files look like they are local but
-they are, in fact, stored in the cloud. That allows me to access the
-files from any of my devices: laptops, phones and tablets.</p>
+<p>As a side note, I store my <em>PAM</em> record files in iCloud
+<em>IaaS</em> storage (infrastructure as a service) that is
+automatically mounted as a local volume on each device so that the files
+look like they are local but they are, in fact, stored in the cloud.
+That allows me to access the files from any of my devices: laptops,
+phones and tablets.</p>
 <p>Of course you could simply load and save the data to a local file but
-that might restrict access to it from other devices (like mobile phones
-or tables) and you would have to be very diligent about keeping it
-backed up.</p>
+that <em>might</em> restrict your ability to access to it from other
+devices (like mobile phones or tables). Not only that but you would have
+to be very diligent about keeping it backed up so that you would not
+lose data if the local file was corrupted or lost.</p>
 <h4 id="reason-6-secure-context-encryption">Reason 6: Secure Context
 Encryption</h4>
-<p>Records are encrypted using an <a
+<p>When records are stored in a <em>PAM</em> file they can be encrypted
+using a password. The password is then used by an <a
 href="https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program"><em>NIST
 certified</em></a>, symmetric encryption algorithm:
-<code>AES-256-CBC</code>. That is a strong security guarantee which
-means, that if an encrypted <em>PAM</em> file is stolen, the record data
-is safe, if it has been encrypted with a strong password.</p>
-<p>As an added benefit, note that <code>AES-256-CBC</code> is thought to
-be reasonably resistant to quantum attacks as discussed in the
-literature. <a
-href="https://crypto.stackexchange.com/questions/6712/is-aes-256-a-post-quantum-secure-cipher-or-not">Here</a>
+<code>AES-256-CBC</code> to encode the records.</p>
+<p>Using a certified encryption algorithm provides a strong security
+guarantee which means, that if an encrypted <em>PAM</em> file is stolen,
+the record data is considered safe from hackers trying to crack the
+contents <em>if a strong password was used</em>.</p>
+<p>Passwords like <em><q>secret</q></em> or <em><q>password123</q></em>
+or any other password that can be found in freely available password
+dictionaries like the <a
+href="https://kalitut.com/best-password-dictionary/#Kali_password_dictionary">Kali
+password dictionary</a> are <em>not</em> strong and will not protect
+your data because they are easy to guess.</p>
+<p><em>Always</em> use a strong password to make it hard to guess.
+Typically a strong password would at least 20 characters would not
+include any personally identifiable information (PII) like your name,
+birth date or address. Also <em>never, ever</em> use the same password
+for two different sites. This is to protect you from hackers if a site
+you use to is attacked and your password is stolen.</p>
+<p>I recommend reading <a
+href="https://www.auditboard.com/blog/nist-password-guidelines/">NIST
+Password Guidelines</a> for more information about how to create strong
+passwords.</p>
+<p>As an interesting aside, note that <code>AES-256-CBC</code> algorithm
+is considered to be reasonably resistant to quantum attacks as discussed
+in the literature. For example, <a
+href="https://crypto.stackexchange.com/questions/6712/is-aes-256-a-post-quantum-secure-cipher-or-not">here</a>
 is one relevant exchange from a <code>crypto.stackexchange.com</code>
 discussion.</p>
 <p><em>PAM</em> encryption and decryption operations are provided by and
@@ -515,14 +600,14 @@ href="#security-considerations">Security Considerations</a> section.</p>
 <h4 id="reason-8-access-from-mobile-devices">Reason 8: Access from
 mobile devices</h4>
 <p>The files can be accessed from mobile devices so the user has access
-to the records anywhere. In addition it uses <a
+to the records anywhere. <em>PAM</em> uses <a
 href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">bootstrap-5</a>
-to make it work better in mobile browsers.</p>
+to make the interface work better in mobile browsers.</p>
 <h4 id="reason-9-foss">Reason 9: FOSS</h4>
 <p>Last but not least, one compelling reason to try <em>PAM</em> is that
 it is free and open source software (FOSS) so you can try it without any
-obligation or cost. You can also help find and fix bugs or customize it
-yourself.</p>
+obligation or cost. You can also help find and fix bugs or improve the
+UI.</p>
 <h2 id="layout">Layout</h2>
 <p><em>PAM</em> is a simple single page web application (SPA). It
 consists of three basic parts: the menu and search section, the records
@@ -577,6 +662,7 @@ clicked or tapped as shown in the example below.</p>
 <li>Edit Record.</li>
 <li>Delete Record.</li>
 <li>Clone Record.</li>
+<li>Clear Records.</li>
 <li>Save records to an encrypted file.</li>
 <li>Load a collection of records from an encrypted file.</li>
 <li>Search Records.</li>
@@ -590,15 +676,14 @@ top level section in this document.</p>
 <em>PAM</em>. You can even add custom HTML through the preferences.</p>
 <p>Here is a screen shot of what you would see.</p>
 <p><img src="./pam-about.png" alt="about"></p>
-<p>Here is the annotated view</p>
-<p><img src="./pam-about-annotated.png" alt="about-annotated"></p>
 <p>Here is an about dialogue with a simple custom message.</p>
 <p><img src="./pam-about-custom.png" alt="about-custom"></p>
 <p>Custom messages are defined in preferences as follows.</p>
 <p><img src="./pam-about-custom-pref.png" alt="about-custom-pref"></p>
 <p>The motivation for allowing custom messages is that someone might
-want to share a <em>PAM</em> file. The custom message would allow the
-person to provide their <em>imprimatur</em> on the collection.</p>
+want to share a <em>PAM</em> file or describe how the records are
+related. The custom message would allow the person to provide their
+<em>imprimatur</em> on the collection.</p>
 <h3 id="create-record">Create Record</h3>
 <p>This is a long section because it covers a number of general concepts
 that are needed by other functions like <q>topics</q> and
@@ -631,31 +716,34 @@ that is automatically generated from a database).</p>
 more detail, it is very important to understand record topics and record
 fields.</p>
 <h4 id="topics">Topics</h4>
-<p>Topics are a way of organizing records that have similar fields.</p>
+<p>Topics provide a convenient abstraction for organizing records in
+files.</p>
 <p>Topics are completely arbitrary associations between records that are
 defined by you based what is important to you. For example, a topic
 could be something like <em><q>recipes</q></em>,
 <em><q>accounts</q></em>, or <em><q>unidentified aerial
-phenomena</q></em> or <em><q>my favorite mathematical
-spaces</q></em>.</p>
-<p>One way to use topics is to help you organize records in files. For
-example you could define a <q><code>recipes.pam</code></q> file for all
-of your recipe records and an <q><code>accounts.pam</code></q> for your
-account records. Or, you could put all of your records, irregardless of
-topic, into a single file like <q><code>mystuff.pam</code></q>.</p>
-<p>Either way, topics provide a useful abstraction for describing the
-fundamental organizing principle.</p>
+phenomena</q></em> or <em><q>my favorite cryptography
+algorithms</q></em>.</p>
+<p>For example you could define a <q><code>recipes.pam</code></q> file
+for all of your recipe records and an <q><code>accounts.pam</code></q>
+for your account records. Or, you could put all of your records,
+irregardless of topic, into a single file like
+<q><code>mystuff.pam</code></q>.</p>
+<p>Topics are also discussed in the <a
+href="#reason-2-record-model">Reason 2: Record Model</a> section.</p>
 <h4 id="fields">Fields</h4>
 <p>Records are composed of fields. Each field has a name, a type and a
 value.</p>
 <p>The field name is arbitrary and is meant to describe the data in the
 field. For example, an <q>ingredients</q> field would indicate that the
 value is a list of ingredients.</p>
-<p>The field type describes the type of data. The available types are
-described in detail below.</p>
+<p>The field type describes the type of data that field holds like a
+number or an email. A complete description list of the available types
+is presented in the <a href="#field-types">Field Types</a> table
+below.</p>
 <p>The field value is the unique value for the field in an individual
-record. For example, a <q>url</q> field in a record would have different
-value than the <q>url</q> field in a different record.</p>
+record. For example, an <q>email</q> field in one record would have
+different value than the <q>email</q> field in a different record.</p>
 <p>To keep things simple, I decided to tightly bind the field name and
 type so that the field name unambiguously defines the type. That means
 that a field like <code>"login"</code> is always a <code>"text"</code>
@@ -677,10 +765,13 @@ on the fields. Thus, you can also change the names of the pre-defined
 fields when creating a new record. They are only provided for
 convenience.</p>
 <p><img src="./pam-change-field-name.png" alt="change-field-name"></p>
-<p>The field types are based on HTML element input types and that is, in
-fact, how they are presented to the user in the preferences dialogue.
-Here is a brief overview of the types and when to use them. You can
-search the web for more details.</p>
+<h5 id="field-types">Field Types</h5>
+<p>The field types are based on HTML <em>input</em> element types except
+for the <em>textarea</em> type which is an HTML <em>textarea</em>
+element. They are presented below as simple types regardless of the
+underlying HTML element to avoid unnecessary complexity.</p>
+<p>The table below presents a brief overview of the types and when to
+use them. You can search the web for more details.</p>
 <table>
 <colgroup>
 <col style="width: 44%" />
@@ -726,33 +817,31 @@ number.</td>
 </tr>
 <tr class="even">
 <td>text</td>
-<td>A string, like a name or keyword. You can use this for anything. A
-typical usage might be a login name where the value might be a name like
-<q>wiley</q> or an email like <q>wcoyote@acme.io</q> or a number like
-<q>12345678</q>.</td>
+<td>A string, like a name or keyword. You can use this for any text but
+it is especially useful when a field can be multiple types like an email
+or a name. A typical usage might be a login name where the value might
+be a name like <q>wiley</q> or an email like <q>wcoyote@acme.io</q> or a
+number like <q>12345678</q>.</td>
 </tr>
 <tr class="odd">
 <td>textarea</td>
 <td>A multi-line text box. A typical usage might be a note or a list of
-recipe ingredients. Note that this is <em>not</em> strictly speaking an
-HTML input element type, it is a separate element. It is treated as an
-input type here for convenience.</td>
+recipe ingredients.</td>
 </tr>
 <tr class="even">
 <td>url</td>
 <td>A text string that is a uniform resource locator (URL). Use it if
 you <em>only</em> want to accept a URL value. A typical usage might be
-the path to an account like https://google.com</td>
+the path to an account like <code>https://google.com</code></td>
 </tr>
 </tbody>
 </table>
-<blockquote>
 <p>Remember that the types were not made up by me, they were taken
 directly from input element description <a
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">here</a>,
 the separate textarea element is described <a
 href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement">here</a>.</p>
-</blockquote>
+<h5 id="custom-field-types">Custom Field Types</h5>
 <p>It is oftentimes the case that all of the <em>available</em> types
 are not needed for the records you are keeping. This is especially true
 in cases where you have a very clear understanding of the record field
@@ -787,15 +876,31 @@ by someone observing your screen.</p>
 <p>And, finally, because they provide the ability to generate two
 different types of passwords: cryptic and memorable.</p>
 <h5 id="cryptic-passwords">Cryptic Passwords</h5>
-<p>Cryptic passwords consist of letters, digits and special characters
-in a single string.</p>
+<p>Cryptic passwords consist of letters, digits and special
+characters.</p>
 <p>Here is an example: <code>'N5yAb!XfGa3vELPsK95K4/AAz8mts'</code>.</p>
 <p>Cryptic passwords tend to be hard to memorize for most people.</p>
+<p>They are perfect for cases where you don’t have to type the password
+in because they are hard to crack.</p>
 <h5 id="memorable-passwords">Memorable Passwords</h5>
-<p>Memorable passwords are composed of lower case English words with an
-optional prefix, an optional separator between each word and an optional
-suffix.</p>
-<p>Here is an example: <code>'rebates/restructuring/jamaica'</code>.</p>
+<p>Memorable passwords are used to define passwords that must be typed
+in manually, as described in the <a
+href="#reason-4-automatic-password-generation">Reason 4: Automatic
+Password Generation</a> section which means that it is important that
+they are secure, easy to type and to remember.</p>
+<p>They are composed of common lower case English words with an optional
+prefix, an optional separator between each word and an optional suffix.
+Often, the prefix and suffix are used to guarantee that the password
+contains the correct mix of characters that the authentication system
+requires, like, at least one capital letter, at least one digit and at
+least one special character.</p>
+<p>The security rationale for memorable passwords is described in this
+article: <a
+href="https://www.ncsc.gov.uk/blog-post/the-logic-behind-three-random-words">The
+logic behind three random words</a>.</p>
+<p>Here is an example: <code>'Z0/rebates/restructuring/jamaica??'</code>
+where the prefix is <code>'Z0/'</code>, the separator is
+<code>'/'</code> and the suffix is <code>'??'</code>.</p>
 <p>Memorable passwords tend to be easier to memorize than cryptic
 passwords for most people.</p>
 <h5 id="hidden-password-representation">Hidden Password
@@ -869,13 +974,14 @@ it.</p>
 preferences so that the list of fields is shorter.</p>
 </blockquote>
 <p><img src="pam-new-record-field-1.png" alt="new-record-field-1"></p>
-<p>Now do the same thing to create a <q>instructions</q> field. Remember
-to choose <q>note</q> just like in the previous step. This is what it
-looks like after you have added the second field.</p>
+<p>Now do the same thing to create an <q>instructions</q> field.
+Remember to choose <q>note</q> just like in the previous step. This is
+what it looks like after you have added the second field.</p>
 <p><img src="pam-new-record-field-2.png" alt="new-record-field-2"></p>
-<p>One interesting thing to note is that you can <em>change the order of
-the fields</em> by dragging them up or down. To do that select the field
-title at the top of the box (fieldset) and move it.</p>
+<p>One interesting thing to understand is that you can <em>change the
+order of the fields</em> by dragging them up or down. To do that select
+the field title at the top of the box (fieldset) and move it. This can
+also be done when editing the record.</p>
 <p>Here is what it looks like when I dragged the <q>instructions</q>
 field up.</p>
 <p><img src="pam-new-record-drag.png" alt="new-record-drag"></p>
@@ -1133,6 +1239,17 @@ you can edit.</p>
 href="#create-record">Create Record</a> section under the <a
 href="#method-2-clone-approach">Method 2: Clone Approach</a>
 subsection.</p>
+<h3 id="clear-records">Clear Records</h3>
+<p>Clear all of the records currently defined.</p>
+<p>This is normally done automatically when a new file is loaded but
+could be useful if you want to enter new a set of records from scratch
+using the currently defined fields. Of course, you could simply delete
+all of the records manually but this is simpler.</p>
+<p>To clear all records choose the
+<q><img src='./trash3-fill.svg' height='32' width='32' /> Clear
+Records</q> option from the menu. See the <a href="#menu">Menu</a>
+section for screenshots.</p>
+<p>This option will ask you to confirm.</p>
 <h3 id="save-file">Save File</h3>
 <p>To save records and preferences to a file by choose the
 <q><img src='./file-arrow-down-fill.svg' height='32' width='32' /> Save
@@ -1203,9 +1320,16 @@ earlier sections but having it consolidated here might be helpful. Plus
 there are links to the sections with relevant details.</p>
 <p>This is what the menu looks like.</p>
 <p><img src="./pam-menu.png" alt="menu"></p>
-<p>As you can see, there are seven menu options: <q>About</q>,
-<q>Preferences</q>, <q>New Record</q>, <q>Clear Records</q>, <q>Load
-File</q>, <q>Save File</q>, and <q>Help</q>.</p>
+<p>As you can see, there are seven menu options:</p>
+<ol type="1">
+<li><q>About</q>,</li>
+<li><q>Preferences</q>,</li>
+<li><q>New Record</q>,</li>
+<li><q>Clear Records</q>,</li>
+<li><q>Load File</q>,</li>
+<li><q>Save File</q>, and</li>
+<li><q>Help</q>.</li>
+</ol>
 <p>Click or tap on the
 <q><img src='./info-circle.svg' height='32' width='32' /> About</q>
 entry to see information about the app. See the <a
@@ -1614,6 +1738,43 @@ application.</p>
 known, trusted site.</p>
 <p>If you are concerned about this, you can always download, build and
 run <em>PAM</em> from your own trusted site.</p>
+<h3 id="dictionary-and-brute-force-password-attacks">Dictionary and
+Brute Force Password Attacks</h3>
+<p>In general a brute force attack is any attach that uses trial and
+error to crack passwords.</p>
+<p>A dictionary attack is a brute force password attack that tries every
+password in a dictionary to break decrypt sensitive data.</p>
+<p>Both attacks are very effective in cases where the attacker has the
+ability to try many passwords without being locked out and where the
+password is short.</p>
+<p><em>PAM</em> is vulnerable to dictionary attacks and brute force
+atttacks because it can be run locally where the attacker can setup an
+automatic system to try to decrypt the file using the set of available
+passwords.</p>
+<p>Sites that require passwords for authentication can mitigate this
+type of attack by limiting the number of login attempts allowed.</p>
+<p><em>PAM</em> can also mitigate these types of attacks but it cannot
+do so <em>automatically</em> because the attacker has access to the
+source code. Instead you can mitigate these attacks by using strong
+(high entropy) passwords.</p>
+<p>To give you some feel for just how effective this approach is,
+consider a simple example where we have a password composed of say 20
+pseudo-random upper case letters (26), lower case letters (26), digits
+(10) and 2 special characters.</p>
+<p>Thus for 20 characters, there are 64<sup>20</sup> or
+1,329,227,995,784,915,872,903,807,060,280,344,576 (~1.3 undecillion)
+possible passwords which is which is <em>one heck of a lot
+possibilities</em>!</p>
+<p>If an attacker were to try to crack such a password using a super
+powerful computer that could perform <em>1 billion tests per second</em>
+(close to the limit of todays technology), it would take something on
+the order of about a sextillion (10<sup>21</sup>) years to crack which
+means that your data is pretty safe if you use such a password.</p>
+<p>On the other hand if you use a simple, six character password like
+<q><code>secret</code></q> it would take about about a minute so don’t
+do that.</p>
+<p>Ideas for generating strong password are discussed in the next
+section.</p>
 <h3 id="protecting-yourself">Protecting Yourself</h3>
 <p>In summary, security can never be fully guaranteed, the best way to
 protect your data is to follow commonly recommended security
