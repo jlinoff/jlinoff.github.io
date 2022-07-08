@@ -8,7 +8,7 @@
 1. [Lock Files](#lock-files)
 1. [myVault](#myvault) - _a user friendly replacement of qspm_
 1. [Quantum Safe Password Manager (qspm)](#quantum-safe-password-manager)
-1. [PAM](#pam) - a a user friendly replacement of myvault and qspm_
+1. [PAM](#pam) - a user friendly replacement of myvault and qspm_
 1. [RSA Demo](#rsa-demo)
 1. [z-tables](#z-tables)
 
