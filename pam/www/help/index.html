@@ -125,11 +125,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-06-28 14:44:59 -0700</code></td>
+<td><code>2022-07-27 18:16:49 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>7c0db5d</code></td>
+<td><code>38f7df9</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -271,6 +271,8 @@ Console</a></li>
 Strategy</a></li>
 <li><a href="#clone-field-values-when-cloning-records">Clone Field
 Values when Cloning Records</a></li>
+<li><a href="#interactive-storage-strategy">Interactive Storage
+Strategy</a></li>
 <li><a href="#custom-about">Custom About</a></li>
 </ul></li>
 <li><a href="#record-fields">Record Fields</a></li>
@@ -1577,6 +1579,24 @@ values before entering new ones which is very simple.</p>
 cloning.</p>
 <p>Set this preference if you want to avoid deleting the fields
 manually.</p>
+<h4 id="interactive-storage-strategy">Interactive Storage Strategy</h4>
+<p>This defines the browser storage strategy for interactive sessions
+for saving the file password. The options are <code>none</code>,
+<code>prefs</code>, <code>local</code> and <code>session</code>.</p>
+<p>The <code>none</code> option means that the file password is never
+stored. Each time you load or save a file you must re-enter it.</p>
+<p>The <code>global</code> option means that the file password is stored
+in a global window session variable. The file password is remembered for
+the file load and save operations. It is remembered until the browser
+tab is closed.</p>
+<p>The <code>local</code> option means that the file password is stored
+in <code>localStorage</code>. The file password is remembered for the
+file load and save operations. It is remembered until it is explicitly
+reset.</p>
+<p>The <code>session</code> option means that the file password is
+stored in <code>sessionStorage</code>. The file password is remembered
+for the file load and save operations. It is remembered until the
+browser tab is closed.</p>
 <h4 id="custom-about">Custom About</h4>
 <p>Customized HTML that is added to the about page. It can be used in
 cases where the field records have been customized to provide an
