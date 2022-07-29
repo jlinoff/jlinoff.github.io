@@ -429,6 +429,12 @@ instructions
 and <q>instructions</q> contain the multiline (<code>textarea</code>)
 descriptions of what the ingredients and instructions are for this
 specific recipe.</p>
+<p>Note that the record field names <q>ingredients</q> and
+<q>instructions</q> are custom <em>field names</em> so you must set the
+<q>Enable Editable Field Name</q> preference to true to enter them.</p>
+<p><img src="./pam-fld-name-edit-checked.png" width="300" alt="false"/></p>
+<p>See the <a href="#enable-editable-field-name">Enable Editable Field
+Name</a> entry under preferences for more details.</p>
 <p>Of course, there are many other types of records that might be
 interesting to store in <em>PAM</em>.</p>
 <p>One common one is a record for each account that you need to login
@@ -441,6 +447,12 @@ idea of importance of supporting record formats that are different than
 recipes.</p>
 <p>Here is what a simple account record might look like.</p>
 <p><img src="./pam-google-account.png" alt="google-account-example"></p>
+<p>In this case the record field names <q>login</q>, <q>password</q> and
+<q>url</q> are standard record field names so you do not need to set the
+<q>Enable Editable Field Name</q> preference. For more information about
+standard record fields, see the<a href="#record-fields">Record
+Fields</a> section for more details.</p>
+<p><img src="./pam-fld-name-edit-unchecked.png" width="300" alt="false"/></p>
 <p>Note that the password is hidden in the example above. <em>PAM</em>
 always hides the contents of passwords by default.</p>
 <p>As you can see both records look quite different. Recipes records
@@ -1591,9 +1603,14 @@ cloning.</p>
 manually.</p>
 <h4 id="enable-editable-field-name">Enable Editable Field Name</h4>
 <p>This defines whether or not the user can change a field name.</p>
+<h5 id="not-enabled">Not Enabled</h5>
 <p>This is what it looks likes when it is unchecked (false).</p>
 <p><img src="./pam-fld-name-edit-unchecked.png" width="300" alt="false"/></p>
 <p><img src="./pam-fld-name-edit-off.png" width="300" alt="false"/></p>
+<p>WHen this is not enabled, the user can only choose record fields from
+the pre-defined <q>Record Fields</q> section of the preferences. See the
+<a href="#record-fields">Record Fields</a> section for more details.</p>
+<h5 id="enabled">Enabled</h5>
 <p>This is what it looks likes when it is checked (true).</p>
 <p><img src="./pam-fld-name-edit-checked.png" width="300" alt="false"/></p>
 <p><img src="./pam-fld-name-edit-on.png" width="300" alt="true"/></p>
