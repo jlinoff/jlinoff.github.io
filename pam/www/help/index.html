@@ -121,15 +121,15 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Version</td>
-<td><code>1.0.0-rc01</code></td>
+<td><code>1.0.0-rc02</code></td>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-07-28 23:41:14 -0700</code></td>
+<td><code>2022-07-29 09:08:50 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>1fbb093</code></td>
+<td><code>2d513bb</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -271,6 +271,8 @@ Console</a></li>
 Strategy</a></li>
 <li><a href="#clone-field-values-when-cloning-records">Clone Field
 Values when Cloning Records</a></li>
+<li><a href="#enable-editable-field-name">Enable Editable Field
+Name</a></li>
 <li><a href="#filepass-cache-strategy">filePass Cache Strategy</a></li>
 <li><a href="#custom-about">Custom About</a></li>
 </ul></li>
@@ -1587,6 +1589,16 @@ values before entering new ones which is very simple.</p>
 cloning.</p>
 <p>Set this preference if you want to avoid deleting the fields
 manually.</p>
+<h4 id="enable-editable-field-name">Enable Editable Field Name</h4>
+<p>This defines whether or not the user can change a field name.</p>
+<p>This is what it looks likes when it is unchecked (false).</p>
+<p><img src="./pam-fld-name-edit-unchecked.png" width="300" alt="false"/></p>
+<p><img src="./pam-fld-name-edit-off.png" width="300" alt="false"/></p>
+<p>This is what it looks likes when it is checked (true).</p>
+<p><img src="./pam-fld-name-edit-checked.png" width="300" alt="false"/></p>
+<p><img src="./pam-fld-name-edit-on.png" width="300" alt="true"/></p>
+<p>The user can replace the default field name (in this case
+<q>name</q>) with whatever they want.</p>
 <h4 id="filepass-cache-strategy">filePass Cache Strategy</h4>
 <p>This defines the browser cache strategy for the file password. The
 options are <code>none</code>, <code>prefs</code>, <code>local</code>
