@@ -121,15 +121,15 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Version</td>
-<td><code>1.0.0-rc02</code></td>
+<td><code>1.0.0-rc03</code></td>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-07-29 11:21:58 -0700</code></td>
+<td><code>2022-08-04 11:54:06 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>d985d5b</code></td>
+<td><code>2afd75b</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -271,6 +271,7 @@ Console</a></li>
 Strategy</a></li>
 <li><a href="#clone-field-values-when-cloning-records">Clone Field
 Values when Cloning Records</a></li>
+<li><a href="#require-record-fields">Require Record Fields</a></li>
 <li><a href="#enable-editable-field-name">Enable Editable Field
 Name</a></li>
 <li><a href="#filepass-cache-strategy">filePass Cache Strategy</a></li>
@@ -1606,6 +1607,12 @@ values before entering new ones which is very simple.</p>
 cloning.</p>
 <p>Set this preference if you want to avoid deleting the fields
 manually.</p>
+<h4 id="require-record-fields">Require Record Fields</h4>
+<p>This determines whether a record can be created with no fields.</p>
+<p>If it is true, then a new record must have a least one field
+defined.</p>
+<p>The default is false which means that records can be created with no
+fields so that records.</p>
 <h4 id="enable-editable-field-name">Enable Editable Field Name</h4>
 <p>This defines whether or not the user can change a field name.</p>
 <h5 id="not-enabled">Not Enabled</h5>
