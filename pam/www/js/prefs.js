@@ -98,7 +98,7 @@ export function menuPrefsDlg() {
     let labelClasses = ['col-9']
     let inputClasses = ['col-3']
     let helpLink = `<a href="window.prefs.helpLink" target="_blank">Help</a>`
-    let fldsList = predefinedRecordFields()
+    let fldsList = mkRecordFields(window.prefs.predefinedRecordFields)
     let body = xmk('span').xAppendChild(
         xmk('p').xInnerHTML(`See the ${helpLink} documentation for detailed information.`),
         // miscellaneous
@@ -137,6 +137,7 @@ export function menuPrefsDlg() {
             xmk('p').xInnerHTML('These are the fields pre-defined to simplify creating a new record.'),
             fldsList),
     )
+
     let b1 = mkPopupModalDlgButton('Close',
                                  'btn-secondary',
                                  'close the dialogue without making changes',
@@ -146,7 +147,7 @@ export function menuPrefsDlg() {
                                          // make sure that the deleted items are restored
                                          // if the user closes without saving.
                                          let old_div = document.body.xGet('#x-prefs-fld-div')
-                                         let new_div = predefinedRecordFields()
+                                         let new_div = mkRecordFields(window.prefs.predefinedRecordFields)
                                          old_div.replaceWith(new_div)
                                      }
                                      delete_occurred = false
@@ -157,9 +158,14 @@ export function menuPrefsDlg() {
                                  'save using the preferences',
                                    (el) => {
                                        delete_occurred = false
-                                       return setPrefs(el)
+                                       return savePrefs(el)
                                    })
     let e = mkPopupModalDlg('menuPrefsDlg', 'Preferences', body, b1, b2)
+    e.xAddEventListener('show.bs.modal', (event) => {
+        // do this each time the prefs modal popup pops up
+        let div = document.body.xGet('#x-prefs-fld-div')
+        div.replaceWith(mkRecordFields(window.prefs.predefinedRecordFields))
+    })
     return e
 }
 
@@ -174,7 +180,7 @@ function setHelpLinks() {
 // Set the preferences
 // The window.prefs entries are determined automatically from the
 // data-pref-id attribute.
-function setPrefs(el) {
+function savePrefs(el) {
     //console.log(el)
     // add logic to set window.prefs.* here
     let prefs = el.xGetN('[data-pref-id]')
@@ -240,6 +246,8 @@ function setPrefs(el) {
         }
         window.prefs.predefinedRecordFields[name] = value
     }
+    let sorted = sortDictByKey(window.prefs.predefinedRecordFields)
+    window.prefs.predefinedRecordFields = sorted
     refreshAbout()
     return true
 }
@@ -721,10 +729,10 @@ function prefLabel(labelClasses, title) {
     )
 }
 
-function predefinedRecordFields() {
+function mkRecordFields(recordFields) {
     // Display the pre-defined record, allow them to be modified or deleted.
     let fldsList = xmk('div').xId('x-prefs-fld-div')
-    let sorted_dict = sortDictByKey(window.prefs.predefinedRecordFields)
+    let sorted_dict = sortDictByKey(recordFields)
     Object.entries(sorted_dict).forEach(([key,value]) => {
         if ( fldsList.length === 0 ) {
             let hdr =  xmk('div').xClass('row').xAppend(
@@ -801,10 +809,14 @@ function predefinedRecordFields() {
                         })
                         .xAppend(icon('bi-trash3-fill', tooltip))
                         .xAddEventListener('click', (event) => {
+                            let newRecordFields = getRecordFieldsFromDOM()
                             let row = event.target.xGetParentWithClass('row')
+                            let name = row.xGet('.x-fld-name').value.trim() // field name
                             row.remove()
-                            // restore it if the user click "Close" without saving
+                            delete newRecordFields[name]
                             delete_occurred = true
+                            let div = document.body.xGet('#x-prefs-fld-div')
+                            div.replaceWith(mkRecordFields(newRecordFields))
                         }),
                 ),
             ),
@@ -825,21 +837,43 @@ function predefinedRecordFields() {
                  .xAppend(icon('bi-plus-circle', tooltip),
                           xmk('span').xInnerHTML('&nbsp;Add New Field'))
                  .xAddEventListener('click', (event) => {
-                     let idn = 0
                      let new_value = 'text'
                      let base = 'AAA'
+                     /*window.prefs.predefinedRecordFields[new_key] = new_value
+                     let div = document.body.xGet('#x-prefs-fld-div')
+                     div.replaceWith(mkRecordFields(window.prefs.predefinedRecordFields))
+                     updateRecordFieldTypes()*/
+                     // load record fields
+                     let newRecordFields = getRecordFieldsFromDOM()
+                     let idn = 0
                      let new_key = base + idn.toString(16).padStart(4, '0')
-                     while (new_key in window.prefs.predefinedRecordFields) {
+                     while (new_key in recordFields) {
                          idn += 1
                          new_key = base + idn.toString(16).padStart(4, '0')
                      }
-                     window.prefs.predefinedRecordFields[new_key] = new_value
+                     //console.log(newRecordFields)
+                     newRecordFields[new_key] = new_value
                      let div = document.body.xGet('#x-prefs-fld-div')
-                     div.replaceWith(predefinedRecordFields())
-                     updateRecordFieldTypes()
+                     div.replaceWith(mkRecordFields(newRecordFields))
                  }),
          ),
     )
     fldsList.xPrepend(newfld)
     return fldsList
+}
+
+function getRecordFieldsFromDOM() {
+    let recflds = {}
+    let div = document.body.xGet('#x-prefs-fld-div')
+    let rows = div.xGetN('.x-pref-fld-row')
+    // get the preference values from the DOM
+    for (const row of rows) {
+        let key = row.xGet('.x-fld-name').value.trim()
+        let value = row.xGet('.dropdown-toggle').innerHTML.trim() // can never be empty
+        recflds[key] = value
+    }
+
+    // Set the pre-defined fields for use in creating records.
+    let sorted_recflds = sortDictByKey(recflds)
+    return sorted_recflds
 }
