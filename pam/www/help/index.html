@@ -126,15 +126,15 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Version</td>
-<td><code>1.0.0-rc03</code></td>
+<td><code>1.0.0-rc05</code></td>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-08-04 18:31:55 -0700</code></td>
+<td><code>2022-08-05 10:30:36 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>a822e7d</code></td>
+<td><code>bb3fe85</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -201,8 +201,10 @@ mobile devices</a></li>
 <li><a href="#topics">Topics</a></li>
 <li><a href="#fields">Fields</a>
 <ul>
-<li><a href="#field-types">Field Types</a></li>
-<li><a href="#custom-field-types">Custom Field Types</a></li>
+<li><a href="#default-record-field-types">Default Record Field
+Types</a></li>
+<li><a href="#custom-record-field-types">Custom Record Field
+Types</a></li>
 </ul></li>
 <li><a href="#password-fields">Password Fields</a>
 <ul>
@@ -442,9 +444,13 @@ specific recipe.</p>
 the <q>ingredients</q> and <q>instructions</q> custom fields so that
 they are available all of the time. The ability to customize record
 fields makes the interface more intuitive for users.</p>
-<p>These are the default field names. You can new fields here if you
-want.</p>
-<p><img src="./pam-custom-record-fields.png" width="300" alt="default"/></p>
+<p>These are the default record field names. You can change, add or
+delete record fields here if you wish to customize the user
+experience.</p>
+<p><img src="./pam-default-record-fields.png" width="300" alt="default"/></p>
+<p>See the <a href="#default-record-field-types">Default Record Field
+Types</a> section for a description of the available record field
+types.</p>
 <p>When you enable it, you must change the name of existing field when
 you add it to the record but the preference must be checked.</p>
 <p><img src="./pam-fld-name-edit-checked.png" width="300" alt="false"/></p>
@@ -779,8 +785,8 @@ field. For example, an <q>ingredients</q> field would indicate that the
 value is a list of ingredients.</p>
 <p>The field type describes the type of data that field holds like a
 number or an email. A complete description list of the available types
-is presented in the <a href="#field-types">Field Types</a> table
-below.</p>
+is presented in the <a href="#custom-record-field-types">Custom Record
+Field Types</a> table below.</p>
 <p>The field value is the unique value for the field in an individual
 record. For example, an <q>email</q> field in one record would have
 different value than the <q>email</q> field in a different record.</p>
@@ -805,11 +811,22 @@ on the fields. Thus, you can also change the names of the pre-defined
 fields when creating a new record. They are only provided for
 convenience.</p>
 <p><img src="./pam-change-field-name.png" alt="change-field-name"></p>
-<h5 id="field-types">Field Types</h5>
-<p>The field types are based on HTML <em>input</em> element types except
-for the <em>textarea</em> type which is an HTML <em>textarea</em>
-element. They are presented below as simple types regardless of the
-underlying HTML element to avoid unnecessary complexity.</p>
+<blockquote>
+<p>Note that the ability to change field names is <em>only</em> enabled
+when the <code>Enable Editable Field Name</code> preference is enabled
+(checked). It is not enabled by default.</p>
+</blockquote>
+<h5 id="default-record-field-types">Default Record Field Types</h5>
+<p>The record field types are the fields that you can define for each
+record you create.</p>
+<p>They are based on HTML <em>input</em> element types except for the
+<em>textarea</em> type which is an HTML <em>textarea</em> element. They
+are presented below as simple types regardless of the underlying HTML
+element to avoid unnecessary complexity.</p>
+<p>You can change, add or delete record fields here if you wish to
+customize the user experience.</p>
+<p>This is what the default record field types look like.</p>
+<p><img src="./pam-default-record-fields.png" width="300" alt="default"/></p>
 <p>The table below presents a brief overview of the types and when to
 use them. You can search the web for more details.</p>
 <table>
@@ -837,25 +854,30 @@ email value. A typical usage might be the email address of a
 contact.</td>
 </tr>
 <tr class="odd">
+<td>html</td>
+<td>Textarea data that is rendered directly as HTML. A typical usage
+might be to reference an image or to display formatted text.</td>
+</tr>
+<tr class="even">
 <td>number</td>
 <td>A numeric text string. Use it if you <em>only</em> want to accept an
 number value. A typical usage might be a measurement like height or
 width or any other numeric value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>password</td>
 <td>A secret text string that is normally displayed as asterisks
 (<code>****</code>) with an eye
 (<img src="./eye.svg" height="32" width="32" alt="eye"/>) button that
 can be clicked or tapped to show the value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>phone</td>
 <td>A phone number text string. Use it if you <em>only</em> want to
 accept a phone number value. A typical usage might be a mobile phone
 number.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>text</td>
 <td>A string, like a name or keyword. You can use this for any text but
 it is especially useful when a field can be multiple types like an email
@@ -863,12 +885,12 @@ or a name. A typical usage might be a login name where the value might
 be a name like <q>wiley</q> or an email like <q>wcoyote@acme.io</q> or a
 number like <q>12345678</q>.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>textarea</td>
 <td>A multi-line text box. A typical usage might be a note or a list of
 recipe ingredients.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>url</td>
 <td>A text string that is a uniform resource locator (URL). Use it if
 you <em>only</em> want to accept a URL value. A typical usage might be
@@ -881,7 +903,7 @@ directly from input element description <a
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">here</a>,
 the separate textarea element is described <a
 href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement">here</a>.</p>
-<h5 id="custom-field-types">Custom Field Types</h5>
+<h5 id="custom-record-field-types">Custom Record Field Types</h5>
 <p>It is oftentimes the case that all of the <em>available</em> types
 are not needed for the records you are keeping. This is especially true
 in cases where you have a very clear understanding of the record field
