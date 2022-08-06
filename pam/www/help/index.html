@@ -130,11 +130,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="odd">
 <td>Build</td>
-<td><code>2022-08-05 10:30:36 -0700</code></td>
+<td><code>2022-08-06 13:07:55 -0700</code></td>
 </tr>
 <tr class="even">
 <td>GitCommitId</td>
-<td><code>bb3fe85</code></td>
+<td><code>675d7e5</code></td>
 </tr>
 <tr class="odd">
 <td>GitBranch</td>
@@ -196,7 +196,7 @@ mobile devices</a></li>
 </ul></li>
 <li><a href="#functions">Functions</a>
 <ul>
-<li><a href="#create-record">Create Record</a>
+<li><a href="#create-new-record">Create New Record</a>
 <ul>
 <li><a href="#topics">Topics</a></li>
 <li><a href="#fields">Fields</a>
@@ -311,7 +311,7 @@ Authentication</a></li>
 <ul>
 <li><a href="#personal-account-records">Personal Account Records</a>
 <ul>
-<li><a href="#create-record-and-file">Create Record and File</a></li>
+<li><a href="#create-record-file">Create Record File</a></li>
 <li><a href="#use-record-data-to-log-into-a-site">Use Record Data to Log
 into a Site</a></li>
 <li><a href="#edit%20an-existing-record">Edit an Existing
@@ -352,7 +352,7 @@ password you used to encrypt it was strong</em>.</p>
 localhost) or from the public github.io server <a
 href="https://jlinoff.github.io/pam/www/index.html">here</a>.</p>
 <p>It looks something like this.</p>
-<p><img src="./pam-iphone-screenshot.png" alt="iphone-screenshot" width="300"></p>
+<p><img src="./pam-iphone-screenshot.png" alt="iphone-screenshot" width="400"></p>
 <p>See the <em><a href="#security-considerations">Security
 Considerations</a></em> and <em><a
 href="#reasons-to-consider-using-pam">Reasons to consider using
@@ -438,22 +438,26 @@ and <q>instructions</q> contain the multiline (<code>textarea</code>)
 descriptions of what the ingredients and instructions are for this
 specific recipe.</p>
 <p>Note that the record field names <q>ingredients</q> and
-<q>instructions</q> are custom <em>field names</em> so you must set the
-<q>Enable Editable Field Name</q> preference to true to enter them
-<em>when you create the field</em> or you must go to the preferences add
-the <q>ingredients</q> and <q>instructions</q> custom fields so that
-they are available all of the time. The ability to customize record
-fields makes the interface more intuitive for users.</p>
+<q>instructions</q> used in this example are custom <em>field
+names</em>. They are not available by default. To make them available
+you must set the <a href="#enable-editable-field-name">Enable Editable
+Field Name</a> preference to true to enter them <em>when you create the
+field</em>.</p>
+<p>Another way to do the same thing is to create them to the default
+record field list in the preferences section <a
+href="#record-fields">Record Fields</a> section so that they are
+available all of the time. The ability to customize record fields makes
+the interface more intuitive for users.</p>
 <p>These are the default record field names. You can change, add or
 delete record fields here if you wish to customize the user
 experience.</p>
-<p><img src="./pam-default-record-fields.png" width="300" alt="default"/></p>
+<p><img src="./pam-default-record-fields.png" width="400" alt="default"/></p>
 <p>See the <a href="#default-record-field-types">Default Record Field
 Types</a> section for a description of the available record field
 types.</p>
 <p>When you enable it, you must change the name of existing field when
 you add it to the record but the preference must be checked.</p>
-<p><img src="./pam-fld-name-edit-checked.png" width="300" alt="false"/></p>
+<p><img src="./pam-fld-name-edit-checked.png" width="400" alt="false"/></p>
 <p>See the <a href="#enable-editable-field-name">Enable Editable Field
 Name</a> entry under preferences for more details.</p>
 <p>Of course, there are many other types of records that might be
@@ -474,7 +478,7 @@ recipes.</p>
 <q>Enable Editable Field Name</q> preference. For more information about
 standard record fields, see the<a href="#record-fields">Record
 Fields</a> section for more details.</p>
-<p><img src="./pam-fld-name-edit-unchecked.png" width="300" alt="false"/></p>
+<p><img src="./pam-fld-name-edit-unchecked.png" width="400" alt="false"/></p>
 <p>Note that the password is hidden in the example above. <em>PAM</em>
 always hides the contents of passwords by default.</p>
 <p>As you can see both records look quite different. Recipes records
@@ -699,7 +703,7 @@ clicked or tapped as shown in the example below.</p>
 <p>In a nutshell they are:</p>
 <ol type="1">
 <li>Display information about the application.</li>
-<li>Create Record.</li>
+<li>Create New Record.</li>
 <li>Edit Record.</li>
 <li>Delete Record.</li>
 <li>Clone Record.</li>
@@ -725,13 +729,14 @@ top level section in this document.</p>
 want to share a <em>PAM</em> file or describe how the records are
 related. The custom message would allow the person to provide their
 <em>imprimatur</em> on the collection.</p>
-<h3 id="create-record">Create Record</h3>
+<h3 id="create-new-record">Create New Record</h3>
 <p>This is a long section because it covers a number of general concepts
 that are needed by other functions like <q>topics</q> and
 <q>fields</q>.</p>
-<p>Creating a record is a very common activity in <em>PAM</em> so I
+<p>Creating a new record is a very common activity in <em>PAM</em> so I
 tried to make it as easy as possible.</p>
-<p>There are three different methods you can use to create records:</p>
+<p>There are three different methods you can use to create new
+records:</p>
 <ol type="1">
 <li>A record can be created in the application by clicking or tapping
 the <q>New Record</q> menu option,</li>
@@ -744,11 +749,14 @@ javascript.</li>
 <p>The first method, creating the record by clicking or tapping the
 <q>New Record</q> menu option in the application, is probably the best
 way to create the first new record for a topic family. This is also
-known as the <q>menu</q> approach.</p>
+known as the <q>menu</q> approach and is shown below.</p>
+<p><img src="pam-create-new-record.png" width="400" alt="new-rec"></p>
 <p>The second method, creating a record by cloning an existing record,
 is useful when you want to use the same fields as the existing record.
 It is a great way to guarantee uniformity. Although if the number of
-fields is small using the first method is also fine.</p>
+fields is small using the first method is also fine. Here is what the
+clone option looks like.</p>
+<p><img src="pam-clone-google.png" width="400" alt="clone-rec"></p>
 <p>The third method, creating a record by editing javascript, is most
 useful if you are interested in creating records programmatically
 (perhaps a subset of accounts that shared with a small group of users
@@ -799,10 +807,11 @@ field. It will never be a phone number or a date.</p>
 same name but different types which would add more complexity to the
 UI.</p>
 </blockquote>
-<p>Fields are defined in <a href="#Preferences">Preferences</a> and they
-are stored in each file with the along with the records. Here is what
-they are by default.</p>
-<p><img src="./pam-predefined-fields.png" alt="predefined-fields"></p>
+<p>Default record fields are defined in <a
+href="#Preferences">Preferences</a> and they are stored in each file
+with the along with the records. See the next section (<a
+href="#default-record-field-types">Default Record Field Types</a>) for
+details.</p>
 <p>You can change them at any time. Because the fields are stored in
 each file they can be different for each topic file, if you choose to
 organize things that way.</p>
@@ -810,23 +819,32 @@ organize things that way.</p>
 on the fields. Thus, you can also change the names of the pre-defined
 fields when creating a new record. They are only provided for
 convenience.</p>
-<p><img src="./pam-change-field-name.png" alt="change-field-name"></p>
+<p><img src="./pam-change-field-name.png" width="400" alt="change-field-name"></p>
 <blockquote>
 <p>Note that the ability to change field names is <em>only</em> enabled
-when the <code>Enable Editable Field Name</code> preference is enabled
-(checked). It is not enabled by default.</p>
+when the <a href="#enable-editable-field-name">Enable Editable Field
+Name</a> preference is enabled (checked). It is not enabled by
+default.</p>
 </blockquote>
 <h5 id="default-record-field-types">Default Record Field Types</h5>
-<p>The record field types are the fields that you can define for each
-record you create.</p>
-<p>They are based on HTML <em>input</em> element types except for the
-<em>textarea</em> type which is an HTML <em>textarea</em> element. They
-are presented below as simple types regardless of the underlying HTML
-element to avoid unnecessary complexity.</p>
+<p>The record field type defines the type of each field that you define
+for a record.</p>
+<p>Record field types are based on HTML <em>input</em> element types
+except for the <em>textarea</em> type which is an HTML <em>textarea</em>
+element and the <em>html</em> type which is a <em>textarea</em> type
+that is displayed as raw HTML. They are presented below as simple types
+regardless of the underlying HTML element to avoid unnecessary
+complexity.</p>
 <p>You can change, add or delete record fields here if you wish to
-customize the user experience.</p>
-<p>This is what the default record field types look like.</p>
-<p><img src="./pam-default-record-fields.png" width="300" alt="default"/></p>
+customize the user experience but you cannot change the types. For
+example, you change the record field <em>note</em> from a
+<em>textarea</em> field to a <em>text</em> field but you cannot change
+the type <em>text</em>.</p>
+<p>These are the default (pre-defined) field types.</p>
+<p><img src="./pam-default-record-fields.png" width="400" alt="default"/></p>
+<blockquote>
+<p>Note that they can be changed at any time.</p>
+</blockquote>
 <p>The table below presents a brief overview of the types and when to
 use them. You can search the web for more details.</p>
 <table>
@@ -914,14 +932,16 @@ up the choices. You can always add them back later if you want.</p>
 <p>Here is an example that shows a recipe record with <q>ingredients</q>
 and <q>instructions</q> fields.</p>
 <p><img src="./pam-ice-cream-sundae.png" alt="ice-cream-sundae-example"></p>
-<p>Here is what the preferences look like with the other fields pruned
-out.</p>
+<p>Here is what the preferences look like after <q>ingredients</q> and
+<q>instructions</q> record fields have been added and the previous
+default record fields have been pruned out.</p>
 <p><img src="./pam-ice-cream-sundae-prefs.png" alt="ice-cream-sundae-example-prefs"></p>
 <p>Here is an example that shows an account record with <q>url</q>,
-<q>login</q> and <q>password</q> fields.</p>
+<q>login</q> and <q>password</q> record fields.</p>
 <p><img src="./pam-google-account.png" alt="google-account-example"></p>
 <p>Here is what the preferences look like with the other fields pruned
-out.</p>
+out. The <q>url</q>, <q>login</q> and <q>password</q> record fields are
+part of the default.</p>
 <p><img src="./pam-google-account-prefs.png" alt="google-account-example-prefs"></p>
 <h4 id="password-fields">Password Fields</h4>
 <p>Passwords fields show up in a lot of places. I chose to document them
@@ -1282,10 +1302,10 @@ class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-
 <h3 id="edit-record">Edit Record</h3>
 <p>To edit a record, select it from the records list and click or tap on
 the <code>"Edit"</code> button to popup the edit dialogue <em>which is
-exactly the same</em> as the dialogue used to create record.</p>
+exactly the same</em> as the dialogue used to create a new record.</p>
 <p>In fact, it is implemented using the <em>same code</em> so you can
-use the instructions from the <a href="#create-record">Create Record</a>
-section to understand how to change or add new fields.</p>
+use the instructions from the <a href="#create-new-record">Create New
+Record</a> section to understand how to change or add new fields.</p>
 <h3 id="delete-record">Delete Record</h3>
 <p>To delete a record, select it from the records list and click or tap
 on the <code>"Delete"</code> button.</p>
@@ -1298,7 +1318,7 @@ be careful</em>.</p>
 on the <code>"Clone"</code> button. This will create a new record that
 you can edit.</p>
 <p>The clone operation is described in detail in the <a
-href="#create-record">Create Record</a> section under the <a
+href="#create-new-record">Create New Record</a> section under the <a
 href="#method-2-clone-approach">Method 2: Clone Approach</a>
 subsection.</p>
 <h3 id="clear-records">Clear Records</h3>
@@ -1404,7 +1424,8 @@ the <a href="#preferences">Preferences</a> section before trying it.</p>
 <p>Click or tap on the
 <q><img src='./plus-circle-fill.svg' height='32' width='32' /> New
 Record</q> entry to create a new record. See the <a
-href="#create-record">Create Record</a> section for more details.</p>
+href="#create-new-record">Create New Record</a> section for more
+details.</p>
 <p>Click or tap on the
 <q><img src='./trash3-fill.svg' height='32' width='32' /> Clear
 Records</q> entry to delete all of the records. This is useful for times
@@ -1433,8 +1454,8 @@ using an example with seven records that contain confidential
 information for <q>Amazon</q>, <q>Email</q>, <q>Facebook</q>,
 <q>Github</q>, <q>Google</q>, <q>Netflix</q> and <q>Stack Exchange</q>
 fictional accounts.</p>
-<p>See the <a href="#create-record">Create Record</a> section for
-details about how to create records.</p>
+<p>See the <a href="#create-new-record">Create New Record</a> section
+for details about how to create records.</p>
 <h3 id="unexpanded-view-of-all-records">Unexpanded View of all
 Records</h3>
 <p>We start with the unexpanded view of all records as shown below.</p>
@@ -1633,8 +1654,8 @@ Cloning Records</h4>
 <p>This preference specifies that all data is kept when cloning a
 record.</p>
 <p>Remember that cloning a record is very simple and powerful way to
-create records with the same fields but you have to delete the existing
-values before entering new ones which is very simple.</p>
+create new records with the same fields but you have to delete the
+existing values before entering new ones which is very simple.</p>
 <p>The default is false which says to keep the field values when
 cloning.</p>
 <p>Set this preference if you want to avoid deleting the fields
@@ -1649,15 +1670,15 @@ fields so that records.</p>
 <p>This defines whether or not the user can change a field name.</p>
 <h5 id="not-enabled">Not Enabled</h5>
 <p>This is what it looks likes when it is unchecked (false).</p>
-<p><img src="./pam-fld-name-edit-unchecked.png" width="300" alt="false"/></p>
-<p><img src="./pam-fld-name-edit-off.png" width="300" alt="false"/></p>
+<p><img src="./pam-fld-name-edit-unchecked.png" width="400" alt="false"/></p>
+<p><img src="./pam-fld-name-edit-off.png" width="400" alt="false"/></p>
 <p>When this is not enabled, the user can only choose record fields from
 the pre-defined <q>Record Fields</q> section of the preferences. See the
 <a href="#record-fields">Record Fields</a> section for more details.</p>
 <h5 id="enabled">Enabled</h5>
 <p>This is what it looks likes when it is checked (true).</p>
-<p><img src="./pam-fld-name-edit-checked.png" width="300" alt="false"/></p>
-<p><img src="./pam-fld-name-edit-on.png" width="300" alt="true"/></p>
+<p><img src="./pam-fld-name-edit-checked.png" width="400" alt="false"/></p>
+<p><img src="./pam-fld-name-edit-on.png" width="400" alt="true"/></p>
 <p>The user can replace the default field name (in this case
 <q>name</q>) with whatever they want, perhaps something like <q>full
 name</q> or <q>first name</q> or <q>last name</q>. The <q>value</q>
@@ -1697,6 +1718,7 @@ menu) and a delete button
 (<img src="./trash3-fill.svg" height="32" width="32" alt="trash"/>) that
 you click to delete the record field.</p>
 <p>The record field names must be unique.</p>
+<p>For a more detailed description see <a href="#fields">Fields</a>.</p>
 <h3 id="saving-preferences">Saving Preferences</h3>
 <p>You <em>must</em> scroll to the bottom of the dialogue and click on
 the <code>"Save"</code> button at the end to save changes. If you do
@@ -1939,8 +1961,8 @@ different scenarios.</p>
 <p>This is the most common usage. It is where personal account records
 are stored so that you have a permanent, encrypted record of all of your
 passwords.</p>
-<h4 id="create-record-and-file">Create Record and File</h4>
-<p>To create a file and a record follow these steps:</p>
+<h4 id="create-record-file">Create Record File</h4>
+<p>To create a file with a single record follow these steps:</p>
 <ol type="1">
 <li>Navigate to the app: <a
 href="https://jlinoff.github.io/pam/www/">https://jlinoff.github.io/pam/www/</a>.
