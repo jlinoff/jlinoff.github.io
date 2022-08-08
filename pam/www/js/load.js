@@ -51,7 +51,8 @@ export function menuLoadDlg() {
 
 function loadExample(event) {
     let href = window.location.href
-    let base = href.substring(href.lastIndexOf('/'))
+    let lidx = href.lastIndexOf('/') + 1
+    let base = href.substring(0, lidx)
     let url = base + 'examples/example.txt'
     console.log('window.location.href', window.location.href)
     console.log('window.location.pathname', window.location.pathname)
