@@ -50,15 +50,12 @@ export function menuLoadDlg() {
 }
 
 function loadExample(event) {
+    // figure out the base url
     let href = window.location.href
     let lidx = href.lastIndexOf('/') + 1
     let base = href.substring(0, lidx)
     let url = base + 'examples/example.txt'
-    console.log('window.location.href', window.location.href)
-    console.log('window.location.pathname', window.location.pathname)
-    console.log('window.location.origin', window.location.origin)
-    console.log('url', url)
-    if (confirm(`Do you really want to load the example from ${url}?`) !== true) {
+    if (confirm(`Do you really want to load the example from\n${url}?`) !== true) {
         return
     }
     fetch(url)
