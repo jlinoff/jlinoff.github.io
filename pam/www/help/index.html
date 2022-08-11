@@ -134,11 +134,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2022-08-11 09:47:41 -0700</code></td>
+<td><code>2022-08-11 11:06:22 -0700</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>5f806a5</code></td>
+<td><code>836940b</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
@@ -476,25 +476,32 @@ Editable Field Name</a> preference to true to allow field names to be
 changed <em>when the field is created in a record</em> by adding a name
 prompt for each field in addition to the value prompt.</p>
 <p><img src="./pam-fld-name-edit-checked.png" width="400" alt="false"/></p>
-<p>Another way to do the same thing is to create them to the default
-record field list in the preferences section <a
-href="#record-fields">Record Fields</a> section so that they are
-available all of the time. The ability to customize record fields makes
-the interface more intuitive for users which is what I did for this
-example. Here is what the preferences look like after the modifications
-were made.</p>
+<p>Another way to do the same thing is to create the <q>ingredients</q>
+and <q>instructions</q> fields in the default record field list in the
+preferences section so that they are available all of the time. See the
+<a href="#record-fields">Record Fields</a> section for more information.
+The ability to customize record fields makes it possible to create more
+intuitive interfaces for users.</p>
+<p>For this example I chose the second option. I created two new
+<em>textarea</em> fields named <q>ingredients</q> and
+<q>instructions</q> so that users could enter multiple lines and removed
+all of the other default fields except the <q>html</q> field because
+they were not needed. I kept the <q>html</q> field because I wanted to
+be able add pictures to the recipes. Here is what the preferences look
+like after the modifications were made.</p>
 <p><img src="./pam-recipe-prefs.png" width="400" alt="default"/></p>
 <p>Of course, there are many other types of records that might be
 interesting to store in <em>PAM</em> that can use the pre-defined record
-field types.</p>
+field types <em>as is</em>.</p>
 <p>One common one is a record for each account that you need to login
 into where you information about how to login is stored so you don’t
 have to remember it.</p>
 <p>Such an <em><q>account</q></em> record would have, at a minimum, the
 web address (URL), the login name and the password of the account.</p>
-<p>Note that this is simplified example is only meant to show the basic
+<p>Note that this simplified example is only meant to show the basic
 idea of importance of supporting record formats that are different than
-recipes.</p>
+recipes. For a real account record you might want to add an email
+address or, perhaps, a notes field.</p>
 <p>Here is what a simple account record might look like.</p>
 <p><img src="./pam-google-account.png" width="400" alt="google-account-example"></p>
 <p>In this case the record field names <q>login</q>, <q>password</q> and
