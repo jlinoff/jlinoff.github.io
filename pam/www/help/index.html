@@ -860,7 +860,8 @@ convenience.</p>
 <p>Note that the ability to change field names is <em>only</em> enabled
 when the <a href="#enable-editable-field-name">Enable Editable Field
 Name</a> preference is enabled (checked) as shown in the following
-figure. It is not enabled by default.</p>
+figure. It is not enabled by default to avoid confusion between the
+<q>name</q> input and the <q>value</q> input.</p>
 </blockquote>
 <p><img src="./pam-fld-name-edit-checked.png" width="400" alt="false"/></p>
 <h5 id="default-record-field-types">Default Record Field Types</h5>
@@ -951,6 +952,12 @@ recipe ingredients.</td>
 <td>A text string that is a uniform resource locator (URL). Use it if
 you <em>only</em> want to accept a URL value. A typical usage might be
 the path to an account like <code>https://google.com</code></td>
+</tr>
+<tr class="even">
+<td>username</td>
+<td>A username. This may be slightly different than a login because a
+login could be an email address but, in general, it probably makes more
+sense to user <code>login</code> rather than <code>username</code>.</td>
 </tr>
 </tbody>
 </table>
