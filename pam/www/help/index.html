@@ -211,8 +211,7 @@ mobile devices</a></li>
 <ul>
 <li><a href="#default-record-field-types">Default Record Field
 Types</a></li>
-<li><a href="#custom-record-field-types">Custom Record Field
-Types</a></li>
+<li><a href="#custom-record-fields">Custom Record Fields</a></li>
 </ul></li>
 <li><a href="#password-fields">Password Fields</a>
 <ul>
@@ -830,7 +829,7 @@ field. For example, an <q>ingredients</q> field would indicate that the
 value is a list of ingredients.</p>
 <p>The field type describes the type of data that field holds like a
 number or an email. A complete description list of the available types
-is presented in the <a href="#custom-record-field-types">Custom Record
+is presented in the <a href="#default-record-field-types">Default Record
 Field Types</a> table below.</p>
 <p>The field value is the unique value for the field in an individual
 record. For example, an <q>email</q> field in one record would have
@@ -860,16 +859,16 @@ convenience.</p>
 <blockquote>
 <p>Note that the ability to change field names is <em>only</em> enabled
 when the <a href="#enable-editable-field-name">Enable Editable Field
-Name</a> preference is enabled (checked). It is not enabled by
-default.</p>
+Name</a> preference is enabled (checked) as shown in the following
+figure. It is not enabled by default.</p>
 </blockquote>
+<p><img src="./pam-fld-name-edit-checked.png" width="400" alt="false"/></p>
 <h5 id="default-record-field-types">Default Record Field Types</h5>
-<p>The record field type defines the type of each field that you define
-for a record.</p>
-<p>Record field types are based on HTML <em>input</em> element types
-except for the <em>textarea</em> type which is an HTML <em>textarea</em>
-element and the <em>html</em> type which is a <em>textarea</em> type
-that is displayed as raw HTML. They are presented below as simple types
+<p>Record field types define the type of each field that you define for
+a record. They are based on HTML <em>input</em> element types except for
+the <em>textarea</em> type which is an HTML <em>textarea</em> element
+and the <em>html</em> type which is a <em>textarea</em> type that is
+displayed as raw HTML. They are presented below as simple types
 regardless of the underlying HTML element to avoid unnecessary
 complexity.</p>
 <p>You can change, add or delete record fields here if you wish to
@@ -877,13 +876,15 @@ customize the user experience but you cannot change the types. For
 example, you change the record field <em>note</em> from a
 <em>textarea</em> field to a <em>text</em> field but you cannot change
 the type <em>text</em>.</p>
-<p>These are the default (pre-defined) field types.</p>
+<p>These are the default (pre-defined) fields and their associated
+types.</p>
 <p><img src="./pam-default-record-fields.png" width="400" alt="default"/></p>
 <blockquote>
 <p>Note that they can be changed at any time.</p>
 </blockquote>
-<p>The table below presents a brief overview of the types and when to
-use them. You can search the web for more details.</p>
+<p>The table below presents a brief overview of the field types and when
+to use them. You can search the web for more details about HTML input
+types.</p>
 <table>
 <colgroup>
 <col style="width: 44%" />
@@ -958,7 +959,7 @@ directly from input element description <a
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">here</a>,
 the separate textarea element is described <a
 href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement">here</a>.</p>
-<h5 id="custom-record-field-types">Custom Record Field Types</h5>
+<h5 id="custom-record-fields">Custom Record Fields</h5>
 <p>It is oftentimes the case that all of the <em>default</em> record
 field types are not needed for the records you are managing. This is
 especially true in cases where you have a very clear understanding of
