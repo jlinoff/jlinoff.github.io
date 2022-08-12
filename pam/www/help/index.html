@@ -134,11 +134,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2022-08-12 07:41:28 -0700</code></td>
+<td><code>2022-08-12 08:23:50 -0700</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>4a02936</code></td>
+<td><code>28bc63c</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
@@ -462,9 +462,11 @@ instructions
 5. add whip cream
 6. put the cherry on top.</code></pre>
 </blockquote>
-<p>It would look like this when you create it in <em>PAM</em>.</p>
+<p>It would look like this when you <em>create</em> it in
+<em>PAM</em>.</p>
 <p><img src="./pam-ice-cream-sundae-new.png" width="400" alt="ice-cream-sundae-example"></p>
-<p>It would look like this when you view it in <em>PAM</em>.</p>
+<p>It would look like this when you <em>view</em> it in
+<em>PAM</em>.</p>
 <p><img src="./pam-ice-cream-sundae-open.png" width="400" alt="ice-cream-sundae-example"></p>
 <p>As you can see, in this <em><q>recipe</q></em> record, the title is
 <code>"Ice Cream Sundae"</code> and the two fields <q>ingredients</q>
@@ -494,11 +496,10 @@ create more intuitive interfaces for users.</p>
 <em>textarea</em> fields named <q>ingredients</q> and
 <q>instructions</q> so that users could enter multiple lines and removed
 all of the other default fields except the <q>html</q> field because
-they were not needed. I kept the <q>html</q> field because I wanted to
-be able add pictures to the recipes. Here is what the preferences look
-like after the modifications were made.</p>
+they were not needed. I kept the default <q>html</q> field because I
+wanted to be able add pictures to the recipes. Here is what the
+preferences look like after the modifications were made.</p>
 <p><img src="./pam-recipe-prefs.png" width="400" alt="default"/></p>
-<p>All of this is discussed in more detail in subsequent sections.</p>
 <h5 id="simple-account-record">Simple Account Record</h5>
 <p>Of course, there are many other types of records that might be
 interesting to store in <em>PAM</em> that can use the pre-defined record
@@ -512,12 +513,13 @@ have to remember it.</p>
 web address (URL), the login name and the password of the account.</p>
 <p>Note that this simplified example is only meant to show the basic
 idea of importance of supporting record formats that are different than
-recipes. For a real account record you might want to add an email
-address or, perhaps, a notes field.</p>
-<p>Here is what a simple account record might look like.</p>
+recipes. For a real account record you would probably want to add
+additional fields like an email address or a notes field.</p>
+<p>Here is what the simple account record would look like.</p>
 <p><img src="./pam-google-account.png" width="400" alt="google-account-example"></p>
 <p>Note that the password is hidden in the example above. <em>PAM</em>
 always hides the contents of passwords by default.</p>
+<h5 id="record-model-summary">Record Model Summary</h5>
 <p>As you can see both records look quite different. Recipes records
 have fields for <q>ingredients</q> and <q>instructions</q> whereas
 account records have fields for the <q>url</q>, <q>login</q> and
@@ -530,7 +532,7 @@ information for other topics like <em><q>books read</q></em> or
 watching</q></em> which would undoubtedly require different fields.</p>
 <p>In my view, this approach of using <em>records composed of
 fields</em> does a better job of representing this type of information
-than a spreadsheet or a text file editor.</p>
+than a spreadsheet or a text file.</p>
 <h4 id="reason-3-searching">Reason 3: Searching</h4>
 <p><em>PAM</em> allows you to search records by their title or their
 field names and values. It also filters out the records that don’t match
