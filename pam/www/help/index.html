@@ -134,11 +134,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2022-08-12 08:23:50 -0700</code></td>
+<td><code>2022-08-12 10:31:17 -0700</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>28bc63c</code></td>
+<td><code>ceb9cd1</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
@@ -189,8 +189,8 @@ Automatic Password Generation</a></li>
 Storage</a></li>
 <li><a href="#reason-6-secure-context-encryption">Reason 6: Secure
 Context Encryption</a></li>
-<li><a href="#reason-8-hiding-passwords-from-causal-observers">Reason 7:
-Hiding Passwords from Causal Observers</a></li>
+<li><a href="#reason-8-hiding-passwords-from-casual-observers">Reason 7:
+Hiding Passwords from Casual Observers</a></li>
 <li><a href="#reason-8-access-from-mobile-devices">Reason 8: Access from
 mobile devices</a></li>
 <li><a href="#reason-9-foss">Reason 9: FOSS</a></li>
@@ -673,23 +673,34 @@ taken very seriously by the internet standards organization and the
 organizations that develop the major browsers.</p>
 <p>You can read more about secure contexts <a
 href="https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts">here</a>.</p>
-<h4 id="reason-7-hiding-passwords-from-causal-observers">Reason 7:
-Hiding Passwords from Causal Observers</h4>
+<h4 id="reason-7-hiding-passwords-from-casual-observers">Reason 7:
+Hiding Passwords from Casual Observers</h4>
 <p>Passwords and other secrets are automatically hidden on the screen
 (displayed as asterisks) so that someone looking over your shoulder
 cannot read them unless you choose to make them visible. You can read
 more about why this is beneficial in the <a
 href="#security-considerations">Security Considerations</a> section.</p>
-<p>This is the default hidden view of a password.</p>
+<p>This is the default hidden view of a password with the <a
+href="#enable-editable-field-name">Enable Editable Field Name</a>
+preference set which shows the name of the field. In this case
+<q>password</q>. You can see that the password value is all
+<em>asterisks</em>.</p>
 <p><img src="./pam-password-hidden.png" width="400" alt="password-hidden"></p>
-<p>This is the view of a password when it is not hidden.</p>
+<p>This is the same view of a password when it is not hidden. You can
+now see the password value.</p>
 <p><img src="./pam-password-shown.png" width="400" alt="password-shown"></p>
 <h4 id="reason-8-access-from-mobile-devices">Reason 8: Access from
 mobile devices</h4>
-<p>The files can be accessed from mobile devices so the user has access
-to the records anywhere. <em>PAM</em> uses <a
+<p>The record files can be accessed from mobile devices so the user has
+access to the records anywhere as described in the <a
+href="#reason-5-file-based-storage">Reason 5: File Based Storage</a> but
+that does not necessarily imply that the interface is <em>mobile
+friendly</em>.</p>
+<p>What makes <em>PAM</em> is <em>mobile friendly</em> is that it is
+implelementing using the <a
 href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">bootstrap-5</a>
-to make the interface work better in mobile browsers.</p>
+library to make the interface work better in the browsers present on
+mobile devices.</p>
 <h4 id="reason-9-foss">Reason 9: FOSS</h4>
 <p>Last but not least, one compelling reason to try <em>PAM</em> is that
 it is free and open source software (FOSS) so you can try it without any
