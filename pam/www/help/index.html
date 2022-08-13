@@ -134,11 +134,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2022-08-12 18:14:19 -0700</code></td>
+<td><code>2022-08-12 18:55:59 -0700</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>116389f</code></td>
+<td><code>f122676</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
@@ -490,10 +490,9 @@ were made.</p>
 <p><img src="./pam-recipe-prefs.png" width="400" alt="default"/></p>
 <h5 id="simple-account-record">Simple Account Record</h5>
 <p>Of course, there are many other types of records that might be
-interesting to store in <em>PAM</em> that can use the pre-defined record
-field types <em>as is</em>. See the <a href="#record-field-types">Record
-Field Types</a> section for a description of the default records and the
-pre-defined record field types.</p>
+interesting to store in <em>PAM</em> that can use the defaultd record
+fields <em>as is</em>. See the <a href="#fields">Fields</a> section for
+a description of the default records and their types.</p>
 <p>One common one is a record for each account that you need to login
 into where you information about how to login is stored so you don’t
 have to remember it.</p>
@@ -863,7 +862,7 @@ preference is enabled (checked) as shown in the following figure. It is
 not enabled by default to avoid confusion between the <q>name</q> input
 and the <q>value</q> input. Typically there is no reason to change
 record field names on a per record basis. It is better to add the new
-record fields to the default (pre-defined) list in the preferences.</p>
+record fields to the default list in the preferences.</p>
 <h5 id="record-field-types">Record Field Types</h5>
 <p>Record field types define the type of each field that you define for
 a record. They are based on HTML <em>input</em> element types except for
@@ -1739,8 +1738,8 @@ section as described in the <a href="#fields">Fields</a> section.</p>
 <p><img src="./pam-fld-name-edit-unchecked.png" width="400" alt="false"/></p>
 <p><img src="./pam-fld-name-edit-off.png" width="400" alt="false"/></p>
 <p>When this is not enabled, the user can only choose record fields from
-the pre-defined <q>Record Fields</q> section of the preferences. See the
-<a href="#record-fields">Record Fields</a> section for more details.</p>
+the <q>Record Fields</q> section of the preferences. See the <a
+href="#record-fields">Record Fields</a> section for more details.</p>
 <h5 id="enabled">Enabled</h5>
 <p>This is what it looks likes when it is checked (true).</p>
 <p><img src="./pam-fld-name-edit-checked.png" width="400" alt="false"/></p>
@@ -1782,8 +1781,8 @@ about record fields.</p>
 <p>At the top of the section there is
 <img src="./plus-circle.svg" height="32" width="32" alt="add"/> icon
 that is used to create a new record field.</p>
-<p>Each pre-defined record field has a name, a type (from a pulldown
-menu) and a delete button
+<p>Each default record field has a name, a type (from a pulldown menu)
+and a delete button
 (<img src="./trash3-fill.svg" height="32" width="32" alt="trash"/>) that
 you click to delete the record field.</p>
 <p>The record field names must be unique but you can modify them. They
