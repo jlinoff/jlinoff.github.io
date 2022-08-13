@@ -134,11 +134,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2022-08-13 15:28:33 -0700</code></td>
+<td><code>2022-08-13 15:31:58 -0700</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>3ee40cf</code></td>
+<td><code>3a00cb7</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
@@ -835,36 +835,49 @@ href="#record-model-summary">Reason 2: Record Model</a>) section.</p>
 <h4 id="fields">Fields</h4>
 <p>Records are composed of fields. Each field has a unique name, a type
 and a value.</p>
-<p>The field <em>name</em> is arbitrary and is meant to describe the
-data in the field. For example, an <q>ingredients</q> field would
-indicate that the value is a list of ingredients and a <q>number</q>
-field would indicate that the value is a number. An example of a field
-<em>name</em> might be <q>mobile phone</q>.</p>
+<p>The field <em>name</em> is arbitrary and is meant to describes how
+the data in the field is used. For example, an <q>ingredients</q> field
+would indicate that the value is a list of ingredients and a
+<q>number</q> field would indicate that the value is a number. An
+example of a field <em>name</em> might be <q>mobile phone</q>.</p>
 <p>The field <em>type</em> explicitly describes the type of data that
-field holds like a number or an email. A complete description list of
-the available types is presented in the <a
-href="#record-field-types">Record Field Types</a> ection.</p>
+field holds like a <q>number</q> or a <q>phone</q> or an <q>email</q>.
+Types are pre-defined and strictly enforced by javascript. An example of
+the difference between a <em>name</em> and a <em>type</em> would be a
+field named <q>mobile</q> of type <em>phone</em>. The name describes
+<em>how</em> it is used whereas the type describes <em>what</em> the
+input type is which, in turn, dictates what user inputs are acceptable.
+A description of each pre-defined record field type can be found inin
+the <a href="#record-field-types">Record Field Types</a> section.</p>
 <p>The field <em>value</em> is the unique value for the field in an
-individual record. For example, an field named <q>email</q> of type
-<q>email</q> could have a value <q>wombat@foo.io</q> the name and the
-type could be the same for all records but the value would vary.</p>
-<p>The default records are defined in the <a
-href="#Preferences">Preferences</a>. They are stored in each file with
-the along with the actual records so each records file can have
-different types of records. For example a file of recipe records would
-always want <q>ingredients</q> and <q>instructions</q> fields but a file
-of <em><q>books read</q></em> records would not.</p>
+individual record that is set when a field is created or edited. For
+example, an field named <q>email</q> of type <q>email</q> could have a
+value <q>wombat@foo.io</q> the name and the type could be the same for
+all records that had an <q>email</q> field but the value would vary.</p>
+<p>The default record fields are defined in the <a
+href="#Preferences">Preferences</a> and show up in the <q>New Field</q>
+pulldown menu when a record is created or edited. They are stored in
+each file with the along with the actual records so each records file
+can have different types of records. For example a file of recipe
+records would probably want <q>ingredients</q> and <q>instructions</q>
+fields but a file of <em><q>books read</q></em> records probably would
+not.</p>
 <p>See the <a href="#record-fields">Record Fields</a> section for
-details about how to modify the default records.</p>
+details about how to add or modify the default record fields.</p>
+<p>There is a second more obscure way to define field names, you can
+change field names <em>when you create or edit an individual record</em>
+by setting the <a href="#enable-editable-field-name">Enable Editable
+Field Name</a> preference.</p>
+<p>It is not enabled by default to avoid confusion between the
+<q>name</q> input and the <q>value</q> input as shown below. Typically
+there is no reason to change record field names on a per record basis.
+It is better to add the new record fields to the default list in the
+preferences.</p>
 <p><img src="./pam-change-field-name.png" width="400" alt="change-field-name"></p>
-<p>Note that the ability to change record field names for
-<em>individual</em> records is <em>only</em> enabled when the <a
-href="#enable-editable-field-name">Enable Editable Field Name</a>
-preference is enabled (checked) as shown in the following figure. It is
-not enabled by default to avoid confusion between the <q>name</q> input
-and the <q>value</q> input. Typically there is no reason to change
-record field names on a per record basis. It is better to add the new
-record fields to the default list in the preferences.</p>
+<blockquote>
+<p>Don’t do this because it might be confusingto users. Instead create a
+new pre-defined record as described above.</p>
+</blockquote>
 <h5 id="record-field-types">Record Field Types</h5>
 <p>Record field types define the type of each field that you define for
 a record. They are based on HTML <em>input</em> element types except for
