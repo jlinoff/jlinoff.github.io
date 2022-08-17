@@ -159,11 +159,6 @@ function saveCallback(text, filename) {
         return
     }
 
-    let check = xmk('a')
-    console.log(check)
-    if (check.download === undefined) {
-        alert('WARNING!\nsave dialogue not fully supported in this browser.')
-    }
     // Create anchor element, add the data and click it.
     let data = 'data:text/plain; charset=utf-8,' + encodeURIComponent(text)
     let a = xmk('a')
@@ -172,9 +167,12 @@ function saveCallback(text, filename) {
             })
         .xAttrs({
             'href': data,
-            'download': filename
+            'download': filename,
+            'target': '_blank',
         })
     document.body.appendChild(a)
-    a.click()
-    a.remove()
+    setTimeout(() => {
+        a.click()
+        a.remove()
+    }, 1000)
 }
