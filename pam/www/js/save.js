@@ -159,6 +159,11 @@ function saveCallback(text, filename) {
         return
     }
 
+    let check = xmk('a')
+    console.log(check)
+    if (check.download === undefined) {
+        alert('WARNING!\nsave dialogue not fully supported in this browser.')
+    }
     // Create anchor element, add the data and click it.
     let data = 'data:text/plain; charset=utf-8,' + encodeURIComponent(text)
     let a = xmk('a')
@@ -167,19 +172,9 @@ function saveCallback(text, filename) {
             })
         .xAttrs({
             'href': data,
-            'download': filename,
-            'target': '_blank',
+            'download': filename
         })
     document.body.appendChild(a)
-    // The following two lines work on all browsers tested except
-    // mobile Safari.
-    //a.click()
-    //a.remove()
-    // This silliness is for ios safari-15 on the apple ipad i tested on.
-    setTimeout(() => { // wait for the element to appear in the DOM
-        a.click()
-        setTimeout(() => { // wait to remove the element.
-            a.remove()
-        }, 1000)
-    })
+    a.click()
+    a.remove()
 }
