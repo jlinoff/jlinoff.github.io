@@ -171,6 +171,15 @@ function saveCallback(text, filename) {
             'target': '_blank',
         })
     document.body.appendChild(a)
-    a.click()
-    a.remove()
+    // The following two lines work on all browsers tested except
+    // mobile Safari.
+    //a.click()
+    //a.remove()
+    // This silliness is for ios safari-15 on the apple ipad i tested on.
+    setTimeout(() => { // wait for the element to appear in the DOM
+        a.click()
+        setTimeout(() => { // wait to remove the element.
+            a.remove()
+        }, 1000)
+    }
 }
