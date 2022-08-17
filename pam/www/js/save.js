@@ -83,7 +83,7 @@ export function menuSaveDlg() {
                                      document.body.xGet('#x-load-password').value = fp
                                      window.prefs.fileName = fn
                                      setFilePass(fp)
-                                     statusBlip(`saving records to ${fn}...`)
+                                     statusBlip(`saving to ${fn}...`)
                                      saveFile(fn, fp)
                                      return true
                                 })
@@ -154,22 +154,21 @@ function saveFile(filename, password) {
     encrypt(password, text, filename, saveCallback)
 }
 
-// Save text to file.
 function saveCallback(text, filename) {
-    const blob = new Blob([text], {type: 'data:text/plain;charset=utf-8'})
-    const url = window.URL.createObjectURL(blob)
+    if (!text || text.length === 0 ) {
+        return
+    }
+    // Create anchor element, add the data and click it.
+    let data = 'data:text/plain; charset=utf-8,' + encodeURIComponent(text)
     let a = xmk('a')
         .xStyle({
             'display': 'none'
             })
         .xAttrs({
-            'href': url,
+            'href': data,
             'download': filename
         })
     document.body.appendChild(a)
     a.click()
-    setTimeout(() => {
-        window.URL.revokeObjectURL(url)
-        window.close()
-    }, 3000)
+    a.remove()
 }
