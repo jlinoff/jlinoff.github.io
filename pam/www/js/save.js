@@ -181,5 +181,5 @@ function saveCallback(text, filename) {
         setTimeout(() => { // wait to remove the element.
             a.remove()
         }, 1000)
-    }
+    })
 }
