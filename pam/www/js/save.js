@@ -173,6 +173,6 @@ function saveCallback(text, filename) {
     document.body.appendChild(a)
     setTimeout(() => {
         a.click()
-        a.remove()
+        setTimeout(()=> {a.remove()}, 1000)
     }, 1000)
 }
