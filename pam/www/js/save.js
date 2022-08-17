@@ -83,7 +83,7 @@ export function menuSaveDlg() {
                                      document.body.xGet('#x-load-password').value = fp
                                      window.prefs.fileName = fn
                                      setFilePass(fp)
-                                     statusBlip(`saving to ${fn}...`)
+                                     statusBlip(`saving records to ${fn}...`)
                                      saveFile(fn, fp)
                                      return true
                                 })
@@ -155,20 +155,25 @@ function saveFile(filename, password) {
 }
 
 function saveCallback(text, filename) {
-    if (!text || text.length === 0 ) {
-        return
-    }
-    // Create anchor element, add the data and click it.
-    let data = 'data:text/plain; charset=utf-8,' + encodeURIComponent(text)
+    saveCallback1(text, filename)
+}
+
+// experimental to see if it works on ipad.
+function saveCallback1(text, filename) {
+    const blob = new Blob([text], {type: 'data:text/plain'})
+    const url = window.URL.createObjectURL(blob)
     let a = xmk('a')
         .xStyle({
             'display': 'none'
             })
         .xAttrs({
-            'href': data,
+            'href': url,
             'download': filename
         })
     document.body.appendChild(a)
     a.click()
-    a.remove()
+    setTimeout(() => {
+        window.URL.revokeObjectURL(url)
+        window.close()
+    }, 3000)
 }
