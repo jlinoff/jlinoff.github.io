@@ -6,7 +6,6 @@ import { icon, mkPopupModalDlgButton, mkPopupModalDlg } from './utils.js'
 import { findRecord } from './record.js'
 import { mkGeneratePasswordDlg, mkLoadSavePassword, setFilePass } from './password.js'
 import { encrypt } from './crypt.js'
-import { saveAs } from 'fileSaver.js';
 
 // Called from the top level menu.
 export function menuSaveDlg() {
@@ -155,13 +154,8 @@ function saveFile(filename, password) {
     encrypt(password, text, filename, saveCallback)
 }
 
+// Save text to file.
 function saveCallback(text, filename) {
-    const blob = new Blob([text], {type: 'data:text/plain;charset=utf-8'})
-    SaveAs(blob, filename)
-}
-
-// experimental to see if it works on ipad.
-function saveCallback1(text, filename) {
     const blob = new Blob([text], {type: 'data:text/plain;charset=utf-8'})
     const url = window.URL.createObjectURL(blob)
     let a = xmk('a')
