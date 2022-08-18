@@ -134,11 +134,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2022-08-17 21:07:13 -0700</code></td>
+<td><code>2022-08-17 21:08:27 -0700</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>5066954</code></td>
+<td><code>3a754f6</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
@@ -875,16 +875,13 @@ details about how to add or modify the default record fields.</p>
 change field names <em>when you create or edit an individual record</em>
 by setting the <a href="#enable-editable-field-name">Enable Editable
 Field Name</a> preference.</p>
-<p>It is not enabled by default to avoid confusion between the
-<q>name</q> input and the <q>value</q> input as shown below. Typically
-there is no reason to change record field names on a per record basis.
-It is better to add the new record fields to the default list in the
-preferences.</p>
+<p>This capability is not enabled by default to avoid confusion between
+the <q>name</q> input and the <q>value</q> input as shown below.
+Normally only the <q>value</q> input is shown.</p>
+<p>Typically there is no reason to change record field names on a per
+record basis. It is better to add the new record fields to the default
+list in the preferences.</p>
 <p><img src="./pam-change-field-name.png" width="400" alt="change-field-name"></p>
-<blockquote>
-<p>Don’t do this because it might be confusingto users. Instead create a
-new pre-defined record as described above.</p>
-</blockquote>
 <h5 id="record-field-types">Record Field Types</h5>
 <p>Record field types define the type of each field that you define for
 a record. They are based on HTML <em>input</em> element types except for
@@ -896,15 +893,18 @@ can be used for inserting images. They are presented below as simple
 types regardless of the underlying HTML element to avoid unnecessary
 complexity.</p>
 <p>You can change, add or delete record field <em>names</em> here if you
-wish to customize the user experience but you cannot change the types.
-For example, you change the record field <em>note</em> from a
-<em>textarea</em> field to a <em>text</em> field but you cannot change
-the type <em>text</em>.</p>
+wish to customize the user experience but you cannot change the built in
+<em>types</em>. For example, you change the record field name
+<em><q>note</q></em> from a <em><q>textarea</q></em> field to a
+<em><q>text</q></em> but there is no way to add a new built in type to
+the drop down list from the user interface.</p>
 <p>These are the default field definitions.</p>
 <p><img src="./pam-default-record-fields.png" width="400" alt="default"/></p>
 <p>The table below presents a brief overview of the pre-defined record
-field types and when to use them. You can search the web for more
-details about HTML input types.</p>
+fields and their associated built in types and when to use them. You can
+search the web for more details about <a
+href="https://developer.mozilla.org/en-US/docs/Learn/Forms/HTML5_input_types">HTML
+input types</a>.</p>
 <table>
 <colgroup>
 <col style="width: 44%" />
@@ -1056,11 +1056,18 @@ form.</p>
 <p><img src="./pam-record-expanded-fields.png" width="400" alt="record-expanded"></p>
 <p>To make the password visible, click or tap on the
 <img src="./eye.svg" height="32" width="32" alt="eye"/> icon.</p>
+<p>The password can be copied to the clipboard when it is hidden by
+clicking on the
+<img src="./clipboard.svg" height="32" width="32" alt="clipboard"/>
+icon.</p>
 <h5 id="visible-password-representation">Visible Password
 Representation</h5>
 <p>Here is an example that shows a password in its visible hidden
 form.</p>
 <p><img src="./pam-record-expanded-password.png" width="400" alt="record-expanded-password"></p>
+<p>The password can be copied to the clipboard by clicking on the
+<img src="./clipboard.svg" height="32" width="32" alt="clipboard"/>
+icon.</p>
 <p>To hide the password, click or tap on the
 <img src="./eye-slash.svg" height="32" width="32" alt="eye"/> icon.</p>
 <h5 id="password-generator">Password Generator</h5>
