@@ -134,11 +134,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2022-08-18 15:37:24 -0700</code></td>
+<td><code>2022-08-18 16:43:32 -0700</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>7698812</code></td>
+<td><code>f5b2bdb</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
@@ -196,11 +196,18 @@ mobile devices</a></li>
 <li><a href="#reason-9-foss">Reason 9: FOSS</a></li>
 </ul></li>
 </ul></li>
+<li><a href="#records">Records</a>
+<ul>
+<li><a href="#unexpanded-view-of-all-records">Unexpanded View of all
+Records</a></li>
+<li><a href="#expanded-view-of-a-record">Expanded View of a
+Record</a></li>
+</ul></li>
 <li><a href="#topics">Topics</a></li>
 <li><a href="#fields">Fields</a>
 <ul>
 <li><a href="#record-field-types">Record Field Types</a></li>
-<li><a href="#custom-record-fields">Custom Record Fields</a></li>
+<li><a href="#custom-fields">Custom Fields</a></li>
 </ul></li>
 <li><a href="#password-fields">Password Fields</a>
 <ul>
@@ -214,7 +221,11 @@ Representation</a></li>
 </ul></li>
 <li><a href="#layout">Layout</a>
 <ul>
-<li><a href="#menu-and-search-section">Menu and Search Section</a></li>
+<li><a href="#menu-and-search-section">Menu and Search Section</a>
+<ul>
+<li><a href="#search">Search</a></li>
+<li><a href="#menu">Menu</a></li>
+</ul></li>
 <li><a href="#records-section">Records Section</a></li>
 <li><a href="#status-section">Status Section</a></li>
 </ul></li>
@@ -232,16 +243,7 @@ Representation</a></li>
 <li><a href="#clear-records">Clear Records</a></li>
 <li><a href="#save-file">Save File</a></li>
 <li><a href="#load-file">Load File</a></li>
-<li><a href="#search-records">Search Records</a></li>
 <li><a href="#get-help">Get Help</a></li>
-</ul></li>
-<li><a href="#menu">Menu</a></li>
-<li><a href="#records">Records</a>
-<ul>
-<li><a href="#unexpanded-view-of-all-records">Unexpanded View of all
-Records</a></li>
-<li><a href="#expanded-view-of-a-record">Expanded View of a
-Record</a></li>
 </ul></li>
 <li><a href="#preferences">Preferences</a>
 <ul>
@@ -476,9 +478,9 @@ contains the image.</p>
 <q>instructions</q> used in this example are custom <em>field
 names</em>. They are not available by default. The <q>html</q> field
 <em>is</em> a default field.</p>
-<p>Custom record fields can be created by adding new fields to the
-default fields defined in the preferences so they are available all of
-the time.</p>
+<p>Custom fields can be created by adding new fields to the default
+fields defined in the preferences so they are available all of the
+time.</p>
 <p>For this example I created two new <em>textarea</em> fields named
 <q>ingredients</q> and <q>instructions</q> so that users could enter
 multiple lines and removed all of the other default fields except the
@@ -531,7 +533,7 @@ easy.</p>
 contain a <q>g</q>.</p>
 <p><img src="./pam-search-g.png" width="400" alt="search-g"/></p>
 <p>Note that regular expressions can be used as well. See <a
-href="#search-records">Search Records</a> for more details.</p>
+href="#search">Search</a> for more details.</p>
 <h4 id="reason-4-automatic-password-generation">Reason 4: Automatic
 Password Generation</h4>
 <p>I always find it hard to come up with passwords in the spur of the
@@ -691,6 +693,68 @@ mobile devices.</p>
 it is free and open source software (FOSS) so you can try it without any
 obligation or cost. You can also help find and fix bugs or improve the
 UI.</p>
+<h2 id="records">Records</h2>
+<p>Records are a key concept in <em>PAM</em> as described in <a
+href="#reason-2-record-model">Reason 2: Record Model</a>.</p>
+<p>This section talks about how records are presented in <em>PAM</em>
+using an example with seven records that contain confidential
+information for <q>Amazon</q>, <q>Email</q>, <q>Facebook</q>,
+<q>Github</q>, <q>Google</q>, <q>Netflix</q> and <q>Stack Exchange</q>
+fictional accounts from the <a href="#load-file">Load File</a>
+example.</p>
+<p>See the <a href="#create-new-record">Create New Record</a> section
+for details about how to create records and the <a
+href="#topics">Topics</a> and <a href="#fields">Fields</a> sections for
+more details about their contents.</p>
+<h3 id="unexpanded-view-of-all-records">Unexpanded View of all
+Records</h3>
+<p>We start with the unexpanded view of all records as shown below.</p>
+<p><img src="./pam-example-records.png" width="400" alt="example-records"></p>
+<p>As you can see <em>PAM</em> presents the records as an accordion.
+Each record is one entry in the accordion that you can expand to view
+the record fields or <a href="#delete-record">delete</a>, <a
+href="#clone-record">clone</a> or <a href="#edit-record">edit</a> edit
+the record.</p>
+<p>To get the information for an account you click or tap the
+button.</p>
+<p>At the top of the screen is the search bar and, at the far right, the
+menu.</p>
+<p>At the bottom of the screen is a status bar that shows status
+messages.</p>
+<h3 id="expanded-view-of-a-record">Expanded View of a Record</h3>
+<p>Once you click on or tap a record it expands as shown below where the
+<q>Facebook</q> record was tapped.</p>
+<p><img src="./pam-record-expanded.png" width="400" alt="record-expanded"></p>
+<p>You can see that there are three fields in the record: <q>url</q>,
+<q>login</q> and <q>password</q>, next to each field there is a icon
+that looks like a clipboard
+<img src="./clipboard.svg" height="32" width="32" alt="clipboard"/>.</p>
+<p><img src="./pam-record-expanded-fields.png" width="400" alt="record-expanded"></p>
+<p>If you click or tap the clipboard icon, the field contents will be
+copied to the clipboard so that you can paste them into a login
+dialogue.</p>
+<blockquote>
+<p>Note that the fields are completely customizable. You can have as
+many as you want. Fields are added, modified and deleted by the
+<q>Edit</q> option.</p>
+</blockquote>
+<p>In addition to the clipboard icon there is another icon that looks
+like an eye <img src="./eye.svg" height="32" width="32" alt="eye"/>.
+that shows up for password field. If you click or tap it, the password
+will be shown in plaintext and the icon will change to an eye with a
+slash through it
+<img src="./eye-slash.svg" height="32" width="32" alt="eye-slash"/>. By
+default all passwords are hidden so that they are not visible to casual
+observers. Click or tap it again to re-hide the password.</p>
+<p>In addition there are three buttons at the bottom
+<q><img src='./trash.svg' height='32' width='32' /> Delete</q> to delete
+the record,
+<q><img src='./files.svg' height='32' width='32' /> Clone</q> to clone
+the record and
+<q><img src='./pencil-square.svg' height='32' width='32' /> Edit</q> to
+edit the record fields.</p>
+<p>As you can see here.</p>
+<p><img src="./pam-record-expanded-fields2.png" width="400" alt="record-expanded"></p>
 <h2 id="topics">Topics</h2>
 <p>Topics define how records are related. They provide a convenient
 abstraction for organizing related records in files. Topics are
@@ -714,8 +778,6 @@ always work on mobile devices so a records file named
 <q><code>myrecords.pam</code></q> might not be readable by the mobile
 browser. Thus, I recommend using the <q><code>.txt</code></q> for all
 record files for maximum portability.</p>
-<p>Topics are also discussed briefly at the end of the <a
-href="#record-model-summary">Reason 2: Record Model</a> section.</p>
 <h2 id="fields">Fields</h2>
 <p>Records are composed of fields. Each field has a unique name, a type
 and a value.</p>
@@ -868,21 +930,19 @@ directly from input element description <a
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">here</a>,
 the separate textarea element is described <a
 href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement">here</a>.</p>
-<h3 id="custom-record-fields">Custom Record Fields</h3>
+<h3 id="custom-fields">Custom Fields</h3>
 <p>It is oftentimes the case that all of the <em>default</em> record
-fields are not needed for the records you are managing. This is
-especially true in cases where you have a very clear understanding of
-the record field requirements.</p>
-<p>If that is the case you might want to use the preferences to delete
-fields that are not relevant for your usage so that they don’t clutter
-up the choices. You can always add them back later if you want.</p>
+fields are not needed for the records you are managing or you may want
+to define new, custom fields that are more intuitive for your records.
+This section shows you how to do that.</p>
 <p>Here is an example that shows a recipe record with <q>ingredients</q>
 and <q>instructions</q> fields.</p>
 <p><img src="./pam-ice-cream-sundae-open.png" width="400" alt="ice-cream-sundae-example"></p>
 <p>Here is what the preferences look like after <q>ingredients</q> and
 <q>instructions</q> record fields have been added and the previous
-default record fields have been pruned out.</p>
-<p><img src="./pam-ice-cream-sundae-prefs.png" width="400" alt="ice-cream-sundae-example-prefs"></p>
+default record fields other than <em><q>html</q></em> have been pruned
+out.</p>
+<p><img src="./pam-recipe-prefs.png" width="400" alt="ice-cream-sundae-example-prefs"></p>
 <p>Here is an example that shows an account record with <q>url</q>,
 <q>login</q> and <q>password</q> record fields.</p>
 <p><img src="./pam-google-account.png" width="400" alt="google-account-example"></p>
@@ -996,14 +1056,81 @@ section and the status section.</p>
 <p><img src="./pam-basic-sections.png" width="400" alt="menu-bar"></p>
 <h3 id="menu-and-search-section">Menu and Search Section</h3>
 <p>The top section that contains a search input and a menu.</p>
-<p>The search input is used to find records that match the input to make
-them easier to find. You can find more information about searching in
-the <a href="#search-records">Search Records</a> section</p>
+<h4 id="search">Search</h4>
+<p><em>PAM</em> allows you to search records by their title or their
+field names and values to filter out records that do not match the
+search pattern. This is extremely useful when the number of records
+grows.</p>
+<p>The search function at the top left supports case insensitive
+searches and regular expressions to make it easier to find records.</p>
+<p>This can be very helpful for finding out where old passwords and
+obsolete accounts are still being used.</p>
+<p>Here is the made up list of account records from the <a
+href="#load-files">Load Files</a> example:</p>
+<p><img src="./pam-search.png" width="400" alt="pam-search"></p>
+<p>Here is the same list after filtering for those whose titles contain
+the letter <code>"g"</code>. Note that searches are case insensitive but
+you can change that by unsetting the <a
+href="#case-insensitive-searches">Case Insensitive Searches</a>
+preference.</p>
+<p><img src="./pam-search-g.png" width="400" alt="pam-search-g"></p>
+<p>To filter only those that start with <code>"g"</code> you would use
+this regular expression search term instead: <code>"^g"</code>. which
+would result in only two records found.</p>
+<p>For more information about regular expression syntax see the
+documentation for <a
+href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">Javascript
+Regular Expressions</a>.</p>
+<p>For more information about how you control the all of the available
+search options see the <a href="#search-preferences">Search
+Preferences</a> section.</p>
+<h4 id="menu">Menu</h4>
 <p>The menu at the top right is the control center for the application
-it has a number of options as you can see below.</p>
-<p><img src="./pam-basic-menu.png" width="400" alt="menu"></p>
-<p>Each of the menu options is discussed in more detail in the <a
-href="#functions">Functions</a> section.</p>
+it has a number of options as you can see below. This is what it looks
+like.</p>
+<p><img src="./pam-menu.png" width="400" alt="menu"></p>
+<p>As you can see, there are seven menu options:</p>
+<ol type="1">
+<li><a href="#about">About</a></li>
+<li><a href="#preferences">Preferences</a></li>
+<li><a href="#create-new-record">New Record</a></li>
+<li><a href="#clear-records">Clear Records</a></li>
+<li><a href="#load-file">Load File</a></li>
+<li><a href="#save-file">Save File</a></li>
+<li><a href="#get-help">Help</a>.</li>
+</ol>
+<p>Click or tap on the
+<q><img src='./info-circle.svg' height='32' width='32' /> About</q>
+entry to see information about the app. See the <a
+href="#about">About</a> section for more details.</p>
+<p>Click or tap on the
+<q><img src='./gear.svg' height=' 32' width='32' /> Preferences</q>
+entry to see the preferences dialogue which allows you to customize some
+of the app behavior. There is a lot of stuff so you might want to read
+the <a href="#preferences">Preferences</a> section before trying it.</p>
+<p>Click or tap on the
+<q><img src='./plus-circle-fill.svg' height='32' width='32' /> New
+Record</q> entry to create a new record. See the <a
+href="#create-new-record">Create New Record</a> section for more
+details.</p>
+<p>Click or tap on the
+<q><img src='./trash3-fill.svg' height='32' width='32' /> Clear
+Records</q> entry to delete all of the records. This is useful for times
+when you want to create a new collection of records that is saved in a
+separate file. For example, if you wanted to create a collection
+personal accounts in one file and a collection shared accounts for a
+group of folks (like a development team sharing AWS accounts).</p>
+<p>Click or tap on the
+<q><img src='./file-arrow-up-fill.svg' height='32' width='32' /> Load
+File</q> entry to load a records file. See the <a href="#load-file">Load
+File</a> section for more details.</p>
+<p>Click or tap on the
+<q><img src='./file-arrow-down-fill.svg' height='32' width='32' /> Save
+File</q> entry to save all of the records to a file. See the <a
+href="#save-file">Save File</a> section for more details.</p>
+<p>Click or tap on the
+<q><img src='./question-circle.svg' height='32' width='32' /> Help</q>
+entry to see this help message.</p>
 <h3 id="records-section">Records Section</h3>
 <p>Underneath the top level bar, in the middle, is the records section.
 Each record is shown as an entry that is displayed by its title. If you
@@ -1043,16 +1170,15 @@ clicked or tapped as shown in the example below.</p>
 <em>PAM</em> provides.</p>
 <p>In a nutshell they are:</p>
 <ol type="1">
-<li>Display information About the application.</li>
-<li>Create New Record.</li>
-<li>Edit Record.</li>
-<li>Delete Record.</li>
-<li>Clone Record.</li>
-<li>Clear Records.</li>
-<li>Save records to an encrypted file.</li>
-<li>Load a collection of records from an encrypted file.</li>
-<li>Search Records.</li>
-<li>Get Help.</li>
+<li><a href="#about">Display information About the application</a></li>
+<li><a href="#create-new-record">Create New Record</a></li>
+<li><a href="#edit-record">Edit Record</a></li>
+<li><a href="#delete-record">Delete Record</a></li>
+<li><a href="#clone-record">Clone Record</a></li>
+<li><a href="#clear-records">Clear Records</a></li>
+<li><a href="#save-records">Save Records</a></li>
+<li><a href="#load-records">Load Records</a></li>
+<li><a href="#get-help">Help</a>.</li>
 </ol>
 <p>Each function will be discussed in a separate subsection below.</p>
 <p>Note that Preferences were not included because they have their own
@@ -1454,27 +1580,6 @@ examples text (#2).</p>
 <p><img src="./pam-file-load-url.png" width="400" alt="load-url"></p>
 <p>This is typically used when a PAM records file is shared because no
 changes can be made.</p>
-<h3 id="search-records">Search Records</h3>
-<p><em>PAM</em> allows you to search records by their title or their
-field names and values to filter out records that do not match the
-search pattern. This is extremely useful when the number of records
-grows.</p>
-<p>The search function supports case insensitive searches and regular
-expressions to make it easier to find stuff.</p>
-<p>This can be very helpful for finding out where old passwords and
-obsolete accounts are still being used.</p>
-<p>Here is the made up list of account records from the <a
-href="#load-files">Load Files</a> example:</p>
-<p><img src="./pam-search.png" width="400" alt="pam-search"></p>
-<p>Here is the same list after filtering for those whose titles contain
-the letter <code>"g"</code>.</p>
-<p><img src="./pam-search-g.png" width="400" alt="pam-search-g"></p>
-<p>To filter only those that start with <code>"g"</code> you would use
-this regular expression search term instead: <code>"^g"</code>.</p>
-<p>For more information about regular expression syntax see the
-documentation for <a
-href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">Javascript
-Regular Expressions</a>.</p>
 <h3 id="get-help">Get Help</h3>
 <p>To get this help message, choose the <code>"Help"</code> option from
 the menu.</p>
@@ -1482,118 +1587,6 @@ the menu.</p>
 improvement, go to the <a
 href="#pam---personal-account-manager">Metadata section</a> at the top
 of this help and click or tap on the project link.</p>
-<h2 id="menu">Menu</h2>
-<p>The menu is the control center for the app. It provides the basic
-operations for creating records, loading records, saving them and it
-provide information about the app including this help.</p>
-<p>Note that much of this material presented here has been discussed in
-earlier sections but having it consolidated here might be helpful. Plus
-there are links to the sections with relevant details.</p>
-<p>This is what the menu looks like.</p>
-<p><img src="./pam-menu.png" width="400" alt="menu"></p>
-<p>As you can see, there are seven menu options:</p>
-<ol type="1">
-<li><q>About</q>,</li>
-<li><q>Preferences</q>,</li>
-<li><q>New Record</q>,</li>
-<li><q>Clear Records</q>,</li>
-<li><q>Load File</q>,</li>
-<li><q>Save File</q>, and</li>
-<li><q>Help</q>.</li>
-</ol>
-<p>Click or tap on the
-<q><img src='./info-circle.svg' height='32' width='32' /> About</q>
-entry to see information about the app. See the <a
-href="#about">About</a> section for more details.</p>
-<p>Click or tap on the
-<q><img src='./gear.svg' height=' 32' width='32' /> Preferences</q>
-entry to see the preferences dialogue which allows you to customize some
-of the app behavior. There is a lot of stuff so you might want to read
-the <a href="#preferences">Preferences</a> section before trying it.</p>
-<p>Click or tap on the
-<q><img src='./plus-circle-fill.svg' height='32' width='32' /> New
-Record</q> entry to create a new record. See the <a
-href="#create-new-record">Create New Record</a> section for more
-details.</p>
-<p>Click or tap on the
-<q><img src='./trash3-fill.svg' height='32' width='32' /> Clear
-Records</q> entry to delete all of the records. This is useful for times
-when you want to create a new collection of records that is saved in a
-separate file. For example, if you wanted to create a collection
-personal accounts in one file and a collection shared accounts for a
-group of folks (like a development team sharing AWS accounts).</p>
-<p>Click or tap on the
-<q><img src='./file-arrow-up-fill.svg' height='32' width='32' /> Load
-File</q> entry to load a records file. See the <a href="#load-file">Load
-File</a> section for more details.</p>
-<p>Click or tap on the
-<q><img src='./file-arrow-down-fill.svg' height='32' width='32' /> Save
-File</q> entry to save all of the records to a file. See the <a
-href="#save-file">Save File</a> section for more details.</p>
-<p>Click or tap on the
-<q><img src='./question-circle.svg' height='32' width='32' /> Help</q>
-entry to see this help message.</p>
-<p>At the top of the screen is the search bar and, at the far right, the
-menu.</p>
-<p>At the bottom of the screen is a status bar that shows status
-messages.</p>
-<h2 id="records">Records</h2>
-<p>This section talks about how records are presented in <em>PAM</em>
-using an example with seven records that contain confidential
-information for <q>Amazon</q>, <q>Email</q>, <q>Facebook</q>,
-<q>Github</q>, <q>Google</q>, <q>Netflix</q> and <q>Stack Exchange</q>
-fictional accounts.</p>
-<p>See the <a href="#create-new-record">Create New Record</a> section
-for details about how to create records.</p>
-<h3 id="unexpanded-view-of-all-records">Unexpanded View of all
-Records</h3>
-<p>We start with the unexpanded view of all records as shown below.</p>
-<p><img src="./pam-example-records.png" width="400" alt="example-records"></p>
-<p>As you can see <em>PAM</em> presents the records as an accordion.
-Each record is one entry in the accordion that you can expand to view
-the record fields or <a href="#delete-record">delete</a>, <a
-href="#clone-record">clone</a> or <a href="#edit-record">edit</a> edit
-the record.</p>
-<p>To get the information for an account you click or tap the
-button.</p>
-<p>At the top of the screen is the search bar and, at the far right, the
-menu.</p>
-<p>At the bottom of the screen is a status bar that shows status
-messages.</p>
-<h3 id="expanded-view-of-a-record">Expanded View of a Record</h3>
-<p>Once you click on or tap a record it expands as shown below where the
-<q>Facebook</q> record was tapped.</p>
-<p><img src="./pam-record-expanded.png" width="400" alt="record-expanded"></p>
-<p>You can see that there are three fields in the record: <q>url</q>,
-<q>login</q> and <q>password</q>, next to each field there is a icon
-that looks like a clipboard
-<img src="./clipboard.svg" height="32" width="32" alt="clipboard"/>.</p>
-<p><img src="./pam-record-expanded-fields.png" width="400" alt="record-expanded"></p>
-<p>If you click or tap the clipboard icon, the field contents will be
-copied to the clipboard so that you can paste them into a login
-dialogue.</p>
-<blockquote>
-<p>Note that the fields are completely customizable. You can have as
-many as you want. Fields are added, modified and deleted by the
-<q>Edit</q> option.</p>
-</blockquote>
-<p>In addition to the clipboard icon there is another icon that looks
-like an eye <img src="./eye.svg" height="32" width="32" alt="eye"/>.
-that shows up for password field. If you click or tap it, the password
-will be shown in plaintext and the icon will change to an eye with a
-slash through it
-<img src="./eye-slash.svg" height="32" width="32" alt="eye-slash"/>. By
-default all passwords are hidden so that they are not visible to casual
-observers. Click or tap it again to re-hide the password.</p>
-<p>In addition there are three buttons at the bottom
-<q><img src='./trash.svg' height='32' width='32' /> Delete</q> to delete
-the record,
-<q><img src='./files.svg' height='32' width='32' /> Clone</q> to clone
-the record and
-<q><img src='./pencil-square.svg' height='32' width='32' /> Edit</q> to
-edit the record fields.</p>
-<p>As you can see here.</p>
-<p><img src="./pam-record-expanded-fields2.png" width="400" alt="record-expanded"></p>
 <h2 id="preferences">Preferences</h2>
 <p>Preferences allow you to customized the behavior of the app. The
 defaults are set so that most people will never have to change
@@ -1610,7 +1603,8 @@ length.</li>
 <p>Each preference is discussed in more detail in the subsections
 below.</p>
 <h3 id="search-preferences">Search Preferences</h3>
-<p>These preferences control search options.</p>
+<p>These preferences control search options. See the <a
+href="#search">Search</a> section for an example.</p>
 <h4 id="case-insensitive-searches">Case Insensitive Searches</h4>
 <p>If enabled, all searches are case insensitive, otherwise they are
 case sensitive.</p>
