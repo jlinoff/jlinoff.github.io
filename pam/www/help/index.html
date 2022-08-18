@@ -134,11 +134,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2022-08-17 21:08:27 -0700</code></td>
+<td><code>2022-08-17 23:26:06 -0700</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>3a754f6</code></td>
+<td><code>48718f0</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
@@ -224,8 +224,7 @@ Representation</a></li>
 </ul></li>
 <li><a href="#method-1-menu-approach">Method 1: Menu Approach</a></li>
 <li><a href="#method-2-clone-approach">Method 2: Clone Approach</a></li>
-<li><a href="#method-3-javascript-approach">Method 3: Javascript
-Approach</a></li>
+<li><a href="#method-3-json-approach">Method 3: JSON Approach</a></li>
 </ul></li>
 <li><a href="#edit-record">Edit Record</a></li>
 <li><a href="#delete-record">Delete Record</a></li>
@@ -795,18 +794,24 @@ record file.</li>
 way to create the first new record for a topic family. This is also
 known as the <q>menu</q> approach and is shown below.</p>
 <p><img src="pam-create-new-record.png" width="400" alt="new-rec"></p>
+<p>See the <a href="#method-1-menu-approach">Method 1: Menu Approach</a>
+section for details.</p>
 <p>The second method, creating a record by cloning an existing record,
 is useful when you want to use the same fields as the existing record.
 It is a great way to guarantee uniformity. Although if the number of
 fields is small using the first method is also fine. Here is what the
 clone option looks like.</p>
 <p><img src="pam-clone-google.png" width="400" alt="clone-rec"></p>
+<p>See the <a href="#method-2-clone-approach">Method 2: Clone
+Approach</a> section for details.</p>
 <p>The third method, creating a record by editing a JSON record file, is
 most useful if you are interested in creating records programmatically
 (perhaps a subset of accounts that shared with a small group of users
 that is automatically generated from a database). The example records
 and recipes example files that are available in the <q>Load</q> dialogue
 are a great place to start.</p>
+<p>See the <a href="#method-3-json-approach">Method 3: JSON Approach</a>
+section for details.</p>
 <p>But, before any of the record creation approaches can be discussed in
 more detail, it is very important to understand record topics and record
 fields.</p>
@@ -845,13 +850,14 @@ would indicate that the value is a list of ingredients and a
 example of a field <em>name</em> might be <q>mobile phone</q>.</p>
 <p>The field <em>type</em> explicitly describes the type of data that
 field holds like a <q>number</q> or a <q>phone</q> or an <q>email</q>.
-Types are pre-defined and strictly enforced by javascript. An example of
-the difference between a <em>name</em> and a <em>type</em> would be a
-field named <q>mobile</q> of type <em>phone</em>. The name describes
-<em>how</em> it is used whereas the type describes <em>what</em> the
-input type is which, in turn, dictates what user inputs are acceptable.
-A description of each pre-defined record field type can be found in the
-<a href="#record-field-types">Record Field Types</a> section.</p>
+Types are built in and strictly enforced by javascript.</p>
+<p>An example of the difference between a <em>name</em> and a
+<em>type</em> would be a field named <q>mobile</q> of type
+<em>phone</em>. The name describes <em>how</em> it is used whereas the
+type describes <em>what</em> the input type is which, in turn, dictates
+what user inputs are acceptable. A description of each built in record
+field type can be found in the <a href="#record-field-types">Record
+Field Types</a> section.</p>
 <p>The field <em>value</em> is the unique value for the field in an
 individual record that is set when a field is created or edited. For
 example, an field named <q>email</q> of type <q>email</q> could have a
@@ -1106,8 +1112,12 @@ and can easily be changed if it turns out to be too cumbersome.</p>
 <p>To choose a generated password simply click or tap on it and it will
 be added to the field value.</p>
 <h4 id="method-1-menu-approach">Method 1: Menu Approach</h4>
-<p>Click or tap on the <code>"New Record"</code> option from the
-menu.</p>
+<p>As mentioned at the beginning of the <a
+href="#create-new-record">Create New Record Section</a> section, there
+are three different ways to create records. In this and the following
+sections all three are discussed.</p>
+<p>To create a new record using the menu approach click or tap on the
+<code>"New Record"</code> option from the menu.</p>
 <p><img src="./pam-new-record-menu.png" width="400" alt="new-record"></p>
 <p>That will popup a dialogue that looks like this.</p>
 <p><img src="./pam-new-record.png" width="400" alt="new-record"></p>
@@ -1149,8 +1159,9 @@ part of the screen.</p>
 you just defined.</p>
 <p><img src="pam-new-record-done-expand.png" width="400" alt="new-record-done-expand"></p>
 <h4 id="method-2-clone-approach">Method 2: Clone Approach</h4>
-<p>Cloning a record is simple. Just expand a record and click or tap on
-the clone button and an edit dialogue pops up.</p>
+<p>The second way to create a new record is by cloning it. Cloning a
+record is simple. Just expand a record and click or tap on the clone
+button and an edit dialogue pops up.</p>
 <p>Using the record that was created in the previous section here is
 what happens when you click or tap the <code>"Clone"</code> button.</p>
 <p><img src="pam-clone-record-popup.png" width="400" alt="clone-record-popup"></p>
@@ -1173,13 +1184,14 @@ create more records.</p>
 <p>In this case we only care about one record so you can click or tap on
 the new record to expand it.</p>
 <p><img src="pam-clone-records-2.png" width="400" alt="clone-records-1"></p>
-<h4 id="method-3-javascript-approach">Method 3: Javascript Approach</h4>
+<h4 id="method-3-json-approach">Method 3: JSON Approach</h4>
 <p>This approach is not going to have any screenshots because it deals
 with <em>PAM</em> internals and may change from time to time. Instead a
 set of instructions is provided that should allows you to figure it out
 pretty easily.</p>
 <ol type="1">
-<li>Create one record using the menu approach.</li>
+<li>Create one record using the menu approach or use one the examples
+from the <q>Load</q> dialogue.</li>
 <li>Save the record to a file <em>without a password</em>. Normally this
 is a very bad idea because it could expose your data to a hacker so take
 precautions to protect the file.</li>
