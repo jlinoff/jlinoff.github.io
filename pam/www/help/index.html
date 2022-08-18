@@ -134,11 +134,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2022-08-18 10:08:13 -0700</code></td>
+<td><code>2022-08-18 12:51:02 -0700</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>c5fe968</code></td>
+<td><code>8a671a4</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
@@ -866,17 +866,18 @@ example, an field named <q>email</q> of type <q>email</q> could have a
 value <q>wombat@foo.io</q> the <em>name</em> and the <em>type</em> could
 be the same for all records that had an <q>email</q> field but the
 <em>value</em> would vary.</p>
-<p>The default record fields are defined in the <a
-href="#Preferences">Preferences</a> and show up in the <q>New Field</q>
-pulldown menu when a record is created or edited. They are stored in
-each file with the along with the actual records so each records file
-can have different default fields. For example a file of recipe records
-would probably want fields of type <em><q>textarea</q></em> named
-<q>ingredients</q> and <q>instructions</q> but a file of <em><q>books
-read</q></em> records probably would not. Instead it might want
-<em><q>text</q></em> fields named <q>author</q> and <q>publisher</q>
-along with, possibly, a field of type <em><q>number</q></em> named
-<q>copyright</q>.</p>
+<p>The default record fields are the fields that are available in the
+<code>"New Field"</code> pull down menu when a record is created or
+edited. They are defined in the <a href="#Preferences">Preferences</a>
+section.</p>
+<p>The default record fields are stored in each file with the along with
+the records so each records file can have different default fields.</p>
+<p>For example a file of recipe records would probably want fields of
+type <em><q>textarea</q></em> named <q>ingredients</q> and
+<q>instructions</q> but a file of <em><q>books read</q></em> records
+probably would not. Instead it might want <em><q>text</q></em> fields
+named <q>author</q> and <q>publisher</q> along with, possibly, a field
+of type <em><q>number</q></em> named <q>copyright</q>.</p>
 <p>See the <a href="#record-fields">Record Fields</a> section for
 details about how to add or modify the default record fields.</p>
 <p>There is a second more obscure way to define field names. You can
@@ -908,7 +909,7 @@ wish to customize the user experience but you cannot change the built in
 the drop down list from the user interface.</p>
 <p>These are the default field definitions.</p>
 <p><img src="./pam-default-record-fields.png" width="400" alt="default"/></p>
-<p>The table below presents a brief overview of the pre-defined record
+<p>The table below presents a brief overview of the default record
 fields and their associated built in types and when to use them. You can
 search the web for more details about <a
 href="https://developer.mozilla.org/en-US/docs/Learn/Forms/HTML5_input_types">HTML
@@ -1119,7 +1120,7 @@ href="#create-new-record">Create New Record Section</a> section, there
 are three different ways to create records. In this and the following
 sections all three are discussed.</p>
 <p>For this example we will create the <q>ingredients</q> and
-<q>instruction</q> pre-defined fields in the <a
+<q>instruction</q> default fields in the <a
 href="#preferences">Preferences</a> as <em><q>textarea</q></em> fields,
 when complete they will look like this.</p>
 <p><img src="./pam-recipe-prefs.png" width="400" alt="default"/></p>
