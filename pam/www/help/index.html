@@ -862,10 +862,13 @@ be the same for all records that had an <q>email</q> field but the
 href="#Preferences">Preferences</a> and show up in the <q>New Field</q>
 pulldown menu when a record is created or edited. They are stored in
 each file with the along with the actual records so each records file
-can have different types of records. For example a file of recipe
-records would probably want <q>ingredients</q> and <q>instructions</q>
-fields but a file of <em><q>books read</q></em> records probably would
-not.</p>
+can have different default fields. For example a file of recipe records
+would probably want fields of type <em><q>textarea</q></em> named
+<q>ingredients</q> and <q>instructions</q> but a file of <em><q>books
+read</q></em> records probably would not. Instead it might want
+<em><q>text</q></em> fields named <q>author</q> and <q>publisher</q>
+along with, possibly, a field of type <em><q>number</q></em> named
+<q>copyright</q>.</p>
 <p>See the <a href="#record-fields">Record Fields</a> section for
 details about how to add or modify the default record fields.</p>
 <p>There is a second more obscure way to define field names, you can
