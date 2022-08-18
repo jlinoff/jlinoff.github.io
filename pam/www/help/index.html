@@ -134,11 +134,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2022-08-18 13:21:00 -0700</code></td>
+<td><code>2022-08-18 14:07:22 -0700</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>1ae00f7</code></td>
+<td><code>9502dd1</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
@@ -202,10 +202,6 @@ mobile devices</a></li>
 <li><a href="#records-section">Records Section</a></li>
 <li><a href="#status-section">Status Section</a></li>
 </ul></li>
-<li><a href="#functions">Functions</a>
-<ul>
-<li><a href="#create-new-record">Create New Record</a>
-<ul>
 <li><a href="#topics">Topics</a></li>
 <li><a href="#fields">Fields</a>
 <ul>
@@ -222,6 +218,10 @@ Representation</a></li>
 Representation</a></li>
 <li><a href="#password-generator">Password Generator</a></li>
 </ul></li>
+<li><a href="#functions">Functions</a>
+<ul>
+<li><a href="#create-new-record">Create New Record</a>
+<ul>
 <li><a href="#method-1-menu-approach">Method 1: Menu Approach</a></li>
 <li><a href="#method-2-clone-approach">Method 2: Clone Approach</a></li>
 <li><a href="#method-3-json-approach">Method 3: JSON Approach</a></li>
@@ -691,135 +691,7 @@ mobile devices.</p>
 it is free and open source software (FOSS) so you can try it without any
 obligation or cost. You can also help find and fix bugs or improve the
 UI.</p>
-<h2 id="layout">Layout</h2>
-<p><em>PAM</em> is a simple single page web application (SPA). It
-consists of three basic parts: the menu and search section, the records
-section and the status section.</p>
-<p>It looks something like this</p>
-<p><img src="./pam-basic-sections.png" width="400" alt="menu-bar"></p>
-<h3 id="menu-and-search-section">Menu and Search Section</h3>
-<p>The top section that contains a search input and a menu.</p>
-<p>The search input is used to find records that match the input to make
-them easier to find. You can find more information about searching in
-the <a href="#search-records">Search Records</a> section</p>
-<p>The menu at the top right is the control center for the application
-it has a number of options as you can see below.</p>
-<p><img src="./pam-basic-menu.png" width="400" alt="menu"></p>
-<p>Each of the menu options is discussed in more detail in the <a
-href="#functions">Functions</a> section.</p>
-<h3 id="records-section">Records Section</h3>
-<p>Underneath the top level bar, in the middle, is the records section.
-Each record is shown as an entry that is displayed by its title. If you
-click or tap on the record title, the record will expand to show the
-record contents (fields) and provide options for deleting, cloning or
-editing the record contents.</p>
-<p>This way of presenting the records is called an accordion display.
-Below you can see how it expands after the <q>Facebook</q> entry has
-been selected.</p>
-<p><img src="./pam-record-expanded.png" width="400" alt="record-expanded"></p>
-<p>As you can see the expanded <q>Facebook</q> record has three fields:
-<q>url</q>, <q>login</q> and <q>password</q>.</p>
-<p><img src="./pam-record-expanded-fields.png" width="400" alt="record-expanded"></p>
-<p>You can copy the field values to the clipboard so that they can be
-pasted into login forms.</p>
-<blockquote>
-<p>Note that the copy works for passwords whether the password is
-visible or not.</p>
-</blockquote>
-<p><img src="./pam-record-expanded-fields2.png" width="400" alt="record-expanded"></p>
-<p>You can also click or tap on the title of the opened record to close
-it.</p>
-<p>Each of the record management options is discussed in more detail in
-the <a href="#functions">Functions</a> section.</p>
-<h3 id="status-section">Status Section</h3>
-<p>Below the records section, at the bottom, is the status section where
-ephemeral status messages are displayed. The messages disappear after
-about 1.5 seconds but the duration is controlled by a preference that
-you can set. See the <a href="#preferences">Preferences</a> section for
-more information.</p>
-<p>The status messages are used to provide activity feedback like
-showing how many bytes were copied to a clipboard when a copy button is
-clicked or tapped as shown in the example below.</p>
-<p><img src="./pam-status-msg.png" width="400" alt="status-message"></p>
-<h2 id="functions">Functions</h2>
-<p>The following sections will go over the basic functions that
-<em>PAM</em> provides.</p>
-<p>In a nutshell they are:</p>
-<ol type="1">
-<li>Display information About the application.</li>
-<li>Create New Record.</li>
-<li>Edit Record.</li>
-<li>Delete Record.</li>
-<li>Clone Record.</li>
-<li>Clear Records.</li>
-<li>Save records to an encrypted file.</li>
-<li>Load a collection of records from an encrypted file.</li>
-<li>Search Records.</li>
-<li>Get Help.</li>
-</ol>
-<p>Each function will be discussed in a separate subsection below.</p>
-<p>Note that Preferences were not included because they have their own
-top level section in this document.</p>
-<h3 id="about">About</h3>
-<p>Click or tap on the <q>About</q> menu entry to get information about
-<em>PAM</em>. You can even add custom HTML through the preferences that
-is stored for each <em>PAM</em> file.</p>
-<p>Here is a screen shot of what you would see.</p>
-<p><img src="./pam-about.png" width="400" alt="about"></p>
-<p>Here is an about dialogue with a simple custom message.</p>
-<p><img src="./pam-about-custom.png" width="400" alt="about-custom"></p>
-<p>Custom messages are defined in preferences as follows.</p>
-<p><img src="./pam-about-custom-pref.png" width="400" alt="about-custom-pref"></p>
-<p>The motivation for allowing custom messages is that someone might
-want to share a <em>PAM</em> file or describe how the records are
-related. The custom message would allow the person to provide their
-<em>imprimatur</em> on the collection.</p>
-<h3 id="create-new-record">Create New Record</h3>
-<p>This is a long section because it covers a number of general concepts
-that are needed by other functions like <q>topics</q> and
-<q>fields</q>.</p>
-<p>Creating a new record is a very common activity in <em>PAM</em> so I
-tried to make it as easy as possible.</p>
-<p>There are three different methods you can use to create new
-records:</p>
-<ol type="1">
-<li>A record can be created in the application by clicking or tapping
-the <q>New Record</q> menu option,</li>
-<li>A record can be created in the application by cloning an existing
-record or</li>
-<li>A record can be created outside of the application by editing a JSON
-record file.</li>
-</ol>
-<h4 id="method-1">Method 1</h4>
-<p>The first method, creating the record by clicking or tapping the
-<q>New Record</q> menu option in the application, is probably the best
-way to create the first new record for a topic family. This is also
-known as the <q>menu</q> approach and is shown below.</p>
-<p><img src="pam-create-new-record.png" width="400" alt="new-rec"></p>
-<p>See the <a href="#method-1-menu-approach">Method 1: Menu Approach</a>
-section for details.</p>
-<h4 id="method-2">Method 2</h4>
-<p>The second method, creating a record by cloning an existing record,
-is useful when you want to use the same fields as the existing record.
-It is a great way to guarantee uniformity. Although if the number of
-fields is small using the first method is also fine. Here is what the
-clone option looks like.</p>
-<p><img src="pam-clone-google.png" width="400" alt="clone-rec"></p>
-<p>See the <a href="#method-2-clone-approach">Method 2: Clone
-Approach</a> section for details.</p>
-<h4 id="method-3">Method 3</h4>
-<p>The third method, creating a record by editing a JSON record file, is
-most useful if you are interested in creating records programmatically
-(perhaps a subset of accounts that shared with a small group of users
-that is automatically generated from a database). The example records
-and recipes example files that are available in the <q>Load</q> dialogue
-are a great place to start.</p>
-<p>See the <a href="#method-3-json-approach">Method 3: JSON Approach</a>
-section for details.</p>
-<p>But, before any of the record creation approaches can be discussed in
-more detail, it is very important to understand record topics and record
-fields.</p>
-<h4 id="topics">Topics</h4>
+<h2 id="topics">Topics</h2>
 <p>Topics define how records are related. They provide a convenient
 abstraction for organizing related records in files. Topics are
 completely arbitrary. For example a topic could be something like
@@ -844,7 +716,7 @@ browser. Thus, I recommend using the <q><code>.txt</code></q> for all
 record files for maximum portability.</p>
 <p>Topics are also discussed briefly at the end of the <a
 href="#record-model-summary">Reason 2: Record Model</a>) section.</p>
-<h4 id="fields">Fields</h4>
+<h2 id="fields">Fields</h2>
 <p>Records are composed of fields. Each field has a unique name, a type
 and a value.</p>
 <p>The field <em>name</em> is arbitrary and is meant to describes how
@@ -871,9 +743,8 @@ be the same for all records that had an <q>email</q> field but the
 <p>The default record fields are the fields that are available in the
 <code>"New Field"</code> pull down menu when a record is created or
 edited. They are defined in the <a href="#Preferences">Preferences</a>
-section.</p>
-<p>The default record fields are stored in each file with the along with
-the records so each records file can have different default fields.</p>
+section and they are stored in each records <em>file</em> along with the
+records so each records file can have different default fields.</p>
 <p>For example a file of recipe records would probably want fields of
 type <em><q>textarea</q></em> named <q>ingredients</q> and
 <q>instructions</q> but a file of <em><q>books read</q></em> records
@@ -881,7 +752,8 @@ probably would not. Instead it might want <em><q>text</q></em> fields
 named <q>author</q> and <q>publisher</q> along with, possibly, a field
 of type <em><q>number</q></em> named <q>copyright</q>.</p>
 <p>See the <a href="#record-fields">Record Fields</a> section for
-details about how to add or modify the default record fields.</p>
+details about how to add or modify the default record fields in the
+preferences dialogue.</p>
 <p>There is a second more obscure way to define field names. You can
 change field names <em>when you create or edit an individual record</em>
 by setting the <a href="#enable-editable-field-name">Enable Editable
@@ -893,7 +765,7 @@ Normally only the <q>value</q> input is shown.</p>
 record basis. It is better to add the new record fields to the default
 list in the preferences.</p>
 <p><img src="./pam-change-field-name.png" width="400" alt="change-field-name"></p>
-<h5 id="record-field-types">Record Field Types</h5>
+<h3 id="record-field-types">Record Field Types</h3>
 <p>Record field types define the type of each field that you define for
 a record. They are based on HTML <em>input</em> element types except for
 the <em><q>textarea</q></em> type which is a HTML <em>textarea</em>
@@ -996,7 +868,7 @@ directly from input element description <a
 href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">here</a>,
 the separate textarea element is described <a
 href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLTextAreaElement">here</a>.</p>
-<h5 id="custom-record-fields">Custom Record Fields</h5>
+<h3 id="custom-record-fields">Custom Record Fields</h3>
 <p>It is oftentimes the case that all of the <em>default</em> record
 fields are not needed for the records you are managing. This is
 especially true in cases where you have a very clear understanding of
@@ -1018,10 +890,7 @@ default record fields have been pruned out.</p>
 out. The <q>url</q>, <q>login</q> and <q>password</q> record fields are
 part of the default.</p>
 <p><img src="./pam-google-account-prefs.png" width="400" alt="google-account-example-prefs"></p>
-<h4 id="password-fields">Password Fields</h4>
-<p>Passwords fields show up in a lot of places. I chose to document them
-here because you will probably first encounter them when creating a
-record.</p>
+<h2 id="password-fields">Password Fields</h2>
 <p>Password fields are a special case for the following three
 reasons.</p>
 <p>First, they provide a generator that allows you to automatically
@@ -1032,14 +901,14 @@ href="#password-preferences">Password Preferences</a></p>
 by someone observing your screen.</p>
 <p>And, finally, because they provide the ability to generate two
 different types of passwords: cryptic and memorable.</p>
-<h5 id="cryptic-passwords">Cryptic Passwords</h5>
+<h3 id="cryptic-passwords">Cryptic Passwords</h3>
 <p>Cryptic passwords consist of letters, digits and special
 characters.</p>
 <p>Here is an example: <code>'N5yAb!XfGa3vELPsK95K4/AAz8mts'</code>.</p>
 <p>Cryptic passwords tend to be hard to memorize for most people.</p>
 <p>They are perfect for cases where you don’t have to type the password
 in because they are hard to crack.</p>
-<h5 id="memorable-passwords">Memorable Passwords</h5>
+<h3 id="memorable-passwords">Memorable Passwords</h3>
 <p>Memorable passwords are used to define passwords that must be typed
 in manually, as described in the <a
 href="#reason-4-automatic-password-generation">Reason 4: Automatic
@@ -1060,8 +929,8 @@ where the prefix is <code>'Z0/'</code>, the separator is
 <code>'/'</code> and the suffix is <code>'??'</code>.</p>
 <p>Memorable passwords tend to be easier to memorize than cryptic
 passwords for most people.</p>
-<h5 id="hidden-password-representation">Hidden Password
-Representation</h5>
+<h3 id="hidden-password-representation">Hidden Password
+Representation</h3>
 <p>Here is an example that shows a password in its standard hidden
 form.</p>
 <p><img src="./pam-record-expanded-fields.png" width="400" alt="record-expanded"></p>
@@ -1071,8 +940,8 @@ form.</p>
 clicking on the
 <img src="./clipboard.svg" height="32" width="32" alt="clipboard"/>
 icon.</p>
-<h5 id="visible-password-representation">Visible Password
-Representation</h5>
+<h3 id="visible-password-representation">Visible Password
+Representation</h3>
 <p>Here is an example that shows a password in its visible hidden
 form.</p>
 <p><img src="./pam-record-expanded-password.png" width="400" alt="record-expanded-password"></p>
@@ -1081,7 +950,7 @@ form.</p>
 icon.</p>
 <p>To hide the password, click or tap on the
 <img src="./eye-slash.svg" height="32" width="32" alt="eye"/> icon.</p>
-<h5 id="password-generator">Password Generator</h5>
+<h3 id="password-generator">Password Generator</h3>
 <p>This is what the password field dialogue looks like with no
 generator.</p>
 <p><img src="./pam-password-no-generator.png" width="400" alt="password-no-generator"></p>
@@ -1116,18 +985,119 @@ and can easily be changed if it turns out to be too cumbersome.</p>
 </blockquote>
 <p>To choose a generated password simply click or tap on it and it will
 be added to the field value.</p>
+<h2 id="layout">Layout</h2>
+<p><em>PAM</em> is a simple single page web application (SPA). It
+consists of three basic parts: the menu and search section, the records
+section and the status section.</p>
+<p>It looks something like this</p>
+<p><img src="./pam-basic-sections.png" width="400" alt="menu-bar"></p>
+<h3 id="menu-and-search-section">Menu and Search Section</h3>
+<p>The top section that contains a search input and a menu.</p>
+<p>The search input is used to find records that match the input to make
+them easier to find. You can find more information about searching in
+the <a href="#search-records">Search Records</a> section</p>
+<p>The menu at the top right is the control center for the application
+it has a number of options as you can see below.</p>
+<p><img src="./pam-basic-menu.png" width="400" alt="menu"></p>
+<p>Each of the menu options is discussed in more detail in the <a
+href="#functions">Functions</a> section.</p>
+<h3 id="records-section">Records Section</h3>
+<p>Underneath the top level bar, in the middle, is the records section.
+Each record is shown as an entry that is displayed by its title. If you
+click or tap on the record title, the record will expand to show the
+record contents (fields) and provide options for deleting, cloning or
+editing the record contents.</p>
+<p>This way of presenting the records is called an accordion display.
+Below you can see how it expands after the <q>Facebook</q> entry has
+been selected.</p>
+<p><img src="./pam-record-expanded.png" width="400" alt="record-expanded"></p>
+<p>As you can see the expanded <q>Facebook</q> record has three fields:
+<q>url</q>, <q>login</q> and <q>password</q>.</p>
+<p><img src="./pam-record-expanded-fields.png" width="400" alt="record-expanded"></p>
+<p>You can copy the field values to the clipboard so that they can be
+pasted into login forms.</p>
+<blockquote>
+<p>Note that the copy works for passwords whether the password is
+visible or not.</p>
+</blockquote>
+<p><img src="./pam-record-expanded-fields2.png" width="400" alt="record-expanded"></p>
+<p>You can also click or tap on the title of the opened record to close
+it.</p>
+<p>Each of the record management options is discussed in more detail in
+the <a href="#functions">Functions</a> section.</p>
+<h3 id="status-section">Status Section</h3>
+<p>Below the records section, at the bottom, is the status section where
+ephemeral status messages are displayed. The messages disappear after
+about 1.5 seconds but the duration is controlled by a preference that
+you can set. See the <a href="#preferences">Preferences</a> section for
+more information.</p>
+<p>The status messages are used to provide activity feedback like
+showing how many bytes were copied to a clipboard when a copy button is
+clicked or tapped as shown in the example below.</p>
+<p><img src="./pam-status-msg.png" width="400" alt="status-message"></p>
+<h2 id="functions">Functions</h2>
+<p>The following sections will go over the basic functions that
+<em>PAM</em> provides.</p>
+<p>In a nutshell they are:</p>
+<ol type="1">
+<li>Display information About the application.</li>
+<li>Create New Record.</li>
+<li>Edit Record.</li>
+<li>Delete Record.</li>
+<li>Clone Record.</li>
+<li>Clear Records.</li>
+<li>Save records to an encrypted file.</li>
+<li>Load a collection of records from an encrypted file.</li>
+<li>Search Records.</li>
+<li>Get Help.</li>
+</ol>
+<p>Each function will be discussed in a separate subsection below.</p>
+<p>Note that Preferences were not included because they have their own
+top level section in this document.</p>
+<h3 id="about">About</h3>
+<p>Click or tap on the <q>About</q> menu entry to get information about
+<em>PAM</em>. You can even add custom HTML through the preferences that
+is stored for each <em>PAM</em> file.</p>
+<p>Here is a screen shot of what you would see.</p>
+<p><img src="./pam-about.png" width="400" alt="about"></p>
+<p>Here is an about dialogue with a simple custom message.</p>
+<p><img src="./pam-about-custom.png" width="400" alt="about-custom"></p>
+<p>Custom messages are defined in preferences as follows.</p>
+<p><img src="./pam-about-custom-pref.png" width="400" alt="about-custom-pref"></p>
+<p>The motivation for allowing custom messages is that someone might
+want to share a <em>PAM</em> file or describe how the records are
+related. The custom message would allow the person to provide their
+<em>imprimatur</em> on the collection.</p>
+<h3 id="create-new-record">Create New Record</h3>
+<p>Before reading this section, please make sure that you are familiar
+with the ideas covered in the <a href="#topics">Topics</a>, <a
+href="#fields">Fields</a> and <a href="#password-fieldds">Password
+Fields</a> sections.</p>
+<p>Creating a new record is a very common activity in <em>PAM</em> so I
+tried to make it as easy as possible.</p>
+<p>There are three different methods you can use to create new
+records:</p>
+<ol type="1">
+<li>A record can be created in the application by clicking or tapping
+the <q>New Record</q> menu option,</li>
+<li>A record can be created in the application by cloning an existing
+record or</li>
+<li>A record can be created outside of the application by editing a JSON
+record file.</li>
+</ol>
+<p>Each method is discussed in detail in the following subsections.</p>
 <h4 id="method-1-menu-approach">Method 1: Menu Approach</h4>
-<p>As mentioned at the beginning of the <a
-href="#create-new-record">Create New Record</a> section, there are three
-different ways to create records. In this and the following sections all
-three are discussed.</p>
-<p>For this example we will create the <q>ingredients</q> and
-<q>instruction</q> default fields in the <a
-href="#preferences">Preferences</a> as <em><q>textarea</q></em> fields,
-when complete they will look like this.</p>
+<p>The first method, creating the record by clicking or tapping the
+<q>New Record</q> menu option in the application, is probably the best
+way to create the first new record for a topic family. This is also
+known as the <q>menu</q> approach and is shown below.</p>
+<p><img src="pam-create-new-record.png" width="400" alt="new-rec"></p>
+<p>To show how it works, we will create a recipe record using
+<q>ingredients</q> and <q>instruction</q> fields. But first we need to
+define them as default <em><q>textarea</q></em> fields in the <a
+href="#preferences">Preferences</a> section. So the available records
+look like this.</p>
 <p><img src="./pam-recipe-prefs.png" width="400" alt="default"/></p>
-<p>Make sure that you click on the <code>"Save"</code> button to save
-the new fields.</p>
 <p>To create a new record using the menu approach click or tap on the
 <code>"New Record"</code> option from the menu.</p>
 <p><img src="./pam-new-record-menu.png" width="400" alt="new-record"></p>
@@ -1161,9 +1131,14 @@ part of the screen.</p>
 you just defined.</p>
 <p><img src="pam-new-record-done-expand.png" width="400" alt="new-record-done-expand"></p>
 <h4 id="method-2-clone-approach">Method 2: Clone Approach</h4>
-<p>The second way to create a new record is by cloning it. Cloning a
-record is simple. Just expand a record and click or tap on the clone
-button and an edit dialogue pops up.</p>
+<p>The second method, creating a record by cloning an existing record,
+is useful when you want to use the same fields as the existing record.
+It is a great way to guarantee uniformity. Although if the number of
+fields is small using the first method is also fine. Here is what the
+clone option looks like.</p>
+<p><img src="pam-clone-google.png" width="400" alt="clone-rec"></p>
+<p>Cloning a record is simple. Just expand a record and click or tap on
+the clone button and an edit dialogue pops up.</p>
 <p>Using the record that was created in the previous section here is
 what happens when you click or tap the <code>"Clone"</code> button.</p>
 <p><img src="pam-clone-record-popup.png" width="400" alt="clone-record-popup"></p>
@@ -1187,9 +1162,15 @@ create more records.</p>
 the new record to expand it.</p>
 <p><img src="pam-clone-records-2.png" width="400" alt="clone-records-1"></p>
 <h4 id="method-3-json-approach">Method 3: JSON Approach</h4>
-<p>This approach is not going to have any screenshots because it deals
-with <em>PAM</em> internals and may change from time to time. Instead a
-set of instructions is provided that should allows you to figure it out
+<p>The third method, creating a record by editing a JSON record file, is
+most useful if you are interested in creating records programmatically
+(perhaps a subset of accounts that shared with a small group of users
+that is automatically generated from a database). The example records
+and recipes example files that are available in the <q>Load</q> dialogue
+are a great place to start.</p>
+<p>This approach does not have any screenshots because it deals with
+<em>PAM</em> internals and may change from time to time. Instead a set
+of instructions is provided that should allows you to figure it out
 pretty easily.</p>
 <ol type="1">
 <li>Create one record using the menu approach or use one the examples
