@@ -134,11 +134,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2022-08-18 19:58:01 -0700</code></td>
+<td><code>2022-08-18 20:10:44 -0700</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>a3ed607</code></td>
+<td><code>e95f1a6</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
@@ -328,8 +328,8 @@ Record</a></li>
 <li><a href="#clone-an-existing-record">Clone an Existing
 Record</a></li>
 </ul></li>
-<li><a href="#shared-credentials-for-a-small-group">Shared Credentials
-for a Small Group</a></li>
+<li><a href="#share-credentials-for-a-small-group">Share Credentials for
+a Small Group</a></li>
 <li><a href="#recipes">Recipes</a></li>
 <li><a href="#books">Books</a></li>
 </ul></li>
@@ -2168,7 +2168,7 @@ records with the same fields.</p>
 <q>Clone Field Values when Cloning Records</q> preference. That avoids
 having to delete each old field value before typing in the new field
 value.</p>
-<h3 id="shared-credentials-for-a-small-group">Shared Credentials for a
+<h3 id="share-credentials-for-a-small-group">Share Credentials for a
 Small Group</h3>
 <p>This scenario assumes that a small group of trusted people wants to
 share a common file of account records with credentials that can only be
@@ -2201,6 +2201,9 @@ fields since all of the records have a specific, known format.</li>
 <li>Communicate the location of the file and the password to the members
 of the group in a secure way.</li>
 </ol>
+<p>Another approach is to create the encrypted <em>PAM</em> file and
+store it on a publicly accessible web site. Users can then use option #3
+in <a href="#load-file">Load File</a> dialogue to load it.</p>
 <h3 id="recipes">Recipes</h3>
 <p>This is a bit of contrived example because you could easily keep all
 of your recipes with your other personal account data but it might be
@@ -2272,6 +2275,9 @@ context to provide encryption and decryption.</p>
 <p>It uses <a
 href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">bootstrap-5</a>
 to make it work better in mobile browsers.</p>
+<p>I wrote my own little library to provide a limited functional
+interface to make coding HTML DOM constructs easier. See the
+<code>www/js/lib.js</code> source code module.</p>
 <h3 id="license">License</h3>
 <p><em>PAM</em> is free and open-source (FOSS) software that licensed
 under the MIT Licensing terms.</p>
@@ -2283,10 +2289,10 @@ Terms</a></p>
 <p>Here are the steps to build PAM.</p>
 <ol type="1">
 <li><code>git clone https://github.com/jlinoff/pam.git</code></li>
-<li><code>make init</code>
+<li><code>make</code> or <code>make init</code>
 <ul>
 <li>This installs the python test infrastructure including pylenium as
-well as bootstrap.</li>
+well as bootstrap 5.</li>
 <li>It also creates the <code>www/js/version.js</code> file and the
 help.</li>
 </ul></li>
@@ -2317,8 +2323,8 @@ considered secure which is convenient for personal use.</p>
 contains the app in <code>pam/www</code>.</li>
 <li>Untar the <code>pam-www.tar</code> on your site.</li>
 </ol>
-<p>This pre-supposes that you have clone the pam project and have made
-modifications.</p>
+<p>This pre-supposes that you have cloned the pam project from
+github.</p>
 <h3 id="history">History</h3>
 <p>This is one of the several times that I have written a password
 manager from scratch over the past twenty years and it is intended to be
