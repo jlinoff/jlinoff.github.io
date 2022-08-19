@@ -134,11 +134,11 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2022-08-18 16:43:32 -0700</code></td>
+<td><code>2022-08-18 19:37:36 -0700</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>f5b2bdb</code></td>
+<td><code>2c00e7b</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
@@ -206,7 +206,7 @@ Record</a></li>
 <li><a href="#topics">Topics</a></li>
 <li><a href="#fields">Fields</a>
 <ul>
-<li><a href="#record-field-types">Record Field Types</a></li>
+<li><a href="#field-types">Field Types</a></li>
 <li><a href="#custom-fields">Custom Fields</a></li>
 </ul></li>
 <li><a href="#password-fields">Password Fields</a>
@@ -694,8 +694,9 @@ it is free and open source software (FOSS) so you can try it without any
 obligation or cost. You can also help find and fix bugs or improve the
 UI.</p>
 <h2 id="records">Records</h2>
-<p>Records are a key concept in <em>PAM</em> as described in <a
-href="#reason-2-record-model">Reason 2: Record Model</a>.</p>
+<p>Records composed of fields are a key concept in <em>PAM</em> as
+described in <a href="#reason-2-record-model">Reason 2: Record
+Model</a>.</p>
 <p>This section talks about how records are presented in <em>PAM</em>
 using an example with seven records that contain confidential
 information for <q>Amazon</q>, <q>Email</q>, <q>Facebook</q>,
@@ -733,11 +734,6 @@ that looks like a clipboard
 <p>If you click or tap the clipboard icon, the field contents will be
 copied to the clipboard so that you can paste them into a login
 dialogue.</p>
-<blockquote>
-<p>Note that the fields are completely customizable. You can have as
-many as you want. Fields are added, modified and deleted by the
-<q>Edit</q> option.</p>
-</blockquote>
 <p>In addition to the clipboard icon there is another icon that looks
 like an eye <img src="./eye.svg" height="32" width="32" alt="eye"/>.
 that shows up for password field. If you click or tap it, the password
@@ -745,7 +741,9 @@ will be shown in plaintext and the icon will change to an eye with a
 slash through it
 <img src="./eye-slash.svg" height="32" width="32" alt="eye-slash"/>. By
 default all passwords are hidden so that they are not visible to casual
-observers. Click or tap it again to re-hide the password.</p>
+observers. Click or tap it again to re-hide the password. Passwords are
+correctly copied to the clipboard at all times even when the password is
+hidden.</p>
 <p>In addition there are three buttons at the bottom
 <q><img src='./trash.svg' height='32' width='32' /> Delete</q> to delete
 the record,
@@ -755,6 +753,18 @@ the record and
 edit the record fields.</p>
 <p>As you can see here.</p>
 <p><img src="./pam-record-expanded-fields2.png" width="400" alt="record-expanded"></p>
+<p>The fields <em>in</em> records are completely customizable when you
+select the <code>"Edit"</code> option.</p>
+<p>Fields are added <em>to</em> the record by selecting a new field from
+the <code>"New Record"</code> drop down menu as shown below for the
+<code>"Facebook"</code> record but these fields can <em>also</em> be
+changed. See the <a href="#custom-fields">Custom Fields</a> and <a
+href="#field-types">Field Types</a> sections for details.</p>
+<p><img src="./pam-record-expanded-edit-facebook-new-field.png" width="400" alt="record-expanded"></p>
+<p>Fields are modified <em>in</em> the record by editing them directly
+and they are deleted <em>from</em> the record by clicking on the
+<img src='./trash.svg' height='32' width='32' /> icon.</p>
+<p><img src="./pam-record-expanded-edit-facebook.png" width="400" alt="record-expanded"></p>
 <h2 id="topics">Topics</h2>
 <p>Topics define how records are related. They provide a convenient
 abstraction for organizing related records in files. Topics are
@@ -794,8 +804,8 @@ Types are built in and strictly enforced by javascript.</p>
 <em>phone</em>. The name describes <em>how</em> it is used whereas the
 type describes <em>what</em> the input type is which, in turn, dictates
 what user inputs are acceptable. A description of each built in record
-field type can be found in the <a href="#record-field-types">Record
-Field Types</a> section.</p>
+field type can be found in the <a href="#field-types">Field Types</a>
+section.</p>
 <p>The field <em>value</em> is the unique value for the field in an
 individual record that is set when a field is created or edited. For
 example, an field named <q>email</q> of type <q>email</q> could have a
@@ -827,7 +837,7 @@ Normally only the <q>value</q> input is shown.</p>
 record basis. It is better to add the new record fields to the default
 list in the preferences.</p>
 <p><img src="./pam-change-field-name.png" width="400" alt="change-field-name"></p>
-<h3 id="record-field-types">Record Field Types</h3>
+<h3 id="field-types">Field Types</h3>
 <p>Record field types define the type of each field that you define for
 a record. They are based on HTML <em>input</em> element types except for
 the <em><q>textarea</q></em> type which is a HTML <em>textarea</em>
