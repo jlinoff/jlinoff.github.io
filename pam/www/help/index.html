@@ -126,7 +126,7 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Version</td>
-<td><code>1.0.0-rc08</code></td>
+<td><code>1.0.0-rc09</code></td>
 </tr>
 <tr class="odd">
 <td>Bootstrap Version</td>
@@ -134,15 +134,15 @@ the on-line help is generated.</p>
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2022-10-18 13:50:24 -0700</code></td>
+<td><code>2022-10-21 10:24:47 -0400</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>ea426ef</code></td>
+<td><code>c763430</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
-<td><code>main</code></td>
+<td><code>print</code></td>
 </tr>
 <tr class="odd">
 <td>project</td>
@@ -281,6 +281,7 @@ Suffix</a></li>
 <li><a href="#log-status-to-the-console">Log Status to the
 Console</a></li>
 <li><a href="#clear-records-on-load">Clear Records On Load</a></li>
+<li><a href="#enable-printing">Enable Printing</a></li>
 <li><a href="#load-duplicate-record-strategy">Load Duplicate Record
 Strategy</a></li>
 <li><a href="#clone-field-values-when-cloning-records">Clone Field
@@ -1617,6 +1618,7 @@ length.</li>
 <p>Each preference is discussed in more detail in the subsections
 below.</p>
 <h3 id="search-preferences">Search Preferences</h3>
+<p><img src="./pam-prefs-search.png" width="400" alt="pam-prefs-search"></p>
 <p>These preferences control search options. See the <a
 href="#search">Search</a> section for an example.</p>
 <h4 id="case-insensitive-searches">Case Insensitive Searches</h4>
@@ -1641,6 +1643,7 @@ they do not.</p>
 contained a specific field value like an obsolete email or really old
 password.</p>
 <h3 id="password-preferences">Password Preferences</h3>
+<p><img src="./pam-prefs-password.png" width="400" alt="pam-prefs-password"></p>
 <p>These preferences control automatic password creation.</p>
 <p>For more information about passwords see <a
 href="#password-fields">Password Fields</a></p>
@@ -1715,7 +1718,9 @@ meet the criteria which might create passwords like
 <code>'html/wishes/combined/A1!!'</code> or
 <code>'rebates/restructuring/jamaica/A1!!'</code>.</p>
 <h3 id="miscellaneous-preferences">Miscellaneous Preferences</h3>
-<p>These are the preferences didn’t fall into the other categories.</p>
+<p><img src="./pam-prefs-miscellaneous.png" width="400" alt="pam-prefs-miscellaneous"></p>
+<p>These are the preferences that didn’t fall into the other
+categories.</p>
 <h4 id="log-status-to-the-console">Log Status to the Console</h4>
 <p>Log status messages to the console as well as the screen to aid
 debugging.</p>
@@ -1732,6 +1737,23 @@ Record Strategy</q> will appear that is not normally visible to ask you
 with strategy you want to used for conflicts.</p>
 <p>You might set this preference to false if you want to to merge sets
 of records from different files.</p>
+<h4 id="enable-printing">Enable Printing</h4>
+<p>Click this to add the Print option to the menu.</p>
+<p>This is what the enable printing preference looks like in the
+preferences dialogue.</p>
+<p><img src="./pam-prefs-enable-printing-check.png" width="400" alt="pam-prefs-enable-printing-check"></p>
+<p>Once it is enabled, the <q>Print</q> option will appear at the bottom
+of the menu as shown below.</p>
+<p><img src="./pam-prefs-enable-printing-menu.png" width="400" alt="pam-prefs-enable-printing-menu"></p>
+<p>When you click on <q>Print</q>, PAM will print the records with the
+passwords visible. This is what it looks like for the example
+records.</p>
+<p><img src="./pam-prefs-enable-printing-example.png" width="400" alt="pam-prefs-enable-printing-example"></p>
+<p>This capability is useful if you want a paper copy of your records
+but it is a security risk. If you choose to enable this option, make
+sure that the paper copy is stored securely.</p>
+<p>Disable this option (the default) if you intend to share PAM records
+with multiple users from a read-only URL.</p>
 <h4 id="load-duplicate-record-strategy">Load Duplicate Record
 Strategy</h4>
 <p>This preference is not visible unless the <q>Clear Records On
