@@ -15,17 +15,39 @@ export function menuLoadDlg() {
     let body = xmk('span')
         .xAppendChild(
             xmk('p')
-                .xInnerHTML('Normally you simply click the "Load" button but there are three special cases:'),
+                .xInnerHTML('Normally you simply click the "Load" button to select a file but there are three special cases:'),
             xmk('ol').xAppend(
                 xmk('li')
-                    .xAddEventListener('click', (event) => loadExample(event))
+                    .xAddEventListener('touchstart', (event) => { event.target.xStyle({'font-weight': 'bold'}) })
+                    .xAddEventListener('touchend', (event) => { event.target.xStyle({'font-weight': 'normal'}) })
+                    .xAddEventListener('mouseover', (event) => { event.target.xStyle({'font-weight': 'bold'}) })
+                    .xAddEventListener('mouseout', (event) => { event.target.xStyle({'font-weight': 'normal'}) })
+                    .xAddEventListener('click', (event) => {
+                        event.target.xStyle({'font-weight': 'normal'})
+                        setTimeout( () => loadExample(event), 500)
+                    })
                     .xInnerHTML('Click or tap anywhere on this line to load example records.'),
                 xmk('li')
+                    .xAddEventListener('touchstart', (event) => { event.target.xStyle({'font-weight': 'bold'}) })
+                    .xAddEventListener('touchend', (event) => { event.target.xStyle({'font-weight': 'normal'}) })
+                    .xAddEventListener('mouseover', (event) => { event.target.xStyle({'font-weight': 'bold'}) })
+                    .xAddEventListener('mouseout', (event) => { event.target.xStyle({'font-weight': 'normal'}) })
                     .xAddEventListener('click', (event) => loadExampleRecipe(event))
                     .xInnerHTML('Click or tap anywhere on this line to the example recipes.'),
                 xmk('li')
+                    .xAddEventListener('touchstart', (event) => { event.target.xStyle({'font-weight': 'bold'}) })
+                    .xAddEventListener('touchend', (event) => { event.target.xStyle({'font-weight': 'normal'}) })
+                    .xAddEventListener('mouseover', (event) => { event.target.xStyle({'font-weight': 'bold'}) })
+                    .xAddEventListener('mouseout', (event) => { event.target.xStyle({'font-weight': 'normal'}) })
                     .xAddEventListener('click', (event) => loadUrl(event))
                     .xInnerHTML('Click or tap anywhere on this line to load records from a URL.'),
+                /*xmk('li')
+                    .xAddEventListener('touchstart', (event) => { event.target.xStyle({'font-weight': 'bold'}) })
+                    .xAddEventListener('touchend', (event) => { event.target.xStyle({'font-weight': 'normal'}) })
+                    .xAddEventListener('mouseover', (event) => { event.target.xStyle({'font-weight': 'bold'}) })
+                    .xAddEventListener('mouseout', (event) => { event.target.xStyle({'font-weight': 'normal'}) })
+                    .xAddEventListener('click', (event) => loadClipboardContent(event))
+                    .xInnerHTML('Click or tap anywhere on this line to load records the clipboard.'),*/
             ),
             xmk('p')
                 .xInnerHTML('Enter a password if the PAM records file was encrypted.'),
@@ -75,6 +97,36 @@ function closeDlg() {
         closeButton.click()
     }
     enablePrinting()
+}
+
+// kept getting: reference error: url not defined
+// may be a permissions problem
+// tabling this for now.
+function loadClipboardContent() {
+    navigator.clipboard.readText()
+        .then( (content) => {
+            if (content.length > 0) {
+                let size = content.length
+                if (content[0] === '{') {
+                    // This file is plain json, it is not encrypted
+                    statusBlip(`not encrypted ${url} (${size}B)`)
+                    loadCallback(content)
+                }  else {
+                    statusBlip(`encrypted ${url} (${size}B)`)
+                    let password = el.xGet('#x-load-password').value.trim()
+                    decrypt(password, content, loadCallback, invalidPasswordCallback)
+                }
+            } else {
+                const msg = `clipboard is empty`
+                statusBlip(msg)
+                alert(msg)
+            }
+        })
+        .catch ( (error) => {
+            const msg = `internal error:\nnavigator.clipboard.readText() exception:\n${error}`
+            statusBlip(msg)
+            alert(msg)
+        })
 }
 
 function loadUrlContent(url) {
