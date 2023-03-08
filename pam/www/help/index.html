@@ -109,7 +109,7 @@
 </tr>
 <tr class="even">
 <td>Version</td>
-<td><code>1.0.8</code></td>
+<td><code>1.0.9</code></td>
 </tr>
 <tr class="odd">
 <td>Bootstrap Version</td>
@@ -117,11 +117,11 @@
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2023-03-06 14:20:28 -0800</code></td>
+<td><code>2023-03-07 17:22:27 -0800</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>cb9a946</code></td>
+<td><code>d4120ab</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
@@ -348,7 +348,7 @@ instructions
 <p><img src="./pam-ice-cream-sundae-new.png" width="400" alt="ice-cream-sundae-example"></p>
 <p>It would look like this when you <em>view</em> it in <em>PAM</em> in edit mode.</p>
 <p><img src="./pam-ice-cream-sundae-open.png" width="400" alt="ice-cream-sundae-example"></p>
-<p>As you can see, in this <em><q>recipe</q></em> record, the title is <code>"Ice Cream Sundae"</code> and the two fields <q>ingredients</q> and <q>instructions</q> contain the multiline (<code>textarea</code>) descriptions of what the ingredients and instructions are for this specific recipe. And, finally, there is an <q>html</q> field that contains the image.</p>
+<p>In this <em><q>recipe</q></em> record, the title is <code>"Ice Cream Sundae"</code> and the two fields <q>ingredients</q> and <q>instructions</q> contain the multiline (<code>textarea</code>) descriptions of what the ingredients and instructions are for this specific recipe. And, finally, there is an <q>html</q> field that contains the image.</p>
 <p>Note that the record field names <q>ingredients</q> and <q>instructions</q> used in this example are custom <em>field names</em>. They are not available by default. The <q>html</q> field <em>is</em> a default field.</p>
 <p>Custom fields can be created by adding new fields to the default fields defined in the preferences so they are available all of the time.</p>
 <p>For this example I created two new <em>textarea</em> fields named <q>ingredients</q> and <q>instructions</q> so that users could enter multiple lines and removed all of the other default fields except the <q>html</q> field because they were not needed. I kept the default <q>html</q> field because I wanted to be able add pictures to the recipes. Here is what the preferences look like after the modifications were made.</p>
@@ -362,7 +362,7 @@ instructions
 <p><img src="./pam-google-account.png" width="400" alt="google-account-example"></p>
 <p>Note that the password is hidden in the example above. <em>PAM</em> always hides the contents of passwords by default.</p>
 <h5 id="record-model-summary">Record Model Summary</h5>
-<p>As you can see both records look quite different. Recipes records have fields for <q>ingredients</q> and <q>instructions</q> whereas account records have fields for the <q>url</q>, <q>login</q> and <q>password</q>. However, in both cases they have the same basic structure: a title and a set of fields that are relevant to recipes or accounts.</p>
+<p>Both records look quite different. Recipes records have fields for <q>ingredients</q> and <q>instructions</q> whereas account records have fields for the <q>url</q>, <q>login</q> and <q>password</q>. However, in both cases they have the same basic structure: a title and a set of fields that are relevant to recipes or accounts.</p>
 <p>You could easily imagine defining other records that contain information for other topics like <em><q>books read</q></em> or <em><q>unidentified aerial phenomena</q></em> or <em><q>bird watching</q></em> which would undoubtedly require different fields. The idea of topics is dicussed in more detail in the <a href="#topics">Topics</a> section.</p>
 <p>In my view, this approach of using <em>records composed of fields</em> does a better job of representing this type of information than a spreadsheet or a text file.</p>
 <h4 id="reason-3-searching">Reason 3: Searching</h4>
@@ -437,7 +437,7 @@ instructions
 <h3 id="unexpanded-view-of-all-records">Unexpanded View of all Records</h3>
 <p>We start with the unexpanded view of all records as shown below.</p>
 <p><img src="./pam-example-records.png" width="400" alt="example-records"></p>
-<p>As you can see <em>PAM</em> presents the records as an accordion. Each record is one entry in the accordion that you can expand to view the record fields or <a href="#delete-record">delete</a>, <a href="#clone-record">clone</a> or <a href="#edit-record">edit</a> edit the record.</p>
+<p><em>PAM</em> presents the records as an accordion. Each record is one entry in the accordion that you can expand to view the record fields or <a href="#delete-record">delete</a>, <a href="#clone-record">clone</a> or <a href="#edit-record">edit</a> edit the record.</p>
 <p>To get the information for an account you click or tap the button.</p>
 <p>At the top of the screen is the search bar and, at the far right, the menu.</p>
 <p>At the bottom of the screen is a status bar that shows status messages.</p>
@@ -448,13 +448,13 @@ instructions
 <p><img src="./pam-record-expanded-fields.png" width="400" alt="record-expanded"></p>
 <p>If you click or tap the clipboard icon, the field contents will be copied to the clipboard so that you can paste them into a login dialogue.</p>
 <p>In addition to the clipboard icon there is another icon that looks like an eye <img src="./eye.svg" height="32" width="32" alt="eye"/> that shows up for password field. If you click or tap it, the password will be shown in plaintext and the icon will change to an eye with a slash through it <img src="./eye-slash.svg" height="32" width="32" alt="eye-slash"/>. By default all passwords are hidden so that they are not visible to casual observers. Click or tap it again to re-hide the password. Passwords are correctly copied to the clipboard at all times even when the password is hidden.</p>
-<p>In addition there are three buttons at the bottom <q><img src='./trash.svg' height='32' width='32' /> Delete</q> to delete the record, <q><img src='./files.svg' height='32' width='32' /> Clone</q> to clone the record and <q><img src='./pencil-square.svg' height='32' width='32' /> Edit</q> to edit the record fields.</p>
-<p>As you can see here.</p>
+<p>In addition there are three buttons at the bottom <q><img src="./trash.svg" height='32' width='32' alt='trash'/> Delete</q> to delete the record, <q><img src="./files.svg" height='32' width='32' alt='files' /> Clone</q> to clone the record and <q><img src="./pencil-square.svg" height='32' width='32' alt='pencil-square'/> Edit</q> to edit the record fields.</p>
+<p>As shown below.</p>
 <p><img src="./pam-record-expanded-fields2.png" width="400" alt="record-expanded"></p>
 <p>The fields <em>in</em> records are completely customizable when you select the <code>"Edit"</code> option.</p>
 <p>Fields are added <em>to</em> the record by selecting a new field from the <code>"New Record"</code> drop down menu as shown below for the <code>"Facebook"</code> record but these fields can <em>also</em> be changed. See the <a href="#custom-fields">Custom Fields</a> and <a href="#field-types">Field Types</a> sections for details.</p>
 <p><img src="./pam-record-expanded-edit-facebook-new-field.png" width="400" alt="record-expanded"></p>
-<p>Fields are modified <em>in</em> the record by editing them directly and they are deleted <em>from</em> the record by clicking on the <img src='./trash.svg' height='32' width='32' /> icon.</p>
+<p>Fields are modified <em>in</em> the record by editing them directly and they are deleted <em>from</em> the record by clicking on the <img src="./trash.svg" height='32' width='32' /> icon.</p>
 <p><img src="./pam-record-expanded-edit-facebook.png" width="400" alt="record-expanded"></p>
 <h2 id="topics">Topics</h2>
 <p>Topics define how records are related. They provide a convenient abstraction for organizing related records in files. Topics are completely arbitrary. For example a topic could be something like <em><q>recipes</q></em> or <em><q>accounts</q></em> or <em><q>unidentified aerial phenomena</q></em> or <em><q>my favorite cryptography algorithms</q></em> or <em><q>green things</q></em>.</p>
@@ -546,7 +546,7 @@ instructions
 <p>Here is what the preferences look like with the other fields pruned out. The <q>url</q>, <q>login</q> and <q>password</q> record fields are part of the default.</p>
 <p><img src="./pam-google-account-prefs.png" width="400" alt="google-account-example-prefs"></p>
 <p>This is what they will look like in the <code>"New Record"</code> pull down menu when creating or editing a record.</p>
-<p><img src="pam-new-record-field-1-select.png" width="400" alt="new-record-field-1-select"></p>
+<p><img src="./pam-new-record-field-1-select.png" width="400" alt="new-record-field-1-select"></p>
 <h2 id="password-fields">Password Fields</h2>
 <p>Password fields are a special case for the following three reasons.</p>
 <p>First, they provide a generator that allows you to automatically create passwords at the click or tap of a button. For information about preferences that can be used to customize password generation see <a href="#password-preferences">Password Preferences</a></p>
@@ -576,17 +576,17 @@ instructions
 <h3 id="password-generator">Password Generator</h3>
 <p>This is what the password field dialogue looks like with no generator.</p>
 <p><img src="./pam-password-no-generator.png" width="400" alt="password-no-generator"></p>
-<p>When you click or tap on the <img src='./gear.svg' height='32' width='32' /> icon, cryptic and memorable passwords are generated and the password generator dialogue appears.</p>
+<p>When you click or tap on the <img src="./gear.svg" height='32' width='32' /> icon, cryptic and memorable passwords are generated and the password generator dialogue appears.</p>
 <p><img src="./pam-password-generator.png" width="400" alt="password-generator"></p>
-<p>As you can see it always generates five memorable passwords to provide some choices. I found that more useful than the original implementation which only had a single choice.</p>
+<p>It always generates five memorable passwords to provide choices. I found that more useful than the original implementation which only had a single choice.</p>
 <blockquote>
 <p>The decision to present five memorable passwords was completely arbitrary but it seems to work well enough for my needs and can easily be changed.</p>
 </blockquote>
 <p>This is what the password generator looks like with annotations.</p>
 <p><img src="./pam-password-generator-annotated.png" width="400" alt="password-generator-annotated"></p>
-<p>If you click or tap on the <img src='./gear.svg' height='32' width='32' /> icon a second time, new passwords will be generated.</p>
-<p>You must click or tap on the <img src='./x-circle.svg' height='32' width='32' /> icon to close the dialogue.</p>
-<p>I chose this approach because I wanted the <img src='./gear.svg' height='32' width='32' /> icon to be used to generate new passwords.</p>
+<p>If you click or tap on the <img src="./gear.svg" height='32' width='32' /> icon a second time, new passwords will be generated.</p>
+<p>You must click or tap on the <img src="./x-circle.svg" height='32' width='32' /> icon to close the dialogue.</p>
+<p>I chose this approach because I wanted the <img src="./gear.svg" height='32' width='32' /> icon to be used to generate new passwords.</p>
 <blockquote>
 <p>In retrospect, that choice may not have been the most intuitive way to implement closing the generator dialogue it but it works well enough and can easily be changed if it turns out to be too cumbersome.</p>
 </blockquote>
@@ -622,18 +622,18 @@ instructions
 <li><a href="#save-file">Save File</a></li>
 <li><a href="#get-help">Help</a>.</li>
 </ol>
-<p>Click or tap on the <q><img src='./info-circle.svg' height='32' width='32' /> About</q> entry to see information about the app. See the <a href="#about">About</a> section for more details.</p>
-<p>Click or tap on the <q><img src='./gear.svg' height=' 32' width='32' /> Preferences</q> entry to see the preferences dialogue which allows you to customize some of the app behavior. There is a lot of stuff so you might want to read the <a href="#preferences">Preferences</a> section before trying it.</p>
-<p>Click or tap on the <q><img src='./plus-circle-fill.svg' height='32' width='32' /> New Record</q> entry to create a new record. See the <a href="#create-new-record">Create New Record</a> section for more details.</p>
-<p>Click or tap on the <q><img src='./trash3-fill.svg' height='32' width='32' /> Clear Records</q> entry to delete all of the records. This is useful for times when you want to create a new collection of records that is saved in a separate file. For example, if you wanted to create a collection personal accounts in one file and a collection shared accounts for a group of folks (like a development team sharing AWS accounts).</p>
-<p>Click or tap on the <q><img src='./file-arrow-up-fill.svg' height='32' width='32' /> Load File</q> entry to load a records file. See the <a href="#load-file">Load File</a> section for more details.</p>
-<p>Click or tap on the <q><img src='./file-arrow-down-fill.svg' height='32' width='32' /> Save File</q> entry to save all of the records to a file. See the <a href="#save-file">Save File</a> section for more details.</p>
-<p>Click or tap on the <q><img src='./question-circle.svg' height='32' width='32' /> Help</q> entry to see this help message.</p>
+<p>Click or tap on the <q><img src="./info-circle.svg" height='32' width='32' /> About</q> entry to see information about the app. See the <a href="#about">About</a> section for more details.</p>
+<p>Click or tap on the <q><img src="./gear.svg" height=' 32' width='32' /> Preferences</q> entry to see the preferences dialogue which allows you to customize some of the app behavior. There is a lot of stuff so you might want to read the <a href="#preferences">Preferences</a> section before trying it.</p>
+<p>Click or tap on the <q><img src="./plus-circle-fill.svg" height='32' width='32' /> New Record</q> entry to create a new record. See the <a href="#create-new-record">Create New Record</a> section for more details.</p>
+<p>Click or tap on the <q><img src="./trash3-fill.svg" height='32' width='32' /> Clear Records</q> entry to delete all of the records. This is useful for times when you want to create a new collection of records that is saved in a separate file. For example, if you wanted to create a collection personal accounts in one file and a collection shared accounts for a group of folks (like a development team sharing AWS accounts).</p>
+<p>Click or tap on the <q><img src="./file-arrow-up-fill.svg" height='32' width='32' /> Load File</q> entry to load a records file. See the <a href="#load-file">Load File</a> section for more details.</p>
+<p>Click or tap on the <q><img src="./file-arrow-down-fill.svg" height='32' width='32' /> Save File</q> entry to save all of the records to a file. See the <a href="#save-file">Save File</a> section for more details.</p>
+<p>Click or tap on the <q><img src="./question-circle.svg" height='32' width='32' /> Help</q> entry to see this help message.</p>
 <h3 id="records-section">Records Section</h3>
 <p>Underneath the top level bar, in the middle, is the records section. Each record is shown as an entry that is displayed by its title. If you click or tap on the record title, the record will expand to show the record contents (fields) and provide options for deleting, cloning or editing the record contents.</p>
 <p>This way of presenting the records is called an accordion display. Below you can see how it expands after the <q>Facebook</q> entry has been selected.</p>
 <p><img src="./pam-record-expanded.png" width="400" alt="record-expanded"></p>
-<p>As you can see the expanded <q>Facebook</q> record has three fields: <q>url</q>, <q>login</q> and <q>password</q>.</p>
+<p>The expanded <q>Facebook</q> record has three fields: <q>url</q>, <q>login</q> and <q>password</q>.</p>
 <p><img src="./pam-record-expanded-fields.png" width="400" alt="record-expanded"></p>
 <p>You can copy the field values to the clipboard so that they can be pasted into login forms.</p>
 <blockquote>
@@ -683,7 +683,7 @@ instructions
 <p>Each method is discussed in detail in the following subsections.</p>
 <h4 id="method-1-menu-approach">Method 1: Menu Approach</h4>
 <p>The first method, creating the record by clicking or tapping the <q>New Record</q> menu option in the application, is probably the best way to create the first new record for a topic family. This is also known as the <q>menu</q> approach and is shown below.</p>
-<p><img src="pam-create-new-record.png" width="400" alt="new-rec"></p>
+<p><img src="./pam-create-new-record.png" width="400" alt="new-rec"></p>
 <p>To show how it works, we will create a recipe record using <q>ingredients</q> and <q>instruction</q> fields. But first we need to define them as default <em><q>textarea</q></em> fields in the <a href="#preferences">Preferences</a> dialogue. So the available records look like this.</p>
 <p><img src="./pam-recipe-prefs.png" width="400" alt="default"/></p>
 <p>To create a new record using the menu approach click or tap on the <code>"New Record"</code> option from the menu.</p>
@@ -694,33 +694,33 @@ instructions
 <p><img src="./pam-new-record-title.png" width="400" alt="new-record"></p>
 <p>From there you click or tap on the <code>"New Field"</code> pulldown to select and create the first record field. Don’t worry if you select the wrong one, they are easy to delete.</p>
 <p>Here is where you select <q>ingredients</q> for the first field.</p>
-<p><img src="pam-new-record-field-1-select.png" width="400" alt="new-record-field-1-select"></p>
+<p><img src="./pam-new-record-field-1-select.png" width="400" alt="new-record-field-1-select"></p>
 <p>Populate it by typing into the <em><q>textarea</q></em> box.</p>
-<p><img src="pam-new-record-field-1.png" width="400" alt="new-record-field-1"></p>
+<p><img src="./pam-new-record-field-1.png" width="400" alt="new-record-field-1"></p>
 <p>Now do the same thing to create an <q>instructions</q> field.</p>
-<p><img src="pam-new-record-field-2.png" width="400" alt="new-record-field-2"></p>
+<p><img src="./pam-new-record-field-2.png" width="400" alt="new-record-field-2"></p>
 <p>One interesting thing to understand is that you can <em>change the order of the fields</em> by dragging them up or down. To do that select the field title at the top of the box (fieldset) and move it. This can also be done when editing the record.</p>
 <p>Here is what it looks like when I dragged the <q>instructions</q> field up.</p>
-<p><img src="pam-new-record-drag.png" width="400" alt="new-record-drag"></p>
+<p><img src="./pam-new-record-drag.png" width="400" alt="new-record-drag"></p>
 <p>I then dragged <q>instructions</q> field back down because it should appear after <q>ingredients</q> field.</p>
 <p>When you are finished click or tap on the <code>"Save"</code> button to save it and you will see it show up as a new record in the records part of the screen.</p>
-<p><img src="pam-new-record-done.png" width="400" alt="new-record-done"></p>
+<p><img src="./pam-new-record-done.png" width="400" alt="new-record-done"></p>
 <p>You can click or tap on the record to expand it and see the fields you just defined.</p>
-<p><img src="pam-new-record-done-expand.png" width="400" alt="new-record-done-expand"></p>
+<p><img src="./pam-new-record-done-expand.png" width="400" alt="new-record-done-expand"></p>
 <h4 id="method-2-clone-approach">Method 2: Clone Approach</h4>
 <p>The second method, creating a record by cloning an existing record, is useful when you want to use the same fields as the existing record. It is a great way to guarantee uniformity. Although if the number of fields is small using the first method is also fine. Here is what the clone option looks like.</p>
-<p><img src="pam-clone-google.png" width="400" alt="clone-rec"></p>
+<p><img src="./pam-clone-google.png" width="400" alt="clone-rec"></p>
 <p>Cloning a record is simple. Just expand a record and click or tap on the clone button and an edit dialogue pops up.</p>
 <p>Using the record that was created in the previous section here is what happens when you click or tap the <code>"Clone"</code> button.</p>
-<p><img src="pam-clone-record-popup.png" width="400" alt="clone-record-popup"></p>
-<p>As you can see, the clone operation created a new record with a slightly modified title <q>Ice Cream Sundae Clone</q> <em>because the record title must be unique</em> and the same fields as the original record.</p>
+<p><img src="./pam-clone-record-popup.png" width="400" alt="clone-record-popup"></p>
+<p>The clone operation created a new record with a slightly modified title <q>Ice Cream Sundae Clone</q> <em>because the record title must be unique</em> and the same fields as the original record.</p>
 <p>At this point you would typically change the title and field values but for this demonstration will not do anything. <em>PAM</em> makes sure that the title is unique so it can be saved.</p>
 <p>Click or tap the <code>"Save"</code> button and you will see this.</p>
-<p><img src="pam-clone-records-1.png" width="400" alt="clone-records-1"></p>
-<p>As you can see, <em>PAM</em> still remembers that you had the original record open. Just below it you will see the new cloned record.</p>
+<p><img src="./pam-clone-records-1.png" width="400" alt="clone-records-1"></p>
+<p><em>PAM</em> still remembers that you had the original record open. Just below it you will see the new cloned record.</p>
 <p>The reason that the original record is left open is so that it is easy to continue clicking or tapping the <code>"Clone"</code> button to create more records.</p>
 <p>In this case we only care about one record so you can click or tap on the new record to expand it.</p>
-<p><img src="pam-clone-records-2.png" width="400" alt="clone-records-1"></p>
+<p><img src="./pam-clone-records-2.png" width="400" alt="clone-records-1"></p>
 <h4 id="method-3-json-approach">Method 3: JSON Approach</h4>
 <p>The third method, creating a record by editing a JSON record file, is most useful if you are interested in creating records programmatically (perhaps a subset of accounts that shared with a small group of users that is automatically generated from a database). The example records and recipes example files that are available in the <q>Load</q> dialogue are a great place to start.</p>
 <p>This approach does not have any screenshots because it deals with <em>PAM</em> internals and may change from time to time. Instead a set of instructions is provided that should allows you to figure it out pretty easily.</p>
@@ -919,10 +919,10 @@ instructions
 <h3 id="clear-records">Clear Records</h3>
 <p>Clear all of the records currently defined.</p>
 <p>This is normally done automatically when a new file is loaded but could be useful if you want to enter new a set of records from scratch using the currently defined fields. Of course, you could simply delete all of the records manually but this is simpler.</p>
-<p>To clear all records choose the <q><img src='./trash3-fill.svg' height='32' width='32' /> Clear Records</q> option from the menu. See the <a href="#menu">Menu</a> section for screenshots.</p>
+<p>To clear all records choose the <q><img src=".//trash3-fill.svg" height='32' width='32' /> Clear Records</q> option from the menu. See the <a href="#menu">Menu</a> section for screenshots.</p>
 <p>This option will ask you to confirm.</p>
 <h3 id="save-file">Save File</h3>
-<p>To save records and preferences to a file by choose the <q><img src='./file-arrow-down-fill.svg' height='32' width='32' /> Save File</q> option from the menu. See the <a href="#menu">Menu</a> section for screenshots.</p>
+<p>To save records and preferences to a file by choose the <q><img src=".//file-arrow-down-fill.svg" height='32' width='32' /> Save File</q> option from the menu. See the <a href="#menu">Menu</a> section for screenshots.</p>
 <p>This is the save file dialogue.</p>
 <p><img src="./pam-file-save.png" width="400" alt="file-save"></p>
 <p>If you want the records to be encrypted, enter or generate a password as described in <a href="#password-generator">Password Generator</a> section.</p>
@@ -933,13 +933,13 @@ instructions
 <p>Plain javascript is <em>NOT</em> secure.</p>
 <p>If you have records with passwords <em>ALWAYS</em> use a password unless you understand the consequences. For example, saving the data without a password can sometimes be convenient because it allows you to see how the <em>PAM</em> data is organized which can aid automation.</p>
 <h3 id="load-file">Load File</h3>
-<p>To load records and preferences from a file by choose the <q><img src='./file-arrow-up-fill.svg' height='32' width='32' /> Load File</q> option from the menu. See the <a href="#menu">Menu</a> section for screenshots.</p>
+<p>To load records and preferences from a file by choose the <q><img src="./file-arrow-up-fill.svg" height='32' width='32' /> Load File</q> option from the menu. See the <a href="#menu">Menu</a> section for screenshots.</p>
 <p>This is the load file dialogue.</p>
 <p><img src="./pam-file-load.png" width="400" alt="file-load"></p>
 <p>If the file was saved with a password, you must enter that password or the file will prompt for the password when loading.</p>
 <h5 id="load-example-records">Load Example Records</h5>
 <p>If you wish to load the example records file, click or tap on the <q>Load Example Records</q> button (#1) to load the following example records that can be used to get you started.</p>
-<p><img src="./pam-file-load-example-records.png" width="400" alt="file-load-example-records"></p>
+<p><img src="./pam-example-records.png" width="400" alt="file-load-example-records"></p>
 <h5 id="load-example-recipe">Load Example Recipe</h5>
 <p>If you wish to load the example recipes file, click or tap on the <q>Load Example Recipes</q> button (#2) and PAM will load this.</p>
 <p><img src="./pam-ice-cream-sundae-open.png" width="400" alt="ice-cream-sundae-example"></p>
@@ -1225,7 +1225,7 @@ instructions
 <ol type="1">
 <li>Navigate to the app as described above.</li>
 <li>Click or tap on the record that contains the information.</li>
-<li>Click or tap on the edit <img src='./pencil-square.svg' height='32' width='32' /> icon.</li>
+<li>Click or tap on the edit <img src="./pencil-square.svg" height='32' width='32' /> icon.</li>
 <li>Edit the record to make the necessary changes to the fields or title.</li>
 <li>Save the record.</li>
 <li>Make sure to save the file when you are done.</li>
@@ -1235,7 +1235,7 @@ instructions
 <ol type="1">
 <li>Navigate to the app as described above.</li>
 <li>Click or tap on the record that contains the information.</li>
-<li>Click or tap on the delete <img src='./trash.svg' height='32' width='32' /> icon.</li>
+<li>Click or tap on the delete <img src="./trash.svg" height='32' width='32' /> icon.</li>
 <li>Make sure to save the file when you are done.</li>
 </ol>
 <h4 id="clone-an-existing-record">Clone an Existing Record</h4>
@@ -1244,7 +1244,7 @@ instructions
 <ol type="1">
 <li>Navigate to the app as described above.</li>
 <li>Click or tap on the record that contains the information.</li>
-<li>Click or tap on the edit <img src='./files.svg' height='32' width='32' /> icon.</li>
+<li>Click or tap on the edit <img src="./files.svg" height='32' width='32' /> icon.</li>
 <li>Edit the record to update the fields.</li>
 <li>Save the record.</li>
 <li>Make sure to save the file when you are done.</li>
