@@ -109,7 +109,7 @@
 </tr>
 <tr class="even">
 <td>Version</td>
-<td><code>1.0.14</code></td>
+<td><code>1.0.15</code></td>
 </tr>
 <tr class="odd">
 <td>Bootstrap Version</td>
@@ -117,11 +117,11 @@
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2023-03-13 08:45:51 -0700</code></td>
+<td><code>2023-03-14 14:47:41 -0700</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>dffc31a</code></td>
+<td><code>1a708f8</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
@@ -299,7 +299,7 @@
 <p><img src="./pam-iphone-screenshot.png" alt="iphone-screenshot" width="400"></p>
 <p>The records appear as accordion entries that expand when you click on them as shown below.</p>
 <p><img src="./pam-google-record.png" width="400" alt="google-account-example"></p>
-<p>Once the record is expanded you simply click on the <img src="./clipboard.svg" height="32" width="32" alt="clipboard"/> icon associated with the record field you are interested in (like the password) to copy its value to the system clipboard so that it can then be pasted them into the appropriate login field.</p>
+<p>Once the record is expanded you simply click on the <img src="../icons/black/clipboard.svg" height="32" width="32" alt="clipboard"/> icon associated with the record field you are interested in (like the password) to copy its value to the system clipboard so that it can then be pasted them into the appropriate login field.</p>
 <p>You can even include images like this.</p>
 <p><img src="./pam-ice-cream-sundae-open.png" width="400" alt="ice-cream-sundae-example"></p>
 <p>There are other features like memorable password generation and customized record fields that are described in the documentation below.</p>
@@ -445,17 +445,17 @@ instructions
 <h3 id="expanded-view-of-a-record">Expanded View of a Record</h3>
 <p>Once you click on or tap a record it expands as shown below where the <q>Facebook</q> record was tapped.</p>
 <p><img src="./pam-record-expanded.png" width="400" alt="record-expanded"></p>
-<p>You can see that there are three fields in the record: <q>url</q>, <q>login</q> and <q>password</q>, next to each field there is a icon that looks like a clipboard <img src="./clipboard.svg" height="32" width="32" alt="clipboard"/>.</p>
+<p>You can see that there are three fields in the record: <q>url</q>, <q>login</q> and <q>password</q>, next to each field there is a icon that looks like a clipboard <img src="../icons/black/clipboard.svg" height="32" width="32" alt="clipboard"/>.</p>
 <p><img src="./pam-record-expanded-fields.png" width="400" alt="record-expanded"></p>
 <p>If you click or tap the clipboard icon, the field contents will be copied to the clipboard so that you can paste them into a login dialogue.</p>
-<p>In addition to the clipboard icon there is another icon that looks like an eye <img src="./eye.svg" height="32" width="32" alt="eye"/> that shows up for password field. If you click or tap it, the password will be shown in plaintext and the icon will change to an eye with a slash through it <img src="./eye-slash.svg" height="32" width="32" alt="eye-slash"/>. By default all passwords are hidden so that they are not visible to casual observers. Click or tap it again to re-hide the password. Passwords are correctly copied to the clipboard at all times even when the password is hidden.</p>
-<p>In addition there are three buttons at the bottom <q><img src="./trash.svg" height='32' width='32' alt='trash'/> Delete</q> to delete the record, <q><img src="./files.svg" height='32' width='32' alt='files' /> Clone</q> to clone the record and <q><img src="./pencil-square.svg" height='32' width='32' alt='pencil-square'/> Edit</q> to edit the record fields.</p>
+<p>In addition to the clipboard icon there is another icon that looks like an eye <img src="../icons/black/eye.svg" height="32" width="32" alt="eye"/> that shows up for password field. If you click or tap it, the password will be shown in plaintext and the icon will change to an eye with a slash through it <img src="../icons/black/eye-slash.svg" height="32" width="32" alt="eye-slash"/>. By default all passwords are hidden so that they are not visible to casual observers. Click or tap it again to re-hide the password. Passwords are correctly copied to the clipboard at all times even when the password is hidden.</p>
+<p>In addition there are three buttons at the bottom <q><img src="../icons/black/trash.svg" height='32' width='32' alt='trash'/> Delete</q> to delete the record, <q><img src="../icons/black/files.svg" height='32' width='32' alt='files' /> Clone</q> to clone the record and <q><img src="../icons/black/pencil-square.svg" height='32' width='32' alt='pencil-square'/> Edit</q> to edit the record fields.</p>
 <p>As shown below.</p>
 <p><img src="./pam-record-expanded-fields2.png" width="400" alt="record-expanded"></p>
 <p>The fields <em>in</em> records are completely customizable when you select the <code>"Edit"</code> option.</p>
 <p>Fields are added <em>to</em> the record by selecting a new field from the <code>"New Record"</code> drop down menu as shown below for the <code>"Facebook"</code> record but these fields can <em>also</em> be changed. See the <a href="#custom-fields">Custom Fields</a> and <a href="#field-types">Field Types</a> sections for details.</p>
 <p><img src="./pam-record-expanded-edit-facebook-new-field.png" width="400" alt="record-expanded"></p>
-<p>Fields are modified <em>in</em> the record by editing them directly and they are deleted <em>from</em> the record by clicking on the <img src="./trash.svg" height='32' width='32' /> icon.</p>
+<p>Fields are modified <em>in</em> the record by editing them directly and they are deleted <em>from</em> the record by clicking on the <img src="../icons/black/trash.svg" height='32' width='32' /> icon.</p>
 <p><img src="./pam-record-expanded-edit-facebook.png" width="400" alt="record-expanded"></p>
 <h2 id="topics">Topics</h2>
 <p>Topics define how records are related. They provide a convenient abstraction for organizing related records in files. Topics are completely arbitrary. For example a topic could be something like <em><q>recipes</q></em> or <em><q>accounts</q></em> or <em><q>unidentified aerial phenomena</q></em> or <em><q>my favorite cryptography algorithms</q></em> or <em><q>green things</q></em>.</p>
@@ -511,7 +511,7 @@ instructions
 </tr>
 <tr class="odd">
 <td>password</td>
-<td>A secret text string that is normally displayed as asterisks (<code>****</code>) with an eye (<img src="./eye.svg" height="32" width="32" alt="eye"/>) button that can be clicked or tapped to show the value.</td>
+<td>A secret text string that is normally displayed as asterisks (<code>****</code>) with an eye (<img src="../icons/black/eye.svg" height="32" width="32" alt="eye"/>) button that can be clicked or tapped to show the value.</td>
 </tr>
 <tr class="even">
 <td>phone</td>
@@ -567,17 +567,17 @@ instructions
 <h3 id="hidden-password-representation">Hidden Password Representation</h3>
 <p>Here is an example that shows a password in its standard hidden form.</p>
 <p><img src="./pam-record-expanded-fields.png" width="400" alt="record-expanded"></p>
-<p>To make the password visible, click or tap on the <img src="./eye.svg" height="32" width="32" alt="eye"/> icon.</p>
-<p>The password can be copied to the clipboard when it is hidden by clicking on the <img src="./clipboard.svg" height="32" width="32" alt="clipboard"/> icon.</p>
+<p>To make the password visible, click or tap on the <img src="../icons/black/eye.svg" height="32" width="32" alt="eye"/> icon.</p>
+<p>The password can be copied to the clipboard when it is hidden by clicking on the <img src="../icons/black/clipboard.svg" height="32" width="32" alt="clipboard"/> icon.</p>
 <h3 id="visible-password-representation">Visible Password Representation</h3>
 <p>Here is an example that shows a password in its visible hidden form.</p>
 <p><img src="./pam-record-expanded-password.png" width="400" alt="record-expanded-password"></p>
-<p>The password can be copied to the clipboard by clicking on the <img src="./clipboard.svg" height="32" width="32" alt="clipboard"/> icon.</p>
-<p>To hide the password, click or tap on the <img src="./eye-slash.svg" height="32" width="32" alt="eye"/> icon.</p>
+<p>The password can be copied to the clipboard by clicking on the <img src="../icons/black/clipboard.svg" height="32" width="32" alt="clipboard"/> icon.</p>
+<p>To hide the password, click or tap on the <img src="../icons/black/eye-slash.svg" height="32" width="32" alt="eye"/> icon.</p>
 <h3 id="password-generator">Password Generator</h3>
 <p>This is what the password field dialogue looks like with no generator.</p>
 <p><img src="./pam-password-no-generator.png" width="400" alt="password-no-generator"></p>
-<p>When you click or tap on the <img src="./gear.svg" height='32' width='32' /> icon, cryptic and memorable passwords are generated and the password generator dialogue appears.</p>
+<p>When you click or tap on the <img src="../icons/black/gear.svg" height='32' width='32' /> icon, cryptic and memorable passwords are generated and the password generator dialogue appears.</p>
 <p><img src="./pam-password-generator.png" width="400" alt="password-generator"></p>
 <p>It always generates five memorable passwords to provide choices. I found that more useful than the original implementation which only had a single choice.</p>
 <blockquote>
@@ -585,9 +585,9 @@ instructions
 </blockquote>
 <p>This is what the password generator looks like with annotations.</p>
 <p><img src="./pam-password-generator-annotated.png" width="400" alt="password-generator-annotated"></p>
-<p>If you click or tap on the <img src="./gear.svg" height='32' width='32' /> icon a second time, new passwords will be generated.</p>
-<p>You must click or tap on the <img src="./x-circle.svg" height='32' width='32' /> icon to close the dialogue.</p>
-<p>I chose this approach because I wanted the <img src="./gear.svg" height='32' width='32' /> icon to be used to generate new passwords.</p>
+<p>If you click or tap on the <img src="../icons/black/gear.svg" height='32' width='32' /> icon a second time, new passwords will be generated.</p>
+<p>You must click or tap on the <img src="../icons/black/x-circle.svg" height='32' width='32' /> icon to close the dialogue.</p>
+<p>I chose this approach because I wanted the <img src="../icons/black/gear.svg" height='32' width='32' /> icon to be used to generate new passwords.</p>
 <blockquote>
 <p>In retrospect, that choice may not have been the most intuitive way to implement closing the generator dialogue it but it works well enough and can easily be changed if it turns out to be too cumbersome.</p>
 </blockquote>
@@ -623,13 +623,13 @@ instructions
 <li><a href="#save-file">Save File</a></li>
 <li><a href="#get-help">Help</a>.</li>
 </ol>
-<p>Click or tap on the <q><img src="./info-circle.svg" height='32' width='32' /> About</q> entry to see information about the app. See the <a href="#about">About</a> section for more details.</p>
-<p>Click or tap on the <q><img src="./gear.svg" height=' 32' width='32' /> Preferences</q> entry to see the preferences dialogue which allows you to customize some of the app behavior. There is a lot of stuff so you might want to read the <a href="#preferences">Preferences</a> section before trying it.</p>
-<p>Click or tap on the <q><img src="./plus-circle-fill.svg" height='32' width='32' /> New Record</q> entry to create a new record. See the <a href="#create-new-record">Create New Record</a> section for more details.</p>
-<p>Click or tap on the <q><img src="./trash3-fill.svg" height='32' width='32' /> Clear Records</q> entry to delete all of the records. This is useful for times when you want to create a new collection of records that is saved in a separate file. For example, if you wanted to create a collection personal accounts in one file and a collection shared accounts for a group of folks (like a development team sharing AWS accounts).</p>
-<p>Click or tap on the <q><img src="./file-arrow-up-fill.svg" height='32' width='32' /> Load File</q> entry to load a records file. See the <a href="#load-file">Load File</a> section for more details.</p>
-<p>Click or tap on the <q><img src="./file-arrow-down-fill.svg" height='32' width='32' /> Save File</q> entry to save all of the records to a file. See the <a href="#save-file">Save File</a> section for more details.</p>
-<p>Click or tap on the <q><img src="./question-circle.svg" height='32' width='32' /> Help</q> entry to see this help message.</p>
+<p>Click or tap on the <q><img src="../icons/black/info-circle.svg" height='32' width='32' /> About</q> entry to see information about the app. See the <a href="#about">About</a> section for more details.</p>
+<p>Click or tap on the <q><img src="../icons/black/gear.svg" height=' 32' width='32' /> Preferences</q> entry to see the preferences dialogue which allows you to customize some of the app behavior. There is a lot of stuff so you might want to read the <a href="#preferences">Preferences</a> section before trying it.</p>
+<p>Click or tap on the <q><img src="../icons/black/plus-circle-fill.svg" height='32' width='32' /> New Record</q> entry to create a new record. See the <a href="#create-new-record">Create New Record</a> section for more details.</p>
+<p>Click or tap on the <q><img src="../icons/black/trash3-fill.svg" height='32' width='32' /> Clear Records</q> entry to delete all of the records. This is useful for times when you want to create a new collection of records that is saved in a separate file. For example, if you wanted to create a collection personal accounts in one file and a collection shared accounts for a group of folks (like a development team sharing AWS accounts).</p>
+<p>Click or tap on the <q><img src="../icons/black/file-arrow-up-fill.svg" height='32' width='32' /> Load File</q> entry to load a records file. See the <a href="#load-file">Load File</a> section for more details.</p>
+<p>Click or tap on the <q><img src="../icons/black/file-arrow-down-fill.svg" height='32' width='32' /> Save File</q> entry to save all of the records to a file. See the <a href="#save-file">Save File</a> section for more details.</p>
+<p>Click or tap on the <q><img src="../icons/black/question-circle.svg" height='32' width='32' /> Help</q> entry to see this help message.</p>
 <h3 id="records-section">Records Section</h3>
 <p>Underneath the top level bar, in the middle, is the records section. Each record is shown as an entry that is displayed by its title. If you click or tap on the record title, the record will expand to show the record contents (fields) and provide options for deleting, cloning or editing the record contents.</p>
 <p>This way of presenting the records is called an accordion display. Below you can see how it expands after the <q>Facebook</q> entry has been selected.</p>
@@ -920,10 +920,10 @@ instructions
 <h3 id="clear-records">Clear Records</h3>
 <p>Clear all of the records currently defined.</p>
 <p>This is normally done automatically when a new file is loaded but could be useful if you want to enter new a set of records from scratch using the currently defined fields. Of course, you could simply delete all of the records manually but this is simpler.</p>
-<p>To clear all records choose the <q><img src=".//trash3-fill.svg" height='32' width='32' /> Clear Records</q> option from the menu. See the <a href="#menu">Menu</a> section for screenshots.</p>
+<p>To clear all records choose the <q><img src="../icons/black/trash3-fill.svg" height='32' width='32' /> Clear Records</q> option from the menu. See the <a href="#menu">Menu</a> section for screenshots.</p>
 <p>This option will ask you to confirm.</p>
 <h3 id="save-file">Save File</h3>
-<p>To save records and preferences to a file by choose the <q><img src=".//file-arrow-down-fill.svg" height='32' width='32' /> Save File</q> option from the menu. See the <a href="#menu">Menu</a> section for screenshots.</p>
+<p>To save records and preferences to a file by choose the <q><img src="../icons/black/file-arrow-down-fill.svg" height='32' width='32' /> Save File</q> option from the menu. See the <a href="#menu">Menu</a> section for screenshots.</p>
 <p>This is the save file dialogue.</p>
 <p><img src="./pam-file-save.png" width="400" alt="file-save"></p>
 <p>If you want the records to be encrypted, enter or generate a password as described in <a href="#password-generator">Password Generator</a> section.</p>
@@ -934,7 +934,7 @@ instructions
 <p>Plain javascript is <em>NOT</em> secure.</p>
 <p>If you have records with passwords <em>ALWAYS</em> use a password unless you understand the consequences. For example, saving the data without a password can sometimes be convenient because it allows you to see how the <em>PAM</em> data is organized which can aid automation.</p>
 <h3 id="load-file">Load File</h3>
-<p>To load records and preferences from a file by choose the <q><img src="./file-arrow-up-fill.svg" height='32' width='32' /> Load File</q> option from the menu. See the <a href="#menu">Menu</a> section for screenshots.</p>
+<p>To load records and preferences from a file by choose the <q><img src="../icons/black/file-arrow-up-fill.svg" height='32' width='32' /> Load File</q> option from the menu. See the <a href="#menu">Menu</a> section for screenshots.</p>
 <p>This is the load file dialogue.</p>
 <p><img src="./pam-file-load.png" width="400" alt="file-load"></p>
 <p>If the file was saved with a password, you must enter that password or the file will prompt for the password when loading.</p>
@@ -1088,8 +1088,8 @@ instructions
 <h3 id="record-fields">Record Fields</h3>
 <p>These are the default record fields that are used when creating or editing record fields. They can be can be changed.</p>
 <p>See the <a href="#fields">Fields</a> section for more information about record fields.</p>
-<p>At the top of the section there is <img src="./plus-circle.svg" height="32" width="32" alt="add"/> icon that is used to create a new record field.</p>
-<p>Each default record field has a name, a type (from a pulldown menu) and a delete button (<img src="./trash3-fill.svg" height="32" width="32" alt="trash"/>) that you click to delete the record field.</p>
+<p>At the top of the section there is <img src="../icons/black/plus-circle.svg" height="32" width="32" alt="add"/> icon that is used to create a new record field.</p>
+<p>Each default record field has a name, a type (from a pulldown menu) and a delete button (<img src="../icons/black/trash3-fill.svg" height="32" width="32" alt="trash"/>) that you click to delete the record field.</p>
 <p>The record field names must be unique but you can modify them. They are stored with the each record file individually.</p>
 <p>This is what the default records filed preference dialogue looks like.</p>
 <p><img src="./pam-default-record-fields.png" width="400" alt="default"/></p>
@@ -1214,8 +1214,8 @@ instructions
 <li>Navigate to the app as described above.</li>
 <li>Click or tap on the record that contains the information.</li>
 <li>Click or tap on the <q>url</q> link so that the site opens up in a different tab.</li>
-<li>Enter the login name or email by clicking or tapping on the <img src="./clipboard.svg" height="32" width="32" alt="clipboard"/> icon next to the login name and paste into the site.</li>
-<li>Enter the password by clicking or tapping on the <img src="./clipboard.svg" height="32" width="32" alt="clipboard"/> icon next to the password and paste into the site.
+<li>Enter the login name or email by clicking or tapping on the <img src="../icons/black/clipboard.svg" height="32" width="32" alt="clipboard"/> icon next to the login name and paste into the site.</li>
+<li>Enter the password by clicking or tapping on the <img src="../icons/black/clipboard.svg" height="32" width="32" alt="clipboard"/> icon next to the password and paste into the site.
 <ol type="1">
 <li>You do <em>not</em> need to make the password visible to do this.</li>
 <li>It picks up the correct password even when it is hidden.</li>
@@ -1226,7 +1226,7 @@ instructions
 <ol type="1">
 <li>Navigate to the app as described above.</li>
 <li>Click or tap on the record that contains the information.</li>
-<li>Click or tap on the edit <img src="./pencil-square.svg" height='32' width='32' /> icon.</li>
+<li>Click or tap on the edit <img src="../icons/black/pencil-square.svg" height='32' width='32' /> icon.</li>
 <li>Edit the record to make the necessary changes to the fields or title.</li>
 <li>Save the record.</li>
 <li>Make sure to save the file when you are done.</li>
@@ -1236,7 +1236,7 @@ instructions
 <ol type="1">
 <li>Navigate to the app as described above.</li>
 <li>Click or tap on the record that contains the information.</li>
-<li>Click or tap on the delete <img src="./trash.svg" height='32' width='32' /> icon.</li>
+<li>Click or tap on the delete <img src="../icons/black/trash.svg" height='32' width='32' /> icon.</li>
 <li>Make sure to save the file when you are done.</li>
 </ol>
 <h4 id="clone-an-existing-record">Clone an Existing Record</h4>
@@ -1245,7 +1245,7 @@ instructions
 <ol type="1">
 <li>Navigate to the app as described above.</li>
 <li>Click or tap on the record that contains the information.</li>
-<li>Click or tap on the edit <img src="./files.svg" height='32' width='32' /> icon.</li>
+<li>Click or tap on the edit <img src="../icons/black/files.svg" height='32' width='32' /> icon.</li>
 <li>Edit the record to update the fields.</li>
 <li>Save the record.</li>
 <li>Make sure to save the file when you are done.</li>
@@ -1275,12 +1275,12 @@ instructions
 <p>Here are the high level steps necessary to get the fields defined.</p>
 <ol type="1">
 <li>Open the preferences dialogue from the menu.</li>
-<li>Add the new fields by clicking or tapping on the <img src="./plus-circle.svg" height="32" width="32" alt="trash"/> icon in the <code>"Record Fields"</code> in the preferences section.
+<li>Add the new fields by clicking or tapping on the <img src="../icons/black/plus-circle.svg" height="32" width="32" alt="trash"/> icon in the <code>"Record Fields"</code> in the preferences section.
 <ol type="1">
 <li><code>"ingredients"</code> of type <q>textarea</q>.</li>
 <li><code>"instructions"</code> of type <q>textarea</q>.</li>
 </ol></li>
-<li>Delete all of the other record fields defined in the preferences by clicking or tapping on the <img src="./trash3-fill.svg" height="32" width="32" alt="trash"/> icon because there is no need for them.</li>
+<li>Delete all of the other record fields defined in the preferences by clicking or tapping on the <img src="../icons/black/trash3-fill.svg" height="32" width="32" alt="trash"/> icon because there is no need for them.</li>
 </ol>
 <p>To search by an ingredient, set the <q>Search Record Field Values</q> preference to true by clicking or tapping on it and then saving it.</p>
 <h3 id="books">Books</h3>
