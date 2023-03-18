@@ -109,7 +109,7 @@
 </tr>
 <tr class="even">
 <td>Version</td>
-<td><code>1.1.0-alpha.3</code></td>
+<td><code>1.1.0-alpha.4</code></td>
 </tr>
 <tr class="odd">
 <td>Bootstrap Version</td>
@@ -117,15 +117,15 @@
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2023-03-18 08:09:54 -0700</code></td>
+<td><code>2023-03-18 14:15:14 -0700</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>0e15ce6</code></td>
+<td><code>056098f</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
-<td><code>main</code></td>
+<td><code>update-help</code></td>
 </tr>
 <tr class="odd">
 <td>project</td>
@@ -295,12 +295,16 @@
 <p><img src="./pam-file-flow-screenshot.png" width="95%" alt="pam-file-flow"></p>
 <p>You can access <em>PAM</em> from your own secure web server (including localhost) or from the public <a href="https://jlinoff.github.io/pam/www/index.html">github.io server</a>.</p>
 <p>In addition, <em>PAM</em> is designed to be mobile friendly so you can access it from your laptop browser as well as your mobile phone and tablet.</p>
-<p>It looks <em>something</em> like this on my iphone for some fictitious example records. This view is approximate because it shows the v1.0 view <em>before</em> support for dark mode was added in v1.1. PAM which allows you to switch between light and dark modes by tapping or clicking the button in the lower left hand corner in the status bar. Everything is the same, except for the light/dark mode colors and the light/dark mode button on the lower left.</p>
-<p><img src="./pam-iphone-screenshot.png" alt="iphone-screenshot" width="400"></p>
+<p>It looks <em>something</em> like this on my iphone in dark mode for the fictitious example records that are provided by PAM to practice with, as described in the <a href="#load-file">Load File</a> section later on.</p>
+<p><img src="./pam-iphone-screenshot-dark.jpg" alt="iphone-screenshot-light-mode" width="400"></p>
+<p>And <em>something</em> like this in light mode.</p>
+<p><img src="./pam-iphone-screenshot-light.jpg" alt="iphone-screenshot-dark-mode" width="400"></p>
+<p>At the bottom left of the screen there is a button that allows you to toggle between light and dark mode. It looks like a sun (switch to light) in dark mode: <img src="../icons/black/sun.svg" height="32" width="32" alt="clipboard"/> and like a moon (switch to dark) in light mode: <img src="../icons/black/moon.svg" height="32" width="32" alt="clipboard"/>.</p>
+<p>Dark and light mode examples will be intermixed throughout this document.</p>
 <p>The records appear as accordion entries that expand when you click on them as shown below.</p>
 <p><img src="./pam-google-record.png" width="400" alt="google-account-example"></p>
 <p>Once the record is expanded you simply click on the <img src="../icons/black/clipboard.svg" height="32" width="32" alt="clipboard"/> icon associated with the record field you are interested in (like the password) to copy its value to the system clipboard so that it can then be pasted them into the appropriate login field.</p>
-<p>You can even include images like this.</p>
+<p>You can even include images as shown in this example which is also provided by PAM to practice with and, like the examples above, is also described in the <a href="#load-file">Load File</a> section later on.</p>
 <p><img src="./pam-ice-cream-sundae-open.png" width="400" alt="ice-cream-sundae-example"></p>
 <p>There are other features like memorable password generation and customized record fields that are described in the documentation below.</p>
 <p>Please note that this is not the first tool I have written to manage passwords but it is meant to be the last. If you are interested in what motivated me to create yet another tool, see the <em><a href="#security-considerations">Security Considerations</a></em> and <em><a href="#reasons-to-consider-using-pam">Reasons to consider using PAM</a></em>. If you are interested in the genesis of <em>PAM</em> and the stories of its predecessors, see the <a href="#history">History</a> section.</p>
