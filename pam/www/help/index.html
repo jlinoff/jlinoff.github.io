@@ -109,7 +109,7 @@
 </tr>
 <tr class="even">
 <td>Version</td>
-<td><code>1.1.0-alpha.4</code></td>
+<td><code>1.1.0</code></td>
 </tr>
 <tr class="odd">
 <td>Bootstrap Version</td>
@@ -117,15 +117,15 @@
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2023-03-18 14:15:14 -0700</code></td>
+<td><code>2023-03-18 17:01:29 -0700</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>056098f</code></td>
+<td><code>c031787</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
-<td><code>update-help</code></td>
+<td><code>main</code></td>
 </tr>
 <tr class="odd">
 <td>project</td>
@@ -289,11 +289,11 @@
 <!--t3-->
 </details>
 <h2 id="introduction">Introduction</h2>
-<p><em>PAM</em> or Personal Account Manager is a free and open source, single page web application that is designed to help you conveniently and securely manage your confidential information inside the secure context of your web browser as dynamically configurable records that can be searched <em>without having to rely on services from a third party server</em> because they are stored in a file that <em>you control</em> either on your local device or on a cloud based file server.</p>
+<p><em>PAM</em> or Personal Account Manager is a free and open source, single page web application that is designed to help you conveniently and securely manage your confidential information <em>like passwords</em> inside the secure context of your web browser as dynamically configurable records that can be searched <em>without having to rely on services from a third party server</em> because they are stored in a file that <em>you control</em> either on your local device or on a cloud based file server.</p>
 <p>The <em>PAM</em> file is encrypted both in transit and when stored so the contents are safe from hackers if the file was stolen assuming, of course, that the password you used to encrypt it <em>was strong</em>.</p>
-<p>The PAM file flow is shown in the figure below.</p>
+<p>The PAM file flow is shown in the figure below. Note that the <em>save</em> device and the <em>load</em> device could be <em>the same device</em>.</p>
 <p><img src="./pam-file-flow-screenshot.png" width="95%" alt="pam-file-flow"></p>
-<p>You can access <em>PAM</em> from your own secure web server (including localhost) or from the public <a href="https://jlinoff.github.io/pam/www/index.html">github.io server</a>.</p>
+<p>You can access <em>PAM</em> from your own secure web server (including localhost) or from the public <a href="https://jlinoff.github.io/pam/www/index.html">github.io server</a>. In either case, once the application is loaded into your browser <em>there is no other communication</em> with the web server which you can verify by monitoring outbound network traffic.</p>
 <p>In addition, <em>PAM</em> is designed to be mobile friendly so you can access it from your laptop browser as well as your mobile phone and tablet.</p>
 <p>It looks <em>something</em> like this on my iphone in dark mode for the fictitious example records that are provided by PAM to practice with, as described in the <a href="#load-file">Load File</a> section later on.</p>
 <p><img src="./pam-iphone-screenshot-dark.jpg" alt="iphone-screenshot-light-mode" width="400"></p>
@@ -303,7 +303,7 @@
 <p>Dark and light mode examples will be intermixed throughout this document.</p>
 <p>The records appear as accordion entries that expand when you click on them as shown below.</p>
 <p><img src="./pam-google-record.png" width="400" alt="google-account-example"></p>
-<p>Once the record is expanded you simply click on the <img src="../icons/black/clipboard.svg" height="32" width="32" alt="clipboard"/> icon associated with the record field you are interested in (like the password) to copy its value to the system clipboard so that it can then be pasted them into the appropriate login field.</p>
+<p>Once the record is expanded you simply click on the clipboard <img src="../icons/black/clipboard.svg" height="32" width="32" alt="clipboard"/> icon associated with the record field you are interested in (like the password) to copy its value to the system clipboard so that it can then be pasted them into the appropriate login field. You can click on the eye <img src="../icons/black/eye.svg" height="32" width="32" alt="eye"/> icon to see the password in plaintext. By default all record fields containing sensitive information,like passwords, are masked so that a casual observer cannot see it.</p>
 <p>You can even include images as shown in this example which is also provided by PAM to practice with and, like the examples above, is also described in the <a href="#load-file">Load File</a> section later on.</p>
 <p><img src="./pam-ice-cream-sundae-open.png" width="400" alt="ice-cream-sundae-example"></p>
 <p>There are other features like memorable password generation and customized record fields that are described in the documentation below.</p>
@@ -373,9 +373,11 @@ instructions
 <h4 id="reason-3-searching">Reason 3: Searching</h4>
 <p><em>PAM</em> allows you to search records by their title or their field names and values. It also filters out the records that don’t match to make it easier to see the matching records visually.</p>
 <p>The availability of fast interactive searching makes finding records easy.</p>
-<p>This is what search/filtering looks like for all example records that contain a <q>g</q>.</p>
+<p>This is what search/filtering looks like for all example records that contain a <q>g</q> in them. Note that, by default, search operations are case insensitive but that can be changed in the preferences.</p>
 <p><img src="./pam-search-g.png" width="400" alt="search-g"/></p>
-<p>Note that regular expressions can be used as well. See <a href="#search">Search</a> for more details.</p>
+<p>Note that regular expressions can be used as well as shown in the example below that looks for records that start with <q>g</q>.</p>
+<p><img src="./pam-search-g-re.png" width="400" alt="search-g-re"/></p>
+<p>See <a href="#search">Search</a> for more details.</p>
 <h4 id="reason-4-automatic-password-generation">Reason 4: Automatic Password Generation</h4>
 <p>I always find it hard to come up with passwords in the spur of the moment so <em>PAM</em> was built with the ability to automatically generate passwords.</p>
 <p>Of course almost all browsers and password tools provide this same capability nowadays, but they tend to generate secure, cryptic, hard to memorize passwords which is perfectly fine for passwords for most accounts.</p>
