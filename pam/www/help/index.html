@@ -109,7 +109,7 @@
 </tr>
 <tr class="even">
 <td>Version</td>
-<td><code>1.1.1</code></td>
+<td><code>1.1.2</code></td>
 </tr>
 <tr class="odd">
 <td>Bootstrap Version</td>
@@ -117,11 +117,11 @@
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2023-03-20 21:58:27 -0700</code></td>
+<td><code>2023-03-21 09:26:59 -0700</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>e25a685</code></td>
+<td><code>4a10891</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
@@ -196,8 +196,9 @@
 <li><a href="#records-section">Records Section</a></li>
 <li><a href="#status-section">Status Section</a></li>
 </ul></li>
-<li><a href="#functions">Functions</a>
+<li><a href="#menu-functions">Menu Functions</a>
 <ul>
+<li><a href="#about">About</a></li>
 <li><a href="#create-new-record">Create New Record</a>
 <ul>
 <li><a href="#method-1-menu-approach">Method 1: Menu Approach</a></li>
@@ -653,8 +654,8 @@ instructions
 <p>Below the records section, at the bottom, is the status section where ephemeral status messages are displayed. The messages disappear after about 1.5 seconds but the duration is controlled by a preference that you can set. See the <a href="#preferences">Preferences</a> section for more information.</p>
 <p>The status messages are used to provide activity feedback like showing how many bytes were copied to a clipboard when a copy button is clicked or tapped as shown in the example below.</p>
 <p><img src="./pam-status-msg.png" width="400" alt="status-message"></p>
-<h2 id="functions">Functions</h2>
-<p>The following sections will go over the basic functions that <em>PAM</em> provides.</p>
+<h2 id="menu-functions">Menu Functions</h2>
+<p>The following sections will go over the basic menu functions that <em>PAM</em> provides.</p>
 <p>In a nutshell they are:</p>
 <ol type="1">
 <li><a href="#about">Display information About the application</a></li>
@@ -670,12 +671,12 @@ instructions
 <p>Each function will be discussed in a separate subsection below.</p>
 <p>Note that Preferences were not included because they have their own top level section in this document.</p>
 <h3 id="about">About</h3>
-<p>Click or tap on the <q>About</q> menu entry to get information about <em>PAM</em>. You can even add custom HTML through the preferences that is stored for each <em>PAM</em> file.</p>
-<p>Here is a screen shot of what you would see.</p>
+<p>click or tap on the <q>About</q> menu entry to get information about <em>PAM</em>. You can even add custom HTML through the preferences that is stored for each <em>PAM</em> file.</p>
+<p>Here is a screen shot of what you would normally see with no customization. Of course details will vary, like the Commit, Branch or Version fields.</p>
 <p><img src="./pam-about.png" width="400" alt="about"></p>
-<p>Here is an about dialogue with a simple custom message.</p>
+<p>Here is the <q>About</q> dialogue with a simple custom message that uses bootstrap formatting classes.</p>
 <p><img src="./pam-about-custom.png" width="400" alt="about-custom"></p>
-<p>Custom messages are defined in preferences as follows.</p>
+<p>Custom messages are defined in the <q>Custom About</q> field in the <a href="#preferences">Preferences</a> as shown below. You can used plain HTML or bootstrap 5 classes (as shown in this example).</p>
 <p><img src="./pam-about-custom-pref.png" width="400" alt="about-custom-pref"></p>
 <p>The motivation for allowing custom messages is that someone might want to share a <em>PAM</em> file or describe how the records are related. The custom message would allow the person to provide their <em>imprimatur</em> on the collection.</p>
 <h3 id="create-new-record">Create New Record</h3>
