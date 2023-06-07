@@ -818,7 +818,7 @@ function mkRecordFields(recordFields) {
                 xmk('div').xClass('col', 'col-4').xAppend(
                     xmk('input').xClass('form-control', 'bg-light', 'text-dark', 'x-fld-name').xAttrs({'value': key})
                 ),
-		xmk('span').xInnerHTML('&nbsp;&nbsp;'),
+                xmk('span').xInnerHTML('&nbsp;&nbsp;'),
                 xmk('div').xClass('col', 'col-4').xAppend(
                     dropdown
                     //xmk('input').xClass('form-control', 'bg-light', 'text-dark', 'x-fld-value').xAttrs({'value': value})
@@ -840,6 +840,7 @@ function mkRecordFields(recordFields) {
                             delete_occurred = true
                             let div = document.body.xGet('#x-prefs-fld-div')
                             div.replaceWith(mkRecordFields(newRecordFields))
+			    setDarkLightTheme(window.prefs.themeName) // fix the new DOM elements
                         }),
                 ),
             ),
@@ -874,6 +875,7 @@ function mkRecordFields(recordFields) {
                      newRecordFields[new_key] = new_value
                      let div = document.body.xGet('#x-prefs-fld-div')
                      div.replaceWith(mkRecordFields(newRecordFields))
+		     setDarkLightTheme(window.prefs.themeName) // fix the new DOM elements
                  }),
          ),
     )
