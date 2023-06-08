@@ -36,8 +36,6 @@ export function initPrefs() {
         // Use the '.txt' extension because the '.pam' extension
         // does not work on some mobile devices.
         themeName: 'dark', // choices are dark or light
-        themeBgClass: 'bg-dark',
-        themeBtnClass: 'btn-dark',
         enablePrinting: false,
         fileName: 'example.txt',
         filePass: '',
@@ -173,7 +171,9 @@ export function menuPrefsDlg() {
     e.xAddEventListener('show.bs.modal', (event) => {
         // do this each time the prefs modal popup pops up
         let div = document.body.xGet('#x-prefs-fld-div')
-        div.replaceWith(mkRecordFields(window.prefs.predefinedRecordFields))
+        let flds = mkRecordFields(window.prefs.predefinedRecordFields)
+        div.replaceWith(flds)
+        setDarkLightTheme(window.prefs.themeName) // fix the new DOM elements
     })
     return e
 }
@@ -675,7 +675,7 @@ function mkPrefsCheckBox(labelClasses, inputClasses, id, title, popup) {
         xmk('div').xClass(...inputClasses).xAppend(
             xmk('div').xClass('input-group').xAppend(
                 xmk('button')
-                    .xClass('form-control', 'btn', 'btn-lg', window.prefs.themeBtnClass)
+                    .xClass('form-control', 'btn', 'btn-lg')
                     .xAttrs({'type': 'button',
                              'title': popup,
                              'data-pref-id': id,
@@ -816,13 +816,14 @@ function mkRecordFields(recordFields) {
                 xmk('div').xClass('col', 'col-4').xAppend(
                     xmk('input').xClass('form-control', 'x-fld-name').xAttrs({'value': key})
                 ),
+                xmk('span').xInnerHTML('&nbsp;&nbsp;'),
                 xmk('div').xClass('col', 'col-4').xAppend(
                     dropdown
                     //xmk('input').xClass('form-control', 'x-fld-value').xAttrs({'value': value})
                 ),
-                xmk('div').xClass('col', 'col-1').xAppend(
+                xmk('div').xClass('col', 'col-1', 'ms-auto').xAppend(
                     xmk('button')
-                        .xClass('btn', 'btn-lg', 'form-control', 'text-start')
+                        .xClass('btn', 'btn-lg', 'form-control')
                         .xAttrs({
                             'type': 'button',
                             'title': tooltip,
@@ -837,6 +838,7 @@ function mkRecordFields(recordFields) {
                             delete_occurred = true
                             let div = document.body.xGet('#x-prefs-fld-div')
                             div.replaceWith(mkRecordFields(newRecordFields))
+                            setDarkLightTheme(window.prefs.themeName) // fix the new DOM elements
                         }),
                 ),
             ),
@@ -849,7 +851,7 @@ function mkRecordFields(recordFields) {
     let newfld = xmk('div').xClass('row').xAppend(
          xmk('div').xClass('col', 'col-12').xAppend(
              xmk('button')
-                 .xClass('btn', 'btn-lg', window.prefs.themeBtnClass, 'form-control', 'text-center', 'fs-5')
+                 .xClass('btn', 'btn-lg', 'form-control', 'text-center', 'fs-5')
                  .xAttrs({
                      'type': 'button',
                      'title': tooltip,
@@ -859,10 +861,6 @@ function mkRecordFields(recordFields) {
                  .xAddEventListener('click', (event) => {
                      let new_value = 'text'
                      let base = 'AAA'
-                     /*window.prefs.predefinedRecordFields[new_key] = new_value
-                     let div = document.body.xGet('#x-prefs-fld-div')
-                     div.replaceWith(mkRecordFields(window.prefs.predefinedRecordFields))
-                     updateRecordFieldTypes()*/
                      // load record fields
                      let newRecordFields = getRecordFieldsFromDOM()
                      let idn = 0
@@ -875,6 +873,7 @@ function mkRecordFields(recordFields) {
                      newRecordFields[new_key] = new_value
                      let div = document.body.xGet('#x-prefs-fld-div')
                      div.replaceWith(mkRecordFields(newRecordFields))
+                     setDarkLightTheme(window.prefs.themeName) // fix the new DOM elements
                  }),
          ),
     )

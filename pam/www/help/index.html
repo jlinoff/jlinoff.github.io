@@ -109,19 +109,19 @@
 </tr>
 <tr class="even">
 <td>Version</td>
-<td><code>1.1.5</code></td>
+<td><code>1.1.6</code></td>
 </tr>
 <tr class="odd">
 <td>Bootstrap Version</td>
-<td><code>5.3.0-alpha3</code></td>
+<td><code>5.3.0</code></td>
 </tr>
 <tr class="even">
 <td>Build</td>
-<td><code>2023-06-02 12:43:59 -0700</code></td>
+<td><code>2023-06-08 14:54:07 -0700</code></td>
 </tr>
 <tr class="odd">
 <td>GitCommitId</td>
-<td><code>56d61e9</code></td>
+<td><code>f0e87d3</code></td>
 </tr>
 <tr class="even">
 <td>GitBranch</td>
@@ -294,7 +294,7 @@
 <p>The <em>PAM</em> file is encrypted both in transit and when stored so the contents are safe from hackers if the file was stolen assuming, of course, that the password you used to encrypt it <em>was strong</em>.</p>
 <p>The PAM file flow is shown in the figure below. Note that the <em>save</em> device and the <em>load</em> device could be <em>the same device</em>.</p>
 <p><img src="./pam-file-flow-screenshot.png" width="95%" alt="pam-file-flow"></p>
-<p>You can access <em>PAM</em> from your own secure web server (including localhost) or from the public <a href="https://jlinoff.github.io/pam/www/index.html">github.io server</a>. In either case, once the application is loaded into your browser <em>there is no other communication</em> with the web server which you can verify by monitoring outbound network traffic.</p>
+<p>You can access <em>PAM</em> from your own secure web server (including localhost) or from the public <a href="https://jlinoff.github.io/pam/www/index.html">github.io server</a>. In either case, once the application is loaded into your browser or run as a local web app (<a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Installing">PWA</a>) <em>there is no other communication</em> with the web server which you can verify by monitoring outbound network traffic.</p>
 <p>In addition, <em>PAM</em> is designed to be mobile friendly so you can access it from your laptop browser as well as your mobile phone and tablet.</p>
 <p>It looks <em>something</em> like this on my iphone in dark mode for the fictitious example records that are provided by PAM to practice with, as described in the <a href="#load-file">Load File</a> section later on.</p>
 <p><img src="./pam-iphone-screenshot-dark.jpg" alt="iphone-screenshot-light-mode" width="400"></p>

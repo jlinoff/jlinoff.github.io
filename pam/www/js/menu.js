@@ -98,7 +98,7 @@ export function mkMenu() {
         .xAppend(
             xmk('button')
                 .xId('menu')
-                .xClass('btn', 'btn-lg', 'dropdown-toggle', 'text-info')
+                .xClass('btn', 'btn-lg', 'dropdown-toggle') //, 'text-info')
                 .xAttrs({
                     'aria-expanded': 'false',
                     'data-bs-toggle': 'dropdown',
