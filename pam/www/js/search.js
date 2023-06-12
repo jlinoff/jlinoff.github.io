@@ -18,69 +18,90 @@ export function mkSearchInputElement() {
     return e
 }
 
-export function searchRecords(value) {
-    if (!value) {
-        value = '.'
+
+function showItem(element) {
+    if (element.classList.contains('d-none')) {
+        element.classList.remove('d-none')
+    }
+}
+
+
+function hideItem(element) {
+    if (!element.classList.contains('d-none')) {
+        element.classList.add('d-none')
+    }
+}
+
+
+function matches(value, element, regex) {
+    if (element.match(regex)) {
+        return  true
+    }
+    return false
+}
+
+
+export function searchRecords(searchValue) {
+    if (!searchValue) {
+        searchValue = '.'  // show all records by default
     }
     let regex = null
     try {
-        regex = window.prefs.searchCaseInsensitive ? new RegExp(value, 'i') : new RegExp(value)
+        regex = window.prefs.searchCaseInsensitive ? new RegExp(searchValue, 'i') : new RegExp(searchValue)
     } catch (exc) {
         // This can occur when a partial expression is being typed in.
         //alert(`ERROR! invalid search expression: "${value}"\nregexp:${exc}`)
         //console.log(`WARNING! invalid search expression: "${value}"\nregexp:${exc}`)
         value = '.'
-        regex = window.prefs.searchCaseInsensitive ? new RegExp(value, 'i') : new RegExp(value)
+        regex = window.prefs.searchCaseInsensitive ? new RegExp(searchValue, 'i') : new RegExp(searchValue)
     }
+    // Figure out which accordion items to show.
     let recordsContainer = document.body.xGet('#records-accordion') // middle part of the document.
     let accordionItems = recordsContainer.xGetN('.accordion-item')
     let num = 0
-    for (let i=0; i<accordionItems.length; i++) {
-        let accordionItem = accordionItems[i]
+    for (let accordionItem of accordionItems) {
         let button = accordionItem.xGet('.accordion-button')
         let title = button.innerHTML
         let matched = false
-        if (title.match(regex) && window.prefs.searchRecordTitles) {
-            if (accordionItem.classList.contains('d-none')) {
-                accordionItem.classList.remove('d-none')
-            }
-            num += 1
-            matched = true
-        } else {
-            if (!accordionItem.classList.contains('d-none')) {
-                accordionItem.classList.add('d-none')
+        hideItem(accordionItem) // all items are hidden by default unless they match.
+
+        // search the titles
+        if (window.prefs.searchRecordTitles) {
+            if (matches(searchValue, title, regex)) {
+                showItem(accordionItem)
+                num += 1
+                matched = true
+                continue
             }
         }
+
+        // search the field names
         if (!matched && window.prefs.searchRecordFieldNames) {
             let names = accordionItem.xGetN('.x-fld-name')
             for (let element of names) {
-            //names.forEach( (element) => {
                 let name = element.innerHTML
-                if (name.match(regex)) {
+                if (matches(searchValue, name, regex)) {
+                    showItem(accordionItem)
                     num += 1
                     matched = true
-                    if (accordionItem.classList.contains('d-none')) {
-                        accordionItem.classList.remove('d-none')
-                    }
+                    break
                 }
-                //})
             }
         }
+
+        // search the field values
         if (!matched && window.prefs.searchRecordFieldValues) {
             let values = accordionItem.xGetN('.x-fld-value')
             for (let element of values) {
-            //values.forEach( (element) => {
                 let type = element.getAttribute('data-fld-type')
                 // how should passwords be managed? using the raw value
                 let value = element.getAttribute('data-fld-raw-value')
-                if (value.match(regex)) {
+                if (matches(searchValue, value, regex)) {
+                    showItem(accordionItem)
                     num += 1
                     matched = true
-                    if (accordionItem.classList.contains('d-none')) {
-                        accordionItem.classList.remove('d-none')
-                    }
+                    break
                 }
-                //})
             }
         }
     }
