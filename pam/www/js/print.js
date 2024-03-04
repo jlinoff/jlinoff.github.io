@@ -30,7 +30,11 @@ export function printRecords() {
 
 // The new Sanitizer API is not yet widely available.
 function sanitize(html) {
-    return html.replace('&', '&nbsp;').replace('<', '&lt;').replace('>', '&gt;').replace("'", '&apos;').replace('"', '&quot;')
+    return html.replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll("'", '&apos;')
+        .replaceAll('"', '&quot;')
 }
 
 function genRecordsDocument() {
@@ -161,7 +165,7 @@ function genRecordsDocument() {
 `
             // row value
             if (type === 'textarea') {
-                html += `               <pre>${value}</pre>`
+                html += `               <pre style="white-space: pre-wrap;word-break: keep-all;">${value}</pre>`
             } else {
                 html += `               ${value}`
             }
