@@ -23,8 +23,9 @@
     q { quotes: "“" "”" "‘" "’"; }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -35,7 +36,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -107,55 +108,55 @@ the on-line help is generated.</p>
 <col style="width: 50%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>Field</th>
 <th>Value</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>Author</td>
 <td>Joe Linoff</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Copyright (©)</td>
 <td>2022</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>License</td>
 <td>MIT Open Source</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Version</td>
 <td><code>1.1.18</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Bootstrap Version</td>
 <td><code>5.3.3</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td>Build</td>
-<td><code>2024-03-20 15:51:55 -0600</code></td>
+<td><code>2025-01-04 13:55:21 -0800</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>GitCommitId</td>
-<td><code>ddf88b3</code></td>
+<td><code>7d025e6</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td>GitBranch</td>
 <td><code>main</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>project</td>
 <td><a
 href="https://github.com/jlinoff/pam">https://github.com/jlinoff/pam</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td>webapp</td>
 <td><a
 href="https://jlinoff.github.io/pam/www/">https://jlinoff.github.io/pam/www/</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>help</td>
 <td><a
 href="https://jlinoff.github.io/pam/www/help">https://jlinoff.github.io/pam/www/help/</a></td>
@@ -324,8 +325,7 @@ Authentication</a></li>
 <li><a href="#create-record-file">Create Record File</a></li>
 <li><a href="#use-record-data-to-log-into-a-site">Use Record Data to Log
 into a Site</a></li>
-<li><a href="#edit%20an-existing-record">Edit an Existing
-Record</a></li>
+<li><a href="#edit-an-existing-record">Edit an Existing Record</a></li>
 <li><a href="#delete-an-existing-record">Delete an Existing
 Record</a></li>
 <li><a href="#clone-an-existing-record">Clone an Existing
@@ -596,17 +596,17 @@ least one special character.</p>
 and a memorable password.</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th><!-- --></th>
 <th><!-- --></th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>cryptic</td>
 <td><code>Rf5NaR7LH2LbZMRhkPCfeG8</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td>memorable</td>
 <td><code>A1/health/mpegs/hopes!!</code></td>
 </tr>
@@ -902,49 +902,49 @@ input types</a>.</p>
 <col style="width: 55%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>Type</th>
 <th>Usage</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>datetime-local</td>
 <td>A datetime text string. Use it if you <em>only</em> want to accept a
 datetime value. A typical usage might be the date that you finished
 reading a book.</td>
 </tr>
-<tr class="even">
+<tr>
 <td>email</td>
 <td>An email text string. Use it if you <em>only</em> want to accept an
 email value. A typical usage might be the email address of a
 contact.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>html</td>
 <td>Textarea data that is rendered directly as HTML. A typical usage
 might be to reference an image or to display formatted text.</td>
 </tr>
-<tr class="even">
+<tr>
 <td>number</td>
 <td>A numeric text string. Use it if you <em>only</em> want to accept an
 number value. A typical usage might be a measurement like height or
 width or any other numeric value.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>password</td>
 <td>A secret text string that is normally displayed as asterisks
 (<code>****</code>) with an eye
 (<img src="../icons/black/eye.svg" height="32" width="32" alt="eye"/>)
 button that can be clicked or tapped to show the value.</td>
 </tr>
-<tr class="even">
+<tr>
 <td>phone</td>
 <td>A phone number text string. Use it if you <em>only</em> want to
 accept a phone number value. A typical usage might be a mobile phone
 number.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>text</td>
 <td>A string, like a name or keyword. You can use this for any text but
 it is especially useful when a field can be multiple types like an email
@@ -952,18 +952,18 @@ or a name. A typical usage might be a login name where the value might
 be a name like <q>wiley</q> or an email like <q>wcoyote@acme.io</q> or a
 number like <q>12345678</q>.</td>
 </tr>
-<tr class="even">
+<tr>
 <td>textarea</td>
 <td>A multi-line text box. A typical usage might be a note or a list of
 recipe ingredients.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>url</td>
 <td>A text string that is a uniform resource locator (URL). Use it if
 you <em>only</em> want to accept a URL value. A typical usage might be
 the path to an account like <code>https://google.com</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td>username</td>
 <td>A username. This may be slightly different than a login because a
 login could be an email address but, in general, it probably makes more
@@ -2195,7 +2195,7 @@ this.</li>
 <li>It picks up the correct password even when it is hidden.</li>
 </ol></li>
 </ol>
-<h3 id="edit-an-existing-record">Edit an Existing Record</h3>
+<h4 id="edit-an-existing-record">Edit an Existing Record</h4>
 <p>To edit an existing record.</p>
 <ol type="1">
 <li>Navigate to the app as described above.</li>
@@ -2308,24 +2308,24 @@ read.</p>
 </blockquote>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>name</th>
 <th>type</th>
 <th>description</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>author</td>
 <td>textarea</td>
 <td>there maybe multiple authors</td>
 </tr>
-<tr class="even">
+<tr>
 <td>date-read</td>
 <td>text</td>
 <td>when it was read</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>thoughts</td>
 <td>textarea</td>
 <td>my thoughts about the book</td>
@@ -2470,22 +2470,22 @@ years.</p>
 <col style="width: 50%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th><!-- --></th>
 <th><!-- --></th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>Circa</td>
 <td>2010</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Project</td>
 <td><a
 href="https://joelinoff.com/blog/?page_id=1025">https://joelinoff.com/blog/?page_id=1025</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Webapp</td>
 <td><a
 href="https://projects.joelinoff.com/passman/passman-v0.7/">https://projects.joelinoff.com/passman/passman-v0.7/</a></td>
@@ -2502,22 +2502,22 @@ data. The UI and the implementation are quite complex.</p>
 <col style="width: 50%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th><!-- --></th>
 <th><!-- --></th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>Circa</td>
 <td>2018</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Project</td>
 <td><a
 href="https://github.com/eSentire/qspm">https://github.com/eSentire/qspm</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Webapp</td>
 <td><a
 href="https://esentire.github.io/qspm/">https://esentire.github.io/qspm/</a></td>
@@ -2537,27 +2537,27 @@ name to say the least.</p>
 <col style="width: 50%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th><!-- --></th>
 <th><!-- --></th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>Circa</td>
 <td>2020</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Project</td>
 <td><a
 href="https://github.com/jlinoff/myvault">https://github.com/jlinoff/myvault</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Webapp</td>
 <td><a
 href="https://jlinoff.github.io/myvault/">https://jlinoff.github.io/myvault</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td>Help</td>
 <td><a
 href="https://jlinoff.github.io/myvault/help/">https://jlinoff.github.io/myvault/help</a></td>
@@ -2576,27 +2576,27 @@ and a poor implementation of the password generator dialogue.</p>
 <col style="width: 50%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th><!-- --></th>
 <th><!-- --></th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>Circa</td>
 <td>2022</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Project</td>
 <td><a
 href="https://github.com/jlinoff/pam">https://github.com/jlinoff/pam</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Webapp</td>
 <td><a
 href="https://jlinoff.github.io/pam/www/">https://jlinoff.github.io/pam/www/</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td>Help</td>
 <td><a
 href="https://jlinoff.github.io/pam/www/help/">https://jlinoff.github.io/pam/www/help/</a></td>
