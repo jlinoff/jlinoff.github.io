@@ -128,23 +128,23 @@ the on-line help is generated.</p>
 </tr>
 <tr>
 <td>Version</td>
-<td><code>1.1.20</code></td>
+<td><code>1.1.21</code></td>
 </tr>
 <tr>
 <td>Bootstrap Version</td>
-<td><code>5.3.6</code></td>
+<td><code>5.3.7</code></td>
 </tr>
 <tr>
 <td>Build</td>
-<td><code>2025-06-16 19:03:39 -0700</code></td>
+<td><code>2025-07-12 22:34:43 -0700</code></td>
 </tr>
 <tr>
 <td>GitCommitId</td>
-<td><code>4619ff9</code></td>
+<td><code>632a0b4</code></td>
 </tr>
 <tr>
 <td>GitBranch</td>
-<td><code>main</code></td>
+<td><code>active-records</code></td>
 </tr>
 <tr>
 <td>project</td>
@@ -242,6 +242,7 @@ Representation</a></li>
 </ul></li>
 <li><a href="#edit-record">Edit Record</a></li>
 <li><a href="#delete-record">Delete Record</a></li>
+<li><a href="#deactivate-record">Deactivate Record</a></li>
 <li><a href="#clone-record">Clone Record</a></li>
 <li><a href="#clear-records">Clear Records</a></li>
 <li><a href="#save-file">Save File</a></li>
@@ -261,6 +262,7 @@ Names</a></li>
 Names</a></li>
 <li><a href="#search-record-field-values">Search Record Field
 Values</a></li>
+<li><a href="#hide-inactive-records">Hide Inactive Records</a></li>
 </ul></li>
 <li><a href="#password-preferences">Password Preferences</a>
 <ul>
@@ -749,8 +751,10 @@ Records</h3>
 <p><img src="./pam-example-records.png" width="400" alt="example-records"></p>
 <p><em>PAM</em> presents the records as an accordion. Each record is one
 entry in the accordion that you can expand to view the record fields or
-<a href="#delete-record">delete</a>, <a href="#clone-record">clone</a>
-or <a href="#edit-record">edit</a> edit the record.</p>
+<a href="#delete-record">delete</a>, <a
+href="#deactivate-record">deactivate</a>, <a
+href="#clone-record">clone</a> or <a href="#edit-record">edit</a> the
+record.</p>
 <p>To get the information for an account you click or tap the
 button.</p>
 <p>At the top of the screen is the search bar and, at the far right, the
@@ -1225,6 +1229,7 @@ clicked or tapped as shown in the example below.</p>
 <li><a href="#create-new-record">Create New Record</a></li>
 <li><a href="#edit-record">Edit Record</a></li>
 <li><a href="#delete-record">Delete Record</a></li>
+<li><a href="#deactivate-record">Deactivate Record</a></li>
 <li><a href="#clone-record">Clone Record</a></li>
 <li><a href="#clear-records">Clear Records</a></li>
 <li><a href="#save-records">Save Records</a></li>
@@ -1559,10 +1564,20 @@ Record</a> section to understand how to change or add new fields.</p>
 <h3 id="delete-record">Delete Record</h3>
 <p>To delete a record, select it from the records list and click or tap
 on the <code>"Delete"</code> button.</p>
-<p><strong>Beware!!! PAM trusts you!!</strong></p>
+<p><strong>Beware the record is deleted permanently!!! PAM trusts
+you!!</strong></p>
 <p><em>PAM</em> will not ask you if you <em>really</em> want to delete
 the record. It will just go ahead and delete it without fanfare <em>so
 be careful</em>.</p>
+<h3 id="deactivate-record">Deactivate Record</h3>
+<p>To deactivate a record click on the Active checkbox to make the
+record inactive. Inactive records are considered deactivated.</p>
+<p>Deactivated records are the same as deleted records because they do
+not show up in the records list but they can always be recovered by
+going to <a href="#Preferences">Preferences</a> and unchecking the <a
+href="#hide-inactive-records">Hide Inactive Records</a> entry. Each
+deactivated record will be labeled with a
+<small><em>INACTIVE</em></small> prefix.</p>
 <h3 id="clone-record">Clone Record</h3>
 <p>To clone a record, select it from the records list and click or tap
 on the <code>"Clone"</code> button. This will create a new record that
@@ -1684,6 +1699,14 @@ they do not.</p>
 <p>You would want to enable this you wanted to see records that
 contained a specific field value like an obsolete email or really old
 password.</p>
+<h3 id="hide-inactive-records">Hide Inactive Records</h3>
+<p>Each record in PAM allows you to set it as Active or Inactive.
+Inactive records are also called deactivate.</p>
+<p>If this checkbox is set those inactive records invisible.</p>
+<p>When disabled this checkbox allows you to view all of the inactive
+records.</p>
+<p>Note that each inactive record will have a
+<small><em>INACTIVE</em></small> prefix.</p>
 <h3 id="password-preferences">Password Preferences</h3>
 <p><img src="./pam-prefs-password.png" width="400" alt="pam-prefs-password"></p>
 <p>These preferences control automatic password creation.</p>
