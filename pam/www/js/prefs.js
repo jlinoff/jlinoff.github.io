@@ -8,6 +8,7 @@ import { enableSaveFile } from './save.js'
 import { setDarkLightTheme } from './utils.js'
 import { searchRecords } from './search.js'
 import { enableRawJSONEdit } from './raw.js'
+import { updateHtmlRenderingIndicator } from './main.js'
 
 // These are the input types that the tool knows how to handle.
 export const VALID_FIELD_TYPES = {
@@ -23,6 +24,18 @@ export const VALID_FIELD_TYPES = {
 }
 
 // These are the storage strategies that the tool understands.
+// Hash a prefs password with SHA-256 (SEC-006).
+// Passwords are stored as hex digests, never plaintext.
+// Returns '' for empty input.
+export async function hashPrefsPassword(password) {
+    if (!password || password.length === 0) {
+        return ''
+    }
+    const enc = new TextEncoder()
+    const buf = await window.crypto.subtle.digest('SHA-256', enc.encode(password))
+    return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2,'0')).join('')
+}
+
 export const VALID_CACHE_STRATEGIES = {  // window.prefs.filePassCache
     'none': 1,
     'global': 1,
@@ -50,7 +63,7 @@ export function initPrefs() {
         enableSaveFile: true,
         fileName: 'example.txt',
         filePass: '',
-        filePassCache: 'local',  // options: none, global, local, session
+        filePassCache: 'session',  // options: none, global, local, session — default session (SEC-002)
         textareaMinHeight: '5em',
         editableFieldName: false, // if true, allow field names to be changed
         searchCaseInsensitive: true,
@@ -101,6 +114,7 @@ export function initPrefs() {
         predefinedRecordFieldsDefault: 'text',
         requireRecordFields: false,
         lockPreferencesPassword: '',
+        allowHtmlFieldRendering: false,  // SEC-001: html fields render as escaped text by default
         defaultRecordFields: 'website,login,password,note',
         enableRawJSONEdit: false,
     }
@@ -267,7 +281,6 @@ export function menuPrefsDlg() {
                                  'btn-secondary',
                                  'close the dialogue without making changes',
                                  (el) => {
-                                     //console.log(el)
                                      if (delete_occurred) {
                                          // make sure that the deleted items are restored
                                          // if the user closes without saving.
@@ -368,41 +381,29 @@ function setHelpLinks() {
 // The window.prefs entries are determined automatically from the
 // data-pref-id attribute.
 function savePrefs(el) {
-    //console.log(el)
     // add logic to set window.prefs.* here
     let prefs = el.xGetN('[data-pref-id]')
     for (const pref of prefs) {
-        //console.log('PREF:', pref.getAttribute('data-pref-id'))
-        //console.log(pref)
         let type = pref.tagName
         let key = pref.getAttribute('data-pref-id')
-        //console.log(`TYPE: ${type}`)
-        //console.log(`VAR: window.prefs["${key}"]`)
         if (type === 'INPUT') {
             // inputs are easy.
             let value = pref.value
-            //console.log(`${type} - window.prefs["${key}"] = "${value}"`)
             window.prefs[key] = value
         } else if (type === 'BUTTON') {
             let icon = pref.xGet('i')
             let value = false
             if (icon) {
-                //console.log(icon)
-                //console.log(icon.classList)
                 value = icon.classList.contains('bi-check2-square')
-                //console.log(value)
             }
             switch(key) {
             case 'loadDupStrategy':
                 let dropdown_menu = pref.parentElement.xGet('.dropdown-menu')
                 let active = dropdown_menu.xGet('.active')
                 value = active.innerHTML
-                //console.log(`ACTIVE: ${active}`)
-                //console.log(`${type} - window.prefs["${key}"] = "${value}"`)
                 break
             default:
                 window.prefs[key] = value
-                //console.log(`${type} - window.prefs["${key}"] = "${value}"`)
                 break
             }
         } else if (type === "TEXTAREA") {
@@ -412,7 +413,6 @@ function savePrefs(el) {
                 window.prefs.customAboutInfo = pref.value
             } else {
                 window.prefs[key] = pref.value
-                //console.log(`${type} - window.prefs["${key}"] = "${value}"`)
             }
         }
     }
@@ -454,6 +454,7 @@ function savePrefs(el) {
     }
 
     setDarkLightTheme(window.prefs.themeName)
+    updateHtmlRenderingIndicator()  // SEC-001: update toolbar badge
     searchRecords()  // refresh
     return checkDefaultRecordFields(true)
 }
@@ -497,6 +498,16 @@ function prefLockPreferencesPassword(labelClasses, inputClasses) {
             ),
         ),
     )
+}
+
+function prefAllowHtmlFieldRendering(labelClasses, inputClasses) {
+    return mkPrefsCheckBox(labelClasses,
+                           inputClasses,
+                           'allowHtmlFieldRendering',
+                           'Allow HTML Field Rendering',
+                           'WARNING (SEC-001): Only enable for trusted files distributed on a read-only volume. ' +
+                           'Enabling this allows HTML fields to render as live HTML, which is an XSS risk if ' +
+                           'loading files from untrusted sources.')
 }
 
 function prefEnableRawJSONEdit(labelClasses, inputClasses) {
@@ -868,8 +879,8 @@ function prefMemorablePasswordMinWords(labelClasses, inputClasses) {
     )
 }
 
-function prefMemorablePasswordMaxWords(labelClasses, inputClasses) {
-    xmk('div').xClass('row').xAppend(
+export function prefMemorablePasswordMaxWords(labelClasses, inputClasses) {
+    return xmk('div').xClass('row').xAppend(
         prefLabel(labelClasses, 'Memorable Password Max Words'),
         xmk('div').xClass(...inputClasses).xAppend(
             xmk('div').xClass('input-group').xAppend(
@@ -951,8 +962,6 @@ function mkPrefsCheckBox(labelClasses, inputClasses, id, title, popup) {
                             })
                     .xAppend(icon(checkbox, 'enable or disable'))
                     .xAddEventListener('click', (event) => {
-                        //console.log(event)
-                        //console.log(event.target.parentElement.tagName)
                         let button = event.target.xGetParentOfType('button')
                         let icon = button.xGet('i')
                         let enabled = icon.classList.contains('bi-check2-square')
@@ -1046,12 +1055,8 @@ function mkPredefineRecordFields(recordFields) {
                 .xAddEventListener('click', (event) => {
                     setActive(event)
                     let value = event.target.innerHTML
-                    //console.log(value)
                     let dm = event.target.xGetParentWithClass('dropdown-menu')
-                    //console.log(dm)
-                    //console.log(dm.parentElement)
                     let button = dm.parentElement.xGet('.dropdown-toggle')
-                    //console.log(button)
                     button.innerHTML = value
                 })
             if (key1 === value) {
@@ -1138,7 +1143,6 @@ function mkPredefineRecordFields(recordFields) {
                          idn += 1
                          new_key = base + idn.toString(16).padStart(4, '0')
                      }
-                     //console.log(newRecordFields)
                      newRecordFields[new_key] = new_value
                      let div = document.body.xGet('#x-prefs-fld-div')
                      div.replaceWith(mkPredefineRecordFields(newRecordFields))
