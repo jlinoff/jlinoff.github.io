@@ -151,15 +151,15 @@ the on-line help is generated.</p>
 </tr>
 <tr>
 <td>Build</td>
-<td><code>2026-04-15 12:02:58 -0700</code></td>
+<td><code>2026-04-15 16:17:31 -0700</code></td>
 </tr>
 <tr>
 <td>GitCommitId</td>
-<td><code>41491e9</code></td>
+<td><code>f90fd1f</code></td>
 </tr>
 <tr>
 <td>GitBranch</td>
-<td><code>update-docs</code></td>
+<td><code>main</code></td>
 </tr>
 <tr>
 <td>project</td>
@@ -856,9 +856,14 @@ upgrade.</td>
 </tr>
 <tr>
 <td>Audit / breach alerts</td>
-<td>None</td>
-<td>HaveIBeenPwned integration, Watchtower</td>
-<td>PAM loses significantly</td>
+<td>None — if a third-party site you use is breached and your
+credentials leaked, PAM has no way to notify you. PAM’s own encrypted
+data remains secure.</td>
+<td>Bitwarden checks passwords against HaveIBeenPwned; 1Password’s
+Watchtower flags breached, weak, and reused passwords automatically</td>
+<td>PAM loses on monitoring — not because PAM’s data is at risk, but
+because it cannot alert you when third-party sites you have accounts on
+are breached</td>
 </tr>
 <tr>
 <td><strong>Flexible / non-password data</strong></td>
