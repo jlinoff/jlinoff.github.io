@@ -103,6 +103,14 @@
 href="./quickstart.html">Quick Start guide</a> — get up and running in
 five minutes.</p>
 </blockquote>
+<blockquote>
+<p><strong>Documentation note:</strong> The screenshots and UI
+descriptions in this document reflect PAM 1.2.5 and earlier. PAM 1.3.0
+introduced tabbed preferences navigation and other visual changes. The
+concepts and features are identical — the documentation remains accurate
+and useful, but some screenshots and UI descriptions may not map 1:1 to
+what you see on screen.</p>
+</blockquote>
 <details>
 <summary>
 Metadata
@@ -135,7 +143,7 @@ the on-line help is generated.</p>
 </tr>
 <tr>
 <td>Version</td>
-<td><code>1.2.5</code></td>
+<td><code>1.3.0</code></td>
 </tr>
 <tr>
 <td>Bootstrap Version</td>
@@ -143,15 +151,15 @@ the on-line help is generated.</p>
 </tr>
 <tr>
 <td>Build</td>
-<td><code>2026-04-14 14:12:38 -0700</code></td>
+<td><code>2026-04-14 17:00:37 -0700</code></td>
 </tr>
 <tr>
 <td>GitCommitId</td>
-<td><code>34524b9</code></td>
+<td><code>09295db</code></td>
 </tr>
 <tr>
 <td>GitBranch</td>
-<td><code>phase/07-test-consolidation</code></td>
+<td><code>phase/08-ux-polish</code></td>
 </tr>
 <tr>
 <td>project</td>
@@ -938,9 +946,10 @@ might be to reference an image or to display formatted text.</td>
 </tr>
 <tr>
 <td>number</td>
-<td>A numeric text string. Use it if you <em>only</em> want to accept an
-number value. A typical usage might be a measurement like height or
-width or any other numeric value.</td>
+<td>A numeric value (integer or decimal). PAM validates that the value
+is a valid number before saving — non-numeric input will be rejected
+with a clear error message. A typical usage might be a measurement like
+height or width or a copyright year.</td>
 </tr>
 <tr>
 <td>password</td>
@@ -1571,11 +1580,11 @@ Record</a> section to understand how to change or add new fields.</p>
 <h3 id="delete-record">Delete Record</h3>
 <p>To delete a record, select it from the records list and click or tap
 on the <code>"Delete"</code> button.</p>
-<p><strong>Beware the record is deleted permanently!!! PAM trusts
-you!!</strong></p>
-<p><em>PAM</em> will not ask you if you <em>really</em> want to delete
-the record. It will just go ahead and delete it without fanfare <em>so
-be careful</em>.</p>
+<p><em>PAM</em> will ask you to confirm before deleting the record.
+Click <code>OK</code> to confirm or <code>Cancel</code> to keep the
+record.</p>
+<p><strong>Beware the record is deleted permanently and cannot be
+recovered once confirmed!</strong></p>
 <h3 id="deactivate-record">Deactivate Record</h3>
 <p>To deactivate a record click on the Active checkbox to make the
 record inactive. Inactive records are considered deactivated.</p>
