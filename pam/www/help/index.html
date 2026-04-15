@@ -151,11 +151,11 @@ the on-line help is generated.</p>
 </tr>
 <tr>
 <td>Build</td>
-<td><code>2026-04-15 16:22:22 -0700</code></td>
+<td><code>2026-04-15 16:32:50 -0700</code></td>
 </tr>
 <tr>
 <td>GitCommitId</td>
-<td><code>dbdb6b2</code></td>
+<td><code>ed70edd</code></td>
 </tr>
 <tr>
 <td>GitBranch</td>
@@ -357,6 +357,9 @@ Record</a></li>
 a Small Group</a></li>
 <li><a href="#recipes">Recipes</a></li>
 <li><a href="#books">Books</a></li>
+<li><a
+href="#decrypting-and-encrypting-pam-files-from-the-command-line">Decrypting
+and encrypting PAM files from the command line</a></li>
 </ul></li>
 <li><a href="#developer-notes">Developer Notes</a>
 <ul>
@@ -1589,10 +1592,11 @@ template to create more records.</li>
 the changes and then re-load the file in <em>PAM</em>.</li>
 <li>Then save it again <em>with a password</em>.</li>
 </ol>
-<p>The reason that this has to be done without a password is because I
-have not yet written a command line utility to encrypt/decrypt the
-files. It should be straightforward to do because it uses the standard
-<code>"AWS_256-CBC"</code> algorithm.</p>
+<p>The reason that this has to be done without a password is because
+editing an encrypted file directly is not practical. If you need to
+encrypt or decrypt a PAM file from the command line, see <a
+href="#decrypting-and-encrypting-pam-files-from-the-command-line">Decrypting
+and encrypting PAM files from the command line</a>.</p>
 <details>
 <summary>
 Click here to see an example javascript file
@@ -2574,6 +2578,60 @@ read.</p>
 </table>
 <p>To search by author, set the <q>Search Record Field Values</q>
 preference to true by clicking or tapping on it and then saving it.</p>
+<h3
+id="decrypting-and-encrypting-pam-files-from-the-command-line">Decrypting
+and encrypting PAM files from the command line</h3>
+<p>PAM files are standard AES-256-CBC encrypted data and can be
+decrypted or encrypted using <code>openssl</code> on any Unix-like
+system (macOS, Linux, WSL). This is useful for automation, backup
+verification, or simply confirming that your data is not locked into a
+proprietary format.</p>
+<blockquote>
+<p><strong>v1 files:</strong> If you have files saved before PAM v2
+(April 2026), load them in PAM and re-save them before attempting
+command-line operations. v1 files used a different key derivation that
+is both weaker and harder to replicate outside the browser. See <a
+href="./MIGRATION.md">MIGRATION.md</a> for details.</p>
+</blockquote>
+<p>The v2 file format is structured as follows:</p>
+<pre><code>&quot;PAMv2:&quot; + Base64( [16-byte salt] [16-byte IV] [ciphertext] )</code></pre>
+<h4 id="decrypt-a-pam-v2-file">Decrypt a PAM v2 file</h4>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Strip the PAMv2: prefix and decode from Base64</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/^PAMv2://&#39;</span> myfile.txt <span class="kw">|</span> <span class="fu">base64</span> <span class="at">-d</span> <span class="op">&gt;</span> raw.bin</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Slice out salt (bytes 0-15), IV (bytes 16-31), ciphertext (bytes 32+)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dd</span> if=raw.bin bs=1 count=16 of=salt.bin <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dd</span> if=raw.bin bs=1 skip=16 count=16 of=iv.bin <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dd</span> if=raw.bin bs=1 skip=32 of=cipher.bin <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Decrypt</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> enc <span class="at">-d</span> <span class="at">-aes-256-cbc</span> <span class="dt">\</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pbkdf2</span> <span class="at">-iter</span> 600000 <span class="at">-md</span> sha256 <span class="dt">\</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">-S</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> salt.bin<span class="va">)</span> <span class="dt">\</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">-iv</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> iv.bin<span class="va">)</span> <span class="dt">\</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">-in</span> cipher.bin <span class="dt">\</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">-out</span> decrypted.json <span class="dt">\</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pass</span> pass:yourpassword</span></code></pre></div>
+<h4 id="encrypt-a-file-to-pam-v2-format">Encrypt a file to PAM v2
+format</h4>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate random salt and IV</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> rand 16 <span class="op">&gt;</span> salt.bin</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> rand 16 <span class="op">&gt;</span> iv.bin</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Encrypt</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> enc <span class="at">-aes-256-cbc</span> <span class="dt">\</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pbkdf2</span> <span class="at">-iter</span> 600000 <span class="at">-md</span> sha256 <span class="dt">\</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">-S</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> salt.bin<span class="va">)</span> <span class="dt">\</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">-iv</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> iv.bin<span class="va">)</span> <span class="dt">\</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">-in</span> plaintext.json <span class="dt">\</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">-out</span> cipher.bin <span class="dt">\</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pass</span> pass:yourpassword</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate salt + IV + ciphertext, Base64-encode, and add the PAMv2: prefix</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> salt.bin iv.bin cipher.bin <span class="kw">|</span> <span class="fu">base64</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="at">-d</span> <span class="st">&#39;\n&#39;</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/^/PAMv2:/&#39;</span> <span class="op">&gt;</span> myfile.txt</span></code></pre></div>
+<p>The resulting file can be loaded directly into PAM.</p>
 <h2 id="developer-notes">Developer Notes</h2>
 <p>These are things that developers might be interested in.</p>
 <p>It was built using pure javascript and relies on the browser secure
@@ -2644,36 +2702,36 @@ files into <code>pam/www</code>
 to make them relative by prepending a dot to the <code>href</code> path)
 like this.</li>
 </ol>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;apple-touch-icon&quot;</span> sizes<span class="op">=</span><span class="st">&quot;180x180&quot;</span> href<span class="op">=</span><span class="st">&quot;./apple-touch-icon.png&quot;</span><span class="op">&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;icon&quot;</span> type<span class="op">=</span><span class="st">&quot;image/png&quot;</span> sizes<span class="op">=</span><span class="st">&quot;32x32&quot;</span> href<span class="op">=</span><span class="st">&quot;./favicon-32x32.png&quot;</span><span class="op">&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;icon&quot;</span> type<span class="op">=</span><span class="st">&quot;image/png&quot;</span> sizes<span class="op">=</span><span class="st">&quot;16x16&quot;</span> href<span class="op">=</span><span class="st">&quot;./favicon-16x16.png&quot;</span><span class="op">&gt;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;manifest&quot;</span> href<span class="op">=</span><span class="st">&quot;./site.webmanifest&quot;</span><span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;apple-touch-icon&quot;</span> sizes<span class="op">=</span><span class="st">&quot;180x180&quot;</span> href<span class="op">=</span><span class="st">&quot;./apple-touch-icon.png&quot;</span><span class="op">&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;icon&quot;</span> type<span class="op">=</span><span class="st">&quot;image/png&quot;</span> sizes<span class="op">=</span><span class="st">&quot;32x32&quot;</span> href<span class="op">=</span><span class="st">&quot;./favicon-32x32.png&quot;</span><span class="op">&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;icon&quot;</span> type<span class="op">=</span><span class="st">&quot;image/png&quot;</span> sizes<span class="op">=</span><span class="st">&quot;16x16&quot;</span> href<span class="op">=</span><span class="st">&quot;./favicon-16x16.png&quot;</span><span class="op">&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;manifest&quot;</span> href<span class="op">=</span><span class="st">&quot;./site.webmanifest&quot;</span><span class="op">&gt;</span></span></code></pre></div>
 <ol start="6" type="1">
 <li>Edited the link tags in <code>pam/www/site.webmanifest</code> to
 make them relative as well by prepending a dot to the <code>src</code>
 path like this. Note that the original was not not formatted, I
 formatted here to make it easier to read.</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;name&quot;</span><span class="er">:</span> <span class="st">&quot;&quot;</span><span class="er">,</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;short_name&quot;</span><span class="er">:</span> <span class="st">&quot;&quot;</span><span class="er">,</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;icons&quot;</span><span class="er">:</span> <span class="ot">[</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;src&quot;</span><span class="fu">:</span> <span class="st">&quot;./android-chrome-192x192.png&quot;</span><span class="fu">,</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;sizes&quot;</span><span class="fu">:</span> <span class="st">&quot;192x192&quot;</span><span class="fu">,</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;image/png&quot;</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;src&quot;</span><span class="fu">:</span> <span class="st">&quot;./android-chrome-512x512.png&quot;</span><span class="fu">,</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;sizes&quot;</span><span class="fu">:</span> <span class="st">&quot;512x512&quot;</span><span class="fu">,</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;image/png&quot;</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="er">,</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;theme_color&quot;</span><span class="er">:</span> <span class="st">&quot;#ffffff&quot;</span><span class="er">,</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;background_color&quot;</span><span class="er">:</span> <span class="st">&quot;#ffffff&quot;</span><span class="er">,</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;display&quot;</span><span class="er">:</span> <span class="st">&quot;standalone&quot;</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;name&quot;</span><span class="er">:</span> <span class="st">&quot;&quot;</span><span class="er">,</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;short_name&quot;</span><span class="er">:</span> <span class="st">&quot;&quot;</span><span class="er">,</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;icons&quot;</span><span class="er">:</span> <span class="ot">[</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;src&quot;</span><span class="fu">:</span> <span class="st">&quot;./android-chrome-192x192.png&quot;</span><span class="fu">,</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;sizes&quot;</span><span class="fu">:</span> <span class="st">&quot;192x192&quot;</span><span class="fu">,</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;image/png&quot;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;src&quot;</span><span class="fu">:</span> <span class="st">&quot;./android-chrome-512x512.png&quot;</span><span class="fu">,</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;sizes&quot;</span><span class="fu">:</span> <span class="st">&quot;512x512&quot;</span><span class="fu">,</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;image/png&quot;</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="er">,</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;theme_color&quot;</span><span class="er">:</span> <span class="st">&quot;#ffffff&quot;</span><span class="er">,</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;background_color&quot;</span><span class="er">:</span> <span class="st">&quot;#ffffff&quot;</span><span class="er">,</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;display&quot;</span><span class="er">:</span> <span class="st">&quot;standalone&quot;</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
 <h3 id="test-pam">Test PAM</h3>
 <p>Here are the steps to test PAM.</p>
 <ol type="1">
