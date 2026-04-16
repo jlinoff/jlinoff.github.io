@@ -145,7 +145,7 @@ the on-line help is generated.</p>
 </tr>
 <tr>
 <td>Version</td>
-<td><code>2.0.4</code></td>
+<td><code>2.0.5</code></td>
 </tr>
 <tr>
 <td>Bootstrap Version</td>
@@ -153,11 +153,11 @@ the on-line help is generated.</p>
 </tr>
 <tr>
 <td>Build</td>
-<td><code>2026-04-15 18:22:22 -0700</code></td>
+<td><code>2026-04-16 15:37:01 -0700</code></td>
 </tr>
 <tr>
 <td>GitCommitId</td>
-<td><code>2e76eb0</code></td>
+<td><code>8f44a9d</code></td>
 </tr>
 <tr>
 <td>GitBranch</td>
@@ -368,7 +368,11 @@ and encrypting PAM files from the command line</a></li>
 <li><a href="#license">License</a></li>
 <li><a href="#build-pam">Build PAM</a></li>
 <li><a href="#create-favicon">Create Favicon</a></li>
-<li><a href="#test-pam">Test PAM</a></li>
+<li><a href="#test-pam">Test PAM</a>
+<ul>
+<li><a href="#interactive-unit-testing-in-the-browser">Interactive unit
+testing in the browser</a></li>
+</ul></li>
 <li><a href="#release-pam">Release PAM</a></li>
 <li><a href="#history">History</a></li>
 </ul></li>
@@ -2744,6 +2748,26 @@ class="sourceCode json"><code class="sourceCode json"><span id="cb7-1"><a href="
 browser via a vanilla JS test runner in
 <code>www/tests/tests.html</code>. E2E tests drive the full app in
 headless Chrome via <code>tests/test_chrome.py</code>.</p>
+<h4 id="interactive-unit-testing-in-the-browser">Interactive unit
+testing in the browser</h4>
+<p>The unit test runner can also be opened directly in a browser for
+interactive debugging, which is particularly useful when a test failure
+is hard to diagnose from the pytest output alone.</p>
+<p>Start the local server if it is not already running:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> run</span></code></pre></div>
+<p>Then open <a
+href="http://localhost:8081/tests/tests.html">http://localhost:8081/tests/tests.html</a>
+in Chrome or Firefox. The test runner executes immediately and displays
+a colour-coded results page — green for passing, red for failing — with
+the exact assertion message for each failure.</p>
+<p>This is especially valuable for JavaScript module import errors,
+which show up in pytest as a 30-second timeout with no useful detail but
+appear immediately as a clear error in the browser console
+(<code>F12 → Console</code>). When you see:</p>
+<pre><code>AssertionError: Test results not found after 30s — page may have failed to load</code></pre>
+<p>open the page directly in the browser and check the console first —
+the root cause is almost always visible there within seconds.</p>
 <h3 id="release-pam">Release PAM</h3>
 <p>Note that <em>PAM</em> will not work unless it is released to a
 secure (HTTPS) server because it requires a <em>secure context</em>.</p>

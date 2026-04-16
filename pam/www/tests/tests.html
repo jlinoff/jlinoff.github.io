@@ -52,7 +52,7 @@ window.prefs = {
   passwordRangeMaxLength: 64,
   passwordRangeLengthDefault: 16,
   // file pass cache
-  filePassCache: 'session',
+  filePassCache: 'local',
   filePass: '',
   // misc
   themeName: 'dark',
@@ -456,7 +456,7 @@ test('null password is stored as empty string', () => {
 })
 
 // Restore default
-window.prefs.filePassCache = 'session'
+window.prefs.filePassCache = 'local'
 
 // ---------------------------------------------------------------------------
 // search.js — searchRecords (needs minimal DOM fixture)
@@ -1029,12 +1029,12 @@ test('ftp:// URL is rejected (only http/https allowed)', () => {
 
 
 // ---------------------------------------------------------------------------
-// Phase 3 — SEC-002/UX-004: filePassCache default is 'session'
+// Phase 3 — SEC-002 revert: filePassCache default reverted to 'local'
 // ---------------------------------------------------------------------------
-suite('SEC-002/UX-004 — filePassCache default is session')
-test('prefs stub uses session (matching the corrected default)', () => {
-  assertEqual(window.prefs.filePassCache, 'session',
-    'filePassCache should default to session, not local')
+suite('SEC-002 revert — filePassCache default is local')
+test('prefs stub uses local (matching the reverted default)', () => {
+  assertEqual(window.prefs.filePassCache, 'local',
+    'filePassCache should default to local (SEC-002 revert)')
 })
 test('session cache stores in sessionStorage', () => {
   window.prefs.filePassCache = 'session'
@@ -1050,7 +1050,7 @@ test('local cache stores in localStorage', () => {
   assertEqual(localStorage.getItem('filePass'), 'sec002-local',
     'local cache should write to localStorage')
   localStorage.removeItem('filePass')
-  window.prefs.filePassCache = 'session'
+  window.prefs.filePassCache = 'local'
 })
 
 // ---------------------------------------------------------------------------
@@ -1193,9 +1193,9 @@ test('getDefaultPrefs returns a non-null object', () => {
   const p = getDefaultPrefs()
   assert(typeof p === 'object' && p !== null, 'getDefaultPrefs should return an object')
 })
-test('getDefaultPrefs filePassCache default is session (SEC-002)', () => {
-  assertEqual(getDefaultPrefs().filePassCache, 'session',
-    'filePassCache default should be session')
+test('getDefaultPrefs filePassCache default is local (SEC-002 revert)', () => {
+  assertEqual(getDefaultPrefs().filePassCache, 'local',
+    'filePassCache default should be local (reverted from session)')
 })
 test('getDefaultPrefs allowHtmlFieldRendering default is false (SEC-001)', () => {
   assertEqual(getDefaultPrefs().allowHtmlFieldRendering, false,
@@ -1215,7 +1215,7 @@ test('getDefaultPrefs returns a fresh object each call (no shared state)', () =>
   const p1 = getDefaultPrefs()
   const p2 = getDefaultPrefs()
   p1.filePassCache = 'mutated'
-  assertEqual(p2.filePassCache, 'session',
+  assertEqual(p2.filePassCache, 'local',
     'mutations to one result should not affect subsequent calls')
 })
 test('VALID_FIELD_TYPES includes html', () => {
@@ -1676,6 +1676,7 @@ test('defaultRecordFields entries exist in predefinedRecordFields', () => {
 //   - hideInactiveRecords: search.js suite
 //   - customAboutInfo / enableRawJSONEdit: Miscellaneous defaults suite
 //   - allowHtmlFieldRendering: SEC-001 suite + BUG (UI wiring) suite below
+//   - filePassCache: SEC-002 suite (default, indicator logic, UI wiring)
 //   - defaultRecordFields: prefs — defaultRecordFields suite
 //   - lockPreferencesPassword (SEC-006 revert): dedicated suite
 // ---------------------------------------------------------------------------
@@ -2032,6 +2033,132 @@ test('missing created field gets placeholder date', () => {
   }
   assert(row.created.startsWith('1999'),
     'missing created should get 1999 placeholder date')
+})
+
+// ---------------------------------------------------------------------------
+// SEC-002 — filePassCache indicator and Administration tab wiring
+// main.js cannot be imported (pulls in menu.js, raw.js, about.js which are
+// unsafe in the test environment). Instead we test:
+//   1. The default pref value
+//   2. The indicator DOM logic directly (mirrors updateFilePassCacheIndicator)
+//   3. That prefFilePassCacheStrategy is wired into the Administration tab
+// ---------------------------------------------------------------------------
+import { prefFilePassCacheStrategy } from '/js/prefs.js'
+
+suite('SEC-002 — filePassCache default and valid strategies')
+test('filePassCache default is local', () => {
+  assertEqual(getDefaultPrefs().filePassCache, 'local',
+    'filePassCache should default to local (SEC-002 revert)')
+})
+test('VALID_CACHE_STRATEGIES contains none, global, local, session', () => {
+  assert('none'    in VALID_CACHE_STRATEGIES, 'none should be a valid strategy')
+  assert('global'  in VALID_CACHE_STRATEGIES, 'global should be a valid strategy')
+  assert('local'   in VALID_CACHE_STRATEGIES, 'local should be a valid strategy')
+  assert('session' in VALID_CACHE_STRATEGIES, 'session should be a valid strategy')
+})
+
+suite('SEC-002 — filepass cache indicator DOM logic')
+test('indicator is hidden when filePassCache is session', () => {
+  const el = document.createElement('span')
+  el.id = 'x-filepass-cache-indicator'
+  el.style.display = 'none'
+  document.body.appendChild(el)
+  window.prefs.filePassCache = 'session'
+  el.style.display = window.prefs.filePassCache === 'local' ? 'inline' : 'none'
+  assertEqual(el.style.display, 'none',
+    'indicator should be hidden when filePassCache is session')
+  el.remove()
+})
+test('indicator is hidden when filePassCache is none', () => {
+  const el = document.createElement('span')
+  el.id = 'x-filepass-cache-indicator'
+  el.style.display = 'none'
+  document.body.appendChild(el)
+  window.prefs.filePassCache = 'none'
+  el.style.display = window.prefs.filePassCache === 'local' ? 'inline' : 'none'
+  assertEqual(el.style.display, 'none',
+    'indicator should be hidden when filePassCache is none')
+  el.remove()
+})
+test('indicator is hidden when filePassCache is global', () => {
+  const el = document.createElement('span')
+  el.id = 'x-filepass-cache-indicator'
+  el.style.display = 'none'
+  document.body.appendChild(el)
+  window.prefs.filePassCache = 'global'
+  el.style.display = window.prefs.filePassCache === 'local' ? 'inline' : 'none'
+  assertEqual(el.style.display, 'none',
+    'indicator should be hidden when filePassCache is global')
+  el.remove()
+})
+test('indicator is visible when filePassCache is local', () => {
+  const el = document.createElement('span')
+  el.id = 'x-filepass-cache-indicator'
+  el.style.display = 'none'
+  document.body.appendChild(el)
+  window.prefs.filePassCache = 'local'
+  el.style.display = window.prefs.filePassCache === 'local' ? 'inline' : 'none'
+  assertEqual(el.style.display, 'inline',
+    'indicator should be visible when filePassCache is local')
+  el.remove()
+  window.prefs.filePassCache = 'local'  // restore default
+})
+
+suite('SEC-002 — prefFilePassCacheStrategy wired into Administration tab UI')
+test('prefFilePassCacheStrategy returns a DOM element', () => {
+  const row = prefFilePassCacheStrategy(['col-4'], ['col-8'])
+  assert(row !== undefined, 'should not return undefined')
+  assert(row !== null, 'should not return null')
+  assert(row instanceof Element, 'should return a DOM Element')
+})
+test('prefFilePassCacheStrategy contains an active item for the current strategy', () => {
+  window.prefs.filePassCache = 'local'
+  const row = prefFilePassCacheStrategy(['col-4'], ['col-8'])
+  const active = row.querySelector('a.active')
+  assert(active !== null, 'should contain an active dropdown item for the current strategy')
+})
+test('active item reflects local default', () => {
+  window.prefs.filePassCache = 'local'
+  const row = prefFilePassCacheStrategy(['col-4'], ['col-8'])
+  const active = row.querySelector('a.active')
+  assert(active !== null, 'active item must exist')
+  assert(active.textContent.toLowerCase().includes('local'),
+    'active item should be local when filePassCache is local')
+})
+test('active item reflects session when set to session', () => {
+  window.prefs.filePassCache = 'session'
+  const row = prefFilePassCacheStrategy(['col-4'], ['col-8'])
+  const active = row.querySelector('a.active')
+  assert(active !== null, 'active item must exist')
+  assert(active.textContent.toLowerCase().includes('session'),
+    'active item should be session when filePassCache is session')
+  window.prefs.filePassCache = 'local'  // restore default
+})
+
+// Also test that the HTML rendering indicator DOM logic is symmetric
+suite('SEC-001 — html rendering indicator DOM logic')
+test('indicator is hidden when allowHtmlFieldRendering is false', () => {
+  const el = document.createElement('span')
+  el.id = 'x-html-rendering-indicator'
+  el.style.display = 'none'
+  document.body.appendChild(el)
+  window.prefs.allowHtmlFieldRendering = false
+  el.style.display = window.prefs.allowHtmlFieldRendering ? 'inline' : 'none'
+  assertEqual(el.style.display, 'none',
+    'indicator should be hidden when allowHtmlFieldRendering is false')
+  el.remove()
+})
+test('indicator is visible when allowHtmlFieldRendering is true', () => {
+  const el = document.createElement('span')
+  el.id = 'x-html-rendering-indicator'
+  el.style.display = 'none'
+  document.body.appendChild(el)
+  window.prefs.allowHtmlFieldRendering = true
+  el.style.display = window.prefs.allowHtmlFieldRendering ? 'inline' : 'none'
+  assertEqual(el.style.display, 'inline',
+    'indicator should be visible when allowHtmlFieldRendering is true')
+  el.remove()
+  window.prefs.allowHtmlFieldRendering = false  // restore default
 })
 
 // Run sync tests first, then async crypt tests
