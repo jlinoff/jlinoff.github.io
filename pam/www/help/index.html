@@ -145,7 +145,7 @@ the on-line help is generated.</p>
 </tr>
 <tr>
 <td>Version</td>
-<td><code>2.0.5</code></td>
+<td><code>2.0.7</code></td>
 </tr>
 <tr>
 <td>Bootstrap Version</td>
@@ -153,11 +153,11 @@ the on-line help is generated.</p>
 </tr>
 <tr>
 <td>Build</td>
-<td><code>2026-04-16 15:37:01 -0700</code></td>
+<td><code>2026-04-19 18:06:15 -0700</code></td>
 </tr>
 <tr>
 <td>GitCommitId</td>
-<td><code>8f44a9d</code></td>
+<td><code>90f26c0</code></td>
 </tr>
 <tr>
 <td>GitBranch</td>
@@ -2101,7 +2101,7 @@ name</q> or <q>first name</q> or <q>last name</q>. The <q>value</q>
 field is where the name is actually entered.</p>
 <h4 id="filepass-cache-strategy">filePass Cache Strategy</h4>
 <p>This defines the browser cache strategy for the file password. The
-options are <code>none</code>, <code>prefs</code>, <code>local</code>
+options are <code>none</code>, <code>global</code>, <code>local</code>
 and <code>session</code>.</p>
 <p>The <code>none</code> option means that the file password is never
 stored. The file password is <em>not</em> remembered for the file load
@@ -2112,13 +2112,19 @@ in a global window session variable. The file password is remembered for
 the file load and save operations. It is remembered until the browser
 tab is closed.</p>
 <p>The <code>local</code> option means that the file password is stored
-in <code>localStorage</code>. The file password is remembered for the
-file load and save operations. It is remembered until it is explicitly
-reset.</p>
-<p>The <code>session</code> option means that the file password is
-stored in <code>sessionStorage</code>. The file password is remembered
-for the file load and save operations. It is remembered until the
-browser tab is closed.</p>
+in <code>localStorage</code>. The file password is remembered across
+sessions and power cycles until explicitly cleared. This is convenient
+for personal use but is a security risk on shared devices. A <strong>⚠
+PASS: LOCAL</strong> warning badge appears in the toolbar while this is
+active.</p>
+<p>The <code>session</code> option (default) means that the file
+password is stored in <code>sessionStorage</code>. The file password is
+remembered for the file load and save operations. It is remembered until
+the browser tab is closed.</p>
+<p>Your chosen strategy is stored per-device in
+<code>localStorage</code> under the key <code>pamCacheStrategy</code>
+and is restored automatically each time PAM starts, independently of the
+PAM file.</p>
 <h4 id="custom-about">Custom About</h4>
 <p>Customized HTML that is added to the about page. It can be used in
 cases where the field records have been customized to provide an
