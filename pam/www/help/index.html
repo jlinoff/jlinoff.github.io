@@ -145,7 +145,7 @@ the on-line help is generated.</p>
 </tr>
 <tr>
 <td>Version</td>
-<td><code>2.0.7</code></td>
+<td><code>2.0.8</code></td>
 </tr>
 <tr>
 <td>Bootstrap Version</td>
@@ -153,11 +153,11 @@ the on-line help is generated.</p>
 </tr>
 <tr>
 <td>Build</td>
-<td><code>2026-04-19 18:06:15 -0700</code></td>
+<td><code>2026-04-20 17:28:32 -0700</code></td>
 </tr>
 <tr>
 <td>GitCommitId</td>
-<td><code>90f26c0</code></td>
+<td><code>a480dca</code></td>
 </tr>
 <tr>
 <td>GitBranch</td>
@@ -251,7 +251,8 @@ Representation</a></li>
 <li><a href="#menu">Menu</a></li>
 </ul></li>
 <li><a href="#records-section">Records Section</a></li>
-<li><a href="#status-section">Status Section</a></li>
+<li><a href="#status-and-controls-section">Status and Controls
+Section</a></li>
 </ul></li>
 <li><a href="#menu-functions">Menu Functions</a>
 <ul>
@@ -411,9 +412,9 @@ tablet.</p>
 the fictitious example records that are provided by PAM to practice
 with, as described in the <a href="#load-file">Load File</a> section
 later on.</p>
-<p><img src="./pam-iphone-screenshot-dark.jpg" alt="iphone-screenshot-light-mode" width="400"></p>
+<p><img src="./pam-iphone-screenshot-dark.png" alt="iphone-screenshot-light-mode" width="400"></p>
 <p>And <em>something</em> like this in light mode.</p>
-<p><img src="./pam-iphone-screenshot-light.jpg" alt="iphone-screenshot-dark-mode" width="400"></p>
+<p><img src="./pam-iphone-screenshot-light.png" alt="iphone-screenshot-dark-mode" width="400"></p>
 <p>At the bottom left of the screen there is a button that allows you to
 toggle between light and dark mode. It looks like a sun (switch to
 light) in dark mode:
@@ -984,8 +985,14 @@ record.</p>
 button.</p>
 <p>At the top of the screen is the search bar and, at the far right, the
 menu.</p>
-<p>At the bottom of the screen is a status bar that shows status
-messages.</p>
+<p>At the bottom of the screen is a status and controls section that
+shows status messages. On the right side of the status and controls
+section are two buttons: the dark/light mode toggle and a <strong>✨ Pwd
+Gen</strong> button that opens a standalone password generator. The
+standalone generator is useful when creating a new account somewhere and
+you need a strong password before you have a PAM record to attach it to.
+Click a generated password to copy it to the clipboard, then paste it
+wherever you need it.</p>
 <h3 id="expanded-view-of-a-record">Expanded View of a Record</h3>
 <p>Once you click on or tap a record it expands as shown below where the
 <q>Facebook</q> record was tapped.</p>
@@ -1292,7 +1299,21 @@ icon.</p>
 <img src="../icons/black/eye-slash.svg" height="32" width="32" alt="eye"/>
 icon.</p>
 <h3 id="password-generator">Password Generator</h3>
-<p>This is what the password field dialogue looks like with no
+<p>PAM has two password generators:</p>
+<ol type="1">
+<li><p><strong>Record field generator</strong> — opened by clicking the
+<img src="../icons/black/gear.svg" height='32' width='32' /> icon on a
+password field inside a record. The generated password is inserted
+directly into the field when you click it.</p></li>
+<li><p><strong>Standalone generator</strong> — opened by clicking the
+<strong>✨ Pwd Gen</strong> button in the toolbar footer. Use this when
+you need a strong password for a new account before you have created a
+PAM record for it. Click any generated password to copy it to the
+clipboard.</p></li>
+</ol>
+<p>Both generators produce the same set of options: one cryptic password
+and five memorable passwords.</p>
+<p>This is what the record field password dialogue looks like with no
 generator.</p>
 <p><img src="./pam-password-no-generator.png" width="400" alt="password-no-generator"></p>
 <p>When you click or tap on the
@@ -1308,22 +1329,8 @@ single choice.</p>
 arbitrary but it seems to work well enough for my needs and can easily
 be changed.</p>
 </blockquote>
-<p>This is what the password generator looks like with annotations.</p>
-<p><img src="./pam-password-generator-annotated.png" width="400" alt="password-generator-annotated"></p>
-<p>If you click or tap on the
-<img src="../icons/black/gear.svg" height='32' width='32' /> icon a
-second time, new passwords will be generated.</p>
-<p>You must click or tap on the
-<img src="../icons/black/x-circle.svg" height='32' width='32' /> icon to
-close the dialogue.</p>
-<p>I chose this approach because I wanted the
-<img src="../icons/black/gear.svg" height='32' width='32' /> icon to be
-used to generate new passwords.</p>
-<blockquote>
-<p>In retrospect, that choice may not have been the most intuitive way
-to implement closing the generator dialogue it but it works well enough
-and can easily be changed if it turns out to be too cumbersome.</p>
-</blockquote>
+<p>Click or tap on the <b>Regenerate</b> button to generate a new set of
+passwords.</p>
 <p>To choose a generated password simply click or tap on it and it will
 be added to the field value.</p>
 <p>See the <a href="#password-preferences">Password Preferences</a>
@@ -1332,7 +1339,13 @@ passwords.</p>
 <h2 id="layout">Layout</h2>
 <p><em>PAM</em> is a simple single page web application (SPA). It
 consists of three basic parts: the menu and search section, the records
-section and the status section.</p>
+section and the status and controls section.</p>
+<p>The status and controls section (footer) contains the dark/light mode
+toggle buttons on the left, a status message area in the center, and on
+the right a <strong>✨ Pwd Gen</strong> button for the standalone
+password generator. If the file password cache strategy is set to
+<code>local</code>, a <strong>⚠ PASS: LOCAL</strong> warning badge also
+appears on the right.</p>
 <p>It looks something like this</p>
 <p><img src="./pam-basic-sections.png" width="400" alt="menu-bar"></p>
 <h3 id="menu-and-search-section">Menu and Search Section</h3>
@@ -1436,12 +1449,12 @@ visible or not.</p>
 it.</p>
 <p>Each of the record management options is discussed in more detail in
 the <a href="#functions">Functions</a> section.</p>
-<h3 id="status-section">Status Section</h3>
-<p>Below the records section, at the bottom, is the status section where
-ephemeral status messages are displayed. The messages disappear after
-about 1.5 seconds but the duration is controlled by a preference that
-you can set. See the <a href="#preferences">Preferences</a> section for
-more information.</p>
+<h3 id="status-and-controls-section">Status and Controls Section</h3>
+<p>Below the records section, at the bottom, is the status and controls
+section where ephemeral status messages are displayed. The messages
+disappear after about 1.5 seconds but the duration is controlled by a
+preference that you can set. See the <a
+href="#preferences">Preferences</a> section for more information.</p>
 <p>The status messages are used to provide activity feedback like
 showing how many bytes were copied to a clipboard when a copy button is
 clicked or tapped as shown in the example below.</p>
