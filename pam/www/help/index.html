@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="pandoc 3.10" />
+  <meta name="generator" content="pandoc 3.11" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>PAM - help</title>
   <style>
@@ -27,7 +27,6 @@
       vertical-align: middle;
     }
     q { quotes: "“" "”" "‘" "’"; }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
     /* CSS for syntax highlighting */
     html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
@@ -149,7 +148,7 @@ the on-line help is generated.</p>
 </tr>
 <tr>
 <td>Version</td>
-<td><code>2.1.3</code></td>
+<td><code>2.3.0</code></td>
 </tr>
 <tr>
 <td>Bootstrap Version</td>
@@ -157,11 +156,11 @@ the on-line help is generated.</p>
 </tr>
 <tr>
 <td>Build</td>
-<td><code>2026-07-16 21:11:01 -0700</code></td>
+<td><code>2026-09-05 09:11:45 -0700</code></td>
 </tr>
 <tr>
 <td>GitCommitId</td>
-<td><code>0b54051</code></td>
+<td><code>c22da1d</code></td>
 </tr>
 <tr>
 <td>GitBranch</td>
@@ -215,11 +214,13 @@ Automatic Password Generation</a></li>
 Storage</a></li>
 <li><a href="#reason-6-secure-context-encryption">Reason 6: Secure
 Context Encryption</a></li>
-<li><a href="#reason-8-hiding-passwords-from-casual-observers">Reason 7:
+<li><a href="#reason-7-hiding-passwords-from-casual-observers">Reason 7:
 Hiding Passwords from Casual Observers</a></li>
 <li><a href="#reason-8-access-from-mobile-devices">Reason 8: Access from
 mobile devices</a></li>
 <li><a href="#reason-9-foss">Reason 9: FOSS</a></li>
+<li><a href="#reason-10-duplicate-password-checking">Reason 10:
+Duplicate Password Checking</a></li>
 </ul></li>
 <li><a href="#pam-vs-mainstream-password-managers">PAM vs mainstream
 password managers</a></li>
@@ -324,7 +325,7 @@ Name</a></li>
 <li><a href="#filepass-cache-strategy">filePass Cache Strategy</a></li>
 <li><a href="#custom-about">Custom About</a></li>
 </ul></li>
-<li><a href="#record-fields">Record Fields</a></li>
+<li><a href="#record-fields-preferences">Record Fields</a></li>
 <li><a href="#saving-preferences">Saving Preferences</a></li>
 </ul></li>
 <li><a href="#security-considerations">Security Considerations</a>
@@ -418,7 +419,7 @@ with, as described in the <a href="#load-file">Load File</a> section
 later on.</p>
 <p><img src="./pam-iphone-screenshot-dark.png" alt="iphone-screenshot-light-mode" width="400"></p>
 <p>And <em>something</em> like this in light mode.</p>
-<p><img src="./pam-iphone-screenshot-light.png" alt="iphone-screenshot-dark-mode" width="400"></p>
+<p><img src="./pam-iphone-screenshot-light.png" alt="iphone-screenshot-dark-mode" width="400" style="border: 1px solid black;"></p>
 <p>At the bottom left of the screen there is a button that allows you to
 toggle between light and dark mode. It looks like a sun (switch to
 light) in dark mode:
@@ -778,6 +779,22 @@ use it like a native app without going through an app store.</p>
 it is free and open source software (FOSS) so you can try it without any
 obligation or cost. You can also help find and fix bugs or improve the
 UI.</p>
+<h4 id="reason-10-duplicate-password-checking">Reason 10: Duplicate
+Password Checking</h4>
+<p>A password shared between two accounts is only as safe as the least
+safe of them. If any one of those sites is breached, every account
+sharing that password is exposed — and you may not find out which ones
+they were.</p>
+<p><em>PAM</em> finds reuse across your whole vault and shows it in the
+<a href="#reused-passwords">Reused Passwords</a> report, listing the
+entries that share a password without ever displaying the password
+itself. A <strong>⚠ REUSED</strong> badge appears in the footer whenever
+any stored password is used more than once, so you do not have to go
+looking.</p>
+<p>The check runs <strong>entirely on your device</strong>. No request
+is made, nothing is uploaded, and no third party learns anything about
+your vault. That is not a policy promise — PAM has no network access to
+make one with.</p>
 <h3 id="pam-vs-mainstream-password-managers">PAM vs mainstream password
 managers</h3>
 <p><em>Analysis: April 2026. Compared against Bitwarden and 1Password as
@@ -865,12 +882,21 @@ upgrade.</td>
 <td>Tie</td>
 </tr>
 <tr>
-<td>Audit / breach alerts</td>
+<td>Reused password detection</td>
+<td>Yes — the <a href="#reused-passwords">Reused Passwords</a> report
+and a footer badge, computed locally with no network request</td>
+<td>Yes — 1Password Watchtower, Bitwarden reports; both require the
+vault to be synced to the vendor</td>
+<td>Tie on capability, PAM wins on disclosure — the same answer without
+anything leaving the device</td>
+</tr>
+<tr>
+<td>Breach alerts</td>
 <td>None — if a third-party site you use is breached and your
 credentials leaked, PAM has no way to notify you. PAM’s own encrypted
 data remains secure.</td>
 <td>Bitwarden checks passwords against HaveIBeenPwned; 1Password’s
-Watchtower flags breached, weak, and reused passwords automatically</td>
+Watchtower flags breached passwords automatically</td>
 <td>PAM loses on monitoring — not because PAM’s data is at risk, but
 because it cannot alert you when third-party sites you have accounts on
 are breached</td>
@@ -966,11 +992,10 @@ managing files manually; or needs a fully auditable FOSS tool.</p>
 described in <a href="#reason-2-record-model">Reason 2: Record
 Model</a>.</p>
 <p>This section talks about how records are presented in <em>PAM</em>
-using an example with seven records that contain confidential
-information for <q>Amazon</q>, <q>Email</q>, <q>Facebook</q>,
-<q>Github</q>, <q>Google</q>, <q>Netflix</q> and <q>Stack Exchange</q>
-fictional accounts from the <a href="#load-file">Load File</a>
-example.</p>
+using an example with nine records that contain confidential information
+for <q>Amazon</q>, <q>Email</q>, <q>Facebook</q>, <q>Github</q>,
+<q>Google</q>, <q>Netflix</q> and <q>Stack Exchange</q> fictional
+accounts from the <a href="#load-file">Load File</a> example.</p>
 <p>See the <a href="#create-new-record">Create New Record</a> section
 for details about how to create records and the <a
 href="#topics">Topics</a> and <a href="#fields">Fields</a> sections for
@@ -998,49 +1023,73 @@ you need a strong password before you have a PAM record to attach it to.
 Click a generated password to copy it to the clipboard, then paste it
 wherever you need it.</p>
 <h3 id="expanded-view-of-a-record">Expanded View of a Record</h3>
-<p>Once you click on or tap a record it expands as shown below where the
-<q>Facebook</q> record was tapped.</p>
-<p><img src="./pam-record-expanded.png" width="400" alt="record-expanded"></p>
-<p>You can see that there are three fields in the record: <q>url</q>,
-<q>login</q> and <q>password</q>, next to each field there is a icon
-that looks like a clipboard
-<img src="../icons/black/clipboard.svg" height="32" width="32" alt="clipboard"/>.</p>
-<p><img src="./pam-record-expanded-fields.png" width="400" alt="record-expanded"></p>
-<p>If you click or tap the clipboard icon, the field contents will be
-copied to the clipboard so that you can paste them into a login
-dialogue.</p>
-<p>In addition to the clipboard icon there is another icon that looks
-like an eye
-<img src="../icons/black/eye.svg" height="32" width="32" alt="eye"/>
-that shows up for password field. If you click or tap it, the password
-will be shown in plaintext and the icon will change to an eye with a
-slash through it
-<img src="../icons/black/eye-slash.svg" height="32" width="32" alt="eye-slash"/>.
-By default all passwords are hidden so that they are not visible to
-casual observers. Click or tap it again to re-hide the password.
-Passwords are correctly copied to the clipboard at all times even when
-the password is hidden.</p>
-<p>In addition there are three buttons at the bottom
-<q><img src="../icons/black/trash.svg" height='32' width='32' alt='trash'/> Delete</q>
-to delete the record,
-<q><img src="../icons/black/files.svg" height='32' width='32' alt='files' /> Clone</q>
-to clone the record and
-<q><img src="../icons/black/pencil-square.svg" height='32' width='32' alt='pencil-square'/> Edit</q>
-to edit the record fields.</p>
-<p>As shown below.</p>
-<p><img src="./pam-record-expanded-fields2.png" width="400" alt="record-expanded"></p>
+<p>Click or tap a record to expand it. Below, the <q>Facebook</q> record
+has been tapped: the other records stay collapsed above and below it,
+and its fields appear indented beneath the title.</p>
+<p><img src="./pam-record-expanded.png" width="400" alt="the Facebook record expanded"></p>
+<p>The Facebook record has three fields — <code>website</code>,
+<code>login</code> and <code>password</code> — each shown as a label
+with its value below it, in the order they were defined.</p>
+<p><strong>The clipboard icon</strong>
+<img src="../icons/black/clipboard.svg" height="24" width="24" alt="clipboard"/>
+sits at the right-hand end of every field, just below the value. Click
+or tap it to copy that field to the clipboard so you can paste it into a
+login page. A confirmation appears briefly in the <a
+href="#layout">status area</a> at the bottom of the screen.</p>
+<p><strong>The eye icon</strong>
+<img src="../icons/black/eye.svg" height="24" width="24" alt="eye"/>
+appears only on password fields, immediately to the left of that field’s
+clipboard icon. Passwords are masked by default so they are not visible
+to casual observers. Click or tap the eye to reveal the value; the icon
+becomes an eye with a slash through it
+<img src="../icons/black/eye-slash.svg" height="24" width="24" alt="eye-slash"/>
+and clicking again re-hides it. Copying always copies the real password,
+whether it is shown or hidden.</p>
+<p><strong>Three buttons sit below the last field</strong>, in this
+order:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Button</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="../icons/black/trash.svg" height="24" width="24" alt="trash"/> Delete</td>
+<td>delete the record, after a confirmation</td>
+</tr>
+<tr>
+<td><img src="../icons/black/files.svg" height="24" width="24" alt="files"/> Clone</td>
+<td>copy the record to a new title</td>
+</tr>
+<tr>
+<td><img src="../icons/black/pencil-square.svg" height="24" width="24" alt="pencil-square"/> Edit</td>
+<td>change the record’s fields</td>
+</tr>
+</tbody>
+</table>
+<p>To their right is the <strong>Active</strong> checkbox, and below it
+the date the record was created. Clearing Active deactivates the record
+— see <a href="#deactivate-record">Deactivate Record</a>.</p>
 <p>The fields <em>in</em> records are completely customizable when you
 select the <code>"Edit"</code> option.</p>
-<p>Fields are added <em>to</em> the record by selecting a new field from
-the <code>"New Record"</code> drop down menu as shown below for the
-<code>"Facebook"</code> record but these fields can <em>also</em> be
-changed. See the <a href="#custom-fields">Custom Fields</a> and <a
+<p>Fields are added <em>to</em> the record from the <strong>New
+Field</strong> drop down menu at the top of the Edit dialogue, below the
+record title. Choosing a predefined name sets both the field’s name and
+its type. See the <a href="#custom-fields">Custom Fields</a> and <a
 href="#field-types">Field Types</a> sections for details.</p>
-<p><img src="./pam-record-expanded-edit-facebook-new-field.png" width="400" alt="record-expanded"></p>
-<p>Fields are modified <em>in</em> the record by editing them directly
-and they are deleted <em>from</em> the record by clicking on the
-<img src="../icons/black/trash.svg" height='32' width='32' /> icon.</p>
-<p><img src="./pam-record-expanded-edit-facebook.png" width="400" alt="record-expanded"></p>
+<p><img src="./pam-record-expanded-edit-facebook-new-field.png" width="400" alt="the New Field drop down menu open in the Edit dialogue"></p>
+<p>Existing fields are edited in place: change a name or a value by
+typing in it, reorder fields by dragging the handle on the left of each
+one, and remove a field with the
+<img src="../icons/black/trash.svg" height="24" width="24" alt="trash"/>
+<strong>Delete Field</strong> button inside it.</p>
+<p><img src="./pam-record-expanded-edit-facebook.png" width="400" alt="the Edit dialogue for the Facebook record"></p>
 <h2 id="topics">Topics</h2>
 <p>Topics define how records are related. They provide a convenient
 abstraction for organizing related records in files. Topics are
@@ -1090,7 +1139,7 @@ be the same for all records that had an <q>email</q> field but the
 <em>value</em> would vary.</p>
 <p>The default record fields are the fields that are available in the
 <code>"New Field"</code> pull down menu when a record is created or
-edited. They are defined in the <a href="#Preferences">Preferences</a>
+edited. They are defined in the <a href="#preferences">Preferences</a>
 section and they are stored in each records <em>file</em> along with the
 records so each records file can have different default fields.</p>
 <p>For example a file of recipe records would probably want fields of
@@ -1099,20 +1148,25 @@ type <em><q>textarea</q></em> named <q>ingredients</q> and
 probably would not. Instead it might want <em><q>text</q></em> fields
 named <q>author</q> and <q>publisher</q> along with, possibly, a field
 of type <em><q>number</q></em> named <q>copyright</q>.</p>
-<p>See the <a href="#record-fields">Record Fields</a> section for
-details about how to add or modify the default record fields in the
-preferences dialogue.</p>
+<p>See the <a href="#record-fields-preferences">Record Fields</a>
+section for details about how to add or modify the default record fields
+in the preferences dialogue.</p>
 <p>There is a second more obscure way to define field names. You can
 change field names <em>when you create or edit an individual record</em>
 by setting the <a href="#enable-editable-field-name">Enable Editable
 Field Name</a> preference.</p>
-<p>This capability is <em>not</em> enabled by default to avoid confusion
-between the <q>name</q> input and the <q>value</q> input as shown below.
-Normally only the <q>value</q> input is shown.</p>
+<p>This capability is <em>not</em> enabled by default, to avoid
+confusion between the <strong>Name</strong> input and the
+<strong>Value</strong> input. With it off, only the Value input is shown
+and the field name appears as a fixed label above it. With it on, each
+field gains a Name box above its Value box, and the field name is edited
+there:</p>
+<p><img src="./pam-fld-name-edit-on.png" width="400" alt="a field row with a Name box above the Value box"></p>
 <p>Typically there is no reason to change record field names on a per
-record basis. It is better to add the new record fields to the default
-list in the preferences.</p>
-<p><img src="./pam-change-field-name.png" width="400" alt="change-field-name"></p>
+record basis, and doing so is not recommended — it is better to add the
+field names you want to the default list in <a
+href="#record-fields-preferences">Record Fields</a> preferences, where
+they apply consistently across every record.</p>
 <h3 id="field-types">Field Types</h3>
 <p>Record field types define the type of each field that you define for
 a record. They are based on HTML <em>input</em> element types except for
@@ -1130,7 +1184,7 @@ wish to customize the user experience but you cannot change the built in
 <em><q>text</q></em> but there is no way to add a new built in type to
 the drop down list from the user interface.</p>
 <p>These are the default field definitions.</p>
-<p><img src="./pam-default-record-fields.png" width="400" alt="default"/></p>
+<p><img src="./pam-prefs-record-fields.png" width="400" alt="the Record Fields preferences tab"/></p>
 <p>The table below presents a brief overview of the default record
 fields and their associated built in types and when to use them. You can
 search the web for more details about <a
@@ -1283,7 +1337,7 @@ passwords for most people.</p>
 Representation</h3>
 <p>Here is an example that shows a password in its standard hidden
 form.</p>
-<p><img src="./pam-record-expanded-fields.png" width="400" alt="record-expanded"></p>
+<p><img src="./pam-record-expanded.png" width="400" alt="the Facebook record expanded"></p>
 <p>To make the password visible, click or tap on the
 <img src="../icons/black/eye.svg" height="32" width="32" alt="eye"/>
 icon.</p>
@@ -1315,6 +1369,7 @@ you need a strong password for a new account before you have created a
 PAM record for it. Click any generated password to copy it to the
 clipboard.</p></li>
 </ol>
+<p><img src="./pam-password-generator-standalone.png" width="400" alt="standalone password generator"></p>
 <p>Both generators produce the same set of options: one cryptic password
 and five memorable passwords.</p>
 <p>This is what the record field password dialogue looks like with no
@@ -1341,17 +1396,70 @@ be added to the field value.</p>
 section about how to define the prefix and suffixes for memorable
 passwords.</p>
 <h2 id="layout">Layout</h2>
-<p><em>PAM</em> is a simple single page web application (SPA). It
-consists of three basic parts: the menu and search section, the records
-section and the status and controls section.</p>
-<p>The status and controls section (footer) contains the dark/light mode
-toggle buttons on the left, a status message area in the center, and on
-the right a <strong>✨ Pwd Gen</strong> button for the standalone
-password generator. If the file password cache strategy is set to
-<code>local</code>, a <strong>⚠ PASS: LOCAL</strong> warning badge also
-appears on the right.</p>
-<p>It looks something like this</p>
-<p><img src="./pam-basic-sections.png" width="400" alt="menu-bar"></p>
+<p><em>PAM</em> is a simple single page web application (SPA). It is
+laid out as three stacked regions, described here from top to
+bottom.</p>
+<p><strong>The menu and search section</strong> runs across the top. On
+the left is the search box, which filters records as you type. Next to
+it is a circled <strong>✕</strong> that clears the search, followed by
+the number of records currently visible. On the right is the
+<strong>☰</strong> menu button.</p>
+<p><strong>The records section</strong> fills the middle and takes up
+most of the screen. Each record is one row showing its title, with a
+chevron on the right to expand it. Deactivated records are shown with an
+<em><em>INACTIVE</em></em> prefix, or hidden entirely depending on the
+<a href="#hide-inactive-records">Hide Inactive Records</a>
+preference.</p>
+<p><strong>The status and controls section</strong> is the footer. The
+dark/light mode toggle is on the left, a status message area is in the
+centre, and on the right is the <strong>✨ Pwd Gen</strong> button for
+the standalone password generator.</p>
+<p>Warning badges also appear in the footer when the relevant preference
+is enabled. Each marks a setting that trades some security for
+convenience:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Badge</th>
+<th>Preference</th>
+<th>See</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>⚠ PASS: LOCAL</strong></td>
+<td>file password cached in <code>localStorage</code></td>
+<td><a href="#filepass-cache-strategy">filePass Cache Strategy</a></td>
+</tr>
+<tr>
+<td><strong>⚠ HTML ON</strong></td>
+<td>HTML field values rendered as live HTML</td>
+<td><a href="#allow-html-field-rendering">Allow HTML Field
+Rendering</a></td>
+</tr>
+<tr>
+<td><strong>⚠ PW SEARCH</strong></td>
+<td>search matches against password values</td>
+<td><a href="#search-password-field-values">Search Password Field
+Values</a></td>
+</tr>
+<tr>
+<td><strong>⚠ REUSED: <em>n</em></strong></td>
+<td><em>n</em> stored passwords are used more than once</td>
+<td><a href="#reused-passwords">Reused Passwords</a></td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>⚠ REUSED</strong> badge is the odd one out: it reports a
+property of your data rather than a setting you chose, and clicking it
+opens the <a href="#reused-passwords">Reused Passwords</a> report.</p>
+<p>It looks something like this.</p>
+<p><img src="./pam-example-records.png" width="400" alt="the three PAM layout regions"></p>
 <h3 id="menu-and-search-section">Menu and Search Section</h3>
 <p>The top section that contains a search input and a menu.</p>
 <h4 id="search">Search</h4>
@@ -1364,8 +1472,8 @@ searches and regular expressions to make it easier to find records.</p>
 <p>This can be very helpful for finding out where old passwords and
 obsolete accounts are still being used.</p>
 <p>Here is the made up list of account records from the <a
-href="#load-files">Load Files</a> example:</p>
-<p><img src="./pam-search.png" width="400" alt="pam-search"></p>
+href="#load-file">Load Files</a> example:</p>
+<p><img src="./pam-example-records.png" width="400" alt="the example records, unfiltered"></p>
 <p>Here is the same list after filtering for those whose titles contain
 the letter <code>"g"</code>. Note that searches are case insensitive but
 you can change that by unsetting the <a
@@ -1437,22 +1545,17 @@ record contents (fields) and provide options for deleting, cloning or
 editing the record contents.</p>
 <p>This way of presenting the records is called an accordion display.
 Below you can see how it expands after the <q>Facebook</q> entry has
-been selected.</p>
-<p><img src="./pam-record-expanded.png" width="400" alt="record-expanded"></p>
-<p>The expanded <q>Facebook</q> record has three fields: <q>url</q>,
-<q>login</q> and <q>password</q>.</p>
-<p><img src="./pam-record-expanded-fields.png" width="400" alt="record-expanded"></p>
-<p>You can copy the field values to the clipboard so that they can be
-pasted into login forms.</p>
-<blockquote>
-<p>Note that the copy works for passwords whether the password is
-visible or not.</p>
-</blockquote>
-<p><img src="./pam-record-expanded-fields2.png" width="400" alt="record-expanded"></p>
-<p>You can also click or tap on the title of the opened record to close
-it.</p>
+been selected, showing its three fields: <code>website</code>,
+<code>login</code> and <code>password</code>.</p>
+<p><img src="./pam-record-expanded.png" width="400" alt="the Facebook record expanded"></p>
+<p>You can copy any field value to the clipboard so it can be pasted
+into a login form, and the copy works for passwords whether they are
+visible or not. Click or tap the title of an open record to close it
+again.</p>
+<p>See <a href="#expanded-view-of-a-record">Expanded View of a
+Record</a> for what each icon and button does.</p>
 <p>Each of the record management options is discussed in more detail in
-the <a href="#functions">Functions</a> section.</p>
+the <a href="#menu-functions">Functions</a> section.</p>
 <h3 id="status-and-controls-section">Status and Controls Section</h3>
 <p>Below the records section, at the bottom, is the status and controls
 section where ephemeral status messages are displayed. The messages
@@ -1475,8 +1578,8 @@ clicked or tapped as shown in the example below.</p>
 <li><a href="#deactivate-record">Deactivate Record</a></li>
 <li><a href="#clone-record">Clone Record</a></li>
 <li><a href="#clear-records">Clear Records</a></li>
-<li><a href="#save-records">Save Records</a></li>
-<li><a href="#load-records">Load Records</a></li>
+<li><a href="#save-file">Save Records</a></li>
+<li><a href="#load-file">Load Records</a></li>
 <li><a href="#get-help">Help</a>.</li>
 </ol>
 <p>Each function will be discussed in a separate subsection below.</p>
@@ -1496,7 +1599,7 @@ uses bootstrap formatting classes.</p>
 <p>Custom messages are defined in the <q>Custom About</q> field in the
 <a href="#preferences">Preferences</a> as shown below. You can used
 plain HTML or bootstrap 5 classes (as shown in this example).</p>
-<p><img src="./pam-about-custom-pref.png" width="400" alt="about-custom-pref"></p>
+<p><img src="./pam-about-custom-pref.png" width="700" alt="the Custom About preference field"></p>
 <p>The motivation for allowing custom messages is that someone might
 want to share a <em>PAM</em> file or describe how the records are
 related. The custom message would allow the person to provide their
@@ -1504,7 +1607,7 @@ related. The custom message would allow the person to provide their
 <h3 id="create-new-record">Create New Record</h3>
 <p>Before reading this section, please make sure that you are familiar
 with the ideas covered in the <a href="#topics">Topics</a>, <a
-href="#fields">Fields</a> and <a href="#password-fieldds">Password
+href="#fields">Fields</a> and <a href="#password-fields">Password
 Fields</a> sections.</p>
 <p>Creating a new record is a very common activity in <em>PAM</em> so I
 tried to make it as easy as possible.</p>
@@ -1524,17 +1627,17 @@ record file.</li>
 <q>New Record</q> menu option in the application, is probably the best
 way to create the first new record for a topic family. This is also
 known as the <q>menu</q> approach and is shown below.</p>
-<p><img src="./pam-create-new-record.png" width="400" alt="new-rec"></p>
+<p><img src="./pam-menu.png" width="300" alt="the menu, with New Record third from the top"></p>
 <p>To show how it works, we will create a recipe record using
 <q>ingredients</q> and <q>instruction</q> fields. But first we need to
 define them as default <em><q>textarea</q></em> fields in the <a
 href="#preferences">Preferences</a> dialogue. So the available records
 look like this.</p>
 <p><img src="./pam-recipe-prefs.png" width="400" alt="default"/></p>
-<p>To create a new record using the menu approach click or tap on the
-<code>"New Record"</code> option from the menu.</p>
-<p><img src="./pam-new-record-menu.png" width="400" alt="new-record"></p>
-<p>That will popup a dialogue that looks like this.</p>
+<p>To create a new record using the menu approach, choose <strong>New
+Record</strong> from the <a href="#menu-functions">menu</a> — third from
+the top, below Preferences. That pops up a dialogue that looks like
+this.</p>
 <p><img src="./pam-new-record.png" width="400" alt="new-record"></p>
 <p>You can now type in the record title.</p>
 <p><img src="./pam-new-record-title.png" width="400" alt="new-record"></p>
@@ -1567,13 +1670,15 @@ you just defined.</p>
 <p>The second method, creating a record by cloning an existing record,
 is useful when you want to use the same fields as the existing record.
 It is a great way to guarantee uniformity. Although if the number of
-fields is small using the first method is also fine. Here is what the
-clone option looks like.</p>
-<p><img src="./pam-clone-google.png" width="400" alt="clone-rec"></p>
-<p>Cloning a record is simple. Just expand a record and click or tap on
-the clone button and an edit dialogue pops up.</p>
-<p>Using the record that was created in the previous section here is
-what happens when you click or tap the <code>"Clone"</code> button.</p>
+fields is small using the first method is also fine.</p>
+<p>Cloning a record is simple. Expand the record you want to copy and
+click or tap the
+<img src="../icons/black/files.svg" height="24" width="24" alt="files"/>
+<strong>Clone</strong> button — it sits below the last field, between
+<strong>Delete</strong> and <strong>Edit</strong>, as described in <a
+href="#expanded-view-of-a-record">Expanded View of a Record</a>.</p>
+<p>Using the record that was created in the previous section, here is
+what happens when you click or tap <code>"Clone"</code>.</p>
 <p><img src="./pam-clone-record-popup.png" width="400" alt="clone-record-popup"></p>
 <p>The clone operation created a new record with a slightly modified
 title <q>Ice Cream Sundae Clone</q> <em>because the record title must be
@@ -1818,7 +1923,7 @@ recovered once confirmed!</strong></p>
 record inactive. Inactive records are considered deactivated.</p>
 <p>Deactivated records are the same as deleted records because they do
 not show up in the records list but they can always be recovered by
-going to <a href="#Preferences">Preferences</a> and unchecking the <a
+going to <a href="#preferences">Preferences</a> and unchecking the <a
 href="#hide-inactive-records">Hide Inactive Records</a> entry. Each
 deactivated record will be labeled with a
 <small><em>INACTIVE</em></small> prefix.</p>
@@ -1896,13 +2001,39 @@ changes can be made.</p>
 to paste records from the clipboard.</p>
 <p>This is typically used when records are copies to the clipboard from
 a save operation or manually after editing.</p>
+<h3 id="reused-passwords">Reused Passwords</h3>
+<p>A password shared between entries is only as safe as the least safe
+of them: if any one of those sites is breached, every entry in the group
+is exposed. PAM finds these locally — no network request is made and
+nothing leaves the device.</p>
+<p>When any stored password is used more than once, a <strong>⚠ REUSED:
+<em>n</em></strong> badge appears in the <a href="#layout">status and
+controls section</a>, where <em>n</em> counts the <em>fields</em>
+involved rather than the groups. Choosing <strong>Reused
+Passwords</strong> from the menu, or clicking the badge, opens the
+report.</p>
+<p><img src="./pam-reused-passwords.png" width="400" alt="the Reused Passwords report"></p>
+<p>Entries are listed by record title and field name, grouped by the
+password they share. <strong>The passwords themselves are never
+shown</strong> — they are used only to group the entries.</p>
+<p>Reuse is a property of a <em>field</em>, not a record. One record may
+hold several password fields, and two fields in the same record can
+share a value, so a group can name the same record twice.</p>
+<p>Inactive records are excluded when <a
+href="#hide-inactive-records">Hide Inactive Records</a> is set: a
+deactivated record is a retired credential, and reporting a collision
+with one would be noise. The dialogue says so when it applies.</p>
+<p>The badge can be turned off with the <a
+href="#show-password-reuse-warning">Show Password Reuse Warning</a>
+preference. That suppresses the badge only — the check still runs and
+the report is still available from the menu, so there is no state in
+which PAM knows about reuse and cannot tell you.</p>
 <h3 id="get-help">Get Help</h3>
 <p>To get this help message, choose the <code>"Help"</code> option from
 the menu.</p>
 <p>If you find a bug or want to request a change or submit an
-improvement, go to the <a
-href="#pam---personal-account-manager">Metadata section</a> at the top
-of this help and click or tap on the project link.</p>
+improvement, go to the <a href="#pam">Metadata section</a> at the top of
+this help and click or tap on the project link.</p>
 <h2 id="preferences">Preferences</h2>
 <p>Preferences allow you to customized the behavior of the app. The
 defaults are set so that most people will never have to change
@@ -2046,24 +2177,6 @@ Record Strategy</q> will appear that is not normally visible to ask you
 with strategy you want to used for conflicts.</p>
 <p>You might set this preference to false if you want to to merge sets
 of records from different files.</p>
-<h4 id="enable-printing">Enable Printing</h4>
-<p>Click this to add the Print option to the menu.</p>
-<p>This is what the enable printing preference looks like in the
-preferences dialogue.</p>
-<p><img src="./pam-prefs-enable-printing-check.png" width="400" alt="pam-prefs-enable-printing-check"></p>
-<p>Once it is enabled, the <q>Print</q> option will appear at the bottom
-of the menu as shown below.</p>
-<p><img src="./pam-prefs-enable-printing-menu.png" width="400" alt="pam-prefs-enable-printing-menu"></p>
-<p>When you click on <q>Print</q>, PAM will open a print-ready document
-showing all visible records with passwords in plain text, formatted as a
-compact two-column card layout suitable for estate planning. This is
-what it looks like for the example records.</p>
-<p><img src="./pam-prefs-enable-printing-example.png" width="400" alt="pam-prefs-enable-printing-example"></p>
-<p>This capability is useful if you want a paper copy of your records
-but it is a security risk. If you choose to enable this option, make
-sure that the paper copy is stored securely.</p>
-<p>Disable this option (the default) if you intend to share PAM records
-with multiple users from a read-only URL.</p>
 <h4 id="load-duplicate-record-strategy">Load Duplicate Record
 Strategy</h4>
 <p>This preference is not visible unless the <q>Clear Records On
@@ -2103,20 +2216,124 @@ the <q>name</q> input can be confusing for users, a better approach is
 to simply add a new field to the default fields in the preference
 section as described in the <a href="#fields">Fields</a> section.</p>
 <h5 id="not-enabled">Not Enabled</h5>
-<p>This is what it looks likes when it is unchecked (false).</p>
-<p><img src="./pam-fld-name-edit-unchecked.png" width="400" alt="false"/></p>
-<p><img src="./pam-fld-name-edit-off.png" width="400" alt="false"/></p>
-<p>When this is not enabled, the user can only choose record fields from
-the <q>Record Fields</q> section of the preferences. See the <a
-href="#record-fields">Record Fields</a> section for more details.</p>
+<p>Unchecked, which is the default:</p>
+<p><img src="./pam-fld-name-edit-unchecked.png" width="700" alt="the preference unchecked"/></p>
+<p>Each field in a record then shows only its <strong>Value</strong>
+box, with the field name fixed as a label above it.</p>
+<p><img src="./pam-fld-name-edit-off.png" width="400" alt="a field row with editable names off"/></p>
+<p>Record fields can then only be chosen from the list defined in
+preferences — see <a href="#record-fields-preferences">Record
+Fields</a>.</p>
 <h5 id="enabled">Enabled</h5>
-<p>This is what it looks likes when it is checked (true).</p>
-<p><img src="./pam-fld-name-edit-checked.png" width="400" alt="false"/></p>
-<p><img src="./pam-fld-name-edit-on.png" width="400" alt="true"/></p>
-<p>The user can replace the default field name (in this case
-<q>name</q>) with whatever they want, perhaps something like <q>full
-name</q> or <q>first name</q> or <q>last name</q>. The <q>value</q>
-field is where the name is actually entered.</p>
+<p>Checked:</p>
+<p><img src="./pam-fld-name-edit-checked.png" width="700" alt="the preference checked"/></p>
+<p>Each field now shows a <strong>Name</strong> box above its
+<strong>Value</strong> box. The Name box holds the field’s label — in
+the example below, <code>name</code> — and can be replaced with
+anything, such as <q>full name</q>, <q>first name</q> or <q>last
+name</q>. The Value box below it still holds the data itself.</p>
+<p><img src="./pam-fld-name-edit-on.png" width="400" alt="a field row with a Name box above the Value box"/></p>
+<h4 id="textarea-minimum-height">Textarea Minimum Height</h4>
+<p>Define the minimum height of the textareas for notes and HTML input.
+This is useful in mobile browsers where resize is not available.</p>
+<h3 id="administration-preferences">Administration Preferences</h3>
+<p><img src="./pam-prefs-administration.png" width="400" alt="pam-prefs-administration"></p>
+<p>These are the preferences that are generally for site
+adiministration.</p>
+<h4 id="lock-preferences-password">Lock Preferences Password</h4>
+<p>Click this to lock the Preferences dialogue so that only authorized
+users can change them.</p>
+<p>Setting this password will lock the preferences so that users who do
+not know this password cannot change them. This allows an administrator
+to disable printing and saving. Leave blank to keep the existing
+password unchanged. This password is stored in the PAM file so it is not
+as secure as the master password. Setting the password here is useful
+when multiple users are reading the same PAM file data and you don’t
+want them to change the records or the preferences.</p>
+<h4 id="default-record-fields">Default Record Fields</h4>
+<p>These are the fields defined automatically when creating a new
+record. The fields are entered entered as a comma separated list of
+field names. A common example would be: <code>url,login,password</code>.
+This is very useful.</p>
+<h4 id="enable-printing">Enable Printing</h4>
+<p>Click this to add the Print option to the menu.</p>
+<p>Enable or disable the menu Print operation. Being able to print
+records could be a security risk because all of the printed information
+is decrypted. This is typically disabled when multiple users share the
+same PAM file data.</p>
+<p>This is what the enable printing preference
+(<code>Enable Printing</code>) looks like in the
+<code>Administration</code> preferences dialogue.</p>
+<p><img src="./pam-prefs-enable-printing-menu.png" width="400" alt="pam-prefs-enable-printing-menu"></p>
+<p>When you click on <q>Print</q>, PAM will open a print-ready document
+showing all visible records with passwords in plain text, formatted as a
+compact two-column card layout suitable for estate planning. This is
+what it looks like for the example records.</p>
+<p><img src="./pam-prefs-enable-printing-example.png" width="400" alt="pam-prefs-enable-printing-example"></p>
+<p>This capability is useful if you want a paper copy of your records
+but it is a security risk. If you choose to enable this option, make
+sure that the paper copy is stored securely.</p>
+<p>Disable this option (the default) if you intend to share PAM records
+with multiple users from a read-only URL.</p>
+<h4 id="enable-save-file">Enable Save File</h4>
+<p>Enable or disable the menu <q>Save File</q> operation. Being able to
+save a private copy of the records could be a security risk. When the
+user disables this preference it does not remove the Save File entry
+from the menu immediately after the preferences are saved. If it did,
+you would never be able to save it persistently in the file. Instead it
+allows the file save operation to succeed but the next time the file is
+loaded the Save File will not appear in the menu. When an administrator
+logs in by successfully entering the Lock Preferences Password, the Save
+File menu option is always displayed, even when Enable Save File is
+false. This is typically disabled when multiple users share the same PAM
+file data.</p>
+<h4 id="hide-inactive-records-1">Hide Inactive Records</h4>
+<p>Making records inactive is very much like deleting them. The only
+difference is that even though they are no longer visible a historical
+record of them is kept if this preference is enabled.</p>
+<h4 id="custom-about">Custom About</h4>
+<p>This allows you to add custom information to the <q>About</q> page.
+Typically you might add something like administrator contact
+information. An example would be This implementation supported by
+admin@example.com.</p>
+<p>Its use is described in the <a href="#about">About</a> section.</p>
+<h4 id="allow-html-field-rendering">Allow HTML Field Rendering</h4>
+<p>WARNING (SEC-001): Only enable for trusted files you authored
+yourself. When enabled, html field values render as live HTML, which is
+an XSS risk if you load files from untrusted sources. A ⚠ HTML ON
+warning badge will appear in the toolbar while this is active.</p>
+<h4 id="show-password-reuse-warning">Show Password Reuse Warning</h4>
+<p>Show a ⚠ REUSED badge in the toolbar when a stored password is used
+by more than one entry. Click the badge for the list. Enabled by
+default.</p>
+<p>Turning this off hides the badge only. The check still runs and the
+count is still reported in the About dialogue, so there is no state in
+which PAM knows a password is reused and has no way to tell you. A
+password shared between entries is only as safe as the least safe of
+them: if any one site is breached, every entry sharing that password is
+exposed. No breach corpus can detect this — it is a property of your
+vault, not of the password.</p>
+<h4 id="search-password-field-values">Search Password Field Values</h4>
+<p>WARNING: this only applies when Search Record Field Values is also
+enabled. It allows the search box to match against the plaintext of
+password fields.</p>
+<p>The risk is not that a password is displayed — it never is. It is
+that the filter results reveal it. The record count beside the search
+box answers a yes/no question about your password on every keystroke,
+and nothing is written to the screen, the clipboard, or a log.</p>
+<p>Search accepts regular expressions, which makes this far worse than
+guessing one character at a time. An attacker with brief access to an
+unlocked vault can use ^s to test the first character, <a href="#fn1"
+class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> to
+halve the remaining possibilities with a single query, ^..x to probe a
+specific position, and .{12} to learn the length outright. That is a
+binary search, not a linear walk: a password that would take thousands
+of guesses character by character falls in a few dozen queries. To find
+which record uses a password you already know, use the Duplicates dialog
+instead — it groups records by shared password without ever putting a
+secret in an input field.</p>
+<p>A ⚠ PW SEARCH warning badge will appear in the toolbar while this is
+active.</p>
 <h4 id="filepass-cache-strategy">filePass Cache Strategy</h4>
 <p>This defines the browser cache strategy for the file password. The
 options are <code>none</code>, <code>global</code>, <code>local</code>
@@ -2143,28 +2360,29 @@ the browser tab is closed.</p>
 <code>localStorage</code> under the key <code>pamCacheStrategy</code>
 and is restored automatically each time PAM starts, independently of the
 PAM file.</p>
-<h4 id="custom-about">Custom About</h4>
-<p>Customized HTML that is added to the about page. It can be used in
-cases where the field records have been customized to provide an
-explanation or link to internal documentation.</p>
-<p>Its use is described in the <a href="#about">About</a> section.</p>
-<h3 id="record-fields">Record Fields</h3>
-<p>These are the default record fields that are used when creating or
-editing record fields. They can be can be changed.</p>
-<p>See the <a href="#fields">Fields</a> section for more information
-about record fields.</p>
-<p>At the top of the section there is
-<img src="../icons/black/plus-circle.svg" height="32" width="32" alt="add"/>
-icon that is used to create a new record field.</p>
-<p>Each default record field has a name, a type (from a pulldown menu)
-and a delete button
-(<img src="../icons/black/trash3-fill.svg" height="32" width="32" alt="trash"/>)
-that you click to delete the record field.</p>
-<p>The record field names must be unique but you can modify them. They
-are stored with the each record file individually.</p>
-<p>This is what the default records filed preference dialogue looks
-like.</p>
-<p><img src="./pam-default-record-fields.png" width="400" alt="default"/></p>
+<h4 id="enable-raw-json-editing">Enable Raw JSON Editing</h4>
+<p>Enable editing of the raw internal JSON data. This is not recommended
+unless you really know what you are doing because it can permanently
+destroy the data in an unrecoverable way. It also disables the password
+protected preferences which allows anything to be modified or
+inspected.</p>
+<h3 id="record-fields-preferences">Record Fields Preferences</h3>
+<p>These are the default record fields offered when you create or edit a
+record. They can be changed, and they are stored with each record file
+individually.</p>
+<p>See the <a href="#fields">Fields</a> section for more about record
+fields.</p>
+<p>The
+<img src="../icons/black/plus-circle.svg" height="24" width="24" alt="add"/>
+<strong>Add New Field</strong> control at the top of the tab creates a
+new record field.</p>
+<p>Each row is one field: its name on the left, its type in a pulldown
+to the right, and a
+<img src="../icons/black/trash3-fill.svg" height="24" width="24" alt="trash"/>
+delete button at the end of the row. Field names must be unique, and you
+can rename them. The types are built in and cannot be extended from the
+user interface.</p>
+<p><img src="./pam-prefs-record-fields.png" width="400" alt="the Record Fields preferences tab"></p>
 <h3 id="saving-preferences">Saving Preferences</h3>
 <p>You <em>must</em> scroll to the bottom of the dialogue and click on
 the <code>"Save"</code> button at the end to save changes. If you do
@@ -2816,5 +3034,13 @@ lineage runs from passman (2010) → qspm (2018) → myvault (2020) → PAM
 <p>See <a href="./history.html">HISTORY.md</a> for the full story.</p>
 <hr />
 <p><a href="../index.html">&lt;- Back to PAM</a></p>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>a-m<a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 </body>
 </html>
