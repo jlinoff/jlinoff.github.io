@@ -108,14 +108,6 @@
 href="./quickstart.html">Quick Start guide</a> — get up and running in
 five minutes.</p>
 </blockquote>
-<blockquote>
-<p><strong>Documentation note:</strong> The screenshots and UI
-descriptions in this document reflect PAM 1.2.5 and earlier. PAM 1.3.0
-introduced tabbed preferences navigation and other visual changes. The
-concepts and features are identical — the documentation remains accurate
-and useful, but some screenshots and UI descriptions may not map 1:1 to
-what you see on screen.</p>
-</blockquote>
 <details>
 <summary>
 Metadata
@@ -148,7 +140,7 @@ the on-line help is generated.</p>
 </tr>
 <tr>
 <td>Version</td>
-<td><code>2.3.0</code></td>
+<td><code>2.4.1</code></td>
 </tr>
 <tr>
 <td>Bootstrap Version</td>
@@ -156,11 +148,11 @@ the on-line help is generated.</p>
 </tr>
 <tr>
 <td>Build</td>
-<td><code>2026-09-05 09:11:45 -0700</code></td>
+<td><code>2026-09-07 19:28:46 -0700</code></td>
 </tr>
 <tr>
 <td>GitCommitId</td>
-<td><code>c22da1d</code></td>
+<td><code>b9c1f19</code></td>
 </tr>
 <tr>
 <td>GitBranch</td>
@@ -184,7 +176,7 @@ href="https://jlinoff.github.io/pam/www/help">https://jlinoff.github.io/pam/www/
 </tbody>
 </table>
 </details>
-<details>
+<details open>
 <summary>
 Table of Contents
 </summary>
@@ -221,6 +213,8 @@ mobile devices</a></li>
 <li><a href="#reason-9-foss">Reason 9: FOSS</a></li>
 <li><a href="#reason-10-duplicate-password-checking">Reason 10:
 Duplicate Password Checking</a></li>
+<li><a href="#reason-11-breached-password-detection">Reason 11: Breached
+Password Detection</a></li>
 </ul></li>
 <li><a href="#pam-vs-mainstream-password-managers">PAM vs mainstream
 password managers</a></li>
@@ -275,6 +269,8 @@ Section</a></li>
 <li><a href="#clear-records">Clear Records</a></li>
 <li><a href="#save-file">Save File</a></li>
 <li><a href="#load-file">Load File</a></li>
+<li><a href="#reused-passwords">Reused Passwords</a></li>
+<li><a href="#breached-passwords">Breached Passwords</a></li>
 <li><a href="#get-help">Get Help</a></li>
 </ul></li>
 <li><a href="#preferences">Preferences</a>
@@ -328,6 +324,7 @@ Name</a></li>
 <li><a href="#record-fields-preferences">Record Fields</a></li>
 <li><a href="#saving-preferences">Saving Preferences</a></li>
 </ul></li>
+<li><a href="#content-security-policy">Content-Security-Policy</a></li>
 <li><a href="#security-considerations">Security Considerations</a>
 <ul>
 <li><a href="#mitm">MITM</a></li>
@@ -347,7 +344,6 @@ and Brute Force Password Attacks</a></li>
 <li><a href="#protecting-yourself">Protecting Yourself</a></li>
 <li><a href="#multi-factor-authentication">Multi-Factor
 Authentication</a></li>
-</ul></li>
 <li><a href="#usage-examples">Usage Examples</a>
 <ul>
 <li><a href="#personal-account-records">Personal Account Records</a>
@@ -381,6 +377,7 @@ testing in the browser</a></li>
 </ul></li>
 <li><a href="#release-pam">Release PAM</a></li>
 <li><a href="#history">History</a></li>
+</ul></li>
 </ul></li>
 </ul>
 <!--t3-->
@@ -793,8 +790,35 @@ any stored password is used more than once, so you do not have to go
 looking.</p>
 <p>The check runs <strong>entirely on your device</strong>. No request
 is made, nothing is uploaded, and no third party learns anything about
-your vault. That is not a policy promise — PAM has no network access to
-make one with.</p>
+your vault. Reuse detection needs no network at all, so this holds
+whether or not <a href="#enable-password-breach-check">Password Breach
+Check</a> is enabled.</p>
+<h4 id="reason-11-breached-password-detection">Reason 11: Breached
+Password Detection</h4>
+<p>A password that has appeared in a public breach is not yours any
+more, whatever its length or complexity. Attackers try published
+passwords first because it is cheap and it works.</p>
+<p><em>PAM</em> can check yours against the <a
+href="https://haveibeenpwned.com/">Have I Been Pwned</a> corpus without
+revealing them: it sends a twenty-bit hash prefix and compares the
+returned list locally, so no password, no full hash, and nothing about
+which record it belongs to ever leaves the device. See <a
+href="#breached-passwords">Breached Passwords</a> for the report and <a
+href="#enable-password-breach-check">Enable Password Breach Check</a>
+for what is sent.</p>
+<p>This is the one feature that makes <em>PAM</em> contact anything, so
+it is <strong>off by default</strong>, it announces itself with a
+toolbar badge while active, and the one host it may reach is named in
+the <a href="#content-security-policy">Content-Security-Policy</a> where
+you can check it.</p>
+<p>It also applies local checks that need no network — keyboard runs,
+sequences, repeats, embedded years, an entropy floor — because being
+absent from a breach corpus is a low bar. A password can be unpublished
+and still bad.</p>
+<p>You can check the whole vault at once, or a single password from the
+record view, the record editor, or the password generator. Checking
+while you are choosing a password is the most useful of these: it is the
+last point at which changing your mind is free.</p>
 <h3 id="pam-vs-mainstream-password-managers">PAM vs mainstream password
 managers</h3>
 <p><em>Analysis: April 2026. Compared against Bitwarden and 1Password as
@@ -863,9 +887,12 @@ app</td>
 </tr>
 <tr>
 <td>Local-only operation</td>
-<td>Fully local — no server traffic after page load</td>
+<td>Local by default — no server traffic after page load unless you
+enable <a href="#enable-password-breach-check">Password Breach
+Check</a>, which sends a 20-bit hash prefix to one host</td>
 <td>Cloud-dependent; requires trust in vendor</td>
-<td>PAM wins for offline/air-gapped scenarios</td>
+<td>PAM wins for offline/air-gapped scenarios: the one optional
+exception is off by default and named in the policy</td>
 </tr>
 <tr>
 <td>Encryption</td>
@@ -891,15 +918,23 @@ vault to be synced to the vendor</td>
 anything leaving the device</td>
 </tr>
 <tr>
-<td>Breach alerts</td>
-<td>None — if a third-party site you use is breached and your
-credentials leaked, PAM has no way to notify you. PAM’s own encrypted
-data remains secure.</td>
-<td>Bitwarden checks passwords against HaveIBeenPwned; 1Password’s
-Watchtower flags breached passwords automatically</td>
-<td>PAM loses on monitoring — not because PAM’s data is at risk, but
-because it cannot alert you when third-party sites you have accounts on
-are breached</td>
+<td>Breach checking</td>
+<td>Yes, on demand — <a href="#breached-passwords">Breached
+Passwords</a> checks against the same Have I Been Pwned corpus, using a
+20-bit hash prefix so nothing identifying is sent. Off by default</td>
+<td>Bitwarden checks against HaveIBeenPwned; 1Password’s Watchtower does
+it automatically, for a vault synced to the vendor</td>
+<td>Close. The competitors check continuously and in the background; PAM
+checks when you ask. PAM sends less and tells you when it could not
+check rather than implying all is well</td>
+</tr>
+<tr>
+<td>Unsolicited breach alerts</td>
+<td>None — PAM cannot notify you of a breach you did not ask about,
+because it does not run in the background or hold your address</td>
+<td>Push and email alerts when a breach affects a stored credential</td>
+<td>PAM loses. Checking on demand means you have to remember to
+check</td>
 </tr>
 <tr>
 <td><strong>Flexible / non-password data</strong></td>
@@ -958,7 +993,9 @@ html</td>
 </tr>
 <tr>
 <td>Offline use</td>
-<td>Full — no dependency on external service</td>
+<td>Full — no dependency on any external service. Breach checking, if
+enabled, reports that it could not reach the corpus rather than implying
+a password is safe</td>
 <td>Local vault cache; full offline possible</td>
 <td>PAM wins — no caching surprises</td>
 </tr>
@@ -1495,7 +1532,7 @@ Preferences</a> section.</p>
 it has a number of options as you can see below. This is what it looks
 like.</p>
 <p><img src="./pam-menu.png" width="400" alt="menu"></p>
-<p>As you can see, there are seven menu options:</p>
+<p>As you can see, there are nine menu options:</p>
 <ol type="1">
 <li><a href="#about">About</a></li>
 <li><a href="#preferences">Preferences</a></li>
@@ -1503,8 +1540,13 @@ like.</p>
 <li><a href="#clear-records">Clear Records</a></li>
 <li><a href="#load-file">Load File</a></li>
 <li><a href="#save-file">Save File</a></li>
+<li><a href="#reused-passwords">Reused Passwords</a></li>
+<li><a href="#breached-passwords">Breached Passwords</a></li>
 <li><a href="#get-help">Help</a>.</li>
 </ol>
+<p>A tenth, <strong>Print</strong>, appears between Breached Passwords
+and Help when the <a href="#enable-printing">Enable Printing</a>
+preference is set. It is hidden by default.</p>
 <p>Click or tap on the
 <q><img src="../icons/black/info-circle.svg" height='32' width='32' /> About</q>
 entry to see information about the app. See the <a
@@ -1534,6 +1576,25 @@ File</a> section for more details.</p>
 <q><img src="../icons/black/file-arrow-down-fill.svg" height='32' width='32' /> Save
 File</q> entry to save all of the records to a file. See the <a
 href="#save-file">Save File</a> section for more details.</p>
+<p>Click or tap on the
+<q><img src="../icons/black/files.svg" height='32' width='32' /> Reused
+Passwords</q> entry to see which stored passwords are used by more than
+one entry. A password shared between entries is only as safe as the
+least safe of them. The check runs entirely on your device. See the <a
+href="#reused-passwords">Reused Passwords</a> section for more
+details.</p>
+<p>Click or tap on the
+<q><img src="../icons/black/key.svg" height='32' width='32' /> Breached
+Passwords</q> entry to check your passwords against a corpus of
+passwords exposed in known breaches. This entry is always present, but
+the check itself is <strong>off by default</strong> — with it off, the
+entry opens a page explaining what would be sent and what would not, so
+you can decide. See the <a href="#breached-passwords">Breached
+Passwords</a> section for more details.</p>
+<p>Click or tap on the
+<q><img src="../icons/black/printer.svg" height='32' width='32' /> Print</q>
+entry to print your records. This entry only appears when the <a
+href="#enable-printing">Enable Printing</a> preference is set.</p>
 <p>Click or tap on the
 <q><img src="../icons/black/question-circle.svg" height='32' width='32' /> Help</q>
 entry to see this help message.</p>
@@ -1580,6 +1641,8 @@ clicked or tapped as shown in the example below.</p>
 <li><a href="#clear-records">Clear Records</a></li>
 <li><a href="#save-file">Save Records</a></li>
 <li><a href="#load-file">Load Records</a></li>
+<li><a href="#reused-passwords">Reused Passwords</a></li>
+<li><a href="#breached-passwords">Breached Passwords</a></li>
 <li><a href="#get-help">Help</a>.</li>
 </ol>
 <p>Each function will be discussed in a separate subsection below.</p>
@@ -1738,12 +1801,12 @@ class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;format-version&quot;</span><span class="op">:</span> <span class="st">&quot;1.0.0&quot;</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;prefs&quot;</span><span class="op">:</span> {</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;passwordRangeLengthDefault&quot;</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;passwordRangeLengthDefault&quot;</span><span class="op">:</span> <span class="dv">30</span><span class="op">,</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;passwordRangeMinLength&quot;</span><span class="op">:</span> <span class="dv">12</span><span class="op">,</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;passwordRangeMaxLength&quot;</span><span class="op">:</span> <span class="dv">32</span><span class="op">,</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;memorablePasswordWordSeparator&quot;</span><span class="op">:</span> <span class="st">&quot;/&quot;</span><span class="op">,</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;memorablePasswordMinWordLength&quot;</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;memorablePasswordMinWords&quot;</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;memorablePasswordMinWords&quot;</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;memorablePasswordMaxWords&quot;</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;memorablePasswordMaxTries&quot;</span><span class="op">:</span> <span class="dv">10000</span><span class="op">,</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;clearBeforeLoad&quot;</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
@@ -2028,6 +2091,58 @@ href="#show-password-reuse-warning">Show Password Reuse Warning</a>
 preference. That suppresses the badge only — the check still runs and
 the report is still available from the menu, so there is no state in
 which PAM knows about reuse and cannot tell you.</p>
+<h3 id="breached-passwords">Breached Passwords</h3>
+<p>Checks your stored passwords against the <a
+href="https://haveibeenpwned.com/">Have I Been Pwned</a> corpus, and
+against local structural checks that need no network. Turn it on in <a
+href="#enable-password-breach-check">Preferences → Administration →
+Enable Password Breach Check</a>; it is off by default.</p>
+<p>The menu entry is always present. With the preference off it opens a
+page explaining what the feature would send and what it would not, so
+the disclosure appears when you are deciding rather than only in this
+document. <strong>Nothing is sent while the preference is off, and
+nothing is sent by opening the report.</strong></p>
+<p><img src="./pam-breached-passwords-disabled.png" width="700" alt="the Breached Passwords report with the feature disabled"></p>
+<p>With it on, the report says how many requests a check would need —
+one per distinct password, so a password shared by three records costs
+one — and waits.</p>
+<p><img src="./pam-breached-passwords.png" width="700" alt="the Breached Passwords report ready to run"></p>
+<p>Press <strong>Check</strong> to start. Requests are sent one at a
+time with a short pause between them; a few hundred passwords takes
+about a minute. <strong>Cancel</strong> stops after the current request,
+and closing the dialogue stops it too.</p>
+<p>Each result is labelled:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Label</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>⚠ BREACHED</strong></td>
+<td>found in the corpus; it is published, change it</td>
+</tr>
+<tr>
+<td><strong>⚠ WEAK</strong></td>
+<td>not in the corpus, but the local checks objected</td>
+</tr>
+<tr>
+<td><strong>could not check</strong></td>
+<td>the lookup failed; <strong>nothing was learned</strong> about
+it</td>
+</tr>
+</tbody>
+</table>
+<p>The last is not a verdict. It is <em>PAM</em> reporting that it
+failed to reach one, and it is never merged with the clean result — if
+you were offline, the report says so rather than implying your passwords
+are fine.</p>
 <h3 id="get-help">Get Help</h3>
 <p>To get this help message, choose the <code>"Help"</code> option from
 the menu.</p>
@@ -2061,6 +2176,14 @@ case sensitive.</p>
 <p>If enabled, all searches look at the record titles, otherwise they do
 not.</p>
 <p>The default is enabled.</p>
+<p><strong>Turning this off also disables selecting records from the
+reports.</strong> Clicking a group in <a href="#reused-passwords">Reused
+Passwords</a>, or an entry in <a href="#breached-passwords">Breached
+Passwords</a>, works by putting a search pattern built from the record
+titles into the search box — which finds nothing if titles are not
+searched. Rather than filtering your records down to an empty list,
+<em>PAM</em> shows those entries as plain text instead of clickable ones
+and says why at the top of the report.</p>
 <h4 id="search-record-field-names">Search Record Field Names</h4>
 <p>If enabled, all searches look at the record field names, otherwise
 they do not.</p>
@@ -2126,7 +2249,126 @@ you like. It is best not to use letters.</p>
 <blockquote>
 <p>It has no affect on cryptic passwords.</p>
 </blockquote>
-<p>The default is 3.</p>
+<p>The default is 5.</p>
+<blockquote>
+<p>Raised from 3 in v2.4.0. Three words carry about 40 bits, which is
+below the floor <em>PAM</em>’s own breach check applies — so
+<em>PAM</em> was generating passwords it would have rejected had it been
+able to measure them correctly. Because the word count is derived from
+the password length rather than chosen directly, the default password
+length was raised from 20 to 30 at the same time; the two cannot be
+changed independently. That also lengthens generated cryptic passwords,
+from about 131 bits to 196.</p>
+</blockquote>
+<p><strong>How many words you need depends on what you are defending
+against.</strong> <em>PAM</em> draws from a list of 9,858 words, so each
+word contributes about 13.3 bits:</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Words</th>
+<th>Entropy</th>
+<th>Exhausted against a fast hash (10<sup>10</sup>/s)</th>
+<th>Against bcrypt-class (10<sup>4</sup>/s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>40 bits</td>
+<td>96 seconds</td>
+<td>3 years</td>
+</tr>
+<tr>
+<td>4</td>
+<td>53 bits</td>
+<td>11 days</td>
+<td>30,000 years</td>
+</tr>
+<tr>
+<td>5</td>
+<td>66 bits</td>
+<td>295 years</td>
+<td>astronomically long</td>
+</tr>
+</tbody>
+</table>
+<p>Against an <strong>online</strong> login that rate-limits attempts,
+even three words is ample — at ten guesses per second the keyspace takes
+thousands of years. The column that matters is the offline one: if the
+site you used the password on is breached and its password hashes leak,
+the attacker computes guesses locally at whatever rate their hardware
+allows, and a fast unsalted hash makes three words a matter of
+minutes.</p>
+<p>You cannot know in advance which sites store your password badly.
+<strong>If you use memorable passwords for anything that matters, set
+this to 5.</strong> Four is a reasonable compromise; three is suitable
+for low-value accounts and for places where you would notice and could
+recover from a compromise.</p>
+<p>Note that <a href="#breached-passwords">Breached Passwords</a> will
+not warn you about this. Its local entropy estimate measures length and
+character variety, not dictionary structure, so it scores a three-word
+password far higher than the 40 bits above and raises no objection. The
+corpus check still applies — a memorable password that has appeared in a
+breach is still reported — but the structural check cannot see
+word-based weakness.</p>
+<h5 id="why-not-just-use-a-bigger-dictionary">Why not just use a bigger
+dictionary?</h5>
+<p>It is the obvious thought and the arithmetic argues against it.
+Entropy grows <strong>logarithmically</strong> with the size of the word
+list but <strong>linearly</strong> with the number of words, so adding
+words is far cheaper than adding vocabulary:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Entropy</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5 words from the current 9,858-word list</td>
+<td>66 bits</td>
+<td>none</td>
+</tr>
+<tr>
+<td>5 words from a 100,000-word list</td>
+<td>83 bits</td>
+<td>a 1.4 MB word list</td>
+</tr>
+<tr>
+<td><strong>6 words</strong> from the current list</td>
+<td><strong>80 bits</strong></td>
+<td>none</td>
+</tr>
+<tr>
+<td><strong>7 words</strong> from the current list</td>
+<td><strong>93 bits</strong></td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>A tenfold larger dictionary buys about 3 bits per word. One extra
+word buys 13. A sixth word matches a tenfold expansion; a seventh beats
+it.</p>
+<p>There is a second reason, and it matters more. <em>PAM</em> uses <a
+href="https://github.com/first20hours/google-10000-english">google-10000-english</a>,
+a list of <strong>common</strong> words — which is the whole point of
+calling them memorable. A 100,000-word list contains words most people
+cannot recall or spell, so they press <strong>Regenerate</strong> until
+something familiar appears. That quietly reduces the real keyspace to
+whatever subset they recognise, which is smaller than the list you
+started with. A larger dictionary can make passwords weaker in practice
+while looking stronger on paper.</p>
+<p>If you want more entropy, increase the length so more words are
+used.</p>
 <h4 id="memorable-password-max-tries">Memorable Password Max Tries</h4>
 <p>The maximum number of attempts to generate a memorable password that
 meets the specified criteria from the other password preferences.</p>
@@ -2313,6 +2555,116 @@ password shared between entries is only as safe as the least safe of
 them: if any one site is breached, every entry sharing that password is
 exposed. No breach corpus can detect this — it is a property of your
 vault, not of the password.</p>
+<h4 id="enable-password-breach-check">Enable Password Breach Check</h4>
+<p>Check stored passwords against the <a
+href="https://haveibeenpwned.com/">Have I Been Pwned</a> corpus of
+passwords exposed in known breaches. <strong>Disabled by
+default</strong>, and the only setting in PAM that causes it to contact
+anything.</p>
+<p>When enabled, PAM sends the first five characters of a password’s
+SHA-1 hash — twenty bits — to <code>api.pwnedpasswords.com</code>, which
+returns every hash in the corpus beginning with that prefix, typically
+around eight hundred. The comparison happens in your browser. The
+password, its full hash, the record it belongs to, and the rest of your
+vault are never transmitted.</p>
+<p>This is the range API’s k-anonymity model. Five hex characters divide
+the corpus into about a million buckets, so the server learns only that
+you asked about one of the several hundred corpus entries sharing that
+prefix — or about some password that is not in the corpus at all, which
+it cannot distinguish from the first case.</p>
+<p>That is a real privacy property, but it is not nothing. A request is
+made, and an IP address is visible to the other end. Checking a whole
+vault sends one request per <strong>distinct</strong> password: a
+password used by three records costs one request, not three.</p>
+<blockquote>
+<p><strong>Note on memorable passwords generated before v2.4.1.</strong>
+Word selection used <code>Math.random()</code>, which is not a
+cryptographic generator, so the entropy figures in this section did not
+hold for them. If a memorable password from an earlier version protects
+something that matters, regenerate it. Cryptic passwords were never
+affected. See <code>RELEASE_NOTES_v2.4.1.md</code>.</p>
+</blockquote>
+<p><strong>Nothing is sent until you ask.</strong> Opening the report
+does not contact anyone; the requests begin when you press
+<strong>Check</strong> and stop when you press <strong>Cancel</strong>
+or close the dialogue.</p>
+<h3 id="what-it-checks-besides-the-corpus">What it checks besides the
+corpus</h3>
+<p>Being absent from a breach corpus is a low bar.
+<code>Summer2026</code> appears in no corpus worth the name and is still
+a bad password, so PAM also applies checks that need no network at
+all:</p>
+<ul>
+<li>keyboard runs (<code>qwer</code>, <code>asdf</code>)</li>
+<li>character sequences (<code>abcd</code>, <code>4321</code>)</li>
+<li>a character repeated four or more times</li>
+<li>an embedded year between 1900 and 2099</li>
+<li>a rough entropy floor of 60 bits, and a minimum length of 12</li>
+</ul>
+<p>These run whether or not the corpus is reachable, and the report
+distinguishes them: an entry is labelled <strong>BREACHED</strong> if it
+was found in the corpus and <strong>WEAK</strong> if only the local
+checks objected. The reasons are listed either way. The distinction
+matters because the urgency differs — a password in the corpus is
+published, and whoever holds the dump has it.</p>
+<h3 id="when-the-check-cannot-be-made">When the check cannot be
+made</h3>
+<p><em>PAM</em> is a progressive web app; being offline is a normal
+state, not an error. A lookup that fails is reported as <strong>could
+not check</strong>, never as a clean result, and the report says plainly
+that nothing was learned about those passwords. If the corpus is
+unreachable when a run starts, <em>PAM</em> says so once rather than
+making several hundred requests that will all fail.</p>
+<p><strong>What enabling it does not change.</strong> The <a
+href="#content-security-policy">Content-Security-Policy</a> permits that
+host whether the preference is on or off. The preference controls
+whether PAM makes the request, not whether it is able to.</p>
+<p>That is a limitation of the mechanism rather than a choice. A policy
+in a <code>&lt;meta&gt;</code> tag is only honoured while the page is
+being parsed, so it cannot be rewritten later from JavaScript. And when
+a page carries more than one policy, a request must be permitted by
+<em>all</em> of them — so adding a policy can only tighten, never relax.
+Both properties exist to stop an attacker widening the policy from
+injected script, and the same mechanism prevents PAM narrowing it
+conditionally.</p>
+<p>A <strong>⚠ BREACH CHECK</strong> badge appears in the toolbar while
+this is enabled, in the same style as the other warning badges, so an
+outbound-capable configuration is never invisible.</p>
+<p>Enabling it also adds a
+<img src="../icons/black/shield-check.svg" height="24" width="24" alt="shield"/>
+button in three places, for checking a single password without running
+the whole vault:</p>
+<ul>
+<li><strong>On every password field</strong> in a record, beside the
+<img src="../icons/black/eye.svg" height="24" width="24" alt="eye"/>
+show/hide button.</li>
+<li><strong>In the record editor</strong>, beside the
+<img src="../icons/black/gear.svg" height="24" width="24" alt="gear"/>
+password generator button. This is the most useful of the three: it is
+the last moment before a password is adopted, whether typed, pasted, or
+taken from the generator. The result clears as soon as you edit the
+value, because it would otherwise describe a password you no longer
+have.</li>
+<li><strong>In the <a href="#password-generator">password
+generator</a></strong>, beside each suggested password.</li>
+</ul>
+<p>All three are hidden while the preference is off, and the result
+appears beside the password it describes.</p>
+<p>The generator button is worth explaining, because a randomly
+generated password is not going to be in a breach corpus. It is there
+for the <strong>memorable</strong> passwords. A 20-character cryptic
+password carries around 130 bits of entropy; three words drawn from
+PAM’s 9,858-word list carries around 40. That is still a reasonable
+password, but it is within reach of a corpus in a way the cryptic one is
+not — and <em>PAM</em>’s local entropy estimate cannot see the
+difference, because it measures length and character variety rather than
+recognising dictionary words. For word-based passwords the corpus is the
+only check that can object at all.</p>
+<p><strong>If you cannot find the button</strong>, the most likely
+reason is that the preference is off — the ⚠ BREACH CHECK badge in the
+toolbar tells you at a glance. Note also that loading a records file
+applies that file’s preferences, so opening a shared vault can switch
+breach checking off.</p>
 <h4 id="search-password-field-values">Search Password Field Values</h4>
 <p>WARNING: this only applies when Search Record Field Values is also
 enabled. It allows the search box to match against the plaintext of
@@ -2387,6 +2739,40 @@ user interface.</p>
 <p>You <em>must</em> scroll to the bottom of the dialogue and click on
 the <code>"Save"</code> button at the end to save changes. If you do
 not, any changes you made will be lost.</p>
+<h2 id="content-security-policy">Content-Security-Policy</h2>
+<p><code>www/index.html</code> carries a Content-Security-Policy meta
+tag that constrains what the page is permitted to do, enforced by the
+browser rather than by PAM’s own code:</p>
+<pre><code>default-src &#39;self&#39;;
+script-src  &#39;self&#39; https://cdn.jsdelivr.net;
+style-src   &#39;self&#39;;
+img-src     &#39;self&#39; data:;
+font-src    &#39;self&#39;;
+connect-src &#39;self&#39; https://api.pwnedpasswords.com</code></pre>
+<p>The one entry worth understanding is <code>connect-src</code>, which
+lists every host the page may open a network connection to. It permits
+PAM’s own origin and exactly one external host: the Have I Been Pwned
+range API used by <a href="#enable-password-breach-check">Password
+Breach Check</a>.</p>
+<p>Before v2.4.0 there was no <code>connect-src</code> directive at all,
+so it inherited <code>default-src 'self'</code> and the policy made a
+stronger statement — that the page could not contact anyone. That was
+verifiable by reading one line, without trusting any claim in this
+document. It now says something weaker but still useful: PAM cannot
+contact anyone <strong>else</strong>.</p>
+<p>Note that the policy cannot depend on your preference settings. A
+<code>&lt;meta&gt;</code> policy is fixed when the page is parsed, and a
+page’s policies combine by intersection — every policy present must
+permit a request — so a second one could only ever tighten the first.
+Both rules exist so that injected script cannot widen a page’s policy;
+the consequence is that PAM cannot narrow it either. See <a
+href="#enable-password-breach-check">Enable Password Breach
+Check</a>.</p>
+<p>The unit tests assert the exact contents of <code>connect-src</code>,
+so adding a host requires deliberately changing a test that says why
+not. That is the point: widening this policy is how a local-only
+application stops being one, a host at a time, each addition reasonable
+on its own.</p>
 <h2 id="security-considerations">Security Considerations</h2>
 <p><em>PAM</em>, like all web applications, has security challenges. By
 fully disclosing them here you can understand the challenges and improve
@@ -2423,14 +2809,27 @@ information.</p>
 <p>Poor reporting of third party web site cybersecurity vulnerabilities
 and exposures was one thing that motivated me to write <em>PAM</em>.</p>
 </blockquote>
-<p>Because <em>PAM</em> does not send the data to a server, it is not
-vulnerable to how cybersecurity is managed on the server by a third
+<p>Because <em>PAM</em> does not send your records to a server, it is
+not vulnerable to how cybersecurity is managed on the server by a third
 party.</p>
 <blockquote>
-<p>You can verify that <em>PAM</em> is not sending data out by
-monitoring outbound traffic from your system. <em>PAM</em> never sends
-any outbound data.</p>
+<p>You can verify what <em>PAM</em> sends by monitoring outbound traffic
+from your system. With default settings it sends nothing at all after
+the page loads.</p>
 </blockquote>
+<p>There is exactly one exception, and it is off by default: <a
+href="#enable-password-breach-check">Password Breach Check</a>. When you
+enable it, <em>PAM</em> sends the first five characters of a password’s
+SHA-1 hash — twenty bits — to <code>api.pwnedpasswords.com</code>, which
+returns every hash beginning with that prefix. The comparison happens in
+the browser. The password, its full hash, the record it belongs to and
+the rest of your vault are never transmitted.</p>
+<p>The <a href="#content-security-policy">Content-Security-Policy</a> in
+<code>index.html</code> names that host explicitly and permits no other,
+so what <em>PAM</em> is able to contact is verifiable from the page
+source rather than from this document. Note that the policy permits the
+host whether or not the preference is enabled: the preference controls
+whether <em>PAM</em> makes the request, not whether it could.</p>
 <p><em>PAM</em> encryption and decryption operations are provided by and
 run <em>inside</em> the <em>secure context</em> of the browser. This is
 the same <em>secure context</em> used for accessing sites securely for
@@ -2844,41 +3243,41 @@ href="./MIGRATION.md">MIGRATION.md</a> for details.</p>
 <p>The v2 file format is structured as follows:</p>
 <pre><code>&quot;PAMv2:&quot; + Base64( [16-byte salt] [16-byte IV] [ciphertext] )</code></pre>
 <h4 id="decrypt-a-pam-v2-file">Decrypt a PAM v2 file</h4>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Strip the PAMv2: prefix and decode from Base64</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/^PAMv2://&#39;</span> myfile.txt <span class="kw">|</span> <span class="fu">base64</span> <span class="at">-d</span> <span class="op">&gt;</span> raw.bin</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Slice out salt (bytes 0-15), IV (bytes 16-31), ciphertext (bytes 32+)</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dd</span> if=raw.bin bs=1 count=16 of=salt.bin <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dd</span> if=raw.bin bs=1 skip=16 count=16 of=iv.bin <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dd</span> if=raw.bin bs=1 skip=32 of=cipher.bin <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Decrypt</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> enc <span class="at">-d</span> <span class="at">-aes-256-cbc</span> <span class="dt">\</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pbkdf2</span> <span class="at">-iter</span> 600000 <span class="at">-md</span> sha256 <span class="dt">\</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">-S</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> salt.bin<span class="va">)</span> <span class="dt">\</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">-iv</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> iv.bin<span class="va">)</span> <span class="dt">\</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">-in</span> cipher.bin <span class="dt">\</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">-out</span> decrypted.json <span class="dt">\</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pass</span> pass:yourpassword</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Strip the PAMv2: prefix and decode from Base64</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/^PAMv2://&#39;</span> myfile.txt <span class="kw">|</span> <span class="fu">base64</span> <span class="at">-d</span> <span class="op">&gt;</span> raw.bin</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Slice out salt (bytes 0-15), IV (bytes 16-31), ciphertext (bytes 32+)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dd</span> if=raw.bin bs=1 count=16 of=salt.bin <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dd</span> if=raw.bin bs=1 skip=16 count=16 of=iv.bin <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dd</span> if=raw.bin bs=1 skip=32 of=cipher.bin <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Decrypt</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> enc <span class="at">-d</span> <span class="at">-aes-256-cbc</span> <span class="dt">\</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pbkdf2</span> <span class="at">-iter</span> 600000 <span class="at">-md</span> sha256 <span class="dt">\</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">-S</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> salt.bin<span class="va">)</span> <span class="dt">\</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">-iv</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> iv.bin<span class="va">)</span> <span class="dt">\</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">-in</span> cipher.bin <span class="dt">\</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">-out</span> decrypted.json <span class="dt">\</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pass</span> pass:yourpassword</span></code></pre></div>
 <h4 id="encrypt-a-file-to-pam-v2-format">Encrypt a file to PAM v2
 format</h4>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate random salt and IV</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> rand 16 <span class="op">&gt;</span> salt.bin</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> rand 16 <span class="op">&gt;</span> iv.bin</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Encrypt</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> enc <span class="at">-aes-256-cbc</span> <span class="dt">\</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pbkdf2</span> <span class="at">-iter</span> 600000 <span class="at">-md</span> sha256 <span class="dt">\</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">-S</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> salt.bin<span class="va">)</span> <span class="dt">\</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">-iv</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> iv.bin<span class="va">)</span> <span class="dt">\</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">-in</span> plaintext.json <span class="dt">\</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">-out</span> cipher.bin <span class="dt">\</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pass</span> pass:yourpassword</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate salt + IV + ciphertext, Base64-encode, and add the PAMv2: prefix</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> salt.bin iv.bin cipher.bin <span class="kw">|</span> <span class="fu">base64</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="at">-d</span> <span class="st">&#39;\n&#39;</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/^/PAMv2:/&#39;</span> <span class="op">&gt;</span> myfile.txt</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate random salt and IV</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> rand 16 <span class="op">&gt;</span> salt.bin</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> rand 16 <span class="op">&gt;</span> iv.bin</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Encrypt</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> enc <span class="at">-aes-256-cbc</span> <span class="dt">\</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pbkdf2</span> <span class="at">-iter</span> 600000 <span class="at">-md</span> sha256 <span class="dt">\</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">-S</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> salt.bin<span class="va">)</span> <span class="dt">\</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">-iv</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> iv.bin<span class="va">)</span> <span class="dt">\</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">-in</span> plaintext.json <span class="dt">\</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">-out</span> cipher.bin <span class="dt">\</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pass</span> pass:yourpassword</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate salt + IV + ciphertext, Base64-encode, and add the PAMv2: prefix</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> salt.bin iv.bin cipher.bin <span class="kw">|</span> <span class="fu">base64</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="at">-d</span> <span class="st">&#39;\n&#39;</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/^/PAMv2:/&#39;</span> <span class="op">&gt;</span> myfile.txt</span></code></pre></div>
 <p>The resulting file can be loaded directly into PAM.</p>
 <h2 id="developer-notes">Developer Notes</h2>
 <p>These are things that developers might be interested in.</p>
@@ -2950,36 +3349,36 @@ files into <code>pam/www</code>
 to make them relative by prepending a dot to the <code>href</code> path)
 like this.</li>
 </ol>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;apple-touch-icon&quot;</span> sizes<span class="op">=</span><span class="st">&quot;180x180&quot;</span> href<span class="op">=</span><span class="st">&quot;./apple-touch-icon.png&quot;</span><span class="op">&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;icon&quot;</span> type<span class="op">=</span><span class="st">&quot;image/png&quot;</span> sizes<span class="op">=</span><span class="st">&quot;32x32&quot;</span> href<span class="op">=</span><span class="st">&quot;./favicon-32x32.png&quot;</span><span class="op">&gt;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;icon&quot;</span> type<span class="op">=</span><span class="st">&quot;image/png&quot;</span> sizes<span class="op">=</span><span class="st">&quot;16x16&quot;</span> href<span class="op">=</span><span class="st">&quot;./favicon-16x16.png&quot;</span><span class="op">&gt;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;manifest&quot;</span> href<span class="op">=</span><span class="st">&quot;./site.webmanifest&quot;</span><span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;apple-touch-icon&quot;</span> sizes<span class="op">=</span><span class="st">&quot;180x180&quot;</span> href<span class="op">=</span><span class="st">&quot;./apple-touch-icon.png&quot;</span><span class="op">&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;icon&quot;</span> type<span class="op">=</span><span class="st">&quot;image/png&quot;</span> sizes<span class="op">=</span><span class="st">&quot;32x32&quot;</span> href<span class="op">=</span><span class="st">&quot;./favicon-32x32.png&quot;</span><span class="op">&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;icon&quot;</span> type<span class="op">=</span><span class="st">&quot;image/png&quot;</span> sizes<span class="op">=</span><span class="st">&quot;16x16&quot;</span> href<span class="op">=</span><span class="st">&quot;./favicon-16x16.png&quot;</span><span class="op">&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;manifest&quot;</span> href<span class="op">=</span><span class="st">&quot;./site.webmanifest&quot;</span><span class="op">&gt;</span></span></code></pre></div>
 <ol start="6" type="1">
 <li>Edited the link tags in <code>pam/www/site.webmanifest</code> to
 make them relative as well by prepending a dot to the <code>src</code>
 path like this. Note that the original was not not formatted, I
 formatted here to make it easier to read.</li>
 </ol>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;name&quot;</span><span class="er">:</span> <span class="st">&quot;&quot;</span><span class="er">,</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;short_name&quot;</span><span class="er">:</span> <span class="st">&quot;&quot;</span><span class="er">,</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;icons&quot;</span><span class="er">:</span> <span class="ot">[</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;src&quot;</span><span class="fu">:</span> <span class="st">&quot;./android-chrome-192x192.png&quot;</span><span class="fu">,</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;sizes&quot;</span><span class="fu">:</span> <span class="st">&quot;192x192&quot;</span><span class="fu">,</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;image/png&quot;</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;src&quot;</span><span class="fu">:</span> <span class="st">&quot;./android-chrome-512x512.png&quot;</span><span class="fu">,</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;sizes&quot;</span><span class="fu">:</span> <span class="st">&quot;512x512&quot;</span><span class="fu">,</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;image/png&quot;</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="er">,</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;theme_color&quot;</span><span class="er">:</span> <span class="st">&quot;#ffffff&quot;</span><span class="er">,</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;background_color&quot;</span><span class="er">:</span> <span class="st">&quot;#ffffff&quot;</span><span class="er">,</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;display&quot;</span><span class="er">:</span> <span class="st">&quot;standalone&quot;</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;name&quot;</span><span class="er">:</span> <span class="st">&quot;&quot;</span><span class="er">,</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;short_name&quot;</span><span class="er">:</span> <span class="st">&quot;&quot;</span><span class="er">,</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;icons&quot;</span><span class="er">:</span> <span class="ot">[</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;src&quot;</span><span class="fu">:</span> <span class="st">&quot;./android-chrome-192x192.png&quot;</span><span class="fu">,</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;sizes&quot;</span><span class="fu">:</span> <span class="st">&quot;192x192&quot;</span><span class="fu">,</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;image/png&quot;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;src&quot;</span><span class="fu">:</span> <span class="st">&quot;./android-chrome-512x512.png&quot;</span><span class="fu">,</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;sizes&quot;</span><span class="fu">:</span> <span class="st">&quot;512x512&quot;</span><span class="fu">,</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;image/png&quot;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="er">,</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;theme_color&quot;</span><span class="er">:</span> <span class="st">&quot;#ffffff&quot;</span><span class="er">,</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;background_color&quot;</span><span class="er">:</span> <span class="st">&quot;#ffffff&quot;</span><span class="er">,</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;display&quot;</span><span class="er">:</span> <span class="st">&quot;standalone&quot;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
 <h3 id="test-pam">Test PAM</h3>
 <p>Here are the steps to test PAM.</p>
 <ol type="1">
@@ -2996,8 +3395,8 @@ testing in the browser</h4>
 interactive debugging, which is particularly useful when a test failure
 is hard to diagnose from the pytest output alone.</p>
 <p>Start the local server if it is not already running:</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> run</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> run</span></code></pre></div>
 <p>Then open <a
 href="http://localhost:8081/tests/tests.html">http://localhost:8081/tests/tests.html</a>
 in Chrome or Firefox. The test runner executes immediately and displays
