@@ -140,7 +140,7 @@ the on-line help is generated.</p>
 </tr>
 <tr>
 <td>Version</td>
-<td><code>2.5.0</code></td>
+<td><code>2.5.1</code></td>
 </tr>
 <tr>
 <td>Bootstrap Version</td>
@@ -148,11 +148,11 @@ the on-line help is generated.</p>
 </tr>
 <tr>
 <td>Build</td>
-<td><code>2026-09-09 14:54:01 -0700</code></td>
+<td><code>2026-09-09 16:14:14 -0700</code></td>
 </tr>
 <tr>
 <td>GitCommitId</td>
-<td><code>11e53d9</code></td>
+<td><code>1f87576</code></td>
 </tr>
 <tr>
 <td>GitBranch</td>
@@ -267,7 +267,10 @@ Section</a></li>
 <li><a href="#deactivate-record">Deactivate Record</a></li>
 <li><a href="#clone-record">Clone Record</a></li>
 <li><a href="#clear-records">Clear Records</a></li>
-<li><a href="#save-file">Save File</a></li>
+<li><a href="#save-file">Save File</a>
+<ul>
+<li><a href="#plaintext-export">Plaintext export</a></li>
+</ul></li>
 <li><a href="#load-file">Load File</a></li>
 <li><a href="#reused-passwords">Reused Passwords</a></li>
 <li><a href="#breached-passwords">Breached Passwords</a></li>
@@ -2067,6 +2070,34 @@ javascript that can be read by anyone.</p>
 unless you understand the consequences. For example, saving the data
 without a password can sometimes be convenient because it allows you to
 see how the <em>PAM</em> data is organized which can aid automation.</p>
+<h4 id="plaintext-export">Plaintext export</h4>
+<p><strong>Saving with an empty password writes unencrypted
+JSON.</strong> Leave the password field blank in the Save dialogue and
+the file is written as-is: readable, greppable, and editable with
+<code>jq</code> or any text editor. Loading a file with no password
+reads it back the same way.</p>
+<p>Since v2.5.1 the Save dialogue says so at the point you decide,
+rather than leaving it to be discovered here.</p>
+<p>This is <em>PAM</em>’s full-fidelity export. Everything in the vault
+is present — every record, every field, every preference, in
+plaintext.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># adjust every record with jq, then load the result back into PAM</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">jq</span> <span class="st">&#39;.records[].fields[] |= (select(.name == &quot;login&quot;) .value |= ascii_downcase)&#39;</span> <span class="dt">\</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>   vault-plaintext.json <span class="op">&gt;</span> vault-edited.json</span></code></pre></div>
+<p><strong>Treat the resulting file as you would the passwords
+themselves.</strong> It is not protected by anything. Do not leave it in
+a sync folder, a downloads directory or a shell history. Delete it when
+you are done.</p>
+<p>Files written this way carry no integrity digest, so an edited file
+loads without complaint. See <a href="#file-integrity-check">File
+Integrity Check</a>.</p>
+<blockquote>
+<p>Plaintext files saved by <strong>v2.5.0 specifically</strong> do
+carry a digest, which was a bug — an edited copy of one is refused on
+load. Either re-save it from v2.5.1, or strip the field once with
+<code>jq 'del(.meta.integrity)'</code>.</p>
+</blockquote>
 <h3 id="load-file">Load File</h3>
 <p>To load records and preferences from a file by choose the
 <q><img src="../icons/black/file-arrow-up-fill.svg" height='32' width='32' /> Load
@@ -2846,6 +2877,13 @@ unverified vault is not applied silently.</p>
 <p><strong>Older files still work.</strong> A file saved before v2.5.0
 has no digest. <em>PAM</em> notes that in the console and loads it
 normally; a missing digest is not treated as tampering.</p>
+<p><strong>Plaintext saves carry no digest, deliberately.</strong>
+Saving with an empty password writes unencrypted JSON — see <a
+href="#plaintext-export">Plaintext export</a> — and the reason to do
+that is usually to edit the result and load it back. A digest would make
+that fail, reporting a file you edited on purpose as modified. An
+unencrypted file is outside the trust boundary in any case: anyone who
+can read it can rewrite it, digest included.</p>
 <p><strong>What it does not do.</strong> The digest is stored inside the
 file, so anyone able to rewrite the file could remove it. And neither
 this nor any authentication scheme detects a <em>rollback</em> —
@@ -3324,41 +3362,41 @@ href="./MIGRATION.md">MIGRATION.md</a> for details.</p>
 <p>The v2 file format is structured as follows:</p>
 <pre><code>&quot;PAMv2:&quot; + Base64( [16-byte salt] [16-byte IV] [ciphertext] )</code></pre>
 <h4 id="decrypt-a-pam-v2-file">Decrypt a PAM v2 file</h4>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Strip the PAMv2: prefix and decode from Base64</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/^PAMv2://&#39;</span> myfile.txt <span class="kw">|</span> <span class="fu">base64</span> <span class="at">-d</span> <span class="op">&gt;</span> raw.bin</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Slice out salt (bytes 0-15), IV (bytes 16-31), ciphertext (bytes 32+)</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dd</span> if=raw.bin bs=1 count=16 of=salt.bin <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dd</span> if=raw.bin bs=1 skip=16 count=16 of=iv.bin <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dd</span> if=raw.bin bs=1 skip=32 of=cipher.bin <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Decrypt</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> enc <span class="at">-d</span> <span class="at">-aes-256-cbc</span> <span class="dt">\</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pbkdf2</span> <span class="at">-iter</span> 600000 <span class="at">-md</span> sha256 <span class="dt">\</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">-S</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> salt.bin<span class="va">)</span> <span class="dt">\</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">-iv</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> iv.bin<span class="va">)</span> <span class="dt">\</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">-in</span> cipher.bin <span class="dt">\</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">-out</span> decrypted.json <span class="dt">\</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pass</span> pass:yourpassword</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Strip the PAMv2: prefix and decode from Base64</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="st">&#39;s/^PAMv2://&#39;</span> myfile.txt <span class="kw">|</span> <span class="fu">base64</span> <span class="at">-d</span> <span class="op">&gt;</span> raw.bin</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Slice out salt (bytes 0-15), IV (bytes 16-31), ciphertext (bytes 32+)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dd</span> if=raw.bin bs=1 count=16 of=salt.bin <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dd</span> if=raw.bin bs=1 skip=16 count=16 of=iv.bin <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dd</span> if=raw.bin bs=1 skip=32 of=cipher.bin <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Decrypt</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> enc <span class="at">-d</span> <span class="at">-aes-256-cbc</span> <span class="dt">\</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pbkdf2</span> <span class="at">-iter</span> 600000 <span class="at">-md</span> sha256 <span class="dt">\</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">-S</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> salt.bin<span class="va">)</span> <span class="dt">\</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">-iv</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> iv.bin<span class="va">)</span> <span class="dt">\</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">-in</span> cipher.bin <span class="dt">\</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">-out</span> decrypted.json <span class="dt">\</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pass</span> pass:yourpassword</span></code></pre></div>
 <h4 id="encrypt-a-file-to-pam-v2-format">Encrypt a file to PAM v2
 format</h4>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate random salt and IV</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> rand 16 <span class="op">&gt;</span> salt.bin</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> rand 16 <span class="op">&gt;</span> iv.bin</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Encrypt</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> enc <span class="at">-aes-256-cbc</span> <span class="dt">\</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pbkdf2</span> <span class="at">-iter</span> 600000 <span class="at">-md</span> sha256 <span class="dt">\</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">-S</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> salt.bin<span class="va">)</span> <span class="dt">\</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">-iv</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> iv.bin<span class="va">)</span> <span class="dt">\</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">-in</span> plaintext.json <span class="dt">\</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">-out</span> cipher.bin <span class="dt">\</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pass</span> pass:yourpassword</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate salt + IV + ciphertext, Base64-encode, and add the PAMv2: prefix</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> salt.bin iv.bin cipher.bin <span class="kw">|</span> <span class="fu">base64</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="at">-d</span> <span class="st">&#39;\n&#39;</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/^/PAMv2:/&#39;</span> <span class="op">&gt;</span> myfile.txt</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate random salt and IV</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> rand 16 <span class="op">&gt;</span> salt.bin</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> rand 16 <span class="op">&gt;</span> iv.bin</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Encrypt</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> enc <span class="at">-aes-256-cbc</span> <span class="dt">\</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pbkdf2</span> <span class="at">-iter</span> 600000 <span class="at">-md</span> sha256 <span class="dt">\</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">-S</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> salt.bin<span class="va">)</span> <span class="dt">\</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">-iv</span> <span class="va">$(</span><span class="ex">xxd</span> <span class="at">-p</span> iv.bin<span class="va">)</span> <span class="dt">\</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">-in</span> plaintext.json <span class="dt">\</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">-out</span> cipher.bin <span class="dt">\</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">-pass</span> pass:yourpassword</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate salt + IV + ciphertext, Base64-encode, and add the PAMv2: prefix</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> salt.bin iv.bin cipher.bin <span class="kw">|</span> <span class="fu">base64</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="at">-d</span> <span class="st">&#39;\n&#39;</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/^/PAMv2:/&#39;</span> <span class="op">&gt;</span> myfile.txt</span></code></pre></div>
 <p>The resulting file can be loaded directly into PAM.</p>
 <h2 id="developer-notes">Developer Notes</h2>
 <p>These are things that developers might be interested in.</p>
@@ -3431,36 +3469,36 @@ files into <code>pam/www</code>
 to make them relative by prepending a dot to the <code>href</code> path)
 like this.</li>
 </ol>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;apple-touch-icon&quot;</span> sizes<span class="op">=</span><span class="st">&quot;180x180&quot;</span> href<span class="op">=</span><span class="st">&quot;./apple-touch-icon.png&quot;</span><span class="op">&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;icon&quot;</span> type<span class="op">=</span><span class="st">&quot;image/png&quot;</span> sizes<span class="op">=</span><span class="st">&quot;32x32&quot;</span> href<span class="op">=</span><span class="st">&quot;./favicon-32x32.png&quot;</span><span class="op">&gt;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;icon&quot;</span> type<span class="op">=</span><span class="st">&quot;image/png&quot;</span> sizes<span class="op">=</span><span class="st">&quot;16x16&quot;</span> href<span class="op">=</span><span class="st">&quot;./favicon-16x16.png&quot;</span><span class="op">&gt;</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;manifest&quot;</span> href<span class="op">=</span><span class="st">&quot;./site.webmanifest&quot;</span><span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;apple-touch-icon&quot;</span> sizes<span class="op">=</span><span class="st">&quot;180x180&quot;</span> href<span class="op">=</span><span class="st">&quot;./apple-touch-icon.png&quot;</span><span class="op">&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;icon&quot;</span> type<span class="op">=</span><span class="st">&quot;image/png&quot;</span> sizes<span class="op">=</span><span class="st">&quot;32x32&quot;</span> href<span class="op">=</span><span class="st">&quot;./favicon-32x32.png&quot;</span><span class="op">&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;icon&quot;</span> type<span class="op">=</span><span class="st">&quot;image/png&quot;</span> sizes<span class="op">=</span><span class="st">&quot;16x16&quot;</span> href<span class="op">=</span><span class="st">&quot;./favicon-16x16.png&quot;</span><span class="op">&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>link rel<span class="op">=</span><span class="st">&quot;manifest&quot;</span> href<span class="op">=</span><span class="st">&quot;./site.webmanifest&quot;</span><span class="op">&gt;</span></span></code></pre></div>
 <ol start="6" type="1">
 <li>Edited the link tags in <code>pam/www/site.webmanifest</code> to
 make them relative as well by prepending a dot to the <code>src</code>
 path like this. Note that the original was not not formatted, I
 formatted here to make it easier to read.</li>
 </ol>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;name&quot;</span><span class="er">:</span> <span class="st">&quot;&quot;</span><span class="er">,</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;short_name&quot;</span><span class="er">:</span> <span class="st">&quot;&quot;</span><span class="er">,</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;icons&quot;</span><span class="er">:</span> <span class="ot">[</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;src&quot;</span><span class="fu">:</span> <span class="st">&quot;./android-chrome-192x192.png&quot;</span><span class="fu">,</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;sizes&quot;</span><span class="fu">:</span> <span class="st">&quot;192x192&quot;</span><span class="fu">,</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;image/png&quot;</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;src&quot;</span><span class="fu">:</span> <span class="st">&quot;./android-chrome-512x512.png&quot;</span><span class="fu">,</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;sizes&quot;</span><span class="fu">:</span> <span class="st">&quot;512x512&quot;</span><span class="fu">,</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;image/png&quot;</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="er">,</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;theme_color&quot;</span><span class="er">:</span> <span class="st">&quot;#ffffff&quot;</span><span class="er">,</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;background_color&quot;</span><span class="er">:</span> <span class="st">&quot;#ffffff&quot;</span><span class="er">,</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;display&quot;</span><span class="er">:</span> <span class="st">&quot;standalone&quot;</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;name&quot;</span><span class="er">:</span> <span class="st">&quot;&quot;</span><span class="er">,</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;short_name&quot;</span><span class="er">:</span> <span class="st">&quot;&quot;</span><span class="er">,</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;icons&quot;</span><span class="er">:</span> <span class="ot">[</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;src&quot;</span><span class="fu">:</span> <span class="st">&quot;./android-chrome-192x192.png&quot;</span><span class="fu">,</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;sizes&quot;</span><span class="fu">:</span> <span class="st">&quot;192x192&quot;</span><span class="fu">,</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;image/png&quot;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;src&quot;</span><span class="fu">:</span> <span class="st">&quot;./android-chrome-512x512.png&quot;</span><span class="fu">,</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;sizes&quot;</span><span class="fu">:</span> <span class="st">&quot;512x512&quot;</span><span class="fu">,</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;image/png&quot;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="er">,</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;theme_color&quot;</span><span class="er">:</span> <span class="st">&quot;#ffffff&quot;</span><span class="er">,</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;background_color&quot;</span><span class="er">:</span> <span class="st">&quot;#ffffff&quot;</span><span class="er">,</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;display&quot;</span><span class="er">:</span> <span class="st">&quot;standalone&quot;</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
 <h3 id="test-pam">Test PAM</h3>
 <p>Here are the steps to test PAM.</p>
 <ol type="1">
@@ -3530,10 +3568,10 @@ tests</td>
 </table>
 <p><code>TEST_NAME</code> is passed to pytest’s <code>-k</code>, so it
 matches substrings and expressions:</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> test-one TEST_NAME=test_password_generator</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> test-one TEST_NAME=print</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> test-one TEST_NAME=<span class="st">&#39;load or save&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> test-one TEST_NAME=test_password_generator</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> test-one TEST_NAME=print</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> test-one TEST_NAME=<span class="st">&#39;load or save&#39;</span></span></code></pre></div>
 <p>Both documentation checks run as part of <code>make lint</code>,
 because a documentation defect is invisible in a Markdown preview: a
 broken anchor simply does nothing, and a link to the <em>wrong</em>
@@ -3556,8 +3594,8 @@ testing in the browser</h4>
 interactive debugging, which is particularly useful when a test failure
 is hard to diagnose from the pytest output alone.</p>
 <p>Start the local server if it is not already running:</p>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> run</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> run</span></code></pre></div>
 <p>Then open <a
 href="http://localhost:8081/tests/tests.html">http://localhost:8081/tests/tests.html</a>
 in Chrome or Firefox. The test runner executes immediately and displays
