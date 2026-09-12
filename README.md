@@ -82,8 +82,7 @@ of a password manager that i write.
 Command line tools for decrypting and encrypting PAM vaults as well as webtool
 for diff'ing PAM vaults and merging records between PAM vaults.
 
-* The webapp can be found [here](https://jlinoff.github.io/pam-crypt/pam-vault-diff.html).
-* The documentation can be found [here](https://jlinoff.github.io/pam/www/help/).
+* The webapp (`pam-vault-diff.html`) can be found [here](https://jlinoff.github.io/pam-crypt/pam-vault-diff.html).
 * The github project is available [here](https://github.com/jlinoff/pam-crypt).
 
 ## RSA Demo
